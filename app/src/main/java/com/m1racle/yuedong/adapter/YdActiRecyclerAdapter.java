@@ -15,26 +15,27 @@ import java.util.List;
  * @author sczyh30
  * @since 0.2
  */
-public class YdActiRecyclerAdapter extends RecyclerView.Adapter<RlistHolder> {
+public class YdActiRecyclerAdapter extends RecyclerView.Adapter<YdmaViewHolder> {
 
     private List<MotionActivities> mList;
     private RecyclerItemClickListener mListener;
+    private RecyclerItemLongClickListener mLongClickListener;
 
     public YdActiRecyclerAdapter(List<MotionActivities> mList) {
         this.mList = mList;
     }
 
     @Override
-    public RlistHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public YdmaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.yd_acti_list_item, parent, false);
-        return new RlistHolder(view);
+        return new YdmaViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(RlistHolder holder, int position) {
+    public void onBindViewHolder(YdmaViewHolder holder, int position) {
         MotionActivities bean = mList.get(position);
-
+        holder.bindData(bean);
     }
 
     @Override

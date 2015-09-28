@@ -3,7 +3,7 @@ package com.m1racle.yuedong.entity;
 /**
  * Motion activities entity
  */
-public class MotionActivities {
+public class MotionActivities extends Entity {
 
     private int ma_id;
     private String title;
@@ -34,11 +34,11 @@ public class MotionActivities {
         this.body = body;
     }
 
-    public String getImg_id() {
+    public String getImgId() {
         return img_id;
     }
 
-    public void setImg_id(String img_id) {
+    public void setImgId(String img_id) {
         this.img_id = img_id;
     }
 }

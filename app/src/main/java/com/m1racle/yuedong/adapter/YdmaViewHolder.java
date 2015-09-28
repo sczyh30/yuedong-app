@@ -4,11 +4,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Map;
+import com.m1racle.yuedong.entity.MotionActivities;
 
 /**
+ * Yuedong Motion Activity ViewHolder
  */
 public class YdmaViewHolder extends RlistHolder {
+
+    //private RecyclerItemClickListener mListener;
+    //private RecyclerItemLongClickListener mLongClickListener;
 
     private View mRootView;
     private ImageView mImageViewIcon;
@@ -18,9 +22,13 @@ public class YdmaViewHolder extends RlistHolder {
         super(itemView);
     }
 
-    @Override
-    public void bindData(Map<String, Object> data) {
-        super.bindData(data);
+    public YdmaViewHolder(View view, RecyclerItemClickListener mListener,
+                          RecyclerItemLongClickListener mLongClickListener) {
+        super(view, mListener, mLongClickListener);
+    }
+
+    public void bindData(MotionActivities data) {
+
     }
 
     @Override
