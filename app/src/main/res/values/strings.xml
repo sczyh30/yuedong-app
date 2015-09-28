@@ -1,0 +1,80 @@
+<resources>
+    <string name="app_name">悦动</string>
+
+    <string name="action_settings">设置</string>
+
+    <string name="login">登录</string>
+    <string name="hint_username">输入账号/邮箱</string>
+    <string name="hint_password">密码</string>
+    <string name="tip_please_input_username">请输入用户名</string>
+    <string name="tip_illegal_email">请输入正确的Email地址</string>
+    <string name="tip_please_input_password">请输入密码</string>
+    <string name="progress_login">正在登录…</string>
+    <string name="tip_login_error_for_network">对不起,无法登录</string>
+    <string name="tip_no_internet">当前没有可用的网络链接</string>
+
+    <!-- Error View -->
+    <string name="error_view_click_to_refresh">点击屏幕,重新加载</string>
+    <string name="error_view_no_data">暂无内容</string>
+    <string name="error_view_loading">加载中…</string>
+    <string name="error_view_load_error_click_to_refresh">内容加载失败\r\n点击重新加载</string>
+    <string name="error_view_network_error_click_to_refresh">没有可用的网络</string>
+    <string name="tip_network_error">没有可用的网络</string>
+
+    <string name="unlogin">未登录，请先登录</string>
+    <string name="unlogin_tip">您还未登录\r\n或网络延迟</string>
+    <string name="my_information_unlogin_tips">未登录</string>
+
+    <string name="loading">加载中…</string>
+    <string name="loading_no_more">已加载全部</string>
+
+    <string name="loading_img">加载图片</string>
+    <string name="mes_notice">消息通知</string>
+    <string name="clean_cache">清理缓存</string>
+    <string name="double_click_exit">双击退出</string>
+    <string name="loading_more">自动加载\"更多\"</string>
+    <string name="update">检查新版本</string>
+    <string name="about">关于悦动</string>
+    <string name="feedback">意见反馈</string>
+    <string name="exit">退出</string>
+    <string name="grade">去评分</string>
+
+    <string name="gosite">华为官网</string>
+    <string name="knowmore">了解更多</string>
+    <string name="hwapp">华为智能设备客户端</string>
+    <string name="copyright">Copyright © 悦动 2015.</string>
+    <string name="copyright_support">本应用由华为手环强力驱动</string>
+
+    <string name="notice_accept">接收新通知</string>
+    <string name="notice_voice">声音</string>
+    <string name="notice_vibration">震动</string>
+    <string name="notice_app_exit">退出后不提醒</string>
+
+    <string name="tip_logout_success">注销成功</string>
+    <string name="title_activity_main">悦动</string>
+
+    <string name="actionbar_title_profile">个人中心</string>
+    <string name="favorite">收藏</string>
+    <string name="following">关注</string>
+    <string name="follower">粉丝</string>
+    <string name="join_time">注册时间:</string>
+    <string name="location">所在地区:</string>
+    <string name="favourite_sport">爱好的运动:</string>
+    <string name="gxqm">个性签名:</string>
+
+    <string name="activi">活动</string>
+    <string name="information">资料</string>
+    <string name="qrcode">二维码</string>
+    <string name="message">消息</string>
+    <string name="health">健康状况</string>
+    <string name="note">便签</string>
+    <string name="bookmarks">收藏夹</string>
+    <string name="user_score">积分</string>
+
+    <string name="actionbar_title_setting">设置</string>
+    <string name="actionbar_title_setting_notification">新消息提醒</string>
+    <string name="actionbar_title_about">关于</string>
+    <string name="actionbar_title_my_information">我的悦动</string>
+    <string name="actionbar_title_my_information_detail">详细信息</string>
+
+</resources>
