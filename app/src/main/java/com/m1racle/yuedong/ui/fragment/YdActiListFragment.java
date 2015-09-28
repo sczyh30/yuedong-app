@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseRefreshFragment;
@@ -124,6 +125,7 @@ public class YdActiListFragment extends BaseRefreshFragment {
 
         private View mRootView;
         private ImageView mImageViewIcon;
+        private TextView mText;
 
         private Map<String, Integer> mData;
 
@@ -131,12 +133,15 @@ public class YdActiListFragment extends BaseRefreshFragment {
             super(itemView);
             mRootView = itemView;
             mImageViewIcon = (ImageView) itemView.findViewById(R.id.image_view_icon);
+            mText = (TextView) itemView.findViewById(R.id.textView_list);
         }
+
         public void bindData(Map<String, Integer> data) {
             mData = data;
 
             mRootView.setBackgroundResource(mData.get(KEY_COLOR));
             mImageViewIcon.setImageResource(mData.get(KEY_ICON));
+            mText.setText(mData.get(KEY_STRING));
         }
     }
     @Override

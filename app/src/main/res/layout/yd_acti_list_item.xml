@@ -14,12 +14,12 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="最新运动消息：活塞运动"
+        android:text="最新运动消息：羽毛球"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         android:textSize="18dp"
         android:textColor="@color/white"
-        android:id="@+id/textView"
+        android:id="@+id/textView_list"
          />
 
 </FrameLayout>

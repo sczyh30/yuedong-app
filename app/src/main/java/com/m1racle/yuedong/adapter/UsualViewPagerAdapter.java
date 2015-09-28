@@ -1,9 +1,5 @@
 package com.m1racle.yuedong.adapter;
 
-/**
- * Created by Administrator on 2015/9/17.
- */
-
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.support.v13.app.FragmentPagerAdapter;

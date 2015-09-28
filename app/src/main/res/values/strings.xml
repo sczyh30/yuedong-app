@@ -77,4 +77,8 @@
     <string name="actionbar_title_my_information">我的悦动</string>
     <string name="actionbar_title_my_information_detail">详细信息</string>
 
+    <string name="lt1">纯洁的要命</string>
+    <string name="lt2">猥琐的要命</string>
+    <string name="lt3">既纯洁又猥琐</string>
+
 </resources>
