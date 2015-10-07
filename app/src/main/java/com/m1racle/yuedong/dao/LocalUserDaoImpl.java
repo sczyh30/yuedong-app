@@ -9,11 +9,14 @@ import com.m1racle.yuedong.util.crypt.MD5Util;
 
 /**
  * Local User Dao Service Impl
- *
  * @author sczyh30
  */
 public class LocalUserDaoImpl extends BaseDaoImpl implements UserDao {
 
+    /**
+     * Save the user info to the database
+     * @param user User entity
+     */
     @Override
     public void saveUserInfo(final User user) {
         SQLiteDatabase db = getUserDB(true);
@@ -96,6 +99,13 @@ public class LocalUserDaoImpl extends BaseDaoImpl implements UserDao {
         }
     }
 
+    /**
+     * A common method
+     * intended to get the ContentValues entity
+     * in a common way
+     * @param user User entity
+     * @return the ContentValues entity
+     */
     private ContentValues getUserValues(User user) {
         ContentValues values = new ContentValues();
         values.put("id", user.getId());
