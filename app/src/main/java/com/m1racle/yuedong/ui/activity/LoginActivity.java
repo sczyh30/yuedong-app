@@ -1,28 +1,54 @@
 package com.m1racle.yuedong.ui.activity;
 
+import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.m1racle.yuedong.AppConfig;
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseActivity;
+import com.m1racle.yuedong.base.Constants;
+import com.m1racle.yuedong.entity.LoginResult;
+import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.net.ApiHttpClient;
+import com.m1racle.yuedong.net.SamsaraAPI;
 import com.m1racle.yuedong.util.DeviceUtil;
+import com.m1racle.yuedong.util.JsonUtil;
 import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 
+import org.apache.http.client.protocol.ClientContext;
+import org.kymjs.kjframe.http.HttpConfig;
+
 import butterknife.Bind;
 import butterknife.OnClick;
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.client.CookieStore;
+import cz.msebera.android.httpclient.cookie.Cookie;
+import cz.msebera.android.httpclient.protocol.HttpContext;
 
 /**
  * Login Activity
  */
 public class LoginActivity extends BaseActivity {
 
+    private final int requestCode = 0;
+    private static final String BUNDLE_KEY_REQUEST_CODE = "BUNDLE_KEY_REQUEST_CODE";
+
     @Bind(R.id.et_username)
     EditText etUserName;
 
     @Bind(R.id.et_password)
     EditText etPassword;
+
+    private String mUserName = "";
+    private String mPassword = "";
 
     @Override
     protected int getLayoutId() {
@@ -99,18 +125,100 @@ public class LoginActivity extends BaseActivity {
         if(!okForLogin())
             return;
 
-        LogUtil.toast("服务器维护中，请稍后再试");
+        mUserName = etUserName.getText().toString();
+        mPassword = etPassword.getText().toString();
+
+        showWaitDialog(R.string.progress_login);
+        SamsaraAPI.login(mUserName, mPassword, mHandler);
+        //LogUtil.toast("服务器维护中，请稍后再试");
     }
 
+    /*private final TextHttpResponseHandler mHandler = new TextHttpResponseHandler() {
+        @Override
+        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+        }
+
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String responseString) {
+
+        }
+    };*/
+
+    private final BaseJsonHttpResponseHandler mHandler = new BaseJsonHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
+            if(response != null) {
+
+            }
+        }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Object errorResponse) {
+            ToastUtil.showToast("网络出现错误，错误代码 => " + statusCode);
+        }
+
+        @Override
+        protected Object parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+            return JsonUtil.resolveLoginResult(rawJsonData);
+        }
+
+        @Override
+        public void onFinish() {
+            super.onFinish();
+            hideWaitDialog();
+        }
+    };
+
+    private void handleLoginResult(LoginResult result) {
+        if(result.getDataResult().isOK()) {
+            AsyncHttpClient client = ApiHttpClient.getHttpClient();
+            HttpContext httpContext = client.getHttpContext();
+            CookieStore cookies = (CookieStore)httpContext
+                    .getAttribute(ClientContext.COOKIE_STORE);
+            if(cookies != null) {
+                String tmp_cookies = "";
+                for(Cookie c : cookies.getCookies()) {
+                    LogUtil.log("cookie:" + c.getName() + " " + c.getValue());
+                    tmp_cookies += (c.getName() + "=" + c.getValue()) + ";";
+                    AppContext.getContext().setProperty(AppConfig.CONF_COOKIE,
+                            tmp_cookies);
+                    ApiHttpClient.setCookie(ApiHttpClient.getCookie(AppContext
+                            .getContext()));
+                    HttpConfig.sCookie = tmp_cookies;
+                }
+            }
+            result.getUser().setAccount(mUserName);
+            result.getUser().setPassword(mPassword);
+            result.getUser().setRememberMe(true);
+            AppContext.getContext().saveUserInfo(result.getUser());
+            hideWaitDialog();
+            handleLoginSuccess();
+        }
+        else {
+            AppContext.getContext().cleanLoginInfo();
+            ToastUtil.showToast("错误：" + result.getDataResult().getErrorMsg());
+        }
+    }
+
+    private void handleLoginSuccess() {
+        Intent data = new Intent();
+        data.putExtra(BUNDLE_KEY_REQUEST_CODE, requestCode);
+        setResult(RESULT_OK, data);
+        this.sendBroadcast(new Intent(Constants.INTENT_ACTION_USER_CHANGE));
+        finish();
+    }
+
+    //TODO:需要的时候添加第三方登录接口支持
     private void qqLogin() {
-        LogUtil.toast("QQ API invocation");
+        LogUtil.toast("QQ API 接口未开放");
     }
 
     private void wxLogin() {
-        LogUtil.toast("WeiXin API invocation");
+        LogUtil.toast("微信API 接口未开放");
     }
 
     private void sinaLogin() {
-
+        LogUtil.toast("微博API 接口未开放");
     }
 }

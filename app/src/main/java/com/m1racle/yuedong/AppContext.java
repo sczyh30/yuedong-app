@@ -5,24 +5,22 @@ import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 
-//import com.loopj.android.http.AsyncHttpClient;
-//import com.loopj.android.http.PersistentCookieStore;
 
-//import com.m1racle.yuedong.api.ApiHttpClient;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.PersistentCookieStore;
 import com.m1racle.yuedong.base.BaseApplication;
 //import com.m1racle.yuedong.bean.Constants;
 //import com.m1racle.yuedong.bean.User;
 //import com.m1racle.yuedong.cache.DataCleanManager;
 //import com.m1racle.yuedong.util.CyptoUtils;
 //import com.m1racle.yuedong.util.MethodsCompat;
+import com.m1racle.yuedong.dao.LocalUserDaoImpl;
 import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.net.ApiHttpClient;
 import com.m1racle.yuedong.util.StringUtils;
 import com.m1racle.yuedong.util.LogUtil;
 //import com.m1racle.yuedong.util.UIHelper;
 
-import org.kymjs.kjframe.KJBitmap;
-import org.kymjs.kjframe.bitmap.BitmapConfig;
-import org.kymjs.kjframe.utils.KJLoger;
 
 import java.util.Properties;
 import java.util.UUID;
@@ -41,19 +39,56 @@ public class AppContext extends BaseApplication {
 
     private static AppContext instance;
 
+    private int loginUid;
+
+    private boolean login;
+    LocalUserDaoImpl userDao;
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
+        init();
+        initLogin();
     }
 
     public static AppContext getContext() {
         return instance;
     }
 
-    private int loginUid;
+    private void init() {
+        // init the http client service
+        AsyncHttpClient client = new AsyncHttpClient();
+        PersistentCookieStore mCookieStore = new PersistentCookieStore(this);
+        client.setCookieStore(mCookieStore);
+        ApiHttpClient.setHttpClient(client);
+        ApiHttpClient.setCookie(ApiHttpClient.getCookie(this));
 
-    private boolean login;
+        userDao = new LocalUserDaoImpl();
+    }
+
+    private void initLogin() {
+        User user = getLoginUser();
+        if (null != user && user.getId() > 0) {
+            login = true;
+            loginUid = user.getId();
+        } else {
+            this.cleanLoginInfo();
+        }
+    }
+
+    public void setProperties(Properties ps) {
+        AppConfig.getAppConfig(this).set(ps);
+    }
+
+    public Properties getProperties() {
+        return AppConfig.getAppConfig(this).get();
+    }
+
+    public void setProperty(String key, String value) {
+        AppConfig.getAppConfig(this).set(key, value);
+    }
+
 
     public static boolean isFristStart() {
         return getPreferences().getBoolean(KEY_FRITST_START, true);
@@ -92,7 +127,6 @@ public class AppContext extends BaseApplication {
         user.setFans(StringUtils.toInt(getProperty("user.fans"), 0));
         user.setScore(StringUtils.toInt(getProperty("user.score"), 0));
         user.setRememberMe(StringUtils.toBool(getProperty("user.isRememberMe")));
-        user.setGender(getProperty("user.gender"));
         return user;
     }
 
@@ -107,6 +141,10 @@ public class AppContext extends BaseApplication {
                 "user.isRememberMe", "user.gender");
     }
 
+    public void saveUserInfo(User user) {
+        userDao.saveUserInfo(user);
+    }
+
     public String getProperty(String key) {
         return AppConfig.getAppConfig(this).get(key);
     }
@@ -115,5 +153,25 @@ public class AppContext extends BaseApplication {
         AppConfig.getAppConfig(this).remove(key);
     }
 
+    public PackageInfo getPackageInfo() {
+        PackageInfo info = null;
+        try {
+            info = getPackageManager().getPackageInfo(getPackageName(), 0);
+        } catch (NameNotFoundException e) {
+            e.printStackTrace(System.err);
+        }
+        if (info == null)
+            info = new PackageInfo();
+        return info;
+    }
+
+    public String getAppId() {
+        String uniqueID = getProperty(AppConfig.CONF_APP_UNIQUEID);
+        if (StringUtils.isEmpty(uniqueID)) {
+            uniqueID = UUID.randomUUID().toString();
+            setProperty(AppConfig.CONF_APP_UNIQUEID, uniqueID);
+        }
+        return uniqueID;
+    }
 
 }

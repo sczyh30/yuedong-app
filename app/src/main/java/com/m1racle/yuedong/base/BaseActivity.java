@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity
     implements BaseDialogControl,View.OnClickListener {
 
-
+    private ProgressDialog waitDialog;
     private boolean isVisible;
 
     protected LayoutInflater mInflater;

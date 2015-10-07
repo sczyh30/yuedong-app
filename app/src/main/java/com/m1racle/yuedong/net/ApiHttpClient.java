@@ -6,7 +6,12 @@ import android.util.Log;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.util.LogUtil;
+
+import org.apache.http.client.params.ClientPNames;
+
+import java.util.Locale;
 
 /**
  * Yuedong App Common Library
@@ -64,5 +69,44 @@ public class ApiHttpClient {
         return API_URL;
     }
 
+    public static void setHttpClient(AsyncHttpClient c) {
+        client = c;
+        client.addHeader("Accept-Language", Locale.getDefault().toString());
+        client.addHeader("Host", HOST);
+        client.addHeader("Connection", "Keep-Alive");
+        client.getHttpClient().getParams()
+                .setParameter(ClientPNames.ALLOW_CIRCULAR_REDIRECTS, true);
 
+        setUserAgent(getUserAgent(AppContext.getContext()));
+    }
+
+    public static void setUserAgent(String userAgent) {
+        client.setUserAgent(userAgent);
+    }
+
+    public static String getUserAgent(AppContext appContext) {
+        StringBuilder sb = new StringBuilder("Yuedong");
+        sb.append('/' + appContext.getPackageInfo().versionName + '_'
+                + appContext.getPackageInfo().versionCode);// app版本信息
+        sb.append("/Android");// 手机系统平台
+        sb.append("/" + android.os.Build.VERSION.RELEASE);// 手机系统版本
+        sb.append("/" + android.os.Build.MODEL); // 手机型号
+        sb.append("/" + appContext.getAppId());// 客户端唯一标识
+        return sb.toString();
+    }
+
+    public static void setCookie(String cookie) {
+        client.addHeader("Cookie", cookie);
+    }
+
+    public static void cleanCookie() {
+        appCookie = "";
+    }
+
+    public static String getCookie(AppContext appContext) {
+        if (appCookie == null || appCookie.equals("")) {
+            appCookie = appContext.getProperty("cookie");
+        }
+        return appCookie;
+    }
 }

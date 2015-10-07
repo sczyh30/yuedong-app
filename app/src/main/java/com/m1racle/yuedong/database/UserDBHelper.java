@@ -12,9 +12,18 @@ import com.m1racle.yuedong.util.ToastUtil;
  */
 public class UserDBHelper extends SQLiteOpenHelper {
 
-    public static final String CREATE_SQL = "CREATE TABLE db_test1("
-            + "id integer NOT NULL PRIMARY KEY AUTOINCREMENT,"
-            + "username varchar(255) NOT NULL )";
+    public static final String CREATE_SQL = "CREATE TABLE db_test1 (" +
+            "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
+            "username varchar(50) NOT NULL UNIQUE," +
+            "face varchar(255) NOT NULL," +
+            "account varchar(50) NOT NULL UNIQUE" +
+            "location varchar(50) NOT NULL" +
+            "gender integer NOT NULL" +
+            "followers integer NOT NULL" +
+            "fans integer NOT NULL" +
+            "score integer NOT NULL" +
+            "rememberMe integer NOT NULL" +
+            ")";
 
     private Context context;
 
@@ -31,7 +40,6 @@ public class UserDBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS db_test1");
         onCreate(sqLiteDatabase);
     }
 }

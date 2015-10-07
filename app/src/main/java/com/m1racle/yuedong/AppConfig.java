@@ -28,7 +28,6 @@ public class AppConfig {
     public static final String KEY_NOTIFICATION_VIBRATION = "KEY_NOTIFICATION_VIBRATION";
     public static final String KEY_NOTIFICATION_DISABLE_WHEN_EXIT = "KEY_NOTIFICATION_DISABLE_WHEN_EXIT";
     public static final String KEY_CHECK_UPDATE = "KEY_CHECK_UPDATE";
-    public static final String KEY_DOUBLE_CLICK_EXIT = "KEY_DOUBLE_CLICK_EXIT";
 
     public static final String KEY_TWEET_DRAFT = "KEY_TWEET_DRAFT";
     public static final String KEY_NOTE_DRAFT = "KEY_NOTE_DRAFT";
@@ -37,20 +36,19 @@ public class AppConfig {
 
     public static final String KEY_NIGHT_MODE_SWITCH="night_mode_switch";
 
-    public static final String APP_QQ_KEY = "100942993";
 
     // 默认存放图片的路径
     public final static String DEFAULT_SAVE_IMAGE_PATH = Environment
             .getExternalStorageDirectory()
             + File.separator
-            + "OSChina"
-            + File.separator + "osc_img" + File.separator;
+            + "Yuedong"
+            + File.separator + "yd_img" + File.separator;
 
     // 默认存放文件下载的路径
     public final static String DEFAULT_SAVE_FILE_PATH = Environment
             .getExternalStorageDirectory()
             + File.separator
-            + "OSChina"
+            + "Yuedong"
             + File.separator + "download" + File.separator;
 
     private Context mContext;
@@ -80,9 +78,6 @@ public class AppConfig {
         FileInputStream fis = null;
         Properties props = new Properties();
         try {
-            // 读取files目录下的config
-            // fis = activity.openFileInput(APP_CONFIG);
-
             // 读取app_config目录下的config
             File dirConf = mContext.getDir(APP_CONFIG, Context.MODE_PRIVATE);
             fis = new FileInputStream(dirConf.getPath() + File.separator
@@ -102,8 +97,6 @@ public class AppConfig {
     private void setProps(Properties p) {
         FileOutputStream fos = null;
         try {
-            // 把config建在files目录下
-            // fos = activity.openFileOutput(APP_CONFIG, Context.MODE_PRIVATE);
 
             // 把config建在(自定义)app_config的目录下
             File dirConf = mContext.getDir(APP_CONFIG, Context.MODE_PRIVATE);

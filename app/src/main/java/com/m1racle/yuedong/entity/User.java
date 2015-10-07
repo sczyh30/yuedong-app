@@ -4,12 +4,16 @@ import java.util.List;
 
 /**
  * User Entity
+ * very complex!
+ * @author sczyh30
  */
 public class User extends Entity {
 
     private int id;
     private String account;
     private String username;
+    private String password;
+
     private TempToken temp_token;
     private boolean isRememberMe;
 
@@ -20,7 +24,7 @@ public class User extends Entity {
 
     private String location;
     private String reg_time;
-    private String gender;
+    private int gender;
     private List<String> like_sport;
     private String my_tip;
 
@@ -53,6 +57,14 @@ public class User extends Entity {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public TempToken getTemp_token() {
@@ -103,11 +115,11 @@ public class User extends Entity {
         this.reg_time = reg_time;
     }
 
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -145,7 +157,7 @@ public class User extends Entity {
 
     @Override
     public String toString() {
-        return "User Entity{" +
+        return "User Entity => {" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", fans=" + fans +

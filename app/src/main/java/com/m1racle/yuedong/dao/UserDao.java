@@ -1,7 +1,19 @@
 package com.m1racle.yuedong.dao;
 
+import com.m1racle.yuedong.entity.User;
+
 /**
- * Created by Administrator on 2015/9/29.
+ * User Dao
+ * @author sczyh30
  */
-public class UserDao {
+public interface UserDao {
+
+    void saveUserInfo(final User user);
+
+    void updateUserInfo(final User user, int id);
+
+    User getUserInfo();
+
+    void removeUserInfo();
+
 }
