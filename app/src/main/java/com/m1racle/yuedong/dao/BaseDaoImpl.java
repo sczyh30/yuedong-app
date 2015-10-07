@@ -11,7 +11,7 @@ import com.m1racle.yuedong.database.UserDBHelper;
  */
 abstract class BaseDaoImpl {
 
-    protected static SQLiteDatabase getUserDB(boolean type) {
+    protected SQLiteDatabase getUserDB(boolean type) {
         UserDBHelper helper = new UserDBHelper(AppContext.getContext(), "UserLogin.db", null, 2);
         if(type)
             return helper.getWritableDatabase();
