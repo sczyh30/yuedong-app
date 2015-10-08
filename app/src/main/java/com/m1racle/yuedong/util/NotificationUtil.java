@@ -23,7 +23,6 @@ import com.m1racle.yuedong.service.NotificationPushService;
  */
 public class NotificationUtil {
 
-    //private static Context context;
 
     public void doNotify() {
 

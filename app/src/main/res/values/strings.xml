@@ -3,6 +3,13 @@
 
     <string name="action_settings">设置</string>
 
+    <string name="welcome_fg">欢迎使用悦动！</string>
+    <string name="b2_ncf">未连接</string>
+    <string name="b2_connect_ok">已连接</string>
+    <string name="b2_error">状态异常</string>
+
+    <string name="b2_not_connected_st">当前设备未连接至运动手环，请检查设备是否已开启，并且蓝牙状态良好</string>
+
     <string name="login">登录</string>
     <string name="hint_username">输入账号/邮箱</string>
     <string name="hint_password">密码</string>
@@ -80,5 +87,7 @@
     <string name="lt1">纯洁的要命</string>
     <string name="lt2">猥琐的要命</string>
     <string name="lt3">既纯洁又猥琐</string>
-
+    <string name="lt4">哈哈哈</string>
+    <string name="lt5">呵呵呵</string>
+    <string name="lt6">嘻嘻哈哈~O(∩_∩)O哈哈~</string>
 </resources>

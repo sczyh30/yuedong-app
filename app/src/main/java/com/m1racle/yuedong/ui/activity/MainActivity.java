@@ -1,6 +1,8 @@
 package com.m1racle.yuedong.ui.activity;
 
 import android.app.Fragment;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.Uri;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -12,6 +14,7 @@ import android.view.View;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.adapter.UsualViewPagerAdapter;
 import com.m1racle.yuedong.base.BaseActivity;
+import com.m1racle.yuedong.service.receiver.NetworkChangeReceiver;
 import com.m1racle.yuedong.ui.fragment.DeviceBasicInfoFragment;
 import com.m1racle.yuedong.ui.fragment.MotionBasicInfoFragment;
 import com.m1racle.yuedong.ui.fragment.MySocialInfoFragment;
@@ -37,6 +40,8 @@ public class MainActivity extends BaseActivity
     private List<Fragment> fragmentList;
     public static final int MENU_TEST = R.menu.menu_test;
 
+    private IntentFilter netFilter;
+    private NetworkChangeReceiver networkChangeReceiver;
 
     @Override
     protected int getLayoutId() {
@@ -65,11 +70,18 @@ public class MainActivity extends BaseActivity
                 adapter.setPagerItems(list);
             }
         });
-        LogUtil.toast(adapter.toString());
+        //LogUtil.toast(adapter.toString());
         if (adapter != null)
             viewPager.setAdapter(adapter);
-
+        initNetStatus();
         viewPager.setCurrentItem(0);
+    }
+
+    private void initNetStatus() {
+        netFilter = new IntentFilter();
+        netFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        networkChangeReceiver = new NetworkChangeReceiver();
+        registerReceiver(networkChangeReceiver, netFilter);
     }
 
 
@@ -91,15 +103,16 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    public void onClick(View view) {
-        int id = view.getId();
-        switch (id) {
-
-        }
-    }
+    public void onClick(View view) {}
 
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(networkChangeReceiver);
     }
 }

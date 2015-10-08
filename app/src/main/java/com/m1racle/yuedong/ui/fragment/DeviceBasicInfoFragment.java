@@ -4,6 +4,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,7 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.huawei.huaweiwearableApi.HuaweiWearableManager;
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.util.LogUtil;
@@ -30,34 +37,45 @@ import butterknife.OnClick;
  */
 public class DeviceBasicInfoFragment extends BaseFragment {
 
-    public String param_from;
+    // bind the view components
+    @Bind(R.id.b2_status_text)
+    TextView mEtStatus;
+    @Bind(R.id.b2_status_instruct_text)
+    TextView mEtStatusInst;
+    @Bind(R.id.b2_battery_status_text)
+    TextView mEtBatteryStatus;
+    @Bind(R.id.b2_battery_status_layout)
+    LinearLayout batteryLayout;
 
+    private HuaweiWearableManager HWmanager = null;
     private OnFragmentInteractionListener mListener;
 
-    public static DeviceBasicInfoFragment newInstance(String param) {
-        DeviceBasicInfoFragment fragment = new DeviceBasicInfoFragment();
-        Bundle args = new Bundle();
-        args.putString("arg", param);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     public DeviceBasicInfoFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            param_from = getArguments().getString("arg");
-        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     public void initData() {
         super.initData();
+    }
+
+    public void initHWManager() {
+        HWmanager = HuaweiWearableManager.getInstance(getContext());
     }
 
     @Override
@@ -73,6 +91,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
     @Override
     public void initView(View view) {
         super.initView(view);
+
     }
 
     public void onButtonPressed(Uri uri) {
@@ -115,6 +134,13 @@ public class DeviceBasicInfoFragment extends BaseFragment {
         switch (id) {
             default:
                 break;
+        }
+    }
+
+    private final class DeviceStatusInnerReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
         }
     }
 

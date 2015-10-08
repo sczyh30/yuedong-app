@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.AppManager;
@@ -26,7 +27,6 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity
     implements BaseDialogControl,View.OnClickListener {
 
-    private ProgressDialog waitDialog;
     private boolean isVisible;
 
     protected LayoutInflater mInflater;
@@ -60,7 +60,7 @@ public abstract class BaseActivity extends AppCompatActivity
         ButterKnife.bind(this);
         // initialize the activity
         init(savedInstanceState);
-
+        isVisible = true;
     }
 
     @Override
@@ -140,6 +140,13 @@ public abstract class BaseActivity extends AppCompatActivity
         }
     }
 
+    protected void hideKeyboard() {
+        InputMethodManager imm =  (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        if(imm != null) {
+            imm.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+        }
+    }
+
     /**
      * Set the ActionBar title by string
      * @param title title string
@@ -169,10 +176,11 @@ public abstract class BaseActivity extends AppCompatActivity
             if (dialog == null) {
                 dialog = DialogUtil.getWaitDialog(this, message);
             }
-            if (dialog != null) {
+            else {
                 dialog.setMessage(message);
                 dialog.show();
             }
+            dialog.setCancelable(false);
             return dialog;
         }
         return null;

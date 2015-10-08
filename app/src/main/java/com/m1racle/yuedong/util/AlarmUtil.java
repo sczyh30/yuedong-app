@@ -10,7 +10,7 @@ import android.os.SystemClock;
  * Yuedong App Common Library
  * Alarm Task Util
  * @author sczyh30
- * @since 1.0.6
+ * @since 0.1.6
  */
 public class AlarmUtil {
 

@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
@@ -73,7 +74,7 @@ public class MyInformationFragment extends BaseFragment {
 
     private static BadgeView mMesCount;
 
-    private boolean mIsWatingLogin;
+    private boolean mIsWaitingLogin;
 
     private User mInfo;
     private AsyncTask<String, Void, User> mCacheTask;
@@ -83,20 +84,24 @@ public class MyInformationFragment extends BaseFragment {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (action.equals(Constants.INTENT_ACTION_LOGOUT)) {
-                if (mErrorLayout != null) {
-                    mIsWatingLogin = true;
-                    setupUser();
-                    mMesCount.hide();
-                }
-            } else if (action.equals(Constants.INTENT_ACTION_USER_CHANGE)) {
-                requestData(true);
-            } else if (action.equals(Constants.INTENT_ACTION_NOTICE)) {
+            switch (action) {
+                case Constants.INTENT_ACTION_LOGOUT:
+                    if (mErrorLayout != null) {
+                        mIsWaitingLogin = true;
+                        setupUser();
+                        mMesCount.hide();
+                    }
+                    break;
+                case Constants.INTENT_ACTION_USER_CHANGE:
+                    requestData(true);
+                    break;
+                case Constants.INTENT_ACTION_NOTICE:
+                    break;
             }
         }
     };
 
-    private final AsyncHttpResponseHandler mHandler = new AsyncHttpResponseHandler() {
+    private final AsyncHttpResponseHandler msHandler = new AsyncHttpResponseHandler() {
         @Override
         public void onSuccess(int arg0, Header[] arg1, byte[] arg2) {
             try {
@@ -121,8 +126,25 @@ public class MyInformationFragment extends BaseFragment {
                 Throwable arg3) {}
     };
 
+    private final BaseJsonHttpResponseHandler mHandler = new BaseJsonHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
+
+        }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Object errorResponse) {
+
+        }
+
+        @Override
+        protected Object parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+            return null;
+        }
+    };
+
     private void setupUser() {
-        if (mIsWatingLogin) {
+        if (mIsWaitingLogin) {
             mUserContainer.setVisibility(View.GONE);
             mUserUnLogin.setVisibility(View.VISIBLE);
         } else {
@@ -211,13 +233,7 @@ public class MyInformationFragment extends BaseFragment {
         mMesCount.setGravity(Gravity.CENTER);
         mMesCount.setBackgroundResource(R.mipmap.notification_bg);
         mQrCode.setOnClickListener(this);
-        // // 初始化团队列表数据
-        // String cache = PreferenceHelper.readString(getActivity(),
-        // TEAM_LIST_FILE, TEAM_LIST_KEY);
-        // if (!StringUtils.isEmpty(cache)) {
-        // List<Team> teams = TeamList.toTeamList(cache);
-        // addTeamLayout(teams);
-        // }
+
     }
 
     private void fillUI() {
@@ -236,7 +252,7 @@ public class MyInformationFragment extends BaseFragment {
 
     private void requestData(boolean refresh) {
         if (AppContext.getContext().isLogin()) {
-            mIsWatingLogin = false;
+            mIsWaitingLogin = false;
             String key = getCacheKey();
             if (refresh || DeviceUtil.hasInternet()
                     && (!CacheManager.isExistDataCache(getActivity(), key))) {
@@ -245,7 +261,7 @@ public class MyInformationFragment extends BaseFragment {
                 readCacheData(key);
             }
         } else {
-            mIsWatingLogin = true;
+            mIsWaitingLogin = true;
         }
         setupUser();
     }
@@ -322,7 +338,7 @@ public class MyInformationFragment extends BaseFragment {
 
     @Override
     public void onClick(View v) {
-        if (mIsWatingLogin) {
+        if (mIsWaitingLogin) {
             ToastUtil.showToast(R.string.unlogin);
             UIUtil.showLoginActivity(getActivity());
             return;

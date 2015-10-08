@@ -21,8 +21,10 @@ import java.util.Locale;
  */
 public class ApiHttpClient {
 
-    public final static String HOST = "";
-    private static String API_URL = "";
+    //public final static String HOST = "233.233.233.233";
+    //private static String API_URL = "http://233.233.233.233/";
+    public final static String HOST = "www.sczyh30.com";
+    private static String API_URL = "http://www.sczyh30.com/";
     private static String appCookie;
 
     public static AsyncHttpClient client;
@@ -56,12 +58,13 @@ public class ApiHttpClient {
 
     public static void get(String partUrl, AsyncHttpResponseHandler handler) {
         client.get(getAbsoluteApiUrl(partUrl), handler);
-        LogUtil.log("GET" + partUrl);
+        LogUtil.log("GET " + partUrl);
+        LogUtil.log("GET => " + getAbsoluteApiUrl(partUrl));
     }
 
     public static String getAbsoluteApiUrl(String partUrl) {
-        String url = String.format(API_URL, partUrl);
-        LogUtil.log("BASE_CLIENT", "request:" + url);
+        String url = API_URL + partUrl;
+        LogUtil.log("BASE_CLIENT", "request: " + url);
         return url;
     }
 

@@ -3,6 +3,7 @@ package com.m1racle.yuedong.ui.activity;
 import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -121,41 +122,17 @@ public class LoginActivity extends BaseActivity {
         return true;
     }
 
-    private void handleLogin() {
-        if(!okForLogin())
-            return;
-
-        mUserName = etUserName.getText().toString();
-        mPassword = etPassword.getText().toString();
-
-        showWaitDialog(R.string.progress_login);
-        SamsaraAPI.login(mUserName, mPassword, mHandler);
-        //LogUtil.toast("服务器维护中，请稍后再试");
-    }
-
-    /*private final TextHttpResponseHandler mHandler = new TextHttpResponseHandler() {
-        @Override
-        public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-
-        }
-
-        @Override
-        public void onSuccess(int statusCode, Header[] headers, String responseString) {
-
-        }
-    };*/
-
     private final BaseJsonHttpResponseHandler mHandler = new BaseJsonHttpResponseHandler() {
         @Override
         public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
             if(response != null) {
-
+                handleLoginResult((LoginResult)response);
             }
         }
 
         @Override
         public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Object errorResponse) {
-            ToastUtil.showToast("网络出现错误，错误代码 => " + statusCode);
+            ToastUtil.toast("网络出现错误，请重试。(" + statusCode + ")");
         }
 
         @Override
@@ -169,6 +146,20 @@ public class LoginActivity extends BaseActivity {
             hideWaitDialog();
         }
     };
+
+    private void handleLogin() {
+        if(!okForLogin())
+            return;
+
+        mUserName = etUserName.getText().toString();
+        mPassword = etPassword.getText().toString();
+
+        hideKeyboard();
+        showWaitDialog(R.string.progress_login).show();
+        SamsaraAPI.login(mUserName, mPassword, mHandler);
+        //LogUtil.toast("服务器维护中，请稍后再试");
+    }
+
 
     private void handleLoginResult(LoginResult result) {
         if(result.getDataResult().isOK()) {
@@ -212,6 +203,7 @@ public class LoginActivity extends BaseActivity {
     //TODO:需要的时候添加第三方登录接口支持
     private void qqLogin() {
         LogUtil.toast("QQ API 接口未开放");
+        //showWaitDialog();
     }
 
     private void wxLogin() {

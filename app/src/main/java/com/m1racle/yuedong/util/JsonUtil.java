@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.m1racle.yuedong.entity.DataResult;
 import com.m1racle.yuedong.entity.LoginResult;
+import com.m1racle.yuedong.entity.MotionActivities;
 import com.m1racle.yuedong.entity.User;
 
 import java.lang.reflect.Type;
@@ -23,7 +24,7 @@ public class JsonUtil {
         return gson.fromJson(jsonData, listType);
     }
 
-    public static ArrayList<User> resolveUser(String jsonData) {
+    public static ArrayList<User> resolveUsers(String jsonData) {
         Type listType = new TypeToken<ArrayList<User>>(){}.getType();
         return gson.fromJson(jsonData, listType);
     }
@@ -42,5 +43,14 @@ public class JsonUtil {
 
     public static LoginResult resolveLoginResult(String jsonData) {
         return gson.fromJson(jsonData, LoginResult.class);
+    }
+
+    public static MotionActivities resolveMAs(String jsonData) {
+        return gson.fromJson(jsonData, MotionActivities.class);
+    }
+
+    public static ArrayList<MotionActivities> resolveMAList(String jsonData) {
+        Type listType = new TypeToken<ArrayList<MotionActivities>>(){}.getType();
+        return gson.fromJson(jsonData, listType);
     }
 }

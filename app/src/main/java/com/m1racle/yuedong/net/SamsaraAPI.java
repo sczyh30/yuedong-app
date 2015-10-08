@@ -76,6 +76,10 @@ public class SamsaraAPI {
         ApiHttpClient.get("action/api/this->get_latest_version",handler);
     }
 
+    public static void getLatestMotionActivities(AsyncHttpResponseHandler handler) {
+        ApiHttpClient.get("action/api/latest_ma.json",handler);
+    }
+
     /**
      * The register action
      * invocation of simple register api

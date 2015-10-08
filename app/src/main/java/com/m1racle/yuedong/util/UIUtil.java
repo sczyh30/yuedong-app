@@ -27,15 +27,15 @@ public class UIUtil {
         }
     }
 
-    public static void showUserCenter(Context context, int hisuid,
-                                      String hisname) {
-        if (hisuid == 0 && hisname.equalsIgnoreCase("匿名")) {
-            ToastUtil.showToast("提醒你，该用户为非会员");
+    public static void showUserCenter(Context context, int uid,
+                                      String username) {
+        if (uid == 0 && username.equalsIgnoreCase("匿名")) {
+            ToastUtil.toast("提醒你，该用户为非会员");
             return;
         }
         Bundle args = new Bundle();
-        args.putInt("his_id", hisuid);
-        args.putString("his_name", hisname);
+        args.putInt("uid", uid);
+        args.putString("username", username);
         //showActivity(context, UtilActivityPage.USER_CENTER, args);
     }
 
@@ -94,9 +94,9 @@ public class UIUtil {
             @Override
             public void handleMessage(Message msg) {
                 if (msg.what == 1) {
-                    ToastUtil.showToast("缓存清除成功");
+                    ToastUtil.toast("缓存清除成功");
                 } else {
-                    ToastUtil.showToast("缓存清除失败");
+                    ToastUtil.toast("缓存清除失败");
                 }
             }
         };

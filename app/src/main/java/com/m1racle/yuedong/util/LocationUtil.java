@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * Location Function Util
  * @author sczyh30
+ * 目前直接用百度地图API就好，暂时不需要此类
  */
 @Deprecated
 public class LocationUtil {
@@ -45,9 +46,6 @@ public class LocationUtil {
         context = context0;
     }
 
-    private void showLocationData(Location location) {
-
-    }
 
     static LocationListener locationListener = new LocationListener() {
         @Override

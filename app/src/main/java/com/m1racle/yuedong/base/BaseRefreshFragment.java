@@ -17,18 +17,11 @@ public abstract class BaseRefreshFragment extends BaseFragment {
 
     public static final int REFRESH_DELAY = 2000;
 
-    public static final String KEY_ICON = "icon";
-    public static final String KEY_COLOR = "color";
-    public static final String KEY_STRING = "string";
-
-    protected List<Map <String, Integer> > MotionActiList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Map<String, Integer> map;
-        MotionActiList = new ArrayList<>();
 
         int[] icons = {
                 R.mipmap.sunny,
@@ -43,16 +36,17 @@ public abstract class BaseRefreshFragment extends BaseFragment {
         int[] strings = {
                 R.string.lt1,
                 R.string.lt2,
-                R.string.lt3
+                R.string.lt3,
+
         };
 
-        for (int i = 0; i < icons.length; i++) {
+        /*for (int i = 0; i < icons.length; i++) {
             map = new HashMap<>();
             map.put(KEY_ICON, icons[i]);
             map.put(KEY_COLOR, colors[i]);
             map.put(KEY_STRING, strings[i]);
             MotionActiList.add(map);
-        }
+        }*/
     }
 
 }

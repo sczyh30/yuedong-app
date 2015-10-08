@@ -23,7 +23,7 @@ public enum UtilActivityPage {
     private Class<?> clz;
     private int value;
 
-    private UtilActivityPage(int value, int title, Class<?> clz) {
+    UtilActivityPage(int value, int title, Class<?> clz) {
         this.value = value;
         this.title = title;
         this.clz = clz;

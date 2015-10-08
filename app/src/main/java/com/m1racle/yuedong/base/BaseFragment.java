@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 
 /**
@@ -27,7 +28,7 @@ public abstract class BaseFragment extends Fragment implements
     protected LayoutInflater mInflater;
 
     public Context getContext() {
-        return BaseApplication.getContext();
+        return AppContext.getContext();
     }
 
     @Override

@@ -17,12 +17,12 @@ public class UserDBHelper extends SQLiteOpenHelper {
             "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
             "username varchar(50) NOT NULL UNIQUE," +
             "face varchar(255) NOT NULL," +
-            "account varchar(50) NOT NULL UNIQUE" +
-            "location varchar(50) NOT NULL" +
-            "gender integer NOT NULL" +
-            "followers integer NOT NULL" +
-            "fans integer NOT NULL" +
-            "score integer NOT NULL" +
+            "account varchar(50) NOT NULL UNIQUE," +
+            "location varchar(50) NOT NULL," +
+            "gender integer NOT NULL," +
+            "followers integer NOT NULL," +
+            "fans integer NOT NULL," +
+            "score integer NOT NULL," +
             "rememberMe integer NOT NULL" +
             ")";
 

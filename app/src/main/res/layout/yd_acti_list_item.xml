@@ -1,24 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="222dp"
-    android:background="@color/eggplant">
+    android:layout_height="100dp"
+    >
 
     <ImageView
         android:id="@+id/image_view_icon"
         android:src="@mipmap/sweat"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="80dp"
+        android:layout_gravity="left|center_vertical"
+        android:layout_width="80dp"
+        android:layout_height="80dp" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="最新运动消息：羽毛球"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="40dp"
-        android:textSize="18dp"
-        android:textColor="@color/white"
+        android:text="我们今天将在这里做一些活塞运动"
+        android:layout_gravity="right|center_vertical"
+        android:layout_marginStart="110dp"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="0dp"
+        android:textSize="16sp"
         android:id="@+id/textView_list"
          />
 

@@ -16,7 +16,7 @@ public class DBTestService extends IntentService {
 
     @Override
     protected void onHandleIntent(Intent intent) {
-        UserDBHelper helper = new UserDBHelper(this, "UserTest.db", null, 2);
+        UserDBHelper helper = new UserDBHelper(this, "UserTest.db", null, 1);
         helper.getWritableDatabase();
     }
 

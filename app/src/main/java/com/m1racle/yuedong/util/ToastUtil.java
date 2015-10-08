@@ -33,7 +33,7 @@ public class ToastUtil {
     }
 
     public static void showToast(String message) {
-        showToast(message, Toast.LENGTH_LONG, 0, Gravity.BOTTOM);
+        showToast(message, Toast.LENGTH_LONG, 0, Gravity.CENTER );
     }
 
     public static void showToast(int message, int icon) {
@@ -49,7 +49,7 @@ public class ToastUtil {
     }
 
     public static void showToastShort(String message) {
-        showToast(message, Toast.LENGTH_SHORT, 0, Gravity.BOTTOM);
+        showToast(message, Toast.LENGTH_SHORT, 0, Gravity.CENTER);
     }
 
     public static void showToastShort(int message, Object... args) {
@@ -90,7 +90,7 @@ public class ToastUtil {
                 if (gravity == Gravity.CENTER) {
                     toast.setGravity(gravity, 0, 0);
                 } else {
-                    toast.setGravity(gravity, 0, 35);
+                    toast.setGravity(gravity, 0, 50);
                 }
 
                 toast.setDuration(duration);
