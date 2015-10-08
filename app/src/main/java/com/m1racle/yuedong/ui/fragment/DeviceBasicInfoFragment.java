@@ -38,8 +38,13 @@ import butterknife.OnClick;
  * Device Basic Info Fragment
  * extends BaseFragment
  * @see com.m1racle.yuedong.base.BaseFragment
+ * This fragment class is not so good
+ * the Huawei Api Impl should be abstract
+ * next version I will update it
  */
 public class DeviceBasicInfoFragment extends BaseFragment {
+
+    protected WeakReference<View> mRootView;
 
     public static final String STATUS_CHANGE_ACTION = "com.m1racle.yuedong.action.DEVICE_STATUS_CHANGED";
     // bind the view components
@@ -89,7 +94,16 @@ public class DeviceBasicInfoFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_device_basic_info, container, false);
+        if (mRootView == null || mRootView.get() == null) {
+            View view = inflater.inflate(R.layout.fragment_device_basic_info, container, false);
+            mRootView = new WeakReference<>(view);
+        } else {
+            ViewGroup parent = (ViewGroup) mRootView.get().getParent();
+            if (parent != null) {
+                parent.removeView(mRootView.get());
+            }
+        }
+        View view = mRootView.get();
         initData();
         ButterKnife.bind(this, view);
         initView(view);
@@ -183,37 +197,58 @@ public class DeviceBasicInfoFragment extends BaseFragment {
                 case HWServiceConfig.JAR_CONNECT_DEVICE:
                     int state = (Integer)object;
                     switch (state) {
-                        case 0:
+                        /*case 0:
                             mFragment.get().mEtStatusInst.setText(R.string.b2_not_connected_st);
                             mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.red));
                             mFragment.get().mEtStatus.setText(R.string.b2_status_0);
-                            break;
+                            break;*/
                         case 1:
                             mFragment.get().mEtStatusInst.setText(R.string.b2_connecting);
-                            mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.lightblue));
-                            mFragment.get().mEtStatus.setText(R.string.b2_status_1);
+                            mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.darker_blue));
+                            setStatus(R.string.b2_status_1);
                             break;
                         case 2:
                             mFragment.get().mEtStatusInst.setText(R.string.b2_connected_ok_st);
-                            mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.darker_blue));
-                            mFragment.get().mEtStatus.setText(R.string.b2_status_2);
+                            mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.lightblue));
+                            setStatus(R.string.b2_status_2);
                             break;
-                        case 3:
+                        /*case 3:
                             mFragment.get().mEtStatusInst.setText(R.string.b2_not_connected_st);
                             mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.red));
+                            if(msg.arg1 == )
                             mFragment.get().mEtStatus.setText(R.string.b2_status_3);
-                            break;
+                            break;*/
                         default:
                             mFragment.get().mEtStatusInst.setText(R.string.b2_not_connected_st);
-                            mFragment.get().mEtStatus.setText(R.string.b2_status_default);
+                            //mFragment.get().mEtStatus.setText(R.string.b2_status_default);
+                            switch (msg.arg1) {
+                                case 100100:
+                                    setStatus(R.string.b2_status_err_100100);
+                                    break;
+                                case 100101:
+                                    setStatus(R.string.b2_status_err_100101);
+                                    break;
+                                case 100104:
+                                    setStatus(R.string.b2_status_err_100104);
+                                    break;
+                                case 100105:
+                                    setStatus(R.string.b2_status_err_100105);
+                                    break;
+                                default:
+                                    setStatus(R.string.b2_status_err_100106);
+                                    break;
+                            }
                             mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.red));
                             break;
                     }
-                    getBlueToothBattery();
                     break;
                 default:
                     break;
             }
+        }
+
+        private void setStatus(int resId) {
+            mFragment.get().mEtStatus.setText(resId);
         }
 
     }
@@ -229,6 +264,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
             message.obj = status;
             message.arg1 = err_code;
             mHandler.sendMessage(message);
+            getBlueToothBattery();
         }
     };
 
@@ -260,7 +296,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
 
             @Override
             public void onFailure(int arg0, String arg1) {
-                LogUtil.log("getBlueToothBattery => err_code = " + arg0 + "arg1 = " + arg1);
+                LogUtil.log("getBlueToothBattery => err_code = " + arg0 + " arg1 = " + arg1);
                 Message message = new Message();
                 message.what = 1;
                 message.obj = "获取数据失败";

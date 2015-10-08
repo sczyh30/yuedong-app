@@ -58,7 +58,7 @@
                     android:textColor="@color/red"
                     android:layout_marginTop="10dp"
                     android:id="@+id/b2_status_text"
-                    android:text=""/>
+                    android:text="等待连接"/>
             </LinearLayout>
 
             <TextView
@@ -92,7 +92,7 @@
                     android:textColor="@color/darker_blue"
                     android:layout_marginTop="10dp"
                     android:id="@+id/b2_battery_status_text"
-                    android:text="24%"/>
+                    android:text="等待获取"/>
             </LinearLayout>
 
             <Button

@@ -60,12 +60,12 @@ public class SamsaraAPI {
 
     public static void getUserDetail(int id, AsyncHttpResponseHandler handler) {
         RequestParams params = new RequestParams("id", id);
-        ApiHttpClient.get("action/api/this->user_detail", params, handler);
+        ApiHttpClient.get("action/api/get/user_detail", params, handler);
     }
 
     public static void getUserDetail(String name, AsyncHttpResponseHandler handler) {
         RequestParams params = new RequestParams("name", name);
-        ApiHttpClient.get("action/api/this->user_detail_name", params, handler);
+        ApiHttpClient.get("action/api/get/user_detail_name", params, handler);
     }
 
     /**
@@ -73,7 +73,7 @@ public class SamsaraAPI {
      * @param handler Http Handler
      */
     public static void getUpdateInfo(AsyncHttpResponseHandler handler) {
-        ApiHttpClient.get("action/api/this->get_latest_version",handler);
+        ApiHttpClient.get("action/api/get/latest_version",handler);
     }
 
     public static void getLatestMotionActivities(AsyncHttpResponseHandler handler) {
@@ -88,11 +88,13 @@ public class SamsaraAPI {
      * @param password password crypted by MD5
      * @param handler Http Handler
      */
-    public static void register(String username, String password, AsyncHttpResponseHandler handler) {
+    public static void register(String username, String password,
+                                String account, AsyncHttpResponseHandler handler) {
         RequestParams params = new RequestParams();
-        params.put("username",username);
-        params.put("password",password);
-        final String REG_URL = "action/api/this->register";
+        params.put("account", account);
+        params.put("username", username);
+        params.put("password", MD5Util.MD5(password));
+        final String REG_URL = "action/api/register";
         ApiHttpClient.post(REG_URL, params, handler);
     }
 

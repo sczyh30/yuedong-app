@@ -15,8 +15,14 @@
     <string name="b2_status_3">已断开连接</string>
     <string name="b2_status_5">已断开连接</string>
     <string name="b2_status_default">已断开连接</string>
+    
+    <string name="b2_status_err_100100">没有安装华为健康App</string>
+    <string name="b2_status_err_100101">设备不支持</string>
+    <string name="b2_status_err_100104">手环服务异常</string>
+    <string name="b2_status_err_100105">手环服务初始化失败</string>
+    <string name="b2_status_err_100106">已断开连接</string>
 
-    <string name="b2_not_connected_st">当前设备未连接至运动手环，请检查设备是否已开启，并且蓝牙状态良好</string>
+    <string name="b2_not_connected_st">当前设备未连接至运动手环，请检查设备是否已开启，并且蓝牙状态良好。使用手环功能时需打开华为智能设备客户端。</string>
     <string name="b2_connecting">正在连接手环，请稍后…</string>
     <string name="b2_connected_ok_st">手环已正常连接</string>
 

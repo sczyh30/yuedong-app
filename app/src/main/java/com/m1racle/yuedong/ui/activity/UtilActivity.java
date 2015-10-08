@@ -69,6 +69,7 @@ public class UtilActivity extends BaseActivity
             FragmentTransaction trans = getFragmentManager()
                     .beginTransaction();
             trans.replace(R.id.container, fragment, TAG);
+            //trans.addToBackStack()
             trans.commitAllowingStateLoss();
 
             mFragment = new WeakReference<Fragment>(fragment);
@@ -105,10 +106,6 @@ public class UtilActivity extends BaseActivity
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
-
-
-
-
 
     @Override
     public void onBackPressed() {

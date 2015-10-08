@@ -12,11 +12,17 @@ import android.view.ViewGroup;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Base Fragment
+ * @author sczyh30
+ * @since 0.1
  */
 public abstract class BaseFragment extends Fragment implements
         android.view.View.OnClickListener {
+
+    protected WeakReference<View> mRootView;
 
     public static final int STATE_NONE = 0;
     public static final int STATE_REFRESH = 1;
