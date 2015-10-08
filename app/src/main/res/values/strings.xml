@@ -7,8 +7,18 @@
     <string name="b2_ncf">未连接</string>
     <string name="b2_connect_ok">已连接</string>
     <string name="b2_error">状态异常</string>
+    <string name="b2_not_get_data">获取数据失败</string>
+
+    <string name="b2_status_0">未知</string>
+    <string name="b2_status_1">正在连接</string>
+    <string name="b2_status_2">已连接</string>
+    <string name="b2_status_3">已断开连接</string>
+    <string name="b2_status_5">已断开连接</string>
+    <string name="b2_status_default">已断开连接</string>
 
     <string name="b2_not_connected_st">当前设备未连接至运动手环，请检查设备是否已开启，并且蓝牙状态良好</string>
+    <string name="b2_connecting">正在连接手环，请稍后…</string>
+    <string name="b2_connected_ok_st">手环已正常连接</string>
 
     <string name="login">登录</string>
     <string name="hint_username">输入账号/邮箱</string>

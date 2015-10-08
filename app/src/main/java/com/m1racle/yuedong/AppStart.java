@@ -59,6 +59,7 @@ public class AppStart extends AppCompatActivity {
         Intent uploadLog = new Intent(this, LogUploadService.class);
         startService(uploadLog);
         Intent intent = new Intent(this, MainActivity.class);
+        //Intent intent = new Intent(this, HWTMainActivity.class);
         startActivity(intent);
         finish();
     }

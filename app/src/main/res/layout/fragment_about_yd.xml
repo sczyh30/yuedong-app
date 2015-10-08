@@ -102,7 +102,7 @@
             android:layout_marginTop="20dip" />
 
         <RelativeLayout
-            android:id="@+id/rl_gitapp"
+            android:id="@+id/bt_hwclient"
             style="@style/option_item_rl">
 
             <TextView

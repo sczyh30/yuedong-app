@@ -1,6 +1,8 @@
 package com.m1racle.yuedong.service;
 
+import android.app.Service;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -8,6 +10,7 @@ import android.os.Message;
 import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.AppContext;
+import com.m1racle.yuedong.util.LogUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -16,9 +19,16 @@ import java.lang.ref.WeakReference;
  * @author sczyh30
  * @since 0.2
  */
-public class HWService extends HWServiceConfig {
+public class HWService extends Service {
 
     private HuaweiWearableManager manager = null;
+    private Intent notifyIntent;
+    private Bundle bundle;
+
+    public static final int JAR_GET_DEVICE_CONNECT_STATUS = 0;
+    public static final int JAR_GET_DEVICE_BATTERY = 1;
+    public static final int JAR_CONNECT_DEVICE = 12;
+    public final static int HUAWEI_TALKBAND_B2 = 1;
 
     private void init() {
         manager = HuaweiWearableManager.getInstance(AppContext.getContext());
@@ -69,6 +79,7 @@ public class HWService extends HWServiceConfig {
      */
     private static class MyHandler extends Handler {
         private final WeakReference<HWService> mService;
+        private Bundle bundle = null;
 
         public MyHandler(HWService service) {
             mService = new WeakReference<>(service);
@@ -81,7 +92,7 @@ public class HWService extends HWServiceConfig {
             switch (msg.what) {
                 case JAR_GET_DEVICE_CONNECT_STATUS:
                     int state = (Integer)object;
-                    int send_data = msg.arg1;
+                    mService.get().bundle.putInt("conn_state", state);
                     break;
                 case JAR_GET_DEVICE_BATTERY:
                     int send_data_battery = msg.arg1;
@@ -93,6 +104,15 @@ public class HWService extends HWServiceConfig {
                     break;
             }
         }
+
+    }
+
+    /**
+     * Send the broadcast to notify the UI layer
+     */
+    private void notifyStatusChanged() {
+        notifyIntent.putExtras(bundle);
+        sendBroadcast(notifyIntent);
     }
 
     private final MyHandler mHandler = new MyHandler(this);
@@ -119,5 +139,20 @@ public class HWService extends HWServiceConfig {
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    private void getBasicStatus() {
+        int connectState = 0;
+
+        if(null != manager){
+            connectState = manager.getConnectStatus(HUAWEI_TALKBAND_B2);
+        }
+
+        LogUtil.log("getConnectState => connectState = " + connectState);
+        Message message = Message.obtain();
+        message.what = JAR_GET_DEVICE_CONNECT_STATUS;
+        message.obj = connectState;
+        message.arg1 = HUAWEI_TALKBAND_B2;
+        mHandler.sendMessage(message);
     }
 }

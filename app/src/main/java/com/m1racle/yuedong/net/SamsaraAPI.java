@@ -33,7 +33,7 @@ public class SamsaraAPI {
         params.put("username", username);
         params.put("pwd", MD5Util.MD5(password));
         params.put("keep_login", 1);
-        String login_url = "action/api/this->login_validate";
+        String login_url = "action/api/login";
         ApiHttpClient.post(login_url, params, handler);
     }
 
@@ -49,7 +49,7 @@ public class SamsaraAPI {
         RequestParams params = new RequestParams();
         params.put("data",data);
         params.put("report",report);
-        String log_url = "action/api/this->log_upload";
+        String log_url = "action/api/upload/log";
         ApiHttpClient.post(log_url, params, handler);
 
     }

@@ -58,7 +58,7 @@
                     android:textColor="@color/red"
                     android:layout_marginTop="10dp"
                     android:id="@+id/b2_status_text"
-                    android:text="@string/b2_ncf"/>
+                    android:text=""/>
             </LinearLayout>
 
             <TextView
@@ -94,6 +94,15 @@
                     android:id="@+id/b2_battery_status_text"
                     android:text="24%"/>
             </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:text="更新手环状态"
+                android:textColor="@color/black"
+                android:id="@+id/btn_update_dvstatus"
+                android:layout_marginTop="50dp"/>
 
         </LinearLayout>
 

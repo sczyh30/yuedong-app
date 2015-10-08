@@ -50,6 +50,10 @@
             android:name=".ui.activity.LoginActivity"
             android:label="@string/login" >
         </activity>
+        <activity android:name=".ui.activity.HWTMainActivity"
+            android:label="@string/app_name">
+
+        </activity>
         <activity
             android:name=".ui.activity.UtilActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -74,9 +78,18 @@
         </service>
         <service
             android:name=".service.HWService"
+            android:enabled="true">
+        </service>
+
+        <receiver
+            android:name=".service.receiver.DeviceStatusChangeReceiver"
             android:enabled="true"
             android:exported="true" >
-        </service>
+            <intent-filter>
+                <action android:name="com.m1racle.yuedong.action.DEVICE_STATUS_CHANGED"/>
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>

@@ -14,6 +14,7 @@ import android.view.View;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.adapter.UsualViewPagerAdapter;
 import com.m1racle.yuedong.base.BaseActivity;
+import com.m1racle.yuedong.service.HWService;
 import com.m1racle.yuedong.service.receiver.NetworkChangeReceiver;
 import com.m1racle.yuedong.ui.fragment.DeviceBasicInfoFragment;
 import com.m1racle.yuedong.ui.fragment.MotionBasicInfoFragment;
@@ -74,6 +75,7 @@ public class MainActivity extends BaseActivity
         if (adapter != null)
             viewPager.setAdapter(adapter);
         initNetStatus();
+        startDeviceService();
         viewPager.setCurrentItem(0);
     }
 
@@ -114,5 +116,16 @@ public class MainActivity extends BaseActivity
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(networkChangeReceiver);
+        stopDeviceService();
+    }
+
+    private void startDeviceService() {
+        Intent intent = new Intent(this, HWService.class);
+        startService(intent);
+    }
+
+    private void stopDeviceService() {
+        Intent intent = new Intent(this, HWService.class);
+        stopService(intent);
     }
 }
