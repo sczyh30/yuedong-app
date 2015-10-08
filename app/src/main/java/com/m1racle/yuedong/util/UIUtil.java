@@ -85,6 +85,10 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.SETTING);
     }
 
+    public static void showTemperature(Context context) {
+        showActivity(context, UtilActivityPage.TEMPERATURE_DETAIL);
+    }
+
     public static void showSocialDetail(Context context) {
         showActivity(context, UtilActivityPage.SOCIAL_DETAIL);
     }

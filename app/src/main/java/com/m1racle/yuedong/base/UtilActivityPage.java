@@ -6,6 +6,7 @@ import com.m1racle.yuedong.ui.fragment.MyInformationFragment;
 import com.m1racle.yuedong.ui.fragment.MySocialDetailFragment;
 import com.m1racle.yuedong.ui.fragment.SettingsFragment;
 import com.m1racle.yuedong.ui.fragment.SettingsNotificationFragment;
+import com.m1racle.yuedong.ui.fragment.TemperatureViewFragment;
 import com.m1racle.yuedong.ui.fragment.TestDBFragment;
 
 public enum UtilActivityPage {
@@ -17,6 +18,7 @@ public enum UtilActivityPage {
     SETTING_NOTIFICATION (4, R.string.actionbar_title_setting_notification,
             SettingsNotificationFragment.class),
     SOCIAL_DETAIL(5,R.string.actionbar_title_my_information_detail, MySocialDetailFragment.class),
+    TEMPERATURE_DETAIL(6,R.string.actionbar_title_temperature_detail, TemperatureViewFragment.class),
     DB_TEST(666,R.string.actionbar_title_setting_notification, TestDBFragment.class);
 
     private int title;

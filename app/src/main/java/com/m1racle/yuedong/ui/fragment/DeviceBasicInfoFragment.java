@@ -177,7 +177,6 @@ public class DeviceBasicInfoFragment extends BaseFragment {
      */
     private static class MyHandler extends Handler {
         private final WeakReference<DeviceBasicInfoFragment> mFragment;
-        private Bundle bundle = null;
 
         public MyHandler(DeviceBasicInfoFragment fragment) {
             mFragment = new WeakReference<>(fragment);

@@ -9,6 +9,11 @@ import android.view.ViewGroup;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.util.ToastUtil;
+import com.m1racle.yuedong.util.UIUtil;
+
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 /**
@@ -19,7 +24,6 @@ public class MotionBasicInfoFragment extends BaseFragment {
     private OnFragmentInteractionListener mListener;
 
     public MotionBasicInfoFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -31,6 +35,7 @@ public class MotionBasicInfoFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_motion_basic_info, container, false);
+        ButterKnife.bind(this, view);
         initView(view);
         initData();
         return view;
@@ -79,8 +84,19 @@ public class MotionBasicInfoFragment extends BaseFragment {
         void onFragmentInteraction(Uri uri);
     }
 
+    @OnClick({R.id.fn_button_advice, R.id.fn_button_alarm, R.id.fn_button_mt_data, R.id.fn_button_mt_everyday,
+        R.id.fn_button_mt_goal, R.id.fn_button_sleep, R.id.fn_button_temperature, R.id.fn_button_userinfo, R.id.fn_button_weight})
     @Override
     public void onClick(View view) {
-
+        int id = view.getId();
+        switch (id) {
+            case R.id.fn_button_mt_data:
+                break;
+            case R.id.fn_button_temperature:
+                UIUtil.showTemperature(getActivity());
+                break;
+            default:
+                break;
+        }
     }
 }

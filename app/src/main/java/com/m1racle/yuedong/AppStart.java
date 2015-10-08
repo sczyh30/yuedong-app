@@ -30,7 +30,7 @@ public class AppStart extends AppCompatActivity {
         setContentView(view);
         // 渐变展示启动屏
         AlphaAnimation aa = new AlphaAnimation(0.5f, 1.0f);
-        aa.setDuration(1000);
+        aa.setDuration(800);
         view.startAnimation(aa);
         aa.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -59,7 +59,6 @@ public class AppStart extends AppCompatActivity {
         Intent uploadLog = new Intent(this, LogUploadService.class);
         startService(uploadLog);
         Intent intent = new Intent(this, MainActivity.class);
-        //Intent intent = new Intent(this, HWTMainActivity.class);
         startActivity(intent);
         finish();
     }

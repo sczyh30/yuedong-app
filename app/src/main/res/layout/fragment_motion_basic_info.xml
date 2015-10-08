@@ -1,12 +1,155 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.m1racle.yuedong.ui.fragment.MotionBasicInfoFragment">
 
-    <TextView
+    <com.m1racle.yuedong.ui.widget.CustomerScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="猥琐的你的运动信息" />
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/choose_function_inst"
+                android:layout_marginTop="20dp"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginLeft="10dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="fill_horizontal"
+                android:layout_marginTop="10dp">
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:text="@string/b2_btn_fn_user_info"
+                    android:id="@+id/fn_button_userinfo"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_red"
+                    android:textSize="15sp"
+                    android:layout_gravity="left|top" />
+
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/b2_btn_fn_motion_everyday"
+                    android:id="@+id/fn_button_mt_everyday"
+                    android:textSize="15sp"
+                    android:background="@drawable/btn_green_selector"/>
+
+
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:text="@string/b2_btn_fn_motion_data"
+                    android:id="@+id/fn_button_mt_data"
+                    android:textSize="15sp"
+                    android:background="@drawable/btn_blue_selector"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="right|top" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="fill_horizontal"
+                android:layout_marginTop="5dp">
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:text="@string/b2_btn_fn_motion_goal"
+                    android:id="@+id/fn_button_mt_goal"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_blue_selector"
+                    android:layout_gravity="left|top" />
+
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/b2_btn_fn_sleep"
+                    android:id="@+id/fn_button_sleep"
+                    android:textSize="15sp"
+                    android:background="@drawable/btn_red" />
+
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:text="@string/b2_btn_alarm"
+                    android:id="@+id/fn_button_alarm"
+                    android:textSize="15sp"
+                    android:background="@drawable/btn_green_selector"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="right|top" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="fill_horizontal"
+                android:layout_marginTop="5dp">
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:text="@string/b2_btn_fn_advice"
+                    android:id="@+id/fn_button_advice"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_green_selector"
+                    android:layout_gravity="left|top" />
+
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/btn_fn_temperature"
+                    android:id="@+id/fn_button_temperature"
+                    android:textSize="15sp"
+                    android:background="@drawable/btn_blue_selector"/>
+
+                <Button
+                    android:layout_width="110dp"
+                    android:layout_height="100dp"
+                    android:text="@string/btn_fn_weight"
+                    android:id="@+id/fn_button_weight"
+                    android:textSize="15sp"
+                    android:background="@drawable/btn_red"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_gravity="right|top" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.m1racle.yuedong.ui.widget.CustomerScrollView>
 
 </FrameLayout>

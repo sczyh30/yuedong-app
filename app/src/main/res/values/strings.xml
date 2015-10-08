@@ -26,6 +26,19 @@
     <string name="b2_connecting">正在连接手环，请稍后…</string>
     <string name="b2_connected_ok_st">手环已正常连接</string>
 
+    <string name="temp_bottom_info">数值将根据您的环境和设备的物理接触变化。</string>
+
+    <string name="choose_function_inst">运动与健康功能</string>
+    <string name="b2_btn_fn_user_info">用户信息</string>
+    <string name="b2_btn_fn_motion_everyday">每日运动</string>
+    <string name="b2_btn_fn_motion_data">运动数据</string>
+    <string name="b2_btn_fn_motion_goal">运动目标</string>
+    <string name="b2_btn_fn_sleep">睡眠监测</string>
+    <string name="b2_btn_alarm">手环闹钟</string>
+    <string name="b2_btn_fn_advice">运动建议</string>
+    <string name="btn_fn_temperature">温度/湿度</string>
+    <string name="btn_fn_weight">体重记录</string>
+
     <string name="login">登录</string>
     <string name="hint_username">输入账号/邮箱</string>
     <string name="hint_password">密码</string>
@@ -99,6 +112,8 @@
     <string name="actionbar_title_about">关于</string>
     <string name="actionbar_title_my_information">我的悦动</string>
     <string name="actionbar_title_my_information_detail">详细信息</string>
+    <string name="actionbar_title_temperature_detail">温度/湿度</string>
+    <string name="actionbar_title_b2_user_info">手环用户信息</string>
 
     <string name="lt1">纯洁的要命</string>
     <string name="lt2">猥琐的要命</string>
@@ -106,4 +121,5 @@
     <string name="lt4">哈哈哈</string>
     <string name="lt5">呵呵呵</string>
     <string name="lt6">嘻嘻哈哈~O(∩_∩)O哈哈~</string>
+
 </resources>

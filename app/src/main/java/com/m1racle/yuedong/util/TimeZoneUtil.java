@@ -1,10 +1,11 @@
 package com.m1racle.yuedong.util;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
 /**
- * 悦动App
+ * Yuedong App
  * TimeZone Transform Util
  */
 public class TimeZoneUtil {
@@ -30,4 +31,10 @@ public class TimeZoneUtil {
 		}
 		return finalDate;
 	}
+
+	public static String getCurrentTime() {
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy年MM月dd日 HH:mm");
+        Date date = new Date(System.currentTimeMillis());
+        return formater.format(date);
+    }
 }
