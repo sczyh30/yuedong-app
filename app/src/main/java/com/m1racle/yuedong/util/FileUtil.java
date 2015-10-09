@@ -204,7 +204,7 @@ public class FileUtil {
 	 */
 	public static String formatFileSize(long fileS) {
 		java.text.DecimalFormat df = new java.text.DecimalFormat("#.00");
-		String fileSizeString = "";
+		String fileSizeString;
 		if (fileS < 1024) {
 			fileSizeString = df.format((double) fileS) + "B";
 		} else if (fileS < 1048576) {
@@ -245,9 +245,6 @@ public class FileUtil {
 
 	/**
 	 * 获取目录文件个数
-	 * 
-	 * @param emojiFragment
-	 * @return
 	 */
 	public long getFileList(File dir) {
 		long count = 0;
@@ -490,7 +487,6 @@ public class FileUtil {
 	
 	/**
 	 * 清空一个文件夹
-	 * @param files
 	 */
 	public static void clearFileWithPath(String filePath) {
 		List<File> files = FileUtil.listPathFiles(filePath);
@@ -531,11 +527,10 @@ public class FileUtil {
 	/**
 	 * 列出root目录下所有子目录
 	 * 
-	 * @param path
 	 * @return 绝对路径
 	 */
 	public static List<String> listPath(String root) {
-		List<String> allDir = new ArrayList<String>();
+		List<String> allDir = new ArrayList<>();
 		SecurityManager checker = new SecurityManager();
 		File path = new File(root);
 		checker.checkRead(root);
@@ -576,8 +571,6 @@ public class FileUtil {
 
 	/**
 	 * 创建目录
-	 * 
-	 * @param path
 	 */
 	public static PathStatus createPath(String newPath) {
 		File path = new File(newPath);

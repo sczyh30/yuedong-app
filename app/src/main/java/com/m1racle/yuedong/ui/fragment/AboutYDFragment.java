@@ -22,7 +22,8 @@ import butterknife.ButterKnife;
 
 
 /**
- * About Yuedong Fragment
+ * Yuedong App
+ * About Fragment
  */
 public class AboutYDFragment extends BaseFragment {
 
@@ -66,13 +67,7 @@ public class AboutYDFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        mTvVersionName.setText("悦动 V " + DeviceUtil.getVersionName());
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        mTvVersionName.setText("悦动 v " + DeviceUtil.getVersionName());
     }
 
     @Override
@@ -89,16 +84,10 @@ public class AboutYDFragment extends BaseFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        LogUtil.log("About Fragment => onDetach");
+        //LogUtil.log("About Fragment => onDetach");
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     */
     public interface OnFragmentInteractionListener {
 
         void onFragmentInteraction(Uri uri);
@@ -109,10 +98,10 @@ public class AboutYDFragment extends BaseFragment {
         final int id = v.getId();
         switch (id) {
             case R.id.rl_check_update:
-                //onClickUpdate();
+                onClickUpdate();
                 break;
             case R.id.rl_feedback:
-                //showFeedBack();
+                showFeedback();
                 break;
             case R.id.rl_grade:
                 DeviceUtil.openAppInMarket(getActivity());
@@ -145,5 +134,13 @@ public class AboutYDFragment extends BaseFragment {
 
     public void onClickTestDB() {
         UIUtil.showActivity(getActivity(), UtilActivityPage.DB_TEST);
+    }
+
+    private void onClickUpdate() {
+
+    }
+
+    private void showFeedback() {
+
     }
 }

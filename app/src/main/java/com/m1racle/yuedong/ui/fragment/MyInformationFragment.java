@@ -25,10 +25,12 @@ import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.base.Constants;
 import com.m1racle.yuedong.cache.CacheManager;
 import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.ui.dialog.MyQRCodeDialog;
 import com.m1racle.yuedong.ui.empty.EmptyLayout;
 import com.m1racle.yuedong.ui.widget.AvatarView;
 import com.m1racle.yuedong.ui.widget.BadgeView;
 import com.m1racle.yuedong.util.DeviceUtil;
+import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 import com.m1racle.yuedong.util.UIUtil;
 
@@ -39,9 +41,12 @@ import java.lang.ref.WeakReference;
 
 import butterknife.ButterKnife;
 import butterknife.Bind;
+import butterknife.OnClick;
 import cz.msebera.android.httpclient.Header;
 
 /**
+ * Yuedong App
+ * fucking My Information Fragment
  */
 public class MyInformationFragment extends BaseFragment {
 
@@ -212,6 +217,7 @@ public class MyInformationFragment extends BaseFragment {
         view.findViewById(R.id.rl_message).setOnClickListener(this);
         view.findViewById(R.id.rl_team).setOnClickListener(this);
         view.findViewById(R.id.rl_blog).setOnClickListener(this);
+        mQrCode.setOnClickListener(this);
         /*view.findViewById(R.id.rl_note).setOnClickListener(
                 new OnClickListener() {
                     @Override
@@ -291,7 +297,7 @@ public class MyInformationFragment extends BaseFragment {
         private final WeakReference<Context> mContext;
 
         private CacheTask(Context context) {
-            mContext = new WeakReference<Context>(context);
+            mContext = new WeakReference<>(context);
         }
 
         @Override
@@ -336,6 +342,7 @@ public class MyInformationFragment extends BaseFragment {
         }
     }
 
+    @OnClick({R.id.iv_qr_code})
     @Override
     public void onClick(View v) {
         if (mIsWaitingLogin) {
@@ -368,9 +375,6 @@ public class MyInformationFragment extends BaseFragment {
             UIUtil.showMyMes(getActivity());
             setNoticeRead();
             break;
-        case R.id.rl_team:
-            UIUtil.showTeamMainActivity(getActivity());
-            break;
         case R.id.rl_blog:
             UIUtil.showUserBlog(getActivity(), AppContext.getContext()
                     .getLoginUid());
@@ -386,8 +390,8 @@ public class MyInformationFragment extends BaseFragment {
     }
 
     private void showMyQrCode() {
-        //MyQrodeDialog dialog = new MyQrodeDialog(getActivity());
-        //dialog.show();
+        MyQRCodeDialog dialog = new MyQRCodeDialog(getActivity());
+        dialog.show();
     }
 
     @Override

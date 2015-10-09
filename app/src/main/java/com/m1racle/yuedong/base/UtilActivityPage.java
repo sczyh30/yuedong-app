@@ -1,7 +1,13 @@
 package com.m1racle.yuedong.base;
 
 import com.m1racle.yuedong.R;
+import com.m1racle.yuedong.SleepObserverFragment;
 import com.m1racle.yuedong.ui.fragment.AboutYDFragment;
+import com.m1racle.yuedong.ui.fragment.DeviceAlarmFragment;
+import com.m1racle.yuedong.ui.fragment.DeviceMotionDataFragment;
+import com.m1racle.yuedong.ui.fragment.DeviceUserFragment;
+import com.m1racle.yuedong.ui.fragment.EverydayMotionFragment;
+import com.m1racle.yuedong.ui.fragment.MotionGoalFragment;
 import com.m1racle.yuedong.ui.fragment.MyInformationFragment;
 import com.m1racle.yuedong.ui.fragment.MySocialDetailFragment;
 import com.m1racle.yuedong.ui.fragment.SettingsFragment;
@@ -19,6 +25,12 @@ public enum UtilActivityPage {
             SettingsNotificationFragment.class),
     SOCIAL_DETAIL(5,R.string.actionbar_title_my_information_detail, MySocialDetailFragment.class),
     TEMPERATURE_DETAIL(6,R.string.actionbar_title_temperature_detail, TemperatureViewFragment.class),
+    DEVICE_USER_INFO(7,R.string.actionbar_title_device_user_info, DeviceUserFragment.class),
+    DEVICE_EVERYDAY_MOTION(8,R.string.actionbar_title_device_everyday_motion, EverydayMotionFragment.class),
+    DEVICE_ALARM(9,R.string.actionbar_title_device_alarm, DeviceAlarmFragment.class),
+    DEVICE_MOTION_DATA(10,R.string.actionbar_title_device_motion_data, DeviceMotionDataFragment.class),
+    DEVICE_MOTION_GOAL(11,R.string.actionbar_title_device_motion_goal, MotionGoalFragment.class),
+    SLEEP_OBSERVER(12,R.string.actionbar_title_device_sleep_observer, SleepObserverFragment.class),
     DB_TEST(666,R.string.actionbar_title_setting_notification, TestDBFragment.class);
 
     private int title;

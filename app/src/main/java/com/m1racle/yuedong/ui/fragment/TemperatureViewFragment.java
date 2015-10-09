@@ -31,6 +31,7 @@ import butterknife.ButterKnife;
  * Sensor Data View Fragment
  * provides the temperature data
  * @author sczyh30
+ * @since 0.3.21
  */
 public class TemperatureViewFragment extends BaseFragment {
 

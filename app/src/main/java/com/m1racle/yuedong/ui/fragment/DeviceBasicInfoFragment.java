@@ -35,12 +35,11 @@ import butterknife.OnClick;
 
 
 /**
+ * Yuedong App
  * Device Basic Info Fragment
+ * @author sczyh30
  * extends BaseFragment
  * @see com.m1racle.yuedong.base.BaseFragment
- * This fragment class is not so good
- * the Huawei Api Impl should be abstract
- * next version I will update it
  */
 public class DeviceBasicInfoFragment extends BaseFragment {
 

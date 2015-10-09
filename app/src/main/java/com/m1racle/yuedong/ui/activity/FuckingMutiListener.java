@@ -12,5 +12,4 @@ public interface FuckingMutiListener extends AboutYDFragment.OnFragmentInteracti
         TestDBFragment.OnFragmentInteractionListener,
         MySocialDetailFragment.OnFragmentInteractionListener,
         TemperatureViewFragment.OnFragmentInteractionListener {
-
 }

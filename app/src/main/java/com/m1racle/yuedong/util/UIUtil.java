@@ -89,8 +89,32 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.TEMPERATURE_DETAIL);
     }
 
+    public static void showDeviceMotionData(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_MOTION_DATA);
+    }
+
+    public static void showMotionGoal(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_MOTION_GOAL);
+    }
+
+    public static void showSleepObserver(Context context) {
+        showActivity(context, UtilActivityPage.SLEEP_OBSERVER);
+    }
+
+    public static void showDeviceAlarm(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_ALARM);
+    }
+
     public static void showSocialDetail(Context context) {
         showActivity(context, UtilActivityPage.SOCIAL_DETAIL);
+    }
+
+    public static void showDeviceUserInfo(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_USER_INFO);
+    }
+
+    public static void showEverydayMotion(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_EVERYDAY_MOTION);
     }
 
     public static void clearAppCache(Activity activity) {

@@ -42,7 +42,7 @@ public class AppContext extends BaseApplication {
     private int loginUid;
 
     private boolean login;
-    LocalUserDaoImpl userDao;
+    LocalUserDaoImpl userDao = new LocalUserDaoImpl();
 
     @Override
     public void onCreate() {
@@ -117,17 +117,7 @@ public class AppContext extends BaseApplication {
     }
 
     public User getLoginUser() {
-        User user = new User();
-        user.setId(StringUtils.toInt(getProperty("user.uid"), 0));
-        user.setUsername(getProperty("user.username"));
-        user.setPortrait(getProperty("user.face"));
-        user.setAccount(getProperty("user.account"));
-        user.setLocation(getProperty("user.location"));
-        user.setFollowers(StringUtils.toInt(getProperty("user.followers"), 0));
-        user.setFans(StringUtils.toInt(getProperty("user.fans"), 0));
-        user.setScore(StringUtils.toInt(getProperty("user.score"), 0));
-        user.setRememberMe(StringUtils.toBool(getProperty("user.isRememberMe")));
-        return user;
+        return userDao.getUserInfo();
     }
 
     /**
@@ -136,9 +126,7 @@ public class AppContext extends BaseApplication {
     public void cleanLoginInfo() {
         this.loginUid = 0;
         this.login = false;
-        removeProperty("user.uid", "user.username", "user.face", "user.location",
-                "user.followers", "user.fans", "user.score",
-                "user.isRememberMe", "user.gender");
+        userDao.removeUserInfo();
     }
 
     public void saveUserInfo(User user) {

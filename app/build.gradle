@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
-        versionName "0.3.58-dev"
+        versionName "0.4.24-dev"
     }
     buildTypes {
         release {
@@ -32,6 +32,7 @@ dependencies {
     //compile 'com.android.support:support-v4:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.google.zxing:core:3.2.0'
     compile 'com.yqritc:recyclerview-flexibledivider:1.2.5'
     compile 'com.yalantis:phoenix:1.2.2'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta1'

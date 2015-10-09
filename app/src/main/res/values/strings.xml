@@ -81,6 +81,9 @@
     <string name="copyright">Copyright © 悦动 2015.</string>
     <string name="copyright_support">本应用由华为手环强力驱动</string>
 
+    <string name="qr_code_tip">扫一扫上面的二维码，加我为好友</string>
+    <string name="qr_code_tip2">(长按保存到本地)</string>
+
     <string name="notice_accept">接收新通知</string>
     <string name="notice_voice">声音</string>
     <string name="notice_vibration">震动</string>
@@ -113,7 +116,13 @@
     <string name="actionbar_title_my_information">我的悦动</string>
     <string name="actionbar_title_my_information_detail">详细信息</string>
     <string name="actionbar_title_temperature_detail">温度/湿度</string>
-    <string name="actionbar_title_b2_user_info">手环用户信息</string>
+    <string name="actionbar_title_device_user_info">手环用户信息</string>
+    <string name="actionbar_title_device_alarm">手环闹钟</string>
+    <string name="actionbar_title_device_everyday_motion">每日运动</string>
+    <string name="actionbar_title_device_motion_data">我的运动数据</string>
+    <string name="actionbar_title_motion_advice">健康与运动建议</string>
+    <string name="actionbar_title_device_motion_goal">我的运动目标</string>
+    <string name="actionbar_title_device_sleep_observer">睡眠监测</string>
 
     <string name="lt1">纯洁的要命</string>
     <string name="lt2">猥琐的要命</string>
@@ -121,5 +130,7 @@
     <string name="lt4">哈哈哈</string>
     <string name="lt5">呵呵呵</string>
     <string name="lt6">嘻嘻哈哈~O(∩_∩)O哈哈~</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

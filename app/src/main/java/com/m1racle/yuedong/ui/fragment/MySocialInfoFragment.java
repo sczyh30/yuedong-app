@@ -20,13 +20,16 @@ import com.m1racle.yuedong.base.BaseApplication;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.base.UtilActivityPage;
 import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.ui.dialog.MyQRCodeDialog;
 import com.m1racle.yuedong.ui.empty.EmptyLayout;
 import com.m1racle.yuedong.ui.widget.AvatarView;
 import com.m1racle.yuedong.ui.widget.BadgeView;
+import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.UIUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class MySocialInfoFragment extends BaseFragment {
@@ -52,8 +55,8 @@ public class MySocialInfoFragment extends BaseFragment {
     View mMesView;
     @Bind(R.id.error_layout)
     EmptyLayout mErrorLayout;
-    @Bind(R.id.iv_qr_code)
-    ImageView mQrCode;
+    //@Bind(R.id.iv_qr_code)
+    //ImageView mQrCode;
     @Bind(R.id.ll_user_container)
     View mUserContainer;
     @Bind(R.id.rl_user_unlogin)
@@ -124,7 +127,6 @@ public class MySocialInfoFragment extends BaseFragment {
         mMesCount.setBadgePosition(BadgeView.POSITION_CENTER);
         mMesCount.setGravity(Gravity.CENTER);
         mMesCount.setBackgroundResource(R.mipmap.notification_bg);
-        mQrCode.setOnClickListener(this);
     }
 
     @Override
@@ -149,14 +151,24 @@ public class MySocialInfoFragment extends BaseFragment {
     }
 
     @Override
+    @OnClick({R.id.iv_qr_code})
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
             case R.id.iv_avatar:
                 UIUtil.showSocialDetail(getActivity());
                 break;
+            case R.id.iv_qr_code:
+                showMyQrCode();
+                break;
             default:
                 break;
         }
+    }
+
+    private void showMyQrCode() {
+        MyQRCodeDialog dialog = new MyQRCodeDialog(getActivity());
+        dialog.show();
+        LogUtil.toast("QR Code click");
     }
 }

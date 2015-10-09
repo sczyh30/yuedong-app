@@ -136,7 +136,7 @@ public class SettingsFragment extends BaseFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 UIUtil.clearAppCache(getActivity());
-                mTvCacheSize.setText("0KB");
+                mTvCacheSize.setText("0 KB");
             }
         }).show();
     }
