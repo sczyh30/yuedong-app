@@ -85,11 +85,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ly_favorite"
+                android:id="@+id/ly_motion_activities"
                 style="@style/uset_information_ll" >
 
                 <TextView
-                    android:id="@+id/tv_favorite"
+                    android:id="@+id/tv_motion_activities"
                     style="@style/user_formation_text" />
 
                 <TextView

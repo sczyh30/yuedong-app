@@ -13,8 +13,6 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
@@ -25,7 +23,6 @@ import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.service.HWServiceConfig;
 import com.m1racle.yuedong.util.LogUtil;
-import com.m1racle.yuedong.util.ToastUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -53,18 +50,24 @@ public class DeviceBasicInfoFragment extends BaseFragment {
     TextView mEtStatusInst;
     @Bind(R.id.b2_battery_status_text)
     TextView mEtBatteryStatus;
-    @Bind(R.id.b2_battery_status_layout)
-    LinearLayout batteryLayout;
+    //@Bind(R.id.b2_battery_status_layout)
+    //LinearLayout batteryLayout;
 
-    private HuaweiWearableManager HWmanager = null;
+    private HuaweiWearableManager HWManager = null;
     private OnFragmentInteractionListener mListener;
-
-    public DeviceBasicInfoFragment() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if(HWManager != null) {
+            getConnectState();
+            getBlueToothBattery();
+        }
     }
 
     @Override
@@ -84,9 +87,9 @@ public class DeviceBasicInfoFragment extends BaseFragment {
     }
 
     public void initHWManager() {
-        HWmanager = HuaweiWearableManager.getInstance(getContext());
-        if(HWmanager != null) {
-            HWmanager.registerConnectStateCallback(stateCallBack);
+        HWManager = getHuaweiManager();
+        if(HWManager != null) {
+            HWManager.registerConnectStateCallback(stateCallBack);
         }
     }
 
@@ -107,10 +110,16 @@ public class DeviceBasicInfoFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         initView(view);
         initHWManager();
-        if(HWmanager != null) {
-            getConnectState();
-            getBlueToothBattery();
-        }
+        /*if(HWManager != null) {
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    getConnectState();
+                    getBlueToothBattery();
+                }
+            }, 1000);
+        }*/
         return view;
     }
 
@@ -159,7 +168,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
         int id = view.getId();
         switch (id) {
             case R.id.btn_update_dvstatus:
-                if(HWmanager != null) {
+                if(HWManager != null) {
                     getConnectState();
                     getBlueToothBattery();
                 }
@@ -195,11 +204,6 @@ public class DeviceBasicInfoFragment extends BaseFragment {
                 case HWServiceConfig.JAR_CONNECT_DEVICE:
                     int state = (Integer)object;
                     switch (state) {
-                        /*case 0:
-                            mFragment.get().mEtStatusInst.setText(R.string.b2_not_connected_st);
-                            mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.red));
-                            mFragment.get().mEtStatus.setText(R.string.b2_status_0);
-                            break;*/
                         case 1:
                             mFragment.get().mEtStatusInst.setText(R.string.b2_connecting);
                             mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.darker_blue));
@@ -210,15 +214,8 @@ public class DeviceBasicInfoFragment extends BaseFragment {
                             mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.lightblue));
                             setStatus(R.string.b2_status_2);
                             break;
-                        /*case 3:
-                            mFragment.get().mEtStatusInst.setText(R.string.b2_not_connected_st);
-                            mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.red));
-                            if(msg.arg1 == )
-                            mFragment.get().mEtStatus.setText(R.string.b2_status_3);
-                            break;*/
                         default:
                             mFragment.get().mEtStatusInst.setText(R.string.b2_not_connected_st);
-                            //mFragment.get().mEtStatus.setText(R.string.b2_status_default);
                             switch (msg.arg1) {
                                 case 100100:
                                     setStatus(R.string.b2_status_err_100100);
@@ -268,9 +265,9 @@ public class DeviceBasicInfoFragment extends BaseFragment {
 
     private void getConnectState() {
         int connectState = 0;
-        if(null != HWmanager){
-            HWmanager.getConnect(HWServiceConfig.HUAWEI_TALKBAND_B2);
-            connectState = HWmanager.getConnectStatus(HWServiceConfig.HUAWEI_TALKBAND_B2);
+        if(null != HWManager){
+            HWManager.getConnect(HWServiceConfig.HUAWEI_TALKBAND_B2);
+            connectState = HWManager.getConnectStatus(HWServiceConfig.HUAWEI_TALKBAND_B2);
         }
         LogUtil.log("getConnectState() => connectState = " + connectState);
         Message message = Message.obtain();
@@ -281,7 +278,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
     }
 
     private void getBlueToothBattery(){
-        HWmanager.getBatteryLevel(HWServiceConfig.HUAWEI_TALKBAND_B2, new IResultReportCallback() {
+        HWManager.getBatteryLevel(HWServiceConfig.HUAWEI_TALKBAND_B2, new IResultReportCallback() {
 
             @Override
             public void onSuccess(Object arg0) {

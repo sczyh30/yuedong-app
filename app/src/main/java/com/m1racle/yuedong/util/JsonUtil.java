@@ -2,10 +2,7 @@ package com.m1racle.yuedong.util;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.m1racle.yuedong.entity.DataResult;
-import com.m1racle.yuedong.entity.LoginResult;
-import com.m1racle.yuedong.entity.MotionActivities;
-import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.entity.*;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -34,7 +31,13 @@ public class JsonUtil {
     }
 
     public static User resolveSingleUser(String jsonData) {
-        return gson.fromJson(jsonData, User.class);
+        try {
+            return gson.fromJson(jsonData, User.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtil.toast("解析用户数据时出现错误");
+            return null;
+        }
     }
 
     public static DataResult resolveDataResult(String jsonData) {
@@ -50,7 +53,22 @@ public class JsonUtil {
     }
 
     public static ArrayList<MotionActivities> resolveMAList(String jsonData) {
-        Type listType = new TypeToken<ArrayList<MotionActivities>>(){}.getType();
-        return gson.fromJson(jsonData, listType);
+        try {
+            Type listType = new TypeToken<ArrayList<MotionActivities>>(){}.getType();
+            return gson.fromJson(jsonData, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtil.toast("解析数据时出现错误");
+            return null;
+        }
+
+    }
+
+    public static UserDetail resolveUserDetail(String jsonData) {
+        return gson.fromJson(jsonData, UserDetail.class);
+    }
+
+    public static Update resolveUpdate(String jsonData) {
+        return gson.fromJson(jsonData, Update.class);
     }
 }

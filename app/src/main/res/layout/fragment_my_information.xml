@@ -41,7 +41,7 @@
                 style="@style/h_line" />
 
             <LinearLayout
-                android:id="@+id/rl_blog"
+                android:id="@+id/rl_activities"
                 style="@style/option_item_rl" >
 
                 <ImageView
@@ -58,7 +58,7 @@
                 style="@style/h_line" />
 
             <LinearLayout
-                android:id="@+id/rl_note"
+                android:id="@+id/rl_friend"
                 style="@style/option_item_rl" >
 
                 <ImageView
@@ -75,7 +75,7 @@
                 style="@style/h_line" />
 
             <LinearLayout
-                android:id="@+id/rl_team"
+                android:id="@+id/rl_health"
                 style="@style/option_item_rl" >
 
                 <ImageView

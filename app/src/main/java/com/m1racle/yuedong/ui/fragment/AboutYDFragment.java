@@ -57,7 +57,7 @@ public class AboutYDFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-        view.findViewById(R.id.rl_check_update).setOnClickListener(this);
+        view.findViewById(R.id.rl_app_feature).setOnClickListener(this);
         view.findViewById(R.id.rl_feedback).setOnClickListener(this);
         view.findViewById(R.id.rl_grade).setOnClickListener(this);
         view.findViewById(R.id.bt_hwclient).setOnClickListener(this);
@@ -97,7 +97,7 @@ public class AboutYDFragment extends BaseFragment {
     public void onClick(View v) {
         final int id = v.getId();
         switch (id) {
-            case R.id.rl_check_update:
+            case R.id.rl_app_feature:
                 onClickUpdate();
                 break;
             case R.id.rl_feedback:

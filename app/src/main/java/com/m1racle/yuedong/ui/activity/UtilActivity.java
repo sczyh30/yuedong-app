@@ -17,6 +17,12 @@ import com.m1racle.yuedong.base.UtilActivityPage;
 
 import java.lang.ref.WeakReference;
 
+/**
+ * Yuedong App
+ * Basic Util Activity
+ * this is the daemon activity
+ * of most fragments
+ */
 public class UtilActivity extends BaseActivity
         implements FuckingMutiListener {
 
@@ -72,7 +78,7 @@ public class UtilActivity extends BaseActivity
             //trans.addToBackStack()
             trans.commitAllowingStateLoss();
 
-            mFragment = new WeakReference<Fragment>(fragment);
+            mFragment = new WeakReference<>(fragment);
         } catch (Exception e) {
             e.printStackTrace();
             throw new IllegalArgumentException(

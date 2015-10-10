@@ -38,6 +38,10 @@ public class DialogUtil {
         return waitDialog;
     }
 
+    public static AlertDialog.Builder getMessageDialog(Context context, String message) {
+        return getMessageDialog(context, message, null);
+    }
+
     public static AlertDialog.Builder getMessageDialog(Context context, String message, DialogInterface.OnClickListener onClickListener) {
         AlertDialog.Builder builder = getDialog(context);
         builder.setMessage(message);

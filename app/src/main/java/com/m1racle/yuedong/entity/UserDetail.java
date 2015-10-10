@@ -53,4 +53,12 @@ public class UserDetail {
         this.my_tip = my_tip;
     }
 
+    public String getSports() {
+        StringBuilder sports = new StringBuilder("");
+        for(String sport : sportList) {
+            sports.append(sport).append(" ");
+        }
+        return sports.toString();
+    }
+
 }

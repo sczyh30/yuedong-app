@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.base.UtilActivityPage;
 import com.m1racle.yuedong.ui.DialogUtil;
 import com.m1racle.yuedong.ui.activity.LoginActivity;
@@ -73,8 +74,15 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.ABOUT_YD);
     }
 
-    public static void showMyInformation(Context context) {
-        showActivity(context, UtilActivityPage.MY_INFORMATION);
+    public static void showMyInformation(Context context, int uid, String username) {
+        if (uid == 0 && username.equalsIgnoreCase("匿名")) {
+            ToastUtil.toast("提醒你，该用户为非会员");
+            return;
+        }
+        Bundle args = new Bundle();
+        args.putInt("uid", uid);
+        args.putString("username", username);
+        showActivity(context, UtilActivityPage.MY_INFORMATION, args);
     }
 
     public static void showSettingNotification(Context context) {
@@ -133,7 +141,7 @@ public class UIUtil {
             public void run() {
                 Message msg = new Message();
                 try {
-                    //AppContext.getContext().clearAppCache();
+                    AppContext.getContext().clearAppCache();
                     msg.what = 1;
                 } catch (Exception e) {
                     e.printStackTrace();

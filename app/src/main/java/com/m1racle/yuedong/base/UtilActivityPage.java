@@ -1,7 +1,7 @@
 package com.m1racle.yuedong.base;
 
 import com.m1racle.yuedong.R;
-import com.m1racle.yuedong.SleepObserverFragment;
+import com.m1racle.yuedong.ui.fragment.SleepObserverFragment;
 import com.m1racle.yuedong.ui.fragment.AboutYDFragment;
 import com.m1racle.yuedong.ui.fragment.DeviceAlarmFragment;
 import com.m1racle.yuedong.ui.fragment.DeviceMotionDataFragment;

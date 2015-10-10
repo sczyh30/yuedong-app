@@ -1,12 +1,10 @@
 package com.m1racle.yuedong.ui.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -35,7 +33,6 @@ import butterknife.ButterKnife;
  */
 public class TemperatureViewFragment extends BaseFragment {
 
-    private OnFragmentInteractionListener mListener;
     private SensorManager mSensorManager;
     private SensorEventListener sensorEventListener;
 
@@ -96,31 +93,12 @@ public class TemperatureViewFragment extends BaseFragment {
         super.initView(view);
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mSensorManager.unregisterListener(sensorEventListener);
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
     }
 
     @Override
@@ -166,17 +144,17 @@ public class TemperatureViewFragment extends BaseFragment {
     private String inspectTempData(int temp) {
         if(temp >= 19 && temp <= 23)
             return "良好";
-        else if (temp > 23 && temp <= 28) {
-            return "优良";
+        else if (temp > 23 && temp <= 26) {
+            return "舒适";
         }
         else if (temp > 28 && temp <= 32) {
             return "偏热";
         }
         else if (temp > 32) {
-            return "炎热";
+            return "高温";
         }
         else
-            return "寒冷";
+            return "低温";
     }
 
     /**

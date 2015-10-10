@@ -58,14 +58,15 @@ public class SamsaraAPI {
         uploadLog(data, "1", handler);
     }
 
-    public static void getUserDetail(int id, AsyncHttpResponseHandler handler) {
-        RequestParams params = new RequestParams("id", id);
-        ApiHttpClient.get("action/api/get/user_detail", params, handler);
+    public static void getUserDetail(int uid, AsyncHttpResponseHandler handler) {
+        RequestParams params = new RequestParams("id", uid);
+        //ApiHttpClient.get("action/api/get/user_detail", params, handler);
+        ApiHttpClient.get("action/api/get/user_detail.json", handler);
     }
 
-    public static void getUserDetail(String name, AsyncHttpResponseHandler handler) {
-        RequestParams params = new RequestParams("name", name);
-        ApiHttpClient.get("action/api/get/user_detail_name", params, handler);
+    public static void getUserInfo(int uid, AsyncHttpResponseHandler handler) {
+        RequestParams params = new RequestParams("id", uid);
+        ApiHttpClient.get("action/api/get/user.json", handler);
     }
 
     /**
@@ -73,7 +74,7 @@ public class SamsaraAPI {
      * @param handler Http Handler
      */
     public static void getUpdateInfo(AsyncHttpResponseHandler handler) {
-        ApiHttpClient.get("action/api/get/latest_version",handler);
+        ApiHttpClient.get("action/api/get/app_version_android.json",handler);
     }
 
     public static void getLatestMotionActivities(AsyncHttpResponseHandler handler) {

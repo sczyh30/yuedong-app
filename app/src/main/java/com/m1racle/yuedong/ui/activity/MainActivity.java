@@ -14,6 +14,7 @@ import android.view.View;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.adapter.UsualViewPagerAdapter;
 import com.m1racle.yuedong.base.BaseActivity;
+import com.m1racle.yuedong.entity.Notice;
 import com.m1racle.yuedong.service.HWService;
 import com.m1racle.yuedong.service.receiver.NetworkChangeReceiver;
 import com.m1racle.yuedong.ui.fragment.DeviceBasicInfoFragment;
@@ -40,6 +41,7 @@ public class MainActivity extends BaseActivity
     private UsualViewPagerAdapter adapter;
     private List<Fragment> fragmentList;
     public static final int MENU_TEST = R.menu.menu_test;
+    public static Notice mNotice;
 
     private IntentFilter netFilter;
     private NetworkChangeReceiver networkChangeReceiver;
@@ -52,6 +54,19 @@ public class MainActivity extends BaseActivity
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
+        initView();
+        initNetStatus();
+        //startDeviceService();
+    }
+
+    private void initNetStatus() {
+        netFilter = new IntentFilter();
+        netFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        networkChangeReceiver = new NetworkChangeReceiver();
+        registerReceiver(networkChangeReceiver, netFilter);
+    }
+
+    private void initView() {
         tabStrip.setBackgroundColor(getResources().getColor(R.color.main_green));
         fragmentList = new ArrayList<>();
         fragmentList.add(new DeviceBasicInfoFragment());
@@ -71,21 +86,10 @@ public class MainActivity extends BaseActivity
                 adapter.setPagerItems(list);
             }
         });
-        //LogUtil.toast(adapter.toString());
         if (adapter != null)
             viewPager.setAdapter(adapter);
-        initNetStatus();
-        startDeviceService();
         viewPager.setCurrentItem(0);
     }
-
-    private void initNetStatus() {
-        netFilter = new IntentFilter();
-        netFilter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        networkChangeReceiver = new NetworkChangeReceiver();
-        registerReceiver(networkChangeReceiver, netFilter);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

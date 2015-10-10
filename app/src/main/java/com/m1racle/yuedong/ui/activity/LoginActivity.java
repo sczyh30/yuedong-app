@@ -157,7 +157,6 @@ public class LoginActivity extends BaseActivity {
         hideKeyboard();
         showWaitDialog(R.string.progress_login).show();
         SamsaraAPI.login(mUserName, mPassword, mHandler);
-        //LogUtil.toast("服务器维护中，请稍后再试");
     }
 
 
@@ -203,7 +202,6 @@ public class LoginActivity extends BaseActivity {
     //TODO:需要的时候添加第三方登录接口支持
     private void qqLogin() {
         LogUtil.toast("QQ API 接口未开放");
-        //showWaitDialog();
     }
 
     private void wxLogin() {

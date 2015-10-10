@@ -85,7 +85,7 @@
             android:textSize="@dimen/text_size_16" />
 
         <TextView
-            android:id="@+id/tv_development_platform"
+            android:id="@+id/tv_love_sport"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/text"
@@ -114,7 +114,7 @@
             android:textSize="@dimen/text_size_16" />
 
         <TextView
-            android:id="@+id/tv_academic_focus"
+            android:id="@+id/tv_my_tip"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/text"

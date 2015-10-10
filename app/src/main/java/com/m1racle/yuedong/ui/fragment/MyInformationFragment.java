@@ -30,7 +30,6 @@ import com.m1racle.yuedong.ui.empty.EmptyLayout;
 import com.m1racle.yuedong.ui.widget.AvatarView;
 import com.m1racle.yuedong.ui.widget.BadgeView;
 import com.m1racle.yuedong.util.DeviceUtil;
-import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 import com.m1racle.yuedong.util.UIUtil;
 
@@ -58,7 +57,7 @@ public class MyInformationFragment extends BaseFragment {
     TextView username;
     @Bind(R.id.tv_score)
     TextView mTvScore;
-    @Bind(R.id.tv_favorite)
+    @Bind(R.id.tv_motion_activities)
     TextView mTvFavorite;
     @Bind(R.id.tv_following)
     TextView mTvFollowing;
@@ -211,12 +210,12 @@ public class MyInformationFragment extends BaseFragment {
                 }
             }
         });
-        view.findViewById(R.id.ly_favorite).setOnClickListener(this);
+        view.findViewById(R.id.ly_motion_activities).setOnClickListener(this);
         view.findViewById(R.id.ly_following).setOnClickListener(this);
         view.findViewById(R.id.ly_follower).setOnClickListener(this);
         view.findViewById(R.id.rl_message).setOnClickListener(this);
-        view.findViewById(R.id.rl_team).setOnClickListener(this);
-        view.findViewById(R.id.rl_blog).setOnClickListener(this);
+        view.findViewById(R.id.rl_health).setOnClickListener(this);
+        view.findViewById(R.id.rl_activities).setOnClickListener(this);
         mQrCode.setOnClickListener(this);
         /*view.findViewById(R.id.rl_note).setOnClickListener(
                 new OnClickListener() {

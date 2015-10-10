@@ -1,4 +1,4 @@
-package com.m1racle.yuedong;
+package com.m1racle.yuedong.ui.fragment;
 
 
 import android.os.Bundle;
@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 
 import butterknife.ButterKnife;
@@ -13,6 +14,7 @@ import butterknife.ButterKnife;
 
 /**
  * Yuedong App
+ * Sleep Observer Fragment
  */
 public class SleepObserverFragment extends BaseFragment {
 

@@ -11,17 +11,17 @@ public class User extends Entity {
     private String account;
     private String username;
     private String password;
+    private String portrait;
 
     private TempToken temp_token;
     private boolean isRememberMe;
 
     private int fans;
     private int followers;
-    private String portrait;
     private int score;
+    private int activities_number;
 
     private String location;
-
     private int gender;
 
     public User(){}
@@ -103,7 +103,13 @@ public class User extends Entity {
         this.location = location;
     }
 
+    public int getActivitiesNumber() {
+        return activities_number;
+    }
 
+    public void setActivitiesNumber(int activities_number) {
+        this.activities_number = activities_number;
+    }
 
     public int getGender() {
         return gender;
