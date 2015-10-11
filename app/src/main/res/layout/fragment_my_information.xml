@@ -62,8 +62,9 @@
                 style="@style/option_item_rl" >
 
                 <ImageView
+                    android:background="@mipmap/icon_my_team"
                     style="@style/option_item_img"
-                    android:background="@mipmap/icon_my_note"
+
                     android:contentDescription="@null" />
 
                 <TextView
@@ -80,7 +81,7 @@
 
                 <ImageView
                     style="@style/option_item_img"
-                    android:background="@mipmap/icon_my_team"
+                    android:background="@mipmap/icon_my_note"
                     android:contentDescription="@null" />
 
                 <TextView

@@ -33,7 +33,8 @@ public class SamsaraAPI {
         params.put("username", username);
         params.put("pwd", MD5Util.MD5(password));
         params.put("keep_login", 1);
-        String login_url = "action/api/login";
+        //String login_url = "action/api/login";
+        String login_url = "action/api/login.json";
         ApiHttpClient.post(login_url, params, handler);
     }
 
@@ -78,7 +79,7 @@ public class SamsaraAPI {
     }
 
     public static void getLatestMotionActivities(AsyncHttpResponseHandler handler) {
-        ApiHttpClient.get("action/api/latest_ma.json",handler);
+        ApiHttpClient.get("action/api/get/latest_ma.json",handler);
     }
 
     /**

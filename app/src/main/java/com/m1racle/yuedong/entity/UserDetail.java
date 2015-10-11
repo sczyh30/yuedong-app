@@ -9,9 +9,10 @@ public class UserDetail {
 
     private int uid;
     private String reg_time;
-    private List<String> sportList;
+    private List<Sport> sportList;
     private String my_tip;
     private String location;
+    private String birthday;
 
     public int getUid() {
         return uid;
@@ -21,11 +22,11 @@ public class UserDetail {
         this.uid = uid;
     }
 
-    public List<String> getSportList() {
+    public List<Sport> getSportList() {
         return sportList;
     }
 
-    public void setSportList(List<String> sportList) {
+    public void setSportList(List<Sport> sportList) {
         this.sportList = sportList;
     }
 
@@ -53,10 +54,18 @@ public class UserDetail {
         this.my_tip = my_tip;
     }
 
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
+    }
+
     public String getSports() {
         StringBuilder sports = new StringBuilder("");
-        for(String sport : sportList) {
-            sports.append(sport).append(" ");
+        for(Sport sport : sportList) {
+            sports.append(sport.getName()).append(" ");
         }
         return sports.toString();
     }

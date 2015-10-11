@@ -10,7 +10,6 @@ import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.service.HWServiceAbstract;
 import com.m1racle.yuedong.service.HWServiceConfig;
 import com.m1racle.yuedong.util.LogUtil;
 
@@ -39,13 +38,13 @@ public abstract class BaseFragmentHWS extends BaseFragment {
             super.handleMessage(msg);
             Object object = msg.obj;
             switch (msg.what) {
-                case HWServiceConfig.JAR_GET_DEVICE_BATTERY:
+                case HWServiceConfig.GET_DEVICE_BATTERY:
                     if(object.equals("获取数据失败"))
                         mFragment.get().mEtBatteryStatus.setText(R.string.b2_not_get_data);
                     else
                         mFragment.get().mEtBatteryStatus.setText("" + object + "%");
                     break;
-                case HWServiceConfig.JAR_CONNECT_DEVICE:
+                case HWServiceConfig.CONNECT_DEVICE:
                     int state = (Integer)object;
                     switch (state) {
                         case 0:
@@ -93,7 +92,7 @@ public abstract class BaseFragmentHWS extends BaseFragment {
         @Override
         public void onConnectStatusChange(int deviceType, String macAddress, int status, int err_code) {
             Message message = Message.obtain();
-            message.what = HWServiceConfig.JAR_CONNECT_DEVICE;
+            message.what = HWServiceConfig.CONNECT_DEVICE;
             message.obj = status;
             message.arg1 = err_code;
             mHandler.sendMessage(message);
@@ -121,7 +120,7 @@ public abstract class BaseFragmentHWS extends BaseFragment {
             @Override
             public void onSuccess(Object arg0) {
                 Message message = Message.obtain();
-                message.what = HWServiceConfig.JAR_GET_DEVICE_BATTERY;
+                message.what = HWServiceConfig.GET_DEVICE_BATTERY;
                 message.obj = arg0;
                 message.arg1 = HWServiceConfig.HUAWEI_TALKBAND_B2;
                 mHandler.sendMessage(message);

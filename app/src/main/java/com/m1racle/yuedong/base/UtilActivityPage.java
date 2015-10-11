@@ -1,6 +1,7 @@
 package com.m1racle.yuedong.base;
 
 import com.m1racle.yuedong.R;
+import com.m1racle.yuedong.ui.fragment.DeviceUserSetFragment;
 import com.m1racle.yuedong.ui.fragment.SleepObserverFragment;
 import com.m1racle.yuedong.ui.fragment.AboutYDFragment;
 import com.m1racle.yuedong.ui.fragment.DeviceAlarmFragment;
@@ -31,7 +32,7 @@ public enum UtilActivityPage {
     DEVICE_MOTION_DATA(10,R.string.actionbar_title_device_motion_data, DeviceMotionDataFragment.class),
     DEVICE_MOTION_GOAL(11,R.string.actionbar_title_device_motion_goal, MotionGoalFragment.class),
     SLEEP_OBSERVER(12,R.string.actionbar_title_device_sleep_observer, SleepObserverFragment.class),
-    DB_TEST(666,R.string.actionbar_title_setting_notification, TestDBFragment.class);
+    DEVICE_USER_INFO_SET(13,R.string.set_device_user_info, DeviceUserSetFragment.class);
 
     private int title;
     private Class<?> clz;

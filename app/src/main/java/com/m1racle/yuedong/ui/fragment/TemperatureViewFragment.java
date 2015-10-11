@@ -18,6 +18,7 @@ import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.TimeZoneUtil;
+import com.m1racle.yuedong.util.ToastUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -84,8 +85,14 @@ public class TemperatureViewFragment extends BaseFragment {
 
             }
         };
-        mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE),
-                SensorManager.SENSOR_DELAY_GAME);
+        if(mSensorManager != null) {
+            mSensorManager.registerListener(sensorEventListener, mSensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE),
+                    SensorManager.SENSOR_DELAY_GAME);
+        } else {
+            ToastUtil.toast(R.string.tip_temperature_sensor_error);
+            mEtTempStatus.setText(R.string.tip_temperature_sensor_error);
+        }
+
     }
 
     @Override

@@ -85,6 +85,11 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.MY_INFORMATION, args);
     }
 
+    public static void showDeviceUserSet(Context context) {
+        //Bundle bundle = new Bundle(); //此处本应该传入DataUserInfo对象的，但由于第三方API限制，放弃了
+        showActivity(context, UtilActivityPage.DEVICE_USER_INFO_SET);
+    }
+
     public static void showSettingNotification(Context context) {
         showActivity(context, UtilActivityPage.SETTING_NOTIFICATION);
     }

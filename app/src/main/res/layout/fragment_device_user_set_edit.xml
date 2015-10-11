@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1px"
+        android:background="@color/list_divider_color"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_10">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_4"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="@dimen/space_10"
+            android:text="@string/age"/>
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ed_dus_age"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:hint="@string/age"
+            android:layout_toRightOf="@id/text"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/h_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_10">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_4"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="@dimen/space_10"
+            android:text="@string/birthday"/>
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ed_dus_birthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:hint="@string/birthday"
+            android:layout_toRightOf="@id/text"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/h_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_10">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_4"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="@dimen/space_10"
+            android:text="@string/gender"/>
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ed_dus_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:hint="性别（男/女）"
+            android:layout_toRightOf="@id/text"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/h_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_10">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_4"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="@dimen/space_10"
+            android:text="@string/user_height"/>
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ed_dus_height"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:hint="身高（单位：cm）"
+            android:layout_toRightOf="@id/text"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/h_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_10">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_4"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="@dimen/space_10"
+            android:text="@string/user_weight"/>
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ed_dus_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:hint="体重（单位：kg）"
+            android:layout_toRightOf="@id/text"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/h_line" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_10">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_4"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="@dimen/space_10"
+            android:text="@string/walk_step_length"/>
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ed_dus_walk_step"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:hint="行走步长（单位：cm）"
+            android:layout_toRightOf="@id/text"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/h_line" />
+
+    <!-- <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/space_10">
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/space_4"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="@dimen/space_10"
+            android:text="@string/run_step_length"/>
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ed_dus_run_step"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:hint="跑步步长（单位：cm）"
+            android:layout_toRightOf="@id/text"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+
+    </RelativeLayout>
+
+    <View
+        style="@style/h_line" /> -->
+
+
+    </LinearLayout>

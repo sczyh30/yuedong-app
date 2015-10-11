@@ -1,7 +1,5 @@
 package com.m1racle.yuedong.ui.fragment;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,7 +9,6 @@ import android.widget.TextView;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.base.UtilActivityPage;
 import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
@@ -33,11 +30,6 @@ public class AboutYDFragment extends BaseFragment {
 
     @Bind(R.id.ab_version_name)
     TextView mTvVersionName;
-
-    private OnFragmentInteractionListener mListener;
-
-    public AboutYDFragment() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -71,34 +63,11 @@ public class AboutYDFragment extends BaseFragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        //LogUtil.log("About Fragment => onDetach");
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-
-        void onFragmentInteraction(Uri uri);
-    }
-
-    @Override
     public void onClick(View v) {
         final int id = v.getId();
         switch (id) {
             case R.id.rl_app_feature:
-                onClickUpdate();
+                showFeatures();
                 break;
             case R.id.rl_feedback:
                 showFeedback();
@@ -107,21 +76,11 @@ public class AboutYDFragment extends BaseFragment {
                 DeviceUtil.openAppInMarket(getActivity());
                 break;
             case R.id.bt_hwclient:
-                /*boolean res = DeviceUtil.openAppActivity(getActivity(),
-                        "com.m1racle.yuedong", "com.m1racle.yuedong");
-
-                if (!res) {
-                    if (!DeviceUtil.isHaveMarket(getActivity())) {
-                        UIUtil.openSysBrowser(getActivity(),
-                                "http://www.sczyh30.com");
-                    } else {
-                        DeviceUtil.gotoMarket(getActivity(), "com.m1racle.yuedong");
-                    }
-                }*/
                 ToastUtil.toast("打开华为智能设备客户端");
                 break;
             case R.id.ab_gosite:
-                onClickTestDB();
+                UIUtil.openSysBrowser(getActivity(),
+                        "http://www.sczyh30.com");
                 break;
             case R.id.tv_knowmore:
                 UIUtil.openSysBrowser(getActivity(),
@@ -132,12 +91,9 @@ public class AboutYDFragment extends BaseFragment {
         }
     }
 
-    public void onClickTestDB() {
-        UIUtil.showActivity(getActivity(), UtilActivityPage.DB_TEST);
-    }
-
-    private void onClickUpdate() {
-
+    private void showFeatures() {
+        UIUtil.openSysBrowser(getActivity(),
+                "http://app.yuedong.com/features");
     }
 
     private void showFeedback() {

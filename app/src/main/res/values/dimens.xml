@@ -23,12 +23,12 @@
     <dimen name="text_size_23">23.0dip</dimen>
     <dimen name="text_size_22">22.0dip</dimen>
     <dimen name="text_size_21">21.0dip</dimen>
-    <dimen name="text_size_20">20.0dip</dimen>
+    <dimen name="text_size_20">20sp</dimen>
     <dimen name="text_size_19">19.0dip</dimen>
     <dimen name="text_size_18">18.0dip</dimen>
     <dimen name="text_size_17">17.0dip</dimen>
-    <dimen name="text_size_16">16.0dip</dimen>
-    <dimen name="text_size_15">15.0dip</dimen>
+    <dimen name="text_size_16">16.0sp</dimen>
+    <dimen name="text_size_15">15.0sp</dimen>
     <dimen name="text_size_14">14.0dip</dimen>
     <dimen name="text_size_13">13.0dip</dimen>
     <dimen name="text_size_12">12.0dip</dimen>
@@ -37,9 +37,14 @@
     <dimen name="text_size_9">9.0dip</dimen>
     <dimen name="text_size_8">8.0dip</dimen>
     <dimen name="text_size_7">7.0dip</dimen>
-    <dimen name="space_100">100.0dip</dimen>
+
+    <dimen name="space_120">120dp</dimen>
+    <dimen name="space_110">110dp</dimen>
+    <dimen name="space_100">100dp</dimen>
+    <dimen name="space_80">80dp</dimen>
     <dimen name="space_60">60dp</dimen>
-    <dimen name="space_49">49dip</dimen>
+    <dimen name="space_50">50dp</dimen>
+    <dimen name="space_49">49dp</dimen>
     <dimen name="space_35">35.0dip</dimen>
     <dimen name="space_30">30.0dip</dimen>
     <dimen name="space_29">29.0dip</dimen>
@@ -51,7 +56,7 @@
     <dimen name="space_23">23.0dip</dimen>
     <dimen name="space_22">22.0dip</dimen>
     <dimen name="space_21">21.0dip</dimen>
-    <dimen name="space_20">20.0dip</dimen>
+    <dimen name="space_20">20dp</dimen>
     <dimen name="space_19">19.0dip</dimen>
     <dimen name="space_18">18.0dip</dimen>
     <dimen name="space_17">17.0dip</dimen>
@@ -61,12 +66,12 @@
     <dimen name="space_13">13.0dip</dimen>
     <dimen name="space_12">12.0dip</dimen>
     <dimen name="space_11">11.0dip</dimen>
-    <dimen name="space_10">10.0dip</dimen>
+    <dimen name="space_10">10dp</dimen>
     <dimen name="space_9">9.0dip</dimen>
     <dimen name="space_8">8.0dip</dimen>
     <dimen name="space_7">7.0dip</dimen>
     <dimen name="space_6">6.0dip</dimen>
-    <dimen name="space_5">5.0dip</dimen>
+    <dimen name="space_5">5dp</dimen>
     <dimen name="space_4">4.0dip</dimen>
     <dimen name="space_3">3.0dip</dimen>
     <dimen name="space_2">2.0dip</dimen>

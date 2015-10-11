@@ -39,7 +39,7 @@ import static com.m1racle.yuedong.AppConfig.KEY_TWEET_DRAFT;
  */
 public class AppContext extends BaseApplication {
 
-    public static final int PAGE_SIZE = 20;// 默认分页大小
+    public static final int PAGE_SIZE = 20; // 默认分页大小
 
     private static AppContext instance;
 
@@ -68,6 +68,8 @@ public class AppContext extends BaseApplication {
         ApiHttpClient.setHttpClient(client);
         ApiHttpClient.setCookie(ApiHttpClient.getCookie(this));
         userDao = new LocalUserDaoImpl();
+        //if(isFristStart())
+        //    userDao.initDatabase();
     }
 
     private void initLogin() {
@@ -147,11 +149,13 @@ public class AppContext extends BaseApplication {
     }
 
     public void saveUserInfo(User user) {
+        this.loginUid = user.getId();
+        this.login = true;
         userDao.saveUserInfo(user);
     }
 
     public void updateUserInfo(final User user) {
-
+        userDao.updateUserInfo(user);
     }
 
     public String getProperty(String key) {

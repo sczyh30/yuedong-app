@@ -46,7 +46,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cz.msebera.android.httpclient.Header;
 
-
+/**
+ * Yuedong App
+ * My Social Information Fragment
+ */
 public class MySocialInfoFragment extends BaseFragment {
 
     @Bind(R.id.iv_avatar)
@@ -78,7 +81,7 @@ public class MySocialInfoFragment extends BaseFragment {
     private AsyncTask<String, Void, User> mCacheTask;
     private static BadgeView mMesCount;
 
-    private boolean mIsWaitingLogin;
+    private boolean isWaitingLogin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -132,26 +135,12 @@ public class MySocialInfoFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 if (AppContext.getContext().isLogin()) {
-                    //requestData(true);
+                    preRequest(true);
                 } else {
                     UIUtil.showLoginActivity(getActivity());
                 }
             }
         });
-        /*view.findViewById(R.id.ly_favorite).setOnClickListener(this);
-        view.findViewById(R.id.ly_following).setOnClickListener(this);
-        view.findViewById(R.id.ly_follower).setOnClickListener(this);
-        view.findViewById(R.id.rl_message).setOnClickListener(this);
-        view.findViewById(R.id.rl_health).setOnClickListener(this);
-        view.findViewById(R.id.rl_activities).setOnClickListener(this);
-        view.findViewById(R.id.rl_friend).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        UIUtil.showActivity(getActivity(),
-                               SimpleBackPage.NOTE);
-                    }
-                });*/
 
         mMesCount = new BadgeView(getActivity(), mMesView);
         mMesCount.setTextSize(TypedValue.COMPLEX_UNIT_SP, 10);
@@ -185,7 +174,7 @@ public class MySocialInfoFragment extends BaseFragment {
 
     private void preRequest(boolean refresh) {
         if (AppContext.getContext().isLogin()) {
-            mIsWaitingLogin = false;
+            isWaitingLogin = false;
             String key = getCacheKey();
             if (refresh || DeviceUtil.hasInternet()
                     && (!CacheManager.isExistDataCache(getActivity(), key))) {
@@ -194,7 +183,7 @@ public class MySocialInfoFragment extends BaseFragment {
                 readCacheData(key);
             }
         } else {
-            mIsWaitingLogin = true;
+            isWaitingLogin = true;
         }
         setUserView();
     }
@@ -231,14 +220,14 @@ public class MySocialInfoFragment extends BaseFragment {
     }
 
     private String getCacheKey() {
-        return "my_social_information" + AppContext.getContext().getLoginUid();
+        return "m_info_" + AppContext.getContext().getLoginUid();
     }
 
     @Override
     @OnClick({R.id.ly_motion_activities, R.id.iv_qr_code, R.id.ly_following, R.id.ly_follower, R.id.rl_message,
             R.id.rl_health, R.id.rl_activities, R.id.rl_friend, R.id.rl_user_unlogin})
     public void onClick(View view) {
-        if (mIsWaitingLogin) {
+        if (isWaitingLogin) {
             ToastUtil.toast(R.string.unlogin);
             UIUtil.showLoginActivity(getActivity());
             return;
@@ -276,7 +265,7 @@ public class MySocialInfoFragment extends BaseFragment {
     }
 
     private void setUserView() {
-        if (mIsWaitingLogin) {
+        if (isWaitingLogin) {
             mUserContainer.setVisibility(View.GONE);
             mUserUnLogin.setVisibility(View.VISIBLE);
         } else {
@@ -293,7 +282,7 @@ public class MySocialInfoFragment extends BaseFragment {
             switch (action) {
                 case Constants.INTENT_ACTION_LOGOUT:
                     if (mErrorLayout != null) {
-                        mIsWaitingLogin = true;
+                        isWaitingLogin = true;
                         setUserView();
                         mMesCount.hide();
                     }
@@ -361,9 +350,9 @@ public class MySocialInfoFragment extends BaseFragment {
             int commentCount = notice.getCommentCount();// 评论
             int newFansCount = notice.getNewFansCount();// 新粉丝
             int newZansCount = notice.getNewZansCount();// 获得点赞
-            int activeCount = atMeCount + messageCount + commentCount + newFansCount + newZansCount;
-            if (activeCount > 0) {
-                mMesCount.setText(activeCount + "");
+            int finalCount = atMeCount + messageCount + commentCount + newFansCount + newZansCount;
+            if (finalCount > 0) {
+                mMesCount.setText(finalCount + "");
                 mMesCount.show();
                 return;
             }
@@ -371,8 +360,4 @@ public class MySocialInfoFragment extends BaseFragment {
         mMesCount.hide();
     }
 
-    private void setNoticeDone() {
-        mMesCount.setText("");
-        mMesCount.hide();
-    }
 }

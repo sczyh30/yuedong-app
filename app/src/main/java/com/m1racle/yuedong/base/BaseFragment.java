@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.AppContext;
@@ -99,5 +100,12 @@ public abstract class BaseFragment extends Fragment implements
 
     protected HuaweiWearableManager getHuaweiManager() {
         return AppContext.getContext().getHWManager();
+    }
+
+    protected void hideKeyboard() {
+        InputMethodManager imm =  (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        if(imm != null) {
+            imm.hideSoftInputFromWindow(getActivity().getWindow().getDecorView().getWindowToken(), 0);
+        }
     }
 }

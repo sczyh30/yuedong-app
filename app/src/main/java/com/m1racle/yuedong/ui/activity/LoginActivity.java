@@ -196,6 +196,7 @@ public class LoginActivity extends BaseActivity {
         data.putExtra(BUNDLE_KEY_REQUEST_CODE, requestCode);
         setResult(RESULT_OK, data);
         this.sendBroadcast(new Intent(Constants.INTENT_ACTION_USER_CHANGE));
+        ToastUtil.toast("登录成功");
         finish();
     }
 

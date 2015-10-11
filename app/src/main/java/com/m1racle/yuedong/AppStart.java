@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
+import com.m1racle.yuedong.service.LogUploadService;
 import com.m1racle.yuedong.ui.activity.MainActivity;
 
 /**

@@ -23,7 +23,7 @@ public class SettingsNotificationFragment extends BaseFragment {
 	@Bind(R.id.tb_voice) ToggleButton mTbVoice;
 	@Bind(R.id.tb_vibration) ToggleButton mTbVibration;
 	@Bind(R.id.tb_app_exit) ToggleButton mTbAppExit;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

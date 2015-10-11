@@ -13,8 +13,9 @@ public class User extends Entity {
     private String password;
     private String portrait;
 
-    private TempToken temp_token;
-    private boolean isRememberMe;
+    private String temp_token;
+    //private TempToken temp_token;
+    private int isRememberMe;
 
     private int fans;
     private int followers;
@@ -37,12 +38,10 @@ public class User extends Entity {
         this.account = account;
     }
 
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }
@@ -63,20 +62,23 @@ public class User extends Entity {
         this.password = password;
     }
 
-    public TempToken getTempToken() {
+    public String  getTempToken() {
         return temp_token;
     }
 
-    public void setTempToken(TempToken temp_token) {
+    public void setTempToken(String temp_token) {
         this.temp_token = temp_token;
     }
 
     public boolean isRememberMe() {
-        return isRememberMe;
+        return isRememberMe > 0;
     }
 
     public void setRememberMe(boolean isRememberMe) {
-        this.isRememberMe = isRememberMe;
+        if(isRememberMe)
+            this.isRememberMe = 1;
+        else
+            this.isRememberMe = 0;
     }
 
     public int getFans() {

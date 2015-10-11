@@ -110,16 +110,6 @@ public class DeviceBasicInfoFragment extends BaseFragment {
         ButterKnife.bind(this, view);
         initView(view);
         initHWManager();
-        /*if(HWManager != null) {
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    getConnectState();
-                    getBlueToothBattery();
-                }
-            }, 1000);
-        }*/
         return view;
     }
 
@@ -195,13 +185,13 @@ public class DeviceBasicInfoFragment extends BaseFragment {
             super.handleMessage(msg);
             Object object = msg.obj;
             switch (msg.what) {
-                case HWServiceConfig.JAR_GET_DEVICE_BATTERY:
+                case HWServiceConfig.GET_DEVICE_BATTERY:
                     if(object.equals("获取数据失败"))
                         mFragment.get().mEtBatteryStatus.setText(R.string.b2_not_get_data);
                     else
                         mFragment.get().mEtBatteryStatus.setText("" + object + "%");
                     break;
-                case HWServiceConfig.JAR_CONNECT_DEVICE:
+                case HWServiceConfig.CONNECT_DEVICE:
                     int state = (Integer)object;
                     switch (state) {
                         case 1:
@@ -255,7 +245,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
         @Override
         public void onConnectStatusChange(int deviceType, String macAddress, int status, int err_code) {
             Message message = Message.obtain();
-            message.what = HWServiceConfig.JAR_CONNECT_DEVICE;
+            message.what = HWServiceConfig.CONNECT_DEVICE;
             message.obj = status;
             message.arg1 = err_code;
             mHandler.sendMessage(message);
@@ -283,7 +273,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
             @Override
             public void onSuccess(Object arg0) {
                 Message message = Message.obtain();
-                message.what = HWServiceConfig.JAR_GET_DEVICE_BATTERY;
+                message.what = HWServiceConfig.GET_DEVICE_BATTERY;
                 message.obj = arg0;
                 message.arg1 = HWServiceConfig.HUAWEI_TALKBAND_B2;
                 mHandler.sendMessage(message);
@@ -291,30 +281,13 @@ public class DeviceBasicInfoFragment extends BaseFragment {
 
             @Override
             public void onFailure(int arg0, String arg1) {
-                LogUtil.log("getBlueToothBattery => err_code = " + arg0 + " arg1 = " + arg1);
-                Message message = new Message();
-                message.what = 1;
+                //LogUtil.log("getBlueToothBattery => err_code = " + arg0 + " arg1 = " + arg1);
+                Message message = Message.obtain();
+                message.what = HWServiceConfig.GET_DEVICE_BATTERY;
                 message.obj = "获取数据失败";
                 mHandler.sendMessage(message);
             }
         });
-    }
-
-    @Deprecated
-    private final class DeviceStatusInnerReceiver extends BroadcastReceiver {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String action = intent.getAction();
-            if(STATUS_CHANGE_ACTION.equals(action)) {
-                Bundle bundle = intent.getExtras();
-                int state = bundle.getInt("conn_state");
-
-            }
-        }
-
-        private void changeState(int state) {
-
-        }
     }
 
 }

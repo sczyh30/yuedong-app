@@ -83,6 +83,7 @@ public class YdActiListFragment extends BaseFragment {
         return rootView;
     }
 
+
     @Override
     public void initView(View view) {
         super.initView(view);
@@ -96,7 +97,7 @@ public class YdActiListFragment extends BaseFragment {
         List<MotionActivities> test = new ArrayList<>();
         for(int i = 0; i < 15; i++) {
             MotionActivities temp = new MotionActivities();
-            temp.setId(i);
+            temp.setMAid(i);
             temp.setTitle("运动信息 => " + i);
             test.add(temp);
         }

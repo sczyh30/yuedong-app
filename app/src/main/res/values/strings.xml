@@ -56,6 +56,8 @@
     <string name="error_view_load_error_click_to_refresh">内容加载失败\r\n点击重新加载</string>
     <string name="error_view_network_error_click_to_refresh">没有可用的网络</string>
     <string name="tip_network_error">没有可用的网络</string>
+    <string name="tip_temperature_sensor_error">您的设备没有可用的传感器</string>
+    <string name="tip_device_no_conn_warning">未连接至手环，请检查连接</string>
 
     <string name="unlogin">未登录，请先登录</string>
     <string name="unlogin_tip">您还未登录\r\n或网络延迟</string>
@@ -63,6 +65,7 @@
 
     <string name="loading">加载中…</string>
     <string name="loading_no_more">已加载全部</string>
+    <string name="saving_data">正在保存数据…</string>
 
     <string name="loading_img">加载图片</string>
     <string name="mes_notice">消息通知</string>
@@ -89,17 +92,26 @@
     <string name="notice_vibration">震动</string>
     <string name="notice_app_exit">退出后不提醒</string>
 
+    <string name="btn_str_logout">注销账号</string>
+    <string name="set_device_user_info">更改手环用户信息</string>
+
     <string name="tip_logout_success">注销成功</string>
-    <string name="title_activity_main">悦动</string>
 
     <string name="actionbar_title_profile">个人中心</string>
     <string name="favorite">收藏</string>
     <string name="following">关注</string>
     <string name="follower">粉丝</string>
-    <string name="join_time">注册时间:</string>
-    <string name="location">所在地区:</string>
-    <string name="favourite_sport">爱好的运动:</string>
-    <string name="gxqm">个性签名:</string>
+    <string name="join_time">注册时间: </string>
+    <string name="location">所在地区: </string>
+    <string name="favourite_sport">爱好的运动: </string>
+    <string name="gxqm">个性签名: </string>
+    <string name="birthday">生日</string>
+    <string name="walk_step_length">行走步长</string>
+    <string name="age">年龄</string>
+    <string name="user_height">身高</string>
+    <string name="user_weight">体重</string>
+    <string name="run_step_length">跑步步长</string>
+    <string name="gender">性别</string>
 
     <string name="activi">活动</string>
     <string name="information">资料</string>
