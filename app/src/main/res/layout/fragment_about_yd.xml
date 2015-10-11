@@ -32,7 +32,7 @@
             android:layout_marginTop="10dp" />
 
         <RelativeLayout
-            android:id="@+id/rl_check_update"
+            android:id="@+id/rl_app_feature"
             style="@style/option_item_rl">
 
             <TextView

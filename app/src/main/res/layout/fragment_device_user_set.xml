@@ -1,0 +1,49 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.m1racle.yuedong.ui.fragment.DeviceUserSetFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/space_10"
+            android:background="@mipmap/settings_band"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/space_10"
+            android:layout_marginBottom="@dimen/space_10"
+            android:text="@string/set_device_user_info"
+            android:textSize="@dimen/text_size_20"/>
+
+        <View
+            style="@style/h_line" />
+
+        <com.m1racle.yuedong.ui.widget.CustomerScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/fragment_device_user_set_edit" />
+
+
+
+            </LinearLayout>
+        </com.m1racle.yuedong.ui.widget.CustomerScrollView>
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

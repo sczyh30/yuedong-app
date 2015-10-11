@@ -9,6 +9,7 @@ import android.os.Build;
 
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
+import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.service.listener.AppLocationListener;
 
 /**
@@ -21,7 +22,7 @@ public class BaseApplication extends Application {
 
     private static Context context;
     static Resources resources;
-    private static String PREF_NAME = "creativelocker.pref";
+    private static String PREF_NAME = "yuedong.pref";
 
     private static boolean FUCKING_GB;
 
@@ -35,6 +36,11 @@ public class BaseApplication extends Application {
      */
     public LocationClient mLocationClient;
     public BDLocationListener myListener;
+    private HuaweiWearableManager HWManager = null;
+
+    public HuaweiWearableManager getHWManager() {
+        return HWManager;
+    }
 
     @Override
     public void onCreate() {
@@ -42,7 +48,7 @@ public class BaseApplication extends Application {
         context = getApplicationContext();
         resources = context.getResources();
         initBDLocation();
-
+        initHWManager();
     }
     public static Context getContext() {
         return context;
@@ -54,6 +60,10 @@ public class BaseApplication extends Application {
         mLocationClient.registerLocationListener(myListener);
     }
 
+    public void initHWManager() {
+        HWManager = HuaweiWearableManager.getInstance(getContext());
+    }
+    
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public static SharedPreferences getPreferences() {
         SharedPreferences pre = context.getSharedPreferences(PREF_NAME,

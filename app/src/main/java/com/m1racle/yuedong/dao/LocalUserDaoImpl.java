@@ -4,7 +4,10 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.m1racle.yuedong.AppContext;
+import com.m1racle.yuedong.database.UserDBHelper;
 import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.crypt.MD5Util;
 
 /**
@@ -32,6 +35,21 @@ public class LocalUserDaoImpl extends BaseDaoImpl implements UserDao {
             db.close();
         }
 
+    }
+
+    public void updateUserInfo(final User user) {
+        SQLiteDatabase db = getUserDB(true);
+        db.beginTransaction();
+        try {
+            ContentValues values = getUserValues(user);
+            db.update("user", values, "rememberMe != ?", new String[]{Integer.toString(0)});
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
     }
 
     @Override
@@ -65,7 +83,7 @@ public class LocalUserDaoImpl extends BaseDaoImpl implements UserDao {
                 user.setPortrait(cursor.getString(cursor.getColumnIndex("face")));
                 user.setGender(cursor.getInt(cursor.getColumnIndex("gender")));
                 user.setLocation(cursor.getString(cursor.getColumnIndex("location")));
-                user.setRememberMe(cursor.getInt(cursor.getColumnIndex("rememberMe")) != 0);
+                user.setRememberMe(cursor.getInt(cursor.getColumnIndex("rememberMe")) > 0);
             }
             cursor.close();
             db.setTransactionSuccessful();
@@ -89,7 +107,7 @@ public class LocalUserDaoImpl extends BaseDaoImpl implements UserDao {
         SQLiteDatabase db = getUserDB(true);
         db.beginTransaction();
         try {
-            db.delete("user", "rememberMe = ", new String[] {"1"});
+            db.execSQL("DELETE FROM user where rememberMe = 1");
             db.setTransactionSuccessful();
         } catch (Exception e) {
             e.printStackTrace();
@@ -118,7 +136,7 @@ public class LocalUserDaoImpl extends BaseDaoImpl implements UserDao {
         values.put("followers", user.getFollowers());
         values.put("fans", user.getFans());
         values.put("score", user.getScore());
-        values.put("rememberMe", user.isRememberMe());
+        values.put("rememberMe", 1);
         return values;
     }
 }

@@ -1,0 +1,72 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.m1racle.yuedong.ui.fragment.EverydayMotionFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/sport_health_exercise_icon_walking"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="每日运动数据"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <View style="@style/h_line"
+            android:layout_marginTop="@dimen/space_10"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/layout_item_bg"
+            android:orientation="horizontal"
+            android:padding="@dimen/space_15"
+            >
+            <TextView
+                android:id="@id/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/space_4"
+                android:text="@string/today_total_calorie"
+                android:textColor="?attr/infoTextColor"
+                android:textSize="@dimen/text_size_16" />
+
+            <TextView
+                android:id="@+id/tv_evm_total_carl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/text"
+                android:text="@string/b2_unknown"
+                android:textColor="@color/green"
+                android:layout_marginLeft="@dimen/space_10"
+                android:layout_marginStart="@dimen/space_10"
+                android:textSize="@dimen/text_size_16" />
+        </RelativeLayout>
+
+        <View style="@style/h_line" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_evm"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:fadingEdge="none"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>

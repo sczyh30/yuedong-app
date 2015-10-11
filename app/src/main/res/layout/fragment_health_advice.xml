@@ -1,0 +1,16 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.m1racle.yuedong.ui.fragment.HealthAdviceFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_5"
+        android:layout_marginBottom="@dimen/space_10"
+        android:text="@string/actionbar_title_motion_advice"
+        android:textSize="20sp"
+        android:layout_gravity="center" />
+
+</FrameLayout>

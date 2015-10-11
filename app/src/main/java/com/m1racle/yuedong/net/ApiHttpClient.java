@@ -23,8 +23,8 @@ public class ApiHttpClient {
 
     //public final static String HOST = "233.233.233.233";
     //private static String API_URL = "http://233.233.233.233/";
-    public final static String HOST = "www.sczyh30.com";
-    private static String API_URL = "http://www.sczyh30.com/";
+    public final static String HOST = "192.168.95.1";
+    private static String API_URL = "http://192.168.95.1/";
     private static String appCookie;
 
     public static AsyncHttpClient client;

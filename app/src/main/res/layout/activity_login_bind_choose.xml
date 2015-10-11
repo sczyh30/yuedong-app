@@ -13,7 +13,7 @@
         android:layout_marginBottom="20dp"
         android:textColor="?attr/textColor"
         android:textSize="17sp"
-        tools:text="你好，大屌" />
+        tools:text="您好" />
 
     <TextView
         android:layout_width="wrap_content"

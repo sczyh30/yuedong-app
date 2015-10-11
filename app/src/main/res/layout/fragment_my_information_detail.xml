@@ -48,7 +48,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
                 android:padding="10dp"
-                android:text="注销账号"
+                android:text="@string/btn_str_logout"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:background="@drawable/btn_red"

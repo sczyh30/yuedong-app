@@ -14,6 +14,8 @@ import com.m1racle.yuedong.base.BaseApplication;
 //import com.m1racle.yuedong.cache.DataCleanManager;
 //import com.m1racle.yuedong.util.CyptoUtils;
 //import com.m1racle.yuedong.util.MethodsCompat;
+import com.m1racle.yuedong.base.Constants;
+import com.m1racle.yuedong.cache.DataCleanManager;
 import com.m1racle.yuedong.dao.LocalUserDaoImpl;
 import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.net.ApiHttpClient;
@@ -21,6 +23,8 @@ import com.m1racle.yuedong.util.StringUtils;
 import com.m1racle.yuedong.util.LogUtil;
 //import com.m1racle.yuedong.util.UIHelper;
 
+
+import org.kymjs.kjframe.KJBitmap;
 
 import java.util.Properties;
 import java.util.UUID;
@@ -35,14 +39,14 @@ import static com.m1racle.yuedong.AppConfig.KEY_TWEET_DRAFT;
  */
 public class AppContext extends BaseApplication {
 
-    public static final int PAGE_SIZE = 20;// 默认分页大小
+    public static final int PAGE_SIZE = 20; // 默认分页大小
 
     private static AppContext instance;
 
     private int loginUid;
 
     private boolean login;
-    LocalUserDaoImpl userDao;
+    LocalUserDaoImpl userDao = new LocalUserDaoImpl();
 
     @Override
     public void onCreate() {
@@ -63,8 +67,9 @@ public class AppContext extends BaseApplication {
         client.setCookieStore(mCookieStore);
         ApiHttpClient.setHttpClient(client);
         ApiHttpClient.setCookie(ApiHttpClient.getCookie(this));
-
         userDao = new LocalUserDaoImpl();
+        //if(isFristStart())
+        //    userDao.initDatabase();
     }
 
     private void initLogin() {
@@ -117,32 +122,40 @@ public class AppContext extends BaseApplication {
     }
 
     public User getLoginUser() {
-        User user = new User();
-        user.setId(StringUtils.toInt(getProperty("user.uid"), 0));
-        user.setUsername(getProperty("user.username"));
-        user.setPortrait(getProperty("user.face"));
-        user.setAccount(getProperty("user.account"));
-        user.setLocation(getProperty("user.location"));
-        user.setFollowers(StringUtils.toInt(getProperty("user.followers"), 0));
-        user.setFans(StringUtils.toInt(getProperty("user.fans"), 0));
-        user.setScore(StringUtils.toInt(getProperty("user.score"), 0));
-        user.setRememberMe(StringUtils.toBool(getProperty("user.isRememberMe")));
-        return user;
+        return userDao.getUserInfo();
     }
 
     /**
-     * 清除登录信息
+     * Clear the login info
      */
     public void cleanLoginInfo() {
         this.loginUid = 0;
         this.login = false;
-        removeProperty("user.uid", "user.username", "user.face", "user.location",
-                "user.followers", "user.fans", "user.score",
-                "user.isRememberMe", "user.gender");
+        userDao.removeUserInfo();
+    }
+
+    /**
+     * Logout method
+     */
+    public void logout() {
+        cleanLoginInfo();
+        ApiHttpClient.cleanCookie();
+        this.cleanCookie();
+        this.login = false;
+        this.loginUid = 0;
+        // notify the app
+        Intent intent = new Intent(Constants.INTENT_ACTION_LOGOUT);
+        sendBroadcast(intent);
     }
 
     public void saveUserInfo(User user) {
+        this.loginUid = user.getId();
+        this.login = true;
         userDao.saveUserInfo(user);
+    }
+
+    public void updateUserInfo(final User user) {
+        userDao.updateUserInfo(user);
     }
 
     public String getProperty(String key) {
@@ -172,6 +185,30 @@ public class AppContext extends BaseApplication {
             setProperty(AppConfig.CONF_APP_UNIQUEID, uniqueID);
         }
         return uniqueID;
+    }
+
+    public static void setLoadImage(boolean flag) {
+        set(KEY_LOAD_IMAGE, flag);
+    }
+
+    //Clear cache methods
+    public void cleanCookie() {
+        removeProperty(AppConfig.CONF_COOKIE);
+    }
+
+    public void clearAppCache() {
+        DataCleanManager.cleanDatabases(this);
+        // clear data cache
+        DataCleanManager.cleanInternalCache(this);
+        DataCleanManager.cleanCustomCache(this.getExternalCacheDir());
+        // clear temporary content
+        Properties props = getProperties();
+        for (Object key : props.keySet()) {
+            String _key = key.toString();
+            if (_key.startsWith("temp"))
+                removeProperty(_key);
+        }
+        new KJBitmap().cleanCache();
     }
 
 }

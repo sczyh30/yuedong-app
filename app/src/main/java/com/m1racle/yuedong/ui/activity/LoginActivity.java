@@ -157,7 +157,6 @@ public class LoginActivity extends BaseActivity {
         hideKeyboard();
         showWaitDialog(R.string.progress_login).show();
         SamsaraAPI.login(mUserName, mPassword, mHandler);
-        //LogUtil.toast("服务器维护中，请稍后再试");
     }
 
 
@@ -197,13 +196,13 @@ public class LoginActivity extends BaseActivity {
         data.putExtra(BUNDLE_KEY_REQUEST_CODE, requestCode);
         setResult(RESULT_OK, data);
         this.sendBroadcast(new Intent(Constants.INTENT_ACTION_USER_CHANGE));
+        ToastUtil.toast("登录成功");
         finish();
     }
 
     //TODO:需要的时候添加第三方登录接口支持
     private void qqLogin() {
         LogUtil.toast("QQ API 接口未开放");
-        //showWaitDialog();
     }
 
     private void wxLogin() {

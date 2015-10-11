@@ -33,7 +33,8 @@ public class SamsaraAPI {
         params.put("username", username);
         params.put("pwd", MD5Util.MD5(password));
         params.put("keep_login", 1);
-        String login_url = "action/api/login";
+        //String login_url = "action/api/login";
+        String login_url = "action/api/login.json";
         ApiHttpClient.post(login_url, params, handler);
     }
 
@@ -58,14 +59,15 @@ public class SamsaraAPI {
         uploadLog(data, "1", handler);
     }
 
-    public static void getUserDetail(int id, AsyncHttpResponseHandler handler) {
-        RequestParams params = new RequestParams("id", id);
-        ApiHttpClient.get("action/api/get/user_detail", params, handler);
+    public static void getUserDetail(int uid, AsyncHttpResponseHandler handler) {
+        RequestParams params = new RequestParams("id", uid);
+        //ApiHttpClient.get("action/api/get/user_detail", params, handler);
+        ApiHttpClient.get("action/api/get/user_detail.json", handler);
     }
 
-    public static void getUserDetail(String name, AsyncHttpResponseHandler handler) {
-        RequestParams params = new RequestParams("name", name);
-        ApiHttpClient.get("action/api/get/user_detail_name", params, handler);
+    public static void getUserInfo(int uid, AsyncHttpResponseHandler handler) {
+        RequestParams params = new RequestParams("id", uid);
+        ApiHttpClient.get("action/api/get/user.json", handler);
     }
 
     /**
@@ -73,11 +75,11 @@ public class SamsaraAPI {
      * @param handler Http Handler
      */
     public static void getUpdateInfo(AsyncHttpResponseHandler handler) {
-        ApiHttpClient.get("action/api/get/latest_version",handler);
+        ApiHttpClient.get("action/api/get/app_version_android.json",handler);
     }
 
     public static void getLatestMotionActivities(AsyncHttpResponseHandler handler) {
-        ApiHttpClient.get("action/api/latest_ma.json",handler);
+        ApiHttpClient.get("action/api/get/latest_ma.json",handler);
     }
 
     /**

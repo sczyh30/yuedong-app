@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
-import com.m1racle.yuedong.ui.activity.HWTMainActivity;
+import com.m1racle.yuedong.service.LogUploadService;
 import com.m1racle.yuedong.ui.activity.MainActivity;
 
 /**
@@ -53,7 +53,7 @@ public class AppStart extends AppCompatActivity {
 
 
     /**
-     * 跳转到...
+     * Redirect to the main activity
      */
     private void redirectTo() {
         Intent uploadLog = new Intent(this, LogUploadService.class);

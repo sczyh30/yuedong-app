@@ -1,36 +1,63 @@
 package com.m1racle.yuedong.ui.fragment;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.util.LogUtil;
+import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.entity.UserDetail;
+import com.m1racle.yuedong.net.SamsaraAPI;
+import com.m1racle.yuedong.ui.empty.EmptyLayout;
+import com.m1racle.yuedong.util.JsonUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 
+import org.kymjs.kjframe.KJBitmap;
+
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * My Social Information Detail Fragment
  */
 public class MySocialDetailFragment extends BaseFragment {
 
-    private OnFragmentInteractionListener mListener;
+    private int uid = AppContext.getContext().getLoginUid();
 
-    public MySocialDetailFragment() {
-    }
+    @Bind(R.id.iv_avatar)
+    ImageView mUserFace;
+    @Bind(R.id.tv_name)
+    TextView mName;
+    @Bind(R.id.tv_join_time)
+    TextView mJoinTime;
+    @Bind(R.id.tv_location)
+    TextView mLocation;
+    @Bind(R.id.tv_love_sport)
+    TextView mLoveSport;
+    @Bind(R.id.tv_my_tip)
+    TextView mMyTip;
+    @Bind(R.id.error_layout)
+    EmptyLayout mErrorLayout;
+
+    private UserDetail mUserDetail;
+    private User mUser;
+
+    private final static String FACE_SAVEPATH = Environment
+            .getExternalStorageDirectory().getAbsolutePath()
+            + "/Yuedong/portrait/";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            LogUtil.log("Social Detail => OnCreate");
-        }
     }
 
     @Override
@@ -39,6 +66,7 @@ public class MySocialDetailFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_my_information_detail,
                 container, false);
         ButterKnife.bind(this, view);
+        initData();
         initView(view);
         return view;
     }
@@ -46,38 +74,62 @@ public class MySocialDetailFragment extends BaseFragment {
     @Override
     public void initView(View view) {
         super.initView(view);
+        mErrorLayout.setOnLayoutClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendRequestData();
+            }
+        });
     }
 
     @Override
     public void initData() {
-        super.initData();
+        sendRequestData();
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    private final BaseJsonHttpResponseHandler mHandler = new BaseJsonHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
+            if(response != null) {
+                handleResult((UserDetail)response);
+            } else {
+                onFailure(statusCode, headers, rawJsonResponse, null);
+            }
         }
-    }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+        @Override
+        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Object errorResponse) {
+            ToastUtil.toast("网络出现错误，请重试。(" + statusCode + ")");
         }
+
+        @Override
+        protected Object parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+            return JsonUtil.resolveUserDetail(rawJsonData);
+        }
+    };
+
+    public void sendRequestData() {
+        mErrorLayout.setErrorType(EmptyLayout.NETWORK_LOADING);
+        SamsaraAPI.getUserDetail(uid, mHandler);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
+    private void handleResult(UserDetail detail) {
+        mErrorLayout.setErrorType(EmptyLayout.HIDE_LAYOUT);
+        mUserDetail = detail;
+        mUser = AppContext.getContext().getLoginUser();
+        updateUI();
     }
 
-    public interface OnFragmentInteractionListener {
-        public void onFragmentInteraction(Uri uri);
+    private void updateUI() {
+        if(mUser != null && mUserDetail != null) {
+            new KJBitmap().displayWithLoadBitmap(mUserFace, mUser.getPortrait(),
+                    R.mipmap.widget_dface);
+            mName.setText(mUser.getUsername());
+            mJoinTime.setText(mUserDetail.getRegTime());
+            mLocation.setText(mUserDetail.getLocation());
+            mLoveSport.setText(mUserDetail.getSports());
+            mMyTip.setText(mUserDetail.getMyTip());
+        }
     }
 
     @Override
@@ -86,7 +138,9 @@ public class MySocialDetailFragment extends BaseFragment {
         int id = view.getId();
         switch (id) {
             case R.id.btn_logout:
-                ToastUtil.showToast("fucking");
+                AppContext.getContext().logout();
+                getActivity().finish();
+                ToastUtil.toast("注销成功");
                 break;
             default:
                 break;

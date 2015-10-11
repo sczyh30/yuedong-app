@@ -3,18 +3,18 @@ package com.m1racle.yuedong.entity;
 /**
  * The common entity abstract class
  */
-public abstract class Entity {
+public abstract class Entity extends SerialEntity {
 
-    protected int id;
+    //protected int id;
     protected String cacheKey;
 
-    public int getId() {
+    /*public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
+    }*/
 
     public String getCacheKey() {
         return cacheKey;

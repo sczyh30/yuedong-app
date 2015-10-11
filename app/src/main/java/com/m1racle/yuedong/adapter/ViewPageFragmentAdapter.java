@@ -24,7 +24,7 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter {
     private final Context mContext;
     protected PagerSlidingTabStrip mPagerStrip;
     private final ViewPager mViewPager;
-    private final ArrayList<ViewPageInfo> mTabs = new ArrayList<ViewPageInfo>();
+    private final ArrayList<ViewPageInfo> mTabs = new ArrayList<>();
 
     public ViewPageFragmentAdapter(FragmentManager fm,
                                    PagerSlidingTabStrip pageStrip, ViewPager pager) {
@@ -72,9 +72,7 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter {
 
     /**
      * 移除一个tab
-     *
-     * @param index
-     *            备注：如果index小于0，则从第一个开始删 如果大于tab的数量值则从最后一个开始删除
+     * 如果index小于0，则从第一个开始删 如果大于tab的数量值则从最后一个开始删除
      */
     public void remove(int index) {
         if (mTabs.isEmpty()) {
@@ -116,7 +114,7 @@ public class ViewPageFragmentAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         ViewPageInfo info = mTabs.get(position);
-        return Fragment.instantiate(mContext, info.clss.getName(), info.args);
+        return Fragment.instantiate(mContext, info.cls.getName(), info.args);
     }
 
     @Override

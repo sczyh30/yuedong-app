@@ -1,7 +1,6 @@
 package com.m1racle.yuedong.ui.fragment;
 
 import android.content.DialogInterface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -13,12 +12,12 @@ import com.m1racle.yuedong.AppConfig;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.AppManager;
 import com.m1racle.yuedong.R;
-import com.m1racle.yuedong.base.BaseApplication;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.ui.DialogUtil;
 import com.m1racle.yuedong.ui.widget.togglebutton.ToggleButton;
 import com.m1racle.yuedong.util.FileUtil;
 import com.m1racle.yuedong.util.UIUtil;
+import com.m1racle.yuedong.util.UpdateManager;
 
 import org.kymjs.kjframe.bitmap.BitmapConfig;
 
@@ -26,13 +25,15 @@ import java.io.File;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
- * 系统设置界面
+ * Yuedong App
+ * Setting Fragment
  */
 public class SettingsFragment extends BaseFragment {
 
-    //@Bind(R.id.tb_loading_img)
+    @Bind(R.id.tb_loading_img)
     ToggleButton mTbLoadImg;
     @Bind(R.id.tv_cache_size)
     TextView mTvCacheSize;
@@ -56,21 +57,13 @@ public class SettingsFragment extends BaseFragment {
         mTbLoadImg.setOnToggleChanged(new ToggleButton.OnToggleChanged() {
             @Override
             public void onToggle(boolean on) {
-                //AppContext.setLoadImage(on);
+                AppContext.setLoadImage(on);
             }
         });
 
-
-        view.findViewById(R.id.rl_loading_img).setOnClickListener(this);
-        view.findViewById(R.id.rl_notification_settings).setOnClickListener(
-                this);
-        view.findViewById(R.id.rl_clean_cache).setOnClickListener(this);
-        view.findViewById(R.id.rl_about).setOnClickListener(this);
-        view.findViewById(R.id.rl_exit).setOnClickListener(this);
-
-        //if (!AppContext.getContext().isLogin()) {
-        //    mTvExit.setText("退出");
-        //}
+        if (!AppContext.getContext().isLogin()) {
+            mTvExit.setText("退出");
+        }
     }
 
     @Override
@@ -107,6 +100,8 @@ public class SettingsFragment extends BaseFragment {
     }
 
     @Override
+    @OnClick({R.id.search_update, R.id.rl_loading_img, R.id.rl_notification_settings,
+            R.id.rl_clean_cache, R.id.rl_about, R.id.rl_exit })
     public void onClick(View v) {
         final int id = v.getId();
         switch (id) {
@@ -115,6 +110,9 @@ public class SettingsFragment extends BaseFragment {
             break;
         case R.id.rl_notification_settings:
             UIUtil.showSettingNotification(getActivity());
+            break;
+        case R.id.search_update:
+            checkUpdate();
             break;
         case R.id.rl_clean_cache:
             onClickCleanCache();
@@ -128,7 +126,6 @@ public class SettingsFragment extends BaseFragment {
         default:
             break;
         }
-
     }
 
     private void onClickCleanCache() {
@@ -136,18 +133,19 @@ public class SettingsFragment extends BaseFragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 UIUtil.clearAppCache(getActivity());
-                mTvCacheSize.setText("0KB");
+                mTvCacheSize.setText("0 KB");
             }
         }).show();
     }
 
     private void onClickExit() {
-        AppContext
-                .set(AppConfig.KEY_NOTIFICATION_DISABLE_WHEN_EXIT,
-                        false);
+        AppContext.set(AppConfig.KEY_NOTIFICATION_DISABLE_WHEN_EXIT, false);
         AppManager.getAppManager().AppExit(getActivity());
         getActivity().finish();
     }
 
+    private void checkUpdate() {
+        new UpdateManager(getActivity(), true).checkUpdate();
+    }
 
 }

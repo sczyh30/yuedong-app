@@ -1,9 +1,11 @@
 package com.m1racle.yuedong.ui.fragment;
 
-import android.app.Activity;
-import android.net.Uri;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.app.Fragment;
 import android.support.annotation.Nullable;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -14,36 +16,52 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
-import com.m1racle.yuedong.base.BaseApplication;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.base.UtilActivityPage;
+import com.m1racle.yuedong.base.Constants;
+import com.m1racle.yuedong.cache.CacheManager;
+import com.m1racle.yuedong.entity.Notice;
 import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.net.SamsaraAPI;
+import com.m1racle.yuedong.ui.activity.MainActivity;
+import com.m1racle.yuedong.ui.dialog.MyQRCodeDialog;
 import com.m1racle.yuedong.ui.empty.EmptyLayout;
 import com.m1racle.yuedong.ui.widget.AvatarView;
 import com.m1racle.yuedong.ui.widget.BadgeView;
+import com.m1racle.yuedong.util.DeviceUtil;
+import com.m1racle.yuedong.util.JsonUtil;
+import com.m1racle.yuedong.util.LogUtil;
+import com.m1racle.yuedong.util.ToastUtil;
 import com.m1racle.yuedong.util.UIUtil;
+
+import org.kymjs.kjframe.utils.StringUtils;
+
+import java.io.Serializable;
+import java.lang.ref.WeakReference;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import cz.msebera.android.httpclient.Header;
 
-
+/**
+ * Yuedong App
+ * My Social Information Fragment
+ */
 public class MySocialInfoFragment extends BaseFragment {
-
-
-    public static final int sChildView = 9; // 在没有加入TeamList控件时rootview有多少子布局
 
     @Bind(R.id.iv_avatar)
     AvatarView mIvAvatar;
     @Bind(R.id.iv_gender)
     ImageView mIvGender;
     @Bind(R.id.tv_name)
-    TextView mTvName;
+    TextView mTvUsername;
     @Bind(R.id.tv_score)
     TextView mTvScore;
-    @Bind(R.id.tv_favorite)
-    TextView mTvFavorite;
+    @Bind(R.id.tv_motion_activities)
+    TextView mTvMotionActivities;
     @Bind(R.id.tv_following)
     TextView mTvFollowing;
     @Bind(R.id.tv_follower)
@@ -52,8 +70,6 @@ public class MySocialInfoFragment extends BaseFragment {
     View mMesView;
     @Bind(R.id.error_layout)
     EmptyLayout mErrorLayout;
-    @Bind(R.id.iv_qr_code)
-    ImageView mQrCode;
     @Bind(R.id.ll_user_container)
     View mUserContainer;
     @Bind(R.id.rl_user_unlogin)
@@ -61,17 +77,18 @@ public class MySocialInfoFragment extends BaseFragment {
     @Bind(R.id.rootview)
     LinearLayout rootView;
 
-    private OnFragmentInteractionListener mListener;
-
-    private User user;
+    private User mInfo;
+    private AsyncTask<String, Void, User> mCacheTask;
     private static BadgeView mMesCount;
 
-    private boolean mIsWatingLogin;
+    private boolean isWaitingLogin;
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        IntentFilter filter = new IntentFilter(Constants.INTENT_ACTION_LOGOUT);
+        filter.addAction(Constants.INTENT_ACTION_USER_CHANGE);
+        getActivity().registerReceiver(mReceiver, filter);
     }
 
     @Override
@@ -81,7 +98,33 @@ public class MySocialInfoFragment extends BaseFragment {
                 container, false);
         ButterKnife.bind(this, view);
         initView(view);
+        initData();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        preRequest(true);
+        mInfo = AppContext.getContext().getLoginUser();
+        updateUI();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setNotice();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        getActivity().unregisterReceiver(mReceiver);
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
     }
 
     @Override
@@ -92,30 +135,10 @@ public class MySocialInfoFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 if (AppContext.getContext().isLogin()) {
-                    //requestData(true);
+                    preRequest(true);
                 } else {
                     UIUtil.showLoginActivity(getActivity());
                 }
-            }
-        });
-        view.findViewById(R.id.ly_favorite).setOnClickListener(this);
-        view.findViewById(R.id.ly_following).setOnClickListener(this);
-        view.findViewById(R.id.ly_follower).setOnClickListener(this);
-        view.findViewById(R.id.rl_message).setOnClickListener(this);
-        view.findViewById(R.id.rl_team).setOnClickListener(this);
-        view.findViewById(R.id.rl_blog).setOnClickListener(this);
-        view.findViewById(R.id.rl_note).setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //UIUtil.showActivity(getActivity(),
-                         //       SimpleBackPage.NOTE);
-                    }
-                });
-        mUserUnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                UIUtil.showLoginActivity(getActivity());
             }
         });
 
@@ -124,39 +147,217 @@ public class MySocialInfoFragment extends BaseFragment {
         mMesCount.setBadgePosition(BadgeView.POSITION_CENTER);
         mMesCount.setGravity(Gravity.CENTER);
         mMesCount.setBackgroundResource(R.mipmap.notification_bg);
-        mQrCode.setOnClickListener(this);
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
+    private final BaseJsonHttpResponseHandler mHandler = new BaseJsonHttpResponseHandler() {
+        @Override
+        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
+                mInfo = (User)response;
+                if(mInfo != null) {
+                    updateUI();
+                    AppContext.getContext().updateUserInfo(mInfo);
+                    new SaveCacheTask(getActivity(), mInfo, getCacheKey()).execute();
+                } else
+                    onFailure(statusCode, headers, rawJsonResponse, null);
+        }
+
+        @Override
+        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Object errorResponse) {
+            LogUtil.toast("获取用户数据出现错误");
+        }
+
+        @Override
+        protected Object parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
+            return JsonUtil.resolveSingleUser(rawJsonData);
+        }
+    };
+
+    private void preRequest(boolean refresh) {
+        if (AppContext.getContext().isLogin()) {
+            isWaitingLogin = false;
+            String key = getCacheKey();
+            if (refresh || DeviceUtil.hasInternet()
+                    && (!CacheManager.isExistDataCache(getActivity(), key))) {
+                sendRequestData();
+            } else {
+                readCacheData(key);
+            }
+        } else {
+            isWaitingLogin = true;
+        }
+        setUserView();
+    }
+
+    public void sendRequestData() {
+        int uid = AppContext.getContext().getLoginUid();
+        SamsaraAPI.getUserInfo(uid, mHandler);
+    }
+
+    private void updateUI() {
+        if (mInfo == null)
+            return;
+        mIvAvatar.setAvatarUrl(mInfo.getPortrait());
+        mTvUsername.setText(mInfo.getAccount());
+        mIvGender
+                .setImageResource(StringUtils.toInt(mInfo.getGender()) == 1 ? R.mipmap.userinfo_icon_male
+                        : R.mipmap.userinfo_icon_female);
+        mTvScore.setText(String.valueOf(mInfo.getScore()));
+        mTvMotionActivities.setText(String.valueOf(mInfo.getActivitiesNumber()));
+        mTvFollowing.setText(String.valueOf(mInfo.getFollowers()));
+        mTvFans.setText(String.valueOf(mInfo.getFans()));
+    }
+
+    private void readCacheData(String key) {
+        cancelReadCacheTask();
+        mCacheTask = new CacheTask(getActivity()).execute(key);
+    }
+
+    private void cancelReadCacheTask() {
+        if (mCacheTask != null) {
+            mCacheTask.cancel(true);
+            mCacheTask = null;
         }
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
+    private String getCacheKey() {
+        return "m_info_" + AppContext.getContext().getLoginUid();
     }
 
     @Override
+    @OnClick({R.id.ly_motion_activities, R.id.iv_qr_code, R.id.ly_following, R.id.ly_follower, R.id.rl_message,
+            R.id.rl_health, R.id.rl_activities, R.id.rl_friend, R.id.rl_user_unlogin})
     public void onClick(View view) {
+        if (isWaitingLogin) {
+            ToastUtil.toast(R.string.unlogin);
+            UIUtil.showLoginActivity(getActivity());
+            return;
+        }
         int id = view.getId();
         switch (id) {
+            case R.id.rl_user_unlogin:
+                ToastUtil.toast(R.string.unlogin);
+                UIUtil.showLoginActivity(getActivity());
+                break;
             case R.id.iv_avatar:
-                UIUtil.showSocialDetail(getActivity());
+                showMyDetail();
+                break;
+            case R.id.iv_qr_code:
+                showMyQrCode();
                 break;
             default:
                 break;
         }
     }
+
+    private void showMyDetail() {
+        if(!AppContext.getContext().isLogin()) {
+            ToastUtil.toast("未登录，请先登录");
+            UIUtil.showLoginActivity(getActivity());
+        } else {
+            UIUtil.showSocialDetail(getActivity());
+        }
+    }
+
+    private void showMyQrCode() {
+        MyQRCodeDialog dialog = new MyQRCodeDialog(getActivity());
+        dialog.show();
+        //LogUtil.toast("QR Code click");
+    }
+
+    private void setUserView() {
+        if (isWaitingLogin) {
+            mUserContainer.setVisibility(View.GONE);
+            mUserUnLogin.setVisibility(View.VISIBLE);
+        } else {
+            mUserContainer.setVisibility(View.VISIBLE);
+            mUserUnLogin.setVisibility(View.GONE);
+        }
+    }
+
+    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            switch (action) {
+                case Constants.INTENT_ACTION_LOGOUT:
+                    if (mErrorLayout != null) {
+                        isWaitingLogin = true;
+                        setUserView();
+                        mMesCount.hide();
+                    }
+                    break;
+                case Constants.INTENT_ACTION_USER_CHANGE:
+                    preRequest(true);
+                    break;
+                case Constants.INTENT_ACTION_NOTICE:
+                    setNotice();
+                    break;
+            }
+        }
+    };
+
+    private class CacheTask extends AsyncTask<String, Void, User> {
+        private final WeakReference<Context> mContext;
+
+        private CacheTask(Context context) {
+            mContext = new WeakReference<>(context);
+        }
+
+        @Override
+        protected User doInBackground(String... params) {
+            Serializable object = CacheManager.readObject(mContext.get(), params[0]);
+            if (object == null) {
+                return null;
+            } else {
+                return (User) object;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(User info) {
+            super.onPostExecute(info);
+            if (info != null) {
+                mInfo = info;
+                updateUI();
+            }
+        }
+    }
+
+    private class SaveCacheTask extends AsyncTask<Void, Void, Void> {
+        private final WeakReference<Context> mContext;
+        private final Serializable object;
+        private final String key;
+
+        private SaveCacheTask(Context context, Serializable object, String key) {
+            mContext = new WeakReference<>(context);
+            this.object = object;
+            this.key = key;
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            CacheManager.saveObject(mContext.get(), object, key);
+            return null;
+        }
+    }
+
+    private void setNotice() {
+        if(MainActivity.mNotice != null) {
+            Notice notice = MainActivity.mNotice;
+            int atMeCount = notice.getAtMeCount();// @我
+            int messageCount = notice.getMessageCount();// 留言
+            int commentCount = notice.getCommentCount();// 评论
+            int newFansCount = notice.getNewFansCount();// 新粉丝
+            int newZansCount = notice.getNewZansCount();// 获得点赞
+            int finalCount = atMeCount + messageCount + commentCount + newFansCount + newZansCount;
+            if (finalCount > 0) {
+                mMesCount.setText(finalCount + "");
+                mMesCount.show();
+                return;
+            }
+        }
+        mMesCount.hide();
+    }
+
 }

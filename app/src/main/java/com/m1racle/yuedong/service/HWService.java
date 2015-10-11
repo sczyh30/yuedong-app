@@ -31,7 +31,7 @@ public class HWService extends Service {
     public final static int HUAWEI_TALKBAND_B2 = 1;
 
     private void init() {
-        manager = HuaweiWearableManager.getInstance(AppContext.getContext());
+        manager = AppContext.getContext().getHWManager();
         if(manager != null) {
             manager.registerConnectStateCallback(stateCallBack);
         }

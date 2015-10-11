@@ -1,7 +1,5 @@
 package com.m1racle.yuedong.ui.fragment;
 
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,7 +14,6 @@ import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.base.BaseRefreshFragment;
 import com.m1racle.yuedong.entity.MotionActivities;
 import com.m1racle.yuedong.net.SamsaraAPI;
 import com.m1racle.yuedong.util.DeviceUtil;
@@ -28,7 +25,6 @@ import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.ButterKnife;
 import cz.msebera.android.httpclient.Header;
@@ -38,15 +34,11 @@ import cz.msebera.android.httpclient.Header;
  */
 public class YdActiListFragment extends BaseFragment {
 
-    private OnFragmentInteractionListener mListener;
     private PullToRefreshView mPullToRefreshView;
     RecyclerView mRecyclerView;
     RlistAdapter adapter = new RlistAdapter();
 
     protected List<MotionActivities> dataList = new ArrayList<>();
-
-    public YdActiListFragment() {
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,21 +59,16 @@ public class YdActiListFragment extends BaseFragment {
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                /*mPullToRefreshView.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        mPullToRefreshView.setRefreshing(false);
-                    }
-                }, REFRESH_DELAY);*/
                 SamsaraAPI.getLatestMotionActivities(mHandler);
             }
         });
-        View view = inflater.inflate(R.layout.fragment_yd_acti_list, container, false);
+        //View view = inflater.inflate(R.layout.fragment_yd_acti_list, container, false);
         initData();
         ButterKnife.bind(this, rootView);
         initView(rootView);
         return rootView;
     }
+
 
     @Override
     public void initView(View view) {
@@ -96,7 +83,7 @@ public class YdActiListFragment extends BaseFragment {
         List<MotionActivities> test = new ArrayList<>();
         for(int i = 0; i < 15; i++) {
             MotionActivities temp = new MotionActivities();
-            temp.setId(i);
+            temp.setMAid(i);
             temp.setTitle("运动信息 => " + i);
             test.add(temp);
         }
@@ -132,32 +119,7 @@ public class YdActiListFragment extends BaseFragment {
         }
     };
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-    }
 
     private class RlistAdapter extends RecyclerView.Adapter<RlistHolder> {
 

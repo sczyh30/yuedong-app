@@ -16,13 +16,14 @@ import java.io.Serializable;
 
 /**
  * Cache manager class
+ * @since 0.1
  */
 public class CacheManager {
 
     // wifi缓存时间为5分钟
-    private static long wifi_cache_time = 5 * 60 * 1000;
+    private static long WIFI_CACHE_EXPIRE_TIME = 5 * 60 * 1000;
     // 其他网络环境为1小时
-    private static long other_cache_time = 60 * 60 * 1000;
+    private static long COMMON_CACHE_EXPIRE_TIME = 60 * 60 * 1000;
 
     /**
      * 保存对象
@@ -93,9 +94,8 @@ public class CacheManager {
 
     /**
      * 判断缓存是否存在
-     *
-     * @param cachefile
-     * @return
+     * @param cachefile the cache filename
+     * @return if the cache file exists
      */
     public static boolean isExistDataCache(Context context, String cachefile) {
         if (context == null)
@@ -117,11 +117,11 @@ public class CacheManager {
             return false;
         }
         long existTime = System.currentTimeMillis() - data.lastModified();
-        boolean failure = false;
+        boolean failure;
         if (DeviceUtil.getNetworkType() == DeviceUtil.NETTYPE_WIFI) {
-            failure = existTime > wifi_cache_time;
+            failure = existTime > WIFI_CACHE_EXPIRE_TIME;
         } else {
-            failure = existTime > other_cache_time;
+            failure = existTime > COMMON_CACHE_EXPIRE_TIME;
         }
         return failure;
     }

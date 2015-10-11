@@ -1,5 +1,6 @@
 package com.m1racle.yuedong.util;
 
+import android.content.Context;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseApplication;
 
@@ -19,13 +21,18 @@ public class ToastUtil {
 
     private static String lastToast = "";
     private static long lastToastTime;
+    private static Context mContext = AppContext.getContext();
 
     /**
      * The method shows the normal toast
      * @param message message text
      */
     public static void toast(String message) {
-        Toast.makeText(BaseApplication.getContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public static void toast(int message) {
+        Toast.makeText(mContext, mContext.getString(message), Toast.LENGTH_SHORT).show();
     }
 
     public static void showToast(int message) {
@@ -62,12 +69,12 @@ public class ToastUtil {
 
     public static void showToast(int message, int duration, int icon,
                                  int gravity) {
-        showToast(BaseApplication.getContext().getString(message), duration, icon, gravity);
+        showToast(AppContext.getContext().getString(message), duration, icon, gravity);
     }
 
     public static void showToast(int message, int duration, int icon,
                                  int gravity, Object... args) {
-        showToast(BaseApplication.getContext().getString(message, args), duration, icon, gravity);
+        showToast(AppContext.getContext().getString(message, args), duration, icon, gravity);
     }
 
     public static void showToast(String message, int duration, int icon,

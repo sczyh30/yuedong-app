@@ -9,11 +9,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.base.UtilActivityPage;
 import com.m1racle.yuedong.ui.DialogUtil;
 import com.m1racle.yuedong.ui.activity.LoginActivity;
 import com.m1racle.yuedong.ui.activity.UtilActivity;
 
+/**
+ * A very important UI util class
+ * @author sczyh30
+ * @since 0.1
+ */
 public class UIUtil {
 
     public static void openSysBrowser(Context context, String url) {
@@ -63,7 +69,6 @@ public class UIUtil {
         DialogUtil.getConfirmDialog(context, "程序发生异常", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // 退出
                 System.exit(-1);
             }
         }).show();
@@ -73,12 +78,27 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.ABOUT_YD);
     }
 
-    public static void showMyInformation(Context context) {
-        showActivity(context, UtilActivityPage.MY_INFORMATION);
+    public static void showMyInformation(Context context, int uid, String username) {
+        if (uid == 0 && username.equalsIgnoreCase("匿名")) {
+            ToastUtil.toast("提醒你，该用户为非会员");
+            return;
+        }
+        Bundle args = new Bundle();
+        args.putInt("uid", uid);
+        args.putString("username", username);
+        showActivity(context, UtilActivityPage.MY_INFORMATION, args);
+    }
+
+    public static void showDeviceUserSet(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_USER_INFO_SET);
     }
 
     public static void showSettingNotification(Context context) {
         showActivity(context, UtilActivityPage.SETTING_NOTIFICATION);
+    }
+
+    public static void showHealthAdvice(Context context) {
+        showActivity(context, UtilActivityPage.HEALTH_MOTION_ADVICE);
     }
 
     public static void showSetting(Context context) {
@@ -89,8 +109,32 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.TEMPERATURE_DETAIL);
     }
 
+    public static void showDeviceMotionData(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_MOTION_DATA);
+    }
+
+    public static void showMotionGoal(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_MOTION_GOAL);
+    }
+
+    public static void showSleepObserver(Context context) {
+        showActivity(context, UtilActivityPage.SLEEP_OBSERVER);
+    }
+
+    public static void showDeviceAlarm(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_ALARM);
+    }
+
     public static void showSocialDetail(Context context) {
         showActivity(context, UtilActivityPage.SOCIAL_DETAIL);
+    }
+
+    public static void showDeviceUserInfo(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_USER_INFO);
+    }
+
+    public static void showEverydayMotion(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_EVERYDAY_MOTION);
     }
 
     public static void clearAppCache(Activity activity) {
@@ -109,7 +153,7 @@ public class UIUtil {
             public void run() {
                 Message msg = new Message();
                 try {
-                    //AppContext.getContext().clearAppCache();
+                    AppContext.getContext().clearAppCache();
                     msg.what = 1;
                 } catch (Exception e) {
                     e.printStackTrace();

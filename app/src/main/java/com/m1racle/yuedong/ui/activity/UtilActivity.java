@@ -17,6 +17,12 @@ import com.m1racle.yuedong.base.UtilActivityPage;
 
 import java.lang.ref.WeakReference;
 
+/**
+ * Yuedong App
+ * Basic Util Activity
+ * this is the daemon activity
+ * of most fragments
+ */
 public class UtilActivity extends BaseActivity
         implements FuckingMutiListener {
 
@@ -69,10 +75,9 @@ public class UtilActivity extends BaseActivity
             FragmentTransaction trans = getFragmentManager()
                     .beginTransaction();
             trans.replace(R.id.container, fragment, TAG);
-            //trans.addToBackStack()
             trans.commitAllowingStateLoss();
 
-            mFragment = new WeakReference<Fragment>(fragment);
+            mFragment = new WeakReference<>(fragment);
         } catch (Exception e) {
             e.printStackTrace();
             throw new IllegalArgumentException(
@@ -89,22 +94,22 @@ public class UtilActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_settings:
-                return true;
+            case R.id.public_menu_send:
+                return super.onOptionsItemSelected(item);
+            //case R.id.action_settings:
+            //    return true;
             case android.R.id.home:
                 onBackPressed();
                 break;
-        default:
-            break;
+            default:
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -141,8 +146,4 @@ public class UtilActivity extends BaseActivity
 
     public void initData() {}
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }

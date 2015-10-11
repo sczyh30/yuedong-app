@@ -13,8 +13,9 @@ import com.m1racle.yuedong.util.ToastUtil;
  */
 public class UserDBHelper extends SQLiteOpenHelper {
 
-    public static final String CREATE_SQL = "CREATE TABLE db_test1 (" +
+    public static final String CREATE_SQL = "CREATE TABLE user (" +
             "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
+            "password varchar(60) NOT NULL," +
             "username varchar(50) NOT NULL UNIQUE," +
             "face varchar(255) NOT NULL," +
             "account varchar(50) NOT NULL UNIQUE," +

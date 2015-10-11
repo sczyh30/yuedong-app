@@ -1,6 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" tools:context="com.m1racle.yuedong.ui.activity.MainActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.m1racle.yuedong.ui.activity.MainActivity">
+
+    <item android:id="@+id/action_settings"
+        android:title="@string/action_settings"
+        android:visible="true"
+        app:showAsAction="never" />
+    <!-- android:icon="@mipmap/drawer_menu_icon_setting_nor" -->
 </menu>

@@ -1,10 +1,8 @@
 package com.m1racle.yuedong.entity;
 
-import java.util.List;
-
 /**
  * User Entity
- * very complex!
+ * very complex
  * @author sczyh30
  */
 public class User extends Entity {
@@ -13,20 +11,19 @@ public class User extends Entity {
     private String account;
     private String username;
     private String password;
+    private String portrait;
 
-    private TempToken temp_token;
-    private boolean isRememberMe;
+    private String temp_token;
+    //private TempToken temp_token;
+    private int isRememberMe;
 
     private int fans;
     private int followers;
-    private String portrait;
     private int score;
+    private int activities_number;
 
     private String location;
-    private String reg_time;
     private int gender;
-    private List<String> like_sport;
-    private String my_tip;
 
     public User(){}
     public User(int id) {
@@ -41,12 +38,10 @@ public class User extends Entity {
         this.account = account;
     }
 
-    @Override
     public int getId() {
         return id;
     }
 
-    @Override
     public void setId(int id) {
         this.id = id;
     }
@@ -67,20 +62,23 @@ public class User extends Entity {
         this.password = password;
     }
 
-    public TempToken getTemp_token() {
+    public String  getTempToken() {
         return temp_token;
     }
 
-    public void setTemp_token(TempToken temp_token) {
+    public void setTempToken(String temp_token) {
         this.temp_token = temp_token;
     }
 
     public boolean isRememberMe() {
-        return isRememberMe;
+        return isRememberMe > 0;
     }
 
     public void setRememberMe(boolean isRememberMe) {
-        this.isRememberMe = isRememberMe;
+        if(isRememberMe)
+            this.isRememberMe = 1;
+        else
+            this.isRememberMe = 0;
     }
 
     public int getFans() {
@@ -107,12 +105,12 @@ public class User extends Entity {
         this.location = location;
     }
 
-    public String getReg_time() {
-        return reg_time;
+    public int getActivitiesNumber() {
+        return activities_number;
     }
 
-    public void setReg_time(String reg_time) {
-        this.reg_time = reg_time;
+    public void setActivitiesNumber(int activities_number) {
+        this.activities_number = activities_number;
     }
 
     public int getGender() {
@@ -121,22 +119,6 @@ public class User extends Entity {
 
     public void setGender(int gender) {
         this.gender = gender;
-    }
-
-    public List<String> getLike_sport() {
-        return like_sport;
-    }
-
-    public void setLike_sport(List<String> like_sport) {
-        this.like_sport = like_sport;
-    }
-
-    public String getMy_tip() {
-        return my_tip;
-    }
-
-    public void setMy_tip(String my_tip) {
-        this.my_tip = my_tip;
     }
 
     public String getPortrait() {
@@ -163,10 +145,7 @@ public class User extends Entity {
                 ", fans=" + fans +
                 ", followers=" + followers +
                 ", location='" + location + '\'' +
-                ", reg_time='" + reg_time + '\'' +
                 ", gender='" + gender + '\'' +
-                ", like_sport=" + like_sport +
-                ", my_tip='" + my_tip + '\'' +
                 '}';
     }
 }
