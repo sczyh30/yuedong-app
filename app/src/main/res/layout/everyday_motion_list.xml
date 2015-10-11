@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="155dp"
+    android:background="?attr/layout_item_bg">
+
+    <ImageView
+        android:id="@+id/image_motion_icon"
+        android:src="@mipmap/sport_health_exercise_icon_walking"
+        android:layout_marginLeft="@dimen/space_2"
+        android:layout_marginRight="@dimen/space_80"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="@dimen/space_80"
+        android:layout_gravity="start|center_vertical"
+        android:layout_width="@dimen/space_80"
+        android:layout_height="@dimen/space_80" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_10">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="运动类型："
+            android:textSize="@dimen/text_size_16"/>
+        <TextView
+            android:id="@+id/tv_evm_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/actionbar_blue"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_40">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="运动步数："
+            android:textSize="@dimen/text_size_16"/>
+        <TextView
+            android:id="@+id/tv_evm_step"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/actionbar_blue"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_70">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="消耗卡路里值："
+            android:textSize="@dimen/text_size_16"/>
+        <TextView
+            android:id="@+id/tv_evm_calorie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/actionbar_blue"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_100">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="运动距离："
+            android:textSize="@dimen/text_size_16"/>
+        <TextView
+            android:id="@+id/tv_evm_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/actionbar_blue"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="128dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="时长："
+            android:textSize="@dimen/text_size_16"/>
+        <TextView
+            android:id="@+id/tv_evm_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/actionbar_blue"
+            android:layout_marginLeft="@dimen/space_10"
+            android:textSize="@dimen/text_size_16"/>
+    </LinearLayout>
+
+
+</FrameLayout>

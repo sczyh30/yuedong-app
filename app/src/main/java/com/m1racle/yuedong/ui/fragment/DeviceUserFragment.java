@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -80,6 +83,21 @@ public class DeviceUserFragment extends BaseFragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_change, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.public_menu_send:
+                UIUtil.showDeviceUserSet(getActivity());
+                break;
+        }
+        return true;
+    }
+
+    @Override
     public void initData() {
         super.initData();
         initHWManager();
@@ -121,7 +139,6 @@ public class DeviceUserFragment extends BaseFragment {
             message.what = HWServiceConfig.CONNECT_DEVICE;
             message.obj = status;
             message.arg1 = err_code;
-            LogUtil.toast(Integer.toString(err_code));
             mHandler.sendMessage(message);
         }
     };
@@ -138,13 +155,13 @@ public class DeviceUserFragment extends BaseFragment {
             super.handleMessage(msg);
             Object object = msg.obj;
             switch (msg.what) {
-                case HWServiceConfig.CONNECT_DEVICE:
+                /*case HWServiceConfig.CONNECT_DEVICE:
                     int state = (Integer)object;
                     switch (state) {
                         default:
                             break;
                     }
-                    break;
+                    break;*/
                 case HWServiceConfig.GET_DEVICE_USER_INFO:
                     mFragment.get().mInfo = (DataUserInfo)object;
                     updateUI();

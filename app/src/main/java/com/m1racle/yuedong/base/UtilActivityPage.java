@@ -2,6 +2,7 @@ package com.m1racle.yuedong.base;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.ui.fragment.DeviceUserSetFragment;
+import com.m1racle.yuedong.ui.fragment.HealthAdviceFragment;
 import com.m1racle.yuedong.ui.fragment.SleepObserverFragment;
 import com.m1racle.yuedong.ui.fragment.AboutYDFragment;
 import com.m1racle.yuedong.ui.fragment.DeviceAlarmFragment;
@@ -14,8 +15,13 @@ import com.m1racle.yuedong.ui.fragment.MySocialDetailFragment;
 import com.m1racle.yuedong.ui.fragment.SettingsFragment;
 import com.m1racle.yuedong.ui.fragment.SettingsNotificationFragment;
 import com.m1racle.yuedong.ui.fragment.TemperatureViewFragment;
-import com.m1racle.yuedong.ui.fragment.TestDBFragment;
 
+/**
+ * The enum class designed for UtilActivity
+ * provide the index for UI Manager class
+ * @see com.m1racle.yuedong.ui.activity.UtilActivity
+ * @see com.m1racle.yuedong.util.UIUtil
+ */
 public enum UtilActivityPage {
 
     SETTING (1, R.string.actionbar_title_setting, SettingsFragment.class),
@@ -32,7 +38,8 @@ public enum UtilActivityPage {
     DEVICE_MOTION_DATA(10,R.string.actionbar_title_device_motion_data, DeviceMotionDataFragment.class),
     DEVICE_MOTION_GOAL(11,R.string.actionbar_title_device_motion_goal, MotionGoalFragment.class),
     SLEEP_OBSERVER(12,R.string.actionbar_title_device_sleep_observer, SleepObserverFragment.class),
-    DEVICE_USER_INFO_SET(13,R.string.set_device_user_info, DeviceUserSetFragment.class);
+    DEVICE_USER_INFO_SET(13,R.string.set_device_user_info, DeviceUserSetFragment.class),
+    HEALTH_MOTION_ADVICE(14,R.string.actionbar_title_motion_advice, HealthAdviceFragment.class);;
 
     private int title;
     private Class<?> clz;

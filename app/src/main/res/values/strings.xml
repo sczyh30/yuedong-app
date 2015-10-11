@@ -15,6 +15,7 @@
     <string name="b2_status_3">已断开连接</string>
     <string name="b2_status_5">已断开连接</string>
     <string name="b2_status_default">已断开连接</string>
+    <string name="b2_unknown">未知</string>
     
     <string name="b2_status_err_100100">没有安装华为健康App</string>
     <string name="b2_status_err_100101">设备不支持</string>
@@ -112,6 +113,8 @@
     <string name="user_weight">体重</string>
     <string name="run_step_length">跑步步长</string>
     <string name="gender">性别</string>
+    
+    <string name="today_total_calorie">今日消耗卡路里量</string>
 
     <string name="activi">活动</string>
     <string name="information">资料</string>

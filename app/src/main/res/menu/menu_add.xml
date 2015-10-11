@@ -4,8 +4,8 @@
 
     <item
         android:id="@+id/public_menu_send"
-        android:icon="@mipmap/actionbar_send_icon"
-        android:title="提交"
+        android:icon="@mipmap/actionbar_icon_add"
+        android:title="添加"
         android:visible="true"
         app:showAsAction="always"/>
 

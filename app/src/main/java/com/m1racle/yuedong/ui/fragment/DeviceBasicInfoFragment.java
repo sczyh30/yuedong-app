@@ -2,9 +2,6 @@ package com.m1racle.yuedong.ui.fragment;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -119,12 +116,6 @@ public class DeviceBasicInfoFragment extends BaseFragment {
 
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -169,8 +160,9 @@ public class DeviceBasicInfoFragment extends BaseFragment {
     }
 
     /**
+     * A custom Handler
      * In case of causing memory leak
-     * use the nested class instead
+     * I use the nested class instead
      * the WeakReference could solve this issue
      */
     private static class MyHandler extends Handler {
@@ -259,7 +251,6 @@ public class DeviceBasicInfoFragment extends BaseFragment {
             HWManager.getConnect(HWServiceConfig.HUAWEI_TALKBAND_B2);
             connectState = HWManager.getConnectStatus(HWServiceConfig.HUAWEI_TALKBAND_B2);
         }
-        LogUtil.log("getConnectState() => connectState = " + connectState);
         Message message = Message.obtain();
         message.what = HWServiceConfig.JAR_GET_DEVICE_CONNECT_STATUS;
         message.obj = connectState;
@@ -281,7 +272,6 @@ public class DeviceBasicInfoFragment extends BaseFragment {
 
             @Override
             public void onFailure(int arg0, String arg1) {
-                //LogUtil.log("getBlueToothBattery => err_code = " + arg0 + " arg1 = " + arg1);
                 Message message = Message.obtain();
                 message.what = HWServiceConfig.GET_DEVICE_BATTERY;
                 message.obj = "获取数据失败";

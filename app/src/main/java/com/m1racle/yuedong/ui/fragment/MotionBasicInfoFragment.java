@@ -74,6 +74,9 @@ public class MotionBasicInfoFragment extends BaseFragment {
             case R.id.fn_button_alarm:
                 UIUtil.showDeviceAlarm(getActivity());
                 break;
+            case R.id.fn_button_advice:
+                UIUtil.showHealthAdvice(getActivity());
+                break;
             case R.id.fn_button_temperature:
                 UIUtil.showTemperature(getActivity());
                 break;

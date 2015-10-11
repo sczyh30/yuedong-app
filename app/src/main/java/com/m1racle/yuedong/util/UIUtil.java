@@ -15,6 +15,11 @@ import com.m1racle.yuedong.ui.DialogUtil;
 import com.m1racle.yuedong.ui.activity.LoginActivity;
 import com.m1racle.yuedong.ui.activity.UtilActivity;
 
+/**
+ * A very important UI util class
+ * @author sczyh30
+ * @since 0.1
+ */
 public class UIUtil {
 
     public static void openSysBrowser(Context context, String url) {
@@ -64,7 +69,6 @@ public class UIUtil {
         DialogUtil.getConfirmDialog(context, "程序发生异常", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                // 退出
                 System.exit(-1);
             }
         }).show();
@@ -86,12 +90,15 @@ public class UIUtil {
     }
 
     public static void showDeviceUserSet(Context context) {
-        //Bundle bundle = new Bundle(); //此处本应该传入DataUserInfo对象的，但由于第三方API限制，放弃了
         showActivity(context, UtilActivityPage.DEVICE_USER_INFO_SET);
     }
 
     public static void showSettingNotification(Context context) {
         showActivity(context, UtilActivityPage.SETTING_NOTIFICATION);
+    }
+
+    public static void showHealthAdvice(Context context) {
+        showActivity(context, UtilActivityPage.HEALTH_MOTION_ADVICE);
     }
 
     public static void showSetting(Context context) {
