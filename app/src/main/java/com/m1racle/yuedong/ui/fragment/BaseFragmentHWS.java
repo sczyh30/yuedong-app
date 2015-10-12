@@ -108,7 +108,7 @@ public abstract class BaseFragmentHWS extends BaseFragment {
         }
         LogUtil.log("getConnectState() => connectState = " + connectState);
         Message message = Message.obtain();
-        message.what = HWServiceConfig.JAR_GET_DEVICE_CONNECT_STATUS;
+        message.what = HWServiceConfig.GET_DEVICE_CONNECT_STATUS;
         message.obj = connectState;
         message.arg1 = HWServiceConfig.HUAWEI_TALKBAND_B2;
         mHandler.sendMessage(message);

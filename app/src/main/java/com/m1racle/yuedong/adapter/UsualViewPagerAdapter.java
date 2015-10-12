@@ -15,7 +15,7 @@ public class UsualViewPagerAdapter extends FragmentPagerAdapter {
 
     private List<Fragment> fragmentList;
     private FragmentManager mFragmentManager;
-    private ArrayList<String> titleList = new ArrayList<String>();
+    private ArrayList<String> titleList = new ArrayList<>();
 
     public interface OnReloadListener
     {
@@ -29,7 +29,7 @@ public class UsualViewPagerAdapter extends FragmentPagerAdapter {
     public UsualViewPagerAdapter(FragmentManager fragmentManager, List<Fragment> fragmentList) {
         super(fragmentManager);
         titleList.add("设备状态");
-        titleList.add("运动数据");
+        titleList.add("运动与健康");
         titleList.add("约动起来");
         titleList.add("我的悦动");
         this.fragmentList = fragmentList;
@@ -42,7 +42,7 @@ public class UsualViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        Log.v("Adapter Activity(s10)", "Adapter items get...");
+        //Log.v("Adapter Activity(s10)", "Adapter items get...");
         return fragmentList.get(position);
     }
 

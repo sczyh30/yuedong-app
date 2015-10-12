@@ -15,8 +15,6 @@ import com.m1racle.yuedong.R;
  */
 public class EverydayMotionHolder extends RecyclerView.ViewHolder {
 
-    private DataTotalMotion mData;
-
     private TextView mTvType;
     private TextView mTvStep;
     private TextView mTvCalorie;
@@ -35,13 +33,12 @@ public class EverydayMotionHolder extends RecyclerView.ViewHolder {
     }
 
     public void bindData(DataTotalMotion data) {
-        mData = data;
-        mTvType.setText(getMotionType(mData.getMotion_type()));
-        mTvStep.setText(String.format("%s 步", getString(mData.getStep())));
-        mTvCalorie.setText(String.format("%s 大卡", getString(mData.getCalorie())));
-        mTvDistance.setText(String.format("%s m", getString(mData.getDistance())));
-        mTvTime.setText(String.format("%s 分钟", getString(mData.getSleep_time())));
-        mIvMotion.setImageResource(getPicture(mData.getMotion_type()));
+        mTvType.setText(getMotionType(data.getMotion_type()));
+        mTvStep.setText(String.format("%s 步", getString(data.getStep())));
+        mTvCalorie.setText(String.format("%s 大卡", getString(data.getCalorie())));
+        mTvDistance.setText(String.format("%s m", getString(data.getDistance())));
+        mTvTime.setText(String.format("%s 分钟", getString(data.getSleep_time())));
+        mIvMotion.setImageResource(getPicture(data.getMotion_type()));
     }
 
     private String getString(int i) {

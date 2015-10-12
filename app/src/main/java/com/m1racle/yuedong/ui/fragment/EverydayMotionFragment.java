@@ -12,6 +12,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
@@ -49,6 +50,8 @@ public class EverydayMotionFragment extends BaseFragment {
     RecyclerView mRecyclerView;
     @Bind(R.id.tv_evm_total_carl)
     TextView mTvTC;
+    @Bind(R.id.my_warning_layout)
+    LinearLayout mWarningLayout;
 
     private EverydayMotionAdapter adapter = new EverydayMotionAdapter();
 
@@ -100,7 +103,6 @@ public class EverydayMotionFragment extends BaseFragment {
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
-
     }
 
     private void initHWManager() {
@@ -115,10 +117,21 @@ public class EverydayMotionFragment extends BaseFragment {
 
     }
 
+    private void ensureView() {
+        if (mList.size() == 0) {
+            mWarningLayout.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        } else {
+            mWarningLayout.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void updateUI() {
         if(mToday != null)
             mTvTC.setText(String.format("%s 大卡", Integer.toString(mToday.getTotalCalorie())));
         adapter.notifyDataSetChanged();
+        ensureView();
     }
 
     private class EverydayMotionAdapter extends RecyclerView.Adapter<EverydayMotionHolder> {
@@ -126,7 +139,7 @@ public class EverydayMotionFragment extends BaseFragment {
         @Override
         public EverydayMotionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.everyday_motion_list, parent, false);
+                    .inflate(R.layout.list_everyday_motion, parent, false);
             return new EverydayMotionHolder(view);
         }
 
@@ -192,6 +205,7 @@ public class EverydayMotionFragment extends BaseFragment {
                 public void onFailure(int err_code, String err_msg) {
                     error_code = err_code;
                     ToastUtil.toast("获取数据时出了点问题");
+                    ensureView();
                 }
             });
         }

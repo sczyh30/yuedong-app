@@ -37,8 +37,6 @@
 
                 <include layout="@layout/fragment_device_user_set_edit" />
 
-
-
             </LinearLayout>
         </com.m1racle.yuedong.ui.widget.CustomerScrollView>
 

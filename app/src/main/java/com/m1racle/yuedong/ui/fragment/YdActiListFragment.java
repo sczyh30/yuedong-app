@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
-import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.entity.MotionActivities;
@@ -109,6 +108,7 @@ public class YdActiListFragment extends BaseFragment {
                     break;
                 default:
                     ToastUtil.toast("网络错误，请重试。(" + statusCode + ")");
+                    break;
             }
         }
 
@@ -126,7 +126,7 @@ public class YdActiListFragment extends BaseFragment {
         @Override
         public RlistHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
             View view = LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.yd_acti_list_item, viewGroup, false);
+                    .inflate(R.layout.list_yd_acti_item, viewGroup, false);
             return new RlistHolder(view);
         }
 

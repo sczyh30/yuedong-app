@@ -28,7 +28,7 @@ public class YdActiRecyclerAdapter extends RecyclerView.Adapter<YdmaViewHolder> 
     @Override
     public YdmaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.yd_acti_list_item, parent, false);
+                .inflate(R.layout.list_yd_acti_item, parent, false);
         return new YdmaViewHolder(view);
     }
 

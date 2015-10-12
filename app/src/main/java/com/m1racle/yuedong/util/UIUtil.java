@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.huawei.huaweiwearable.data.DataAlarm;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.base.UtilActivityPage;
 import com.m1racle.yuedong.ui.DialogUtil;
@@ -97,6 +98,15 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.SETTING_NOTIFICATION);
     }
 
+    public static void showDeviceAlarmSet(Context context, DataAlarm data) {
+        if (data != null) {
+            Bundle bundle = new Bundle();
+            showActivity(context, UtilActivityPage.DEVICE_ALARM_SET, bundle);
+        } else {
+            showActivity(context, UtilActivityPage.DEVICE_ALARM_SET);
+        }
+    }
+
     public static void showHealthAdvice(Context context) {
         showActivity(context, UtilActivityPage.HEALTH_MOTION_ADVICE);
     }
@@ -115,6 +125,11 @@ public class UIUtil {
 
     public static void showMotionGoal(Context context) {
         showActivity(context, UtilActivityPage.DEVICE_MOTION_GOAL);
+    }
+
+    //TODO:这里需要传入一些数据
+    public static void showMotionGoalSet(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_MOTION_GOAL_SET);
     }
 
     public static void showSleepObserver(Context context) {

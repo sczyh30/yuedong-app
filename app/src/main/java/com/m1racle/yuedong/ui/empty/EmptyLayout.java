@@ -14,7 +14,7 @@ import com.m1racle.yuedong.util.DeviceUtil;
 
 
 public class EmptyLayout extends LinearLayout implements
-        View.OnClickListener {// , ISkinUIObserver {
+        View.OnClickListener {
 
     public static final int HIDE_LAYOUT = 4;
     public static final int NETWORK_ERROR = 1;
@@ -127,9 +127,6 @@ public class EmptyLayout extends LinearLayout implements
 
     /**
      * 新添设置背景
-     * 
-     * @author 火蚁 2015-1-27 下午2:14:00
-     * 
      */
     public void setErrorImag(int imgResource) {
         try {

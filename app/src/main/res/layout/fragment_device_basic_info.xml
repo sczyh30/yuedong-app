@@ -76,7 +76,7 @@
                 android:layout_gravity="center"
                 android:orientation="vertical"
                 android:id="@+id/b2_battery_status_layout"
-                android:visibility="visible">
+                android:visibility="gone">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -100,9 +100,11 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:text="更新手环状态"
-                android:textColor="@color/black"
+                android:background="@drawable/btn_green_selector"
+                android:textColor="@color/white"
                 android:id="@+id/btn_update_dvstatus"
-                android:layout_marginTop="50dp"/>
+                android:layout_marginTop="@dimen/space_50"
+                android:padding="@dimen/space_15"/>
 
         </LinearLayout>
 

@@ -1,45 +1,42 @@
 package com.m1racle.yuedong.ui.fragment;
 
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TimePicker;
 
+import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.util.LogUtil;
-import com.m1racle.yuedong.util.UIUtil;
+import com.m1racle.yuedong.service.HWServiceConfig;
 
 import java.lang.ref.WeakReference;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 
 
 /**
- * Yuedong App
- * Device Alarm Fragment
+ * Yuedong app
+ * Device Alarm Set Fragment
  */
-public class DeviceAlarmFragment extends BaseFragment {
+public class DeviceAlarmSetFragment extends BaseFragment {
 
     private HuaweiWearableManager HWManager;
     private int error_code = 0;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
+    @Bind(R.id.alarm_timePicker)
+    TimePicker timePicker;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_device_alarm, container, false);
+        View view = inflater.inflate(R.layout.fragment_device_alarm_set, container, false);
         ButterKnife.bind(this, view);
         initData();
         initView(view);
@@ -47,23 +44,16 @@ public class DeviceAlarmFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_add, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.public_menu_send:
-                LogUtil.toast("添加闹钟");
-                UIUtil.showDeviceAlarmSet(getActivity(), null);
-                break;
-        }
-        return true;
-    }
-
-    @Override
     public void initData() {
+        initHWManager();
+    }
+
+    @Override
+    public void initView(View view) {
+        timePicker.setIs24HourView(true);
+    }
+
+    private void initHWManager() {
         HWManager = getHuaweiManager();
     }
 
@@ -73,9 +63,9 @@ public class DeviceAlarmFragment extends BaseFragment {
     }
 
     private class MyHandler extends Handler {
-        private final WeakReference<DeviceAlarmFragment> mFragment;
+        private final WeakReference<DeviceAlarmSetFragment> mFragment;
 
-        public MyHandler(DeviceAlarmFragment fragment) {
+        public MyHandler(DeviceAlarmSetFragment fragment) {
             mFragment = new WeakReference<>(fragment);
         }
 
@@ -84,11 +74,13 @@ public class DeviceAlarmFragment extends BaseFragment {
             super.handleMessage(msg);
             Object object = msg.obj;
             switch (msg.what) {
-
+                case HWServiceConfig.SET_DEVICE_ALARM:
+                    break;
+                default:
+                    break;
             }
         }
     }
 
     private MyHandler mHandler = new MyHandler(this);
-
 }

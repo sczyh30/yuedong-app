@@ -1,20 +1,18 @@
 package com.m1racle.yuedong.ui.fragment;
 
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.util.LogUtil;
-import com.m1racle.yuedong.util.UIUtil;
+import com.m1racle.yuedong.service.HWServiceConfig;
 
 import java.lang.ref.WeakReference;
 
@@ -22,24 +20,18 @@ import butterknife.ButterKnife;
 
 
 /**
- * Yuedong App
- * Device Alarm Fragment
+ * Yuedong app
+ * Motion Goal Set Fragment
  */
-public class DeviceAlarmFragment extends BaseFragment {
+public class MotionGoalSetFragment extends BaseFragment {
 
     private HuaweiWearableManager HWManager;
     private int error_code = 0;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_device_alarm, container, false);
+        View view = inflater.inflate(R.layout.fragment_motion_goal_set, container, false);
         ButterKnife.bind(this, view);
         initData();
         initView(view);
@@ -47,24 +39,16 @@ public class DeviceAlarmFragment extends BaseFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_add, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.public_menu_send:
-                LogUtil.toast("添加闹钟");
-                UIUtil.showDeviceAlarmSet(getActivity(), null);
-                break;
-        }
-        return true;
-    }
-
-    @Override
     public void initData() {
+        super.initData();
+        initHWManager();
+    }
+
+    private void initHWManager() {
         HWManager = getHuaweiManager();
+        if(HWManager != null) {
+            HWManager.registerConnectStateCallback(stateCallBack);
+        }
     }
 
     @Override
@@ -72,10 +56,21 @@ public class DeviceAlarmFragment extends BaseFragment {
 
     }
 
-    private class MyHandler extends Handler {
-        private final WeakReference<DeviceAlarmFragment> mFragment;
+    private IDeviceConnectStatusCallback stateCallBack = new IDeviceConnectStatusCallback() {
+        @Override
+        public void onConnectStatusChange(int deviceType, String macAddress, int status, int err_code) {
+            Message message = Message.obtain();
+            message.what = HWServiceConfig.CONNECT_DEVICE;
+            message.obj = status;
+            message.arg1 = err_code;
+            mHandler.sendMessage(message);
+        }
+    };
 
-        public MyHandler(DeviceAlarmFragment fragment) {
+    private class MyHandler extends Handler {
+        private final WeakReference<MotionGoalSetFragment> mFragment;
+
+        public MyHandler(MotionGoalSetFragment fragment) {
             mFragment = new WeakReference<>(fragment);
         }
 
@@ -90,5 +85,6 @@ public class DeviceAlarmFragment extends BaseFragment {
     }
 
     private MyHandler mHandler = new MyHandler(this);
+
 
 }

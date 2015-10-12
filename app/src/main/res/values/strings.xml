@@ -125,6 +125,9 @@
     <string name="bookmarks">收藏夹</string>
     <string name="user_score">积分</string>
 
+    <string name="warning_title_0001_error">出错啦！</string>
+    <string name="warning_body_0001_error">信息暂时无法获取，请稍候再试。</string>
+
     <string name="actionbar_title_setting">设置</string>
     <string name="actionbar_title_setting_notification">新消息提醒</string>
     <string name="actionbar_title_about">关于</string>
@@ -133,10 +136,12 @@
     <string name="actionbar_title_temperature_detail">温度/湿度</string>
     <string name="actionbar_title_device_user_info">手环用户信息</string>
     <string name="actionbar_title_device_alarm">手环闹钟</string>
+    <string name="actionbar_title_device_alarm_set">手环闹钟设定</string>
     <string name="actionbar_title_device_everyday_motion">每日运动</string>
     <string name="actionbar_title_device_motion_data">我的运动数据</string>
     <string name="actionbar_title_motion_advice">健康与运动建议</string>
     <string name="actionbar_title_device_motion_goal">我的运动目标</string>
+    <string name="actionbar_title_device_motion_goal_set">设定运动目标</string>
     <string name="actionbar_title_device_sleep_observer">睡眠监测</string>
 
     <string name="lt1">纯洁的要命</string>

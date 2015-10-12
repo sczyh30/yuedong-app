@@ -1,13 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.m1racle.yuedong.ui.fragment.DeviceUserFragment">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/space_120"
@@ -31,33 +29,52 @@
 
             <View
                 style="@style/h_line" />
-            <com.m1racle.yuedong.ui.widget.CustomerScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-                    <include layout="@layout/fragment_device_user_information" />
 
-                    <Button
-                        android:id="@+id/btn_start_set_du_info"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="@dimen/space_30"
-                        android:padding="10dp"
-                        android:text="@string/set_device_user_info"
-                        android:textSize="18sp"
-                        android:textColor="@color/white"
-                        android:background="@drawable/btn_blue_selector"
-                        android:layout_marginRight="30dp"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/space_10"
+                        android:id="@+id/my_warning_layout">
+                        <include layout="@layout/view_warning_layout" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/my_info_layout">
+
+                        <com.m1racle.yuedong.ui.widget.CustomerScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+                                <include layout="@layout/fragment_device_user_information" />
+                                <Button
+                                    android:id="@+id/btn_start_set_du_info"
+                                    android:layout_marginLeft="30dp"
+                                    android:layout_marginTop="30dp"
+                                    android:layout_marginBottom="@dimen/space_30"
+                                    android:padding="10dp"
+                                    android:text="@string/set_device_user_info"
+                                    android:textSize="18sp"
+                                    android:textColor="@color/white"
+                                    android:background="@drawable/btn_blue_selector"
+                                    android:layout_marginRight="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent" />
+                            </LinearLayout>
+
+                        </com.m1racle.yuedong.ui.widget.CustomerScrollView>
+                    </LinearLayout>
+
                 </LinearLayout>
 
-            </com.m1racle.yuedong.ui.widget.CustomerScrollView>
-
-        </LinearLayout>
-
-
-</FrameLayout>
+</LinearLayout>

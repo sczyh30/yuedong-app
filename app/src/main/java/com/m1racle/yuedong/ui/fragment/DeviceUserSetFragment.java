@@ -151,7 +151,7 @@ public class DeviceUserSetFragment extends BaseFragment {
         mInfo.setBirthday(getIntForData(mEtBirthday));
         mInfo.setGender(getString(mEtGender).equals("男") ? 1 : 2);
         mInfo.setHeight(getIntForData(mEtHeight));
-        mInfo.setHeight(getIntForData(mEtHeight));
+        mInfo.setWeight(getIntForData(mEtWeight));
         mInfo.setWalk_step_length(getIntForData(mEtWalkStep));
     }
 
