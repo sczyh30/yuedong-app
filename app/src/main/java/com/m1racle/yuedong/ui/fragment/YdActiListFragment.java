@@ -10,11 +10,14 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.entity.MotionActivities;
 import com.m1racle.yuedong.net.SamsaraAPI;
+import com.m1racle.yuedong.net.YuedongAPI;
 import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.JsonUtil;
 import com.m1racle.yuedong.util.LogUtil;
@@ -58,7 +61,8 @@ public class YdActiListFragment extends BaseFragment {
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                SamsaraAPI.getLatestMotionActivities(mHandler);
+                //SamsaraAPI.getLatestMotionActivities(mHandler);
+                YuedongAPI.getLatestMotionActivities(listener, errorListener);
             }
         });
         //View view = inflater.inflate(R.layout.fragment_yd_acti_list, container, false);
@@ -73,7 +77,8 @@ public class YdActiListFragment extends BaseFragment {
     public void initView(View view) {
         super.initView(view);
         if(DeviceUtil.getNetworkType() == 1)
-            SamsaraAPI.getLatestMotionActivities(mHandler);
+            YuedongAPI.getLatestMotionActivities(listener, errorListener);
+            //SamsaraAPI.getLatestMotionActivities(mHandler);
     }
 
     @Override
@@ -88,6 +93,30 @@ public class YdActiListFragment extends BaseFragment {
         }
         dataList = test;
     }
+
+    //TODO:TEST START
+
+    private Response.Listener<String> listener = new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            dataList = JsonUtil.resolveMAList(response);
+            if(dataList != null) {
+                adapter.notifyDataSetChanged();
+            }
+            mPullToRefreshView.setRefreshing(false);
+        }
+    };
+
+    private Response.ErrorListener errorListener = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            mPullToRefreshView.setRefreshing(false);
+            error.printStackTrace();
+            ToastUtil.toast("服务器解析错误，请重试。");
+        }
+    };
+
+    //TODO:TEST END
 
     private final BaseJsonHttpResponseHandler mHandler = new BaseJsonHttpResponseHandler() {
         @Override

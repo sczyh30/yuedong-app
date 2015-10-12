@@ -6,6 +6,8 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
 
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.PersistentCookieStore;
 import com.m1racle.yuedong.base.BaseApplication;
@@ -19,6 +21,8 @@ import com.m1racle.yuedong.cache.DataCleanManager;
 import com.m1racle.yuedong.dao.LocalUserDaoImpl;
 import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.net.ApiHttpClient;
+import com.m1racle.yuedong.net.ApiRequestClient;
+import com.m1racle.yuedong.net.YuedongAPI;
 import com.m1racle.yuedong.util.StringUtils;
 import com.m1racle.yuedong.util.LogUtil;
 //import com.m1racle.yuedong.util.UIHelper;
@@ -32,7 +36,6 @@ import java.util.UUID;
 import static com.m1racle.yuedong.AppConfig.KEY_FRITST_START;
 import static com.m1racle.yuedong.AppConfig.KEY_LOAD_IMAGE;
 import static com.m1racle.yuedong.AppConfig.KEY_NIGHT_MODE_SWITCH;
-import static com.m1racle.yuedong.AppConfig.KEY_TWEET_DRAFT;
 
 /**
  * 全局应用程序类：用于保存和调用全局应用配置及访问网络数据
@@ -47,6 +50,8 @@ public class AppContext extends BaseApplication {
 
     private boolean login;
     LocalUserDaoImpl userDao = new LocalUserDaoImpl();
+
+    //private RequestQueue mQueue = Volley.newRequestQueue(this);
 
     @Override
     public void onCreate() {
@@ -67,9 +72,15 @@ public class AppContext extends BaseApplication {
         client.setCookieStore(mCookieStore);
         ApiHttpClient.setHttpClient(client);
         ApiHttpClient.setCookie(ApiHttpClient.getCookie(this));
+        initNewAPI();
         userDao = new LocalUserDaoImpl();
         //if(isFristStart())
         //    userDao.initDatabase();
+    }
+
+    private void initNewAPI() {
+        //ApiRequestClient.setQueue(mQueue);
+        YuedongAPI.setCookie(YuedongAPI.getCookie(this));
     }
 
     private void initLogin() {

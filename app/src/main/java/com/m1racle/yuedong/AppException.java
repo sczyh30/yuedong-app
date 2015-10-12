@@ -10,7 +10,6 @@ import java.net.ConnectException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import org.apache.http.HttpException;
 import org.kymjs.kjframe.utils.FileUtils;
 import org.kymjs.kjframe.utils.SystemTool;
 
@@ -104,7 +103,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
     }
 
     // 网络请求异常
-    public static AppException network(Exception e) {
+    /*public static AppException network(Exception e) {
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
             return new AppException(TYPE_NETWORK, 0, e);
         } else if (e instanceof HttpException) {
@@ -113,7 +112,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
             return socket(e);
         }
         return http(e);
-    }
+    }*/
 
     public static AppException run(Exception e) {
         return new AppException(TYPE_RUN, 0, e);
