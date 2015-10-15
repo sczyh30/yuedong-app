@@ -5,11 +5,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TimePicker;
 
 import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
+import com.huawei.huaweiwearable.data.DataAlarm;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
@@ -29,9 +33,21 @@ public class DeviceAlarmSetFragment extends BaseFragment {
 
     private HuaweiWearableManager HWManager;
     private int error_code = 0;
+    private DataAlarm mAlarm;
 
     @Bind(R.id.alarm_timePicker)
     TimePicker timePicker;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+        if(getArguments() != null) {
+            Bundle args = getArguments();
+            mAlarm = new DataAlarm();
+            //mAlarm.setAlarm_enable(true);
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +57,21 @@ public class DeviceAlarmSetFragment extends BaseFragment {
         initData();
         initView(view);
         return view;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_finish, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.public_menu_send:
+                hideKeyboard();
+                break;
+        }
+        return true;
     }
 
     @Override

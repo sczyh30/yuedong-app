@@ -108,6 +108,15 @@
         <item name="android:background">?attr/layout_item_bg</item>
     </style>
 
+    <style name="option_item_list">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clickable">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">?attr/layout_item_bg</item>
+    </style>
+
     <style name="option_item_img">
         <item name="android:layout_width">28dp</item>
         <item name="android:layout_height">28dp</item>

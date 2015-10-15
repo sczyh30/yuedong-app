@@ -1,5 +1,6 @@
 package com.m1racle.yuedong.net;
 
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -9,8 +10,8 @@ import com.m1racle.yuedong.util.LogUtil;
 /**
  * Yuedong App Common Library
  * Samsara API HttpClient
- * uses the Volley framework
- * the old client has been deprecated
+ * uses the Volley library
+ * the old client will be replaced by this
  * @author sczyh30
  * @since 0.6
  * @see YuedongAPI api implements
@@ -18,9 +19,9 @@ import com.m1racle.yuedong.util.LogUtil;
 public class ApiRequestClient {
 
     public final static String HOST = "192.168.95.1";
-    private static String API_URL = "http://192.168.95.1/";
+    private static String API_URL = "http://192.168.95.1/sandbox/";
 
-    //public static RequestQueue mQueue;
+    //volley net object
     public static RequestQueue mQueue = Volley.newRequestQueue(AppContext.getContext());
 
     public ApiRequestClient() {}

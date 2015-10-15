@@ -49,7 +49,7 @@ public class SamsaraGsonRequest<T> extends Request<T> {
         String parsed;
         try {
             parsed = new String(response.data, encoding);
-            return Response.success(mGson.fromJson(parsed, mClass),HttpHeaderParser.parseCacheHeaders(response));
+            return Response.success(mGson.fromJson(parsed, mClass), HttpHeaderParser.parseCacheHeaders(response));
         } catch (UnsupportedEncodingException e) {
             parsed = new String(response.data);
             LogUtil.log("SamsaraGsonRequest resolve error => " + parsed);

@@ -65,6 +65,16 @@ public class UIUtil {
         context.startActivity(intent);
     }
 
+    public static void showActivitiesDetail(Context context, int maid) {
+        if(maid == 0) {
+            ToastUtil.toast("获取信息失败");
+            return;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putInt("ma_id", maid);
+        showActivity(context, UtilActivityPage.MOTION_ACTIVITIES_DETAIL, bundle);
+    }
+
     public static void sendAppCrashReport(final Context context) {
 
         DialogUtil.getConfirmDialog(context, "程序发生异常", new DialogInterface.OnClickListener() {

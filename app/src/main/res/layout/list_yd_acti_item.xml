@@ -2,12 +2,12 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/space_100"
-    >
+    style="@style/option_item_list">
 
     <ImageView
         android:id="@+id/image_view_icon"
-        android:src="@mipmap/sweat"
-        android:layout_marginLeft="@dimen/space_2"
+        android:src="@mipmap/pic_load_wait"
+        android:layout_marginLeft="@dimen/space_6"
         android:layout_marginRight="@dimen/space_80"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="@dimen/space_80"
@@ -15,7 +15,7 @@
         android:layout_width="@dimen/space_80"
         android:layout_height="@dimen/space_80" />
 
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="今天的天气适合打羽毛球"
@@ -26,7 +26,63 @@
         android:layout_marginRight="@dimen/space_20"
         android:layout_marginTop="0dp"
         android:textSize="@dimen/text_size_15"
-        android:id="@+id/textView_list"
-         />
+        android:id="@+id/tv_ma_list_title" />-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="今天的天气适合打羽毛球"
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/space_100"
+            android:layout_marginLeft="@dimen/space_100"
+            android:layout_marginEnd="@dimen/space_20"
+            android:layout_marginRight="@dimen/space_20"
+            android:layout_marginTop="@dimen/space_18"
+            android:textSize="@dimen/text_size_16"
+            android:textColor="@color/black"
+            android:id="@+id/tv_ma_list_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="这里应该显示内容。"
+            android:textSize="@dimen/text_size_13"
+            android:layout_marginTop="@dimen/space_6"
+            android:layout_marginStart="@dimen/space_100"
+            android:layout_marginLeft="@dimen/space_100"
+            android:layout_marginEnd="@dimen/space_20"
+            android:layout_marginRight="@dimen/space_20"
+            android:id="@+id/tv_ma_list_summary"/>
+    </LinearLayout>
+    <!--<TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="今天的天气适合打羽毛球"
+        android:layout_gravity="end"
+        android:layout_marginStart="@dimen/space_100"
+        android:layout_marginLeft="@dimen/space_100"
+        android:layout_marginEnd="@dimen/space_20"
+        android:layout_marginRight="@dimen/space_20"
+        android:layout_marginTop="@dimen/space_18"
+        android:textSize="@dimen/text_size_16"
+        android:textColor="@color/black"
+        android:id="@+id/tv_ma_list_title" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这里应该显示内容。"
+        android:textSize="@dimen/text_size_13"
+
+        android:layout_marginTop="@dimen/space_45"
+        android:layout_marginStart="@dimen/space_100"
+        android:layout_marginLeft="@dimen/space_100"
+        android:layout_marginEnd="@dimen/space_20"
+        android:layout_marginRight="@dimen/space_20"
+        android:id="@+id/tv_ma_list_body"/> -->
 
 </FrameLayout>

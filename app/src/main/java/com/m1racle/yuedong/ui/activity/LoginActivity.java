@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -121,6 +123,24 @@ public class LoginActivity extends BaseActivity {
 
         return true;
     }
+
+    // TODO: 2015/10/14 TEST VOLLEY START
+    private Response.Listener<LoginResult> listener = new Response.Listener<LoginResult>() {
+        @Override
+        public void onResponse(LoginResult response) {
+            if(response != null) {
+                handleLoginResult(response);
+            }
+        }
+    };
+
+    private Response.ErrorListener errorListener = new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            ToastUtil.toast("网络出现错误，请重试");
+        }
+    };
+    // TODO: 2015/10/14 TEST VOLLEY END
 
     private final BaseJsonHttpResponseHandler mHandler = new BaseJsonHttpResponseHandler() {
         @Override

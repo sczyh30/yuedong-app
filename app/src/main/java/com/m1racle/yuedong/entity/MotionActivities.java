@@ -9,6 +9,7 @@ public class MotionActivities extends Entity {
     private String title;
     private String body;
     private String img_id;
+    private String summary;
 
     public int getMAid() {
         return ma_id;
@@ -40,5 +41,13 @@ public class MotionActivities extends Entity {
 
     public void setImgId(String img_id) {
         this.img_id = img_id;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 }

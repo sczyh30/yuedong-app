@@ -143,6 +143,7 @@
     <string name="actionbar_title_device_motion_goal">我的运动目标</string>
     <string name="actionbar_title_device_motion_goal_set">设定运动目标</string>
     <string name="actionbar_title_device_sleep_observer">睡眠监测</string>
+    <string name="actionbar_title_motion_activities_detail">约动起来</string>
 
     <string name="lt1">纯洁的要命</string>
     <string name="lt2">猥琐的要命</string>

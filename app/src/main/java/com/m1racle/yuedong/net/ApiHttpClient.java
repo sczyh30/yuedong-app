@@ -18,13 +18,14 @@ import java.util.Locale;
  * Samsara API HttpClient
  * @author sczyh30
  * @since 0.1
+ * we are considering to deprecate this class soon
  */
 public class ApiHttpClient {
 
     //public final static String HOST = "233.233.233.233";
     //private static String API_URL = "http://233.233.233.233/";
     public final static String HOST = "192.168.95.1";
-    private static String API_URL = "http://192.168.95.1/";
+    private static String API_URL = "http://192.168.95.1/sandbox/";
     private static String appCookie;
 
     public static AsyncHttpClient client;

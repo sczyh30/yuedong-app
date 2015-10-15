@@ -4,10 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.m1racle.yuedong.ui.fragment.DeviceAlarmFragment">
 
-    <com.m1racle.yuedong.ui.widget.CustomerScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,16 +28,26 @@
                     android:layout_gravity="center" />
             </LinearLayout>
 
-            <TimePicker
+            <View style="@style/h_line_green" />
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/timePicker"
-                android:layout_gravity="center" />
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/space_10"
+                android:id="@+id/my_warning_layout">
+                <include layout="@layout/view_warning_layout" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_alarm"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:fadingEdge="none"/>
+
+
 
         </LinearLayout>
-
-    </com.m1racle.yuedong.ui.widget.CustomerScrollView>
-
-
-
 </FrameLayout>
