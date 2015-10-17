@@ -197,7 +197,7 @@ public class DeviceAlarmFragment extends BaseFragment {
     private MyHandler mHandler = new MyHandler(this);
 
     private void ensureView() {
-        if (mList.size() == 0) {
+        if (mList.size() == 0 || mList == null) {
             mWarningLayout.setVisibility(View.VISIBLE);
             mRecyclerView.setVisibility(View.GONE);
         } else {
@@ -225,6 +225,7 @@ public class DeviceAlarmFragment extends BaseFragment {
                 @Override
                 public void onFailure(int err_code, String err_msg) {
                     ToastUtil.toast("获取手环闹钟时出现错误");
+                    updateUI();
                     error_code = err_code;
                 }
             });

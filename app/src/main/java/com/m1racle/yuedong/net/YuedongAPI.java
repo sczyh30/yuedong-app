@@ -5,6 +5,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.entity.LoginResult;
+import com.m1racle.yuedong.entity.MotionActivitiesDetail;
 import com.m1racle.yuedong.net.request.SamsaraGsonRequest;
 import com.m1racle.yuedong.net.request.SamsaraStringRequest;
 import com.m1racle.yuedong.util.LogUtil;
@@ -40,6 +41,7 @@ public class YuedongAPI {
     public static final String URL_GET_USER_DETAIL= "action/api/get/user_detail.json";
     public static final String URL_UPLOAD_LOG = "action/api/upload/log";
     public static final String URL_GET_ANDROID_UPDATE = "action/api/get/app_version_android.json";
+    public static final String URL_GET_ACTIVITY_DETAIL = "action/api/get/act_detail";
 
     /**
      * Login API method (POST)
@@ -65,6 +67,24 @@ public class YuedongAPI {
         request.setDefaultHeaders(appCookie);
         ApiRequestClient.send(request);
         LogUtil.log("POST => " + login_url);
+    }
+
+    public static void getActivityDetail(final int maid, Response.Listener<MotionActivitiesDetail> listener,
+                                         Response.ErrorListener errorListener) {
+        String url = ApiRequestClient.getAbsoluteApiUrl(URL_GET_ACTIVITY_DETAIL + "/" + maid + ".json");
+        SamsaraGsonRequest<MotionActivitiesDetail> request = new
+                SamsaraGsonRequest<MotionActivitiesDetail>(url, MotionActivitiesDetail.class,
+                listener, errorListener) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("maid", Integer.toString(maid));
+                        return params;
+                    }
+                };
+        request.setDefaultHeaders(appCookie);
+        ApiRequestClient.send(request);
+        LogUtil.log("GET => " + url);
     }
 
     public static void getLatestMotionActivities(Response.Listener<String> listener,

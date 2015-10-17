@@ -12,7 +12,7 @@ import com.m1racle.yuedong.util.NotificationUtil;
 
 public class NotificationPushService extends Service {
 
-    private final int period = 60 * 10 * 1000;
+    private final int period = 60 * 10 * 10 * 1000;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -29,7 +29,7 @@ public class NotificationPushService extends Service {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                NotificationUtil.doTest(NotificationPushService.this);
+                NotificationUtil.doNotify("朋友，今天悦动了吗？", "今天天气很好，出去运动一下吧~");
             }
         }).start();
         AlarmUtil.setAlarmByBC(this, NPSBroadcastReceiver.class, period);

@@ -25,6 +25,7 @@ import com.m1racle.yuedong.cache.CacheManager;
 import com.m1racle.yuedong.cache.SaveCacheTask;
 import com.m1racle.yuedong.entity.Notice;
 import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.net.BitmapRequestClient;
 import com.m1racle.yuedong.net.SamsaraAPI;
 import com.m1racle.yuedong.ui.activity.MainActivity;
 import com.m1racle.yuedong.ui.dialog.MyQRCodeDialog;
@@ -206,6 +207,9 @@ public class MySocialInfoFragment extends BaseFragment {
         mTvMotionActivities.setText(String.valueOf(mInfo.getActivitiesNumber()));
         mTvFollowing.setText(String.valueOf(mInfo.getFollowers()));
         mTvFans.setText(String.valueOf(mInfo.getFans()));
+        if(mInfo.getPortrait() != null) {
+            BitmapRequestClient.send(mIvAvatar, "portrait/" + mInfo.getPortrait(), 60, 60);
+        }
     }
 
     private void readCacheData(String key) {
@@ -262,7 +266,6 @@ public class MySocialInfoFragment extends BaseFragment {
     private void showMyQrCode() {
         MyQRCodeDialog dialog = new MyQRCodeDialog(getActivity());
         dialog.show();
-        //LogUtil.toast("QR Code click");
     }
 
     private void setUserView() {
@@ -320,6 +323,10 @@ public class MySocialInfoFragment extends BaseFragment {
             super.onPostExecute(info);
             if (info != null) {
                 mInfo = info;
+                mErrorLayout.setErrorType(EmptyLayout.HIDE_LAYOUT);
+                updateUI();
+            } else {
+                mErrorLayout.setErrorType(EmptyLayout.NETWORK_ERROR);
                 updateUI();
             }
         }

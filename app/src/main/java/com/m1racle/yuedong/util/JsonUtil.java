@@ -48,13 +48,13 @@ public class JsonUtil {
         return gson.fromJson(jsonData, LoginResult.class);
     }
 
-    public static MotionActivities resolveMAs(String jsonData) {
-        return gson.fromJson(jsonData, MotionActivities.class);
+    public static MotionActivitiesPre resolveMAs(String jsonData) {
+        return gson.fromJson(jsonData, MotionActivitiesPre.class);
     }
 
-    public static ArrayList<MotionActivities> resolveMAList(String jsonData) {
+    public static ArrayList<MotionActivitiesPre> resolveMAList(String jsonData) {
         try {
-            Type listType = new TypeToken<ArrayList<MotionActivities>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<MotionActivitiesPre>>(){}.getType();
             return gson.fromJson(jsonData, listType);
         } catch (Exception e) {
             e.printStackTrace();

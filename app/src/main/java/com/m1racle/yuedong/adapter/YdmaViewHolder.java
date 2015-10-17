@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.m1racle.yuedong.entity.MotionActivities;
+import com.m1racle.yuedong.entity.MotionActivitiesPre;
 
 /**
  * Yuedong Motion Activity ViewHolder
@@ -27,7 +27,7 @@ public class YdmaViewHolder extends RlistHolder {
         super(view, mListener, mLongClickListener);
     }
 
-    public void bindData(MotionActivities data) {
+    public void bindData(MotionActivitiesPre data) {
 
     }
 

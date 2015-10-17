@@ -1,5 +1,7 @@
 package com.m1racle.yuedong.ui.fragment;
 
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,7 +17,9 @@ import com.android.volley.VolleyError;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.adapter.OnItemClickListener;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.entity.MotionActivities;
+import com.m1racle.yuedong.cache.CacheManager;
+import com.m1racle.yuedong.cache.SaveCacheTask;
+import com.m1racle.yuedong.entity.MotionActivitiesPre;
 import com.m1racle.yuedong.net.BitmapRequestClient;
 import com.m1racle.yuedong.net.YuedongAPI;
 import com.m1racle.yuedong.util.DeviceUtil;
@@ -26,8 +30,9 @@ import com.m1racle.yuedong.util.UIUtil;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
+import java.io.Serializable;
+import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.ButterKnife;
 
@@ -40,7 +45,9 @@ public class YdActiListFragment extends BaseFragment {
     RecyclerView mRecyclerView;
     RlistAdapter adapter = new RlistAdapter();
 
-    protected List<MotionActivities> dataList = new ArrayList<>();
+    protected ArrayList<MotionActivitiesPre> dataList = new ArrayList<>();
+
+    private AsyncTask<String, Void, ArrayList<MotionActivitiesPre>> mCacheTask;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,7 +79,12 @@ public class YdActiListFragment extends BaseFragment {
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                YuedongAPI.getLatestMotionActivities(listener, errorListener);
+                if(!DeviceUtil.hasInternet()) {
+                    mPullToRefreshView.setRefreshing(false);
+                    readCacheData(getCacheKey());
+                }
+                else
+                    YuedongAPI.getLatestMotionActivities(listener, errorListener);
             }
         });
         initData();
@@ -92,20 +104,22 @@ public class YdActiListFragment extends BaseFragment {
     @Override
     public void initData() {
         super.initData();
-        List<MotionActivities> test = new ArrayList<>();
+        ArrayList<MotionActivitiesPre> test = new ArrayList<>();
         for(int i = 0; i < 15; i++) {
-            MotionActivities temp = new MotionActivities();
+            MotionActivitiesPre temp = new MotionActivitiesPre();
             temp.setMAid(i);
             temp.setTitle("运动信息 => " + i);
             test.add(temp);
         }
         dataList = test;
+        readCacheData(getCacheKey());
     }
 
     private Response.Listener<String> listener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
             dataList = JsonUtil.resolveMAList(response);
+            new SaveCacheTask(getActivity(), dataList, getCacheKey()).execute();
             if(dataList != null) {
                 adapter.notifyDataSetChanged();
             }
@@ -140,7 +154,7 @@ public class YdActiListFragment extends BaseFragment {
 
         @Override
         public void onBindViewHolder(final RlistHolder holder, final int pos) {
-            final MotionActivities data = dataList.get(pos);
+            final MotionActivitiesPre data = dataList.get(pos);
             holder.bindData(data);
 
             if (mOnItemClickListener != null) {
@@ -174,17 +188,21 @@ public class YdActiListFragment extends BaseFragment {
         private ImageView mIvPic;
         private TextView mTvTitle;
         private TextView mTvSummary;
+        private TextView mTvCT;
+        private TextView mTvAuthor;
 
-        private MotionActivities mData;
+        private MotionActivitiesPre mData;
 
         public RlistHolder(View itemView) {
             super(itemView);
             mIvPic = (ImageView) itemView.findViewById(R.id.image_view_icon);
             mTvTitle = (TextView) itemView.findViewById(R.id.tv_ma_list_title);
             mTvSummary = (TextView) itemView.findViewById(R.id.tv_ma_list_summary);
+            mTvCT = (TextView) itemView.findViewById(R.id.tv_ma_ct);
+            mTvAuthor = (TextView) itemView.findViewById(R.id.tv_ma_author);
         }
 
-        public void bindData(MotionActivities data) {
+        public void bindData(MotionActivitiesPre data) {
             mData = data;
             String img_id = mData.getImgId();
             String title = mData.getTitle();
@@ -196,6 +214,8 @@ public class YdActiListFragment extends BaseFragment {
             }
             setTextOptional(title, mTvTitle);
             setTextOptional(summary, mTvSummary);
+            mTvCT.setText(mData.getCreateTime());
+            mTvAuthor.setText(mData.getAuthor());
         }
 
         public void setTextOptional(String s, TextView tv) {
@@ -207,6 +227,49 @@ public class YdActiListFragment extends BaseFragment {
                 tv.setText(s);
             else
                 tv.setText(R.string.error_view_no_data);
+        }
+    }
+
+    private void readCacheData(String key) {
+        cancelReadCacheTask();
+        mCacheTask = new CacheTask(getActivity()).execute(key);
+    }
+
+    private void cancelReadCacheTask() {
+        if (mCacheTask != null) {
+            mCacheTask.cancel(true);
+            mCacheTask = null;
+        }
+    }
+
+    private String getCacheKey() {
+        return "yd_ma_list";
+    }
+
+    private class CacheTask extends AsyncTask<String, Void, ArrayList<MotionActivitiesPre>> {
+        private final WeakReference<Context> mContext;
+
+        private CacheTask(Context context) {
+            mContext = new WeakReference<>(context);
+        }
+
+        @Override
+        protected ArrayList<MotionActivitiesPre> doInBackground(String... params) {
+            Serializable object = CacheManager.readObject(mContext.get(), params[0]);
+            if (object == null) {
+                return null;
+            } else {
+                return (ArrayList<MotionActivitiesPre>) object;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<MotionActivitiesPre> info) {
+            super.onPostExecute(info);
+            if (info != null) {
+                dataList = info;
+                adapter.notifyDataSetChanged();
+            }
         }
     }
 

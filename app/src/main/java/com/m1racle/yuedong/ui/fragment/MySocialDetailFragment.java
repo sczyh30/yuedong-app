@@ -14,6 +14,7 @@ import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.entity.UserDetail;
+import com.m1racle.yuedong.net.BitmapRequestClient;
 import com.m1racle.yuedong.net.SamsaraAPI;
 import com.m1racle.yuedong.ui.empty.EmptyLayout;
 import com.m1racle.yuedong.util.JsonUtil;
@@ -122,8 +123,9 @@ public class MySocialDetailFragment extends BaseFragment {
 
     private void updateUI() {
         if(mUser != null && mUserDetail != null) {
-            new KJBitmap().displayWithLoadBitmap(mUserFace, mUser.getPortrait(),
-                    R.mipmap.widget_dface);
+            BitmapRequestClient.send(mUserFace, "portrait/" + mUser.getPortrait(), 50, 50);
+            //new KJBitmap().displayWithLoadBitmap(mUserFace, mUser.getPortrait(),
+            //        R.mipmap.widget_dface);
             mName.setText(mUser.getUsername());
             mJoinTime.setText(mUserDetail.getRegTime());
             mLocation.setText(mUserDetail.getLocation());

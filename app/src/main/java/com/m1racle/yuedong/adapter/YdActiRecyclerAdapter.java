@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.m1racle.yuedong.R;
-import com.m1racle.yuedong.entity.MotionActivities;
+import com.m1racle.yuedong.entity.MotionActivitiesPre;
 
 import java.util.List;
 
@@ -17,11 +17,11 @@ import java.util.List;
  */
 public class YdActiRecyclerAdapter extends RecyclerView.Adapter<YdmaViewHolder> {
 
-    private List<MotionActivities> mList;
+    private List<MotionActivitiesPre> mList;
     private RecyclerItemClickListener mListener;
     private RecyclerItemLongClickListener mLongClickListener;
 
-    public YdActiRecyclerAdapter(List<MotionActivities> mList) {
+    public YdActiRecyclerAdapter(List<MotionActivitiesPre> mList) {
         this.mList = mList;
     }
 
@@ -34,7 +34,7 @@ public class YdActiRecyclerAdapter extends RecyclerView.Adapter<YdmaViewHolder> 
 
     @Override
     public void onBindViewHolder(YdmaViewHolder holder, int position) {
-        MotionActivities bean = mList.get(position);
+        MotionActivitiesPre bean = mList.get(position);
         holder.bindData(bean);
     }
 

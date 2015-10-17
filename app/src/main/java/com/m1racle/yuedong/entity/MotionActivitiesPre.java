@@ -1,15 +1,16 @@
 package com.m1racle.yuedong.entity;
 
 /**
- * Motion activities entity
+ * Motion activities pre entity
  */
-public class MotionActivities extends Entity {
+public class MotionActivitiesPre extends Entity {
 
     private int ma_id;
     private String title;
-    private String body;
     private String img_id;
     private String summary;
+    private String author;
+    private String createTime;
 
     public int getMAid() {
         return ma_id;
@@ -27,14 +28,6 @@ public class MotionActivities extends Entity {
         this.title = title;
     }
 
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
     public String getImgId() {
         return img_id;
     }
@@ -49,5 +42,21 @@ public class MotionActivities extends Entity {
 
     public void setSummary(String summary) {
         this.summary = summary;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }
