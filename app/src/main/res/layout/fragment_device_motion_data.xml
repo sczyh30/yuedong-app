@@ -9,8 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/space_5"
         android:layout_marginBottom="@dimen/space_10"
-        android:text="@string/actionbar_title_device_motion_data"
-        android:textSize="20sp"
+        android:text="我的运动数据（请打开华为客户端查看）"
+        android:textSize="16sp"
         android:layout_gravity="center" />
 
 </FrameLayout>

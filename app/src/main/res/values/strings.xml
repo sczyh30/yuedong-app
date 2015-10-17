@@ -67,6 +67,7 @@
     <string name="loading">加载中…</string>
     <string name="loading_no_more">已加载全部</string>
     <string name="saving_data">正在保存数据…</string>
+    <string name="sync_data">正在向设备同步数据…</string>
 
     <string name="loading_img">加载图片</string>
     <string name="mes_notice">消息通知</string>
@@ -127,6 +128,8 @@
 
     <string name="warning_title_0001_error">出错啦！</string>
     <string name="warning_body_0001_error">信息暂时无法获取，请稍候再试。</string>
+    <string name="warning_title_no_data_error">哎呦喂！</string>
+    <string name="warning_body_no_data_error">没有从手环中获取到任何数据哦~</string>
 
     <string name="actionbar_title_setting">设置</string>
     <string name="actionbar_title_setting_notification">新消息提醒</string>
@@ -145,12 +148,23 @@
     <string name="actionbar_title_device_sleep_observer">睡眠监测</string>
     <string name="actionbar_title_motion_activities_detail">约动起来</string>
 
-    <string name="lt1">纯洁的要命</string>
+    <string-array name="weeks">
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
+        <item>周日</item>
+        <item>周一至周五（工作日）</item>
+    </string-array>
+
+    <!-- <string name="lt1">纯洁的要命</string>
     <string name="lt2">猥琐的要命</string>
     <string name="lt3">既纯洁又猥琐</string>
     <string name="lt4">哈哈哈</string>
     <string name="lt5">呵呵呵</string>
-    <string name="lt6">嘻嘻哈哈~O(∩_∩)O哈哈~</string>
+    <string name="lt6">嘻嘻哈哈~O(∩_∩)O哈哈~</string> -->
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

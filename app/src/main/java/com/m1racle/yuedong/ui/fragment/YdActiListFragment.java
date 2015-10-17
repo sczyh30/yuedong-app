@@ -72,7 +72,6 @@ public class YdActiListFragment extends BaseFragment {
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //SamsaraAPI.getLatestMotionActivities(mHandler);
                 YuedongAPI.getLatestMotionActivities(listener, errorListener);
             }
         });
@@ -88,7 +87,6 @@ public class YdActiListFragment extends BaseFragment {
         super.initView(view);
         if(DeviceUtil.getNetworkType() == 1)
             YuedongAPI.getLatestMotionActivities(listener, errorListener);
-            //SamsaraAPI.getLatestMotionActivities(mHandler);
     }
 
     @Override
@@ -103,8 +101,6 @@ public class YdActiListFragment extends BaseFragment {
         }
         dataList = test;
     }
-
-    //TODO:TEST START
 
     private Response.Listener<String> listener = new Response.Listener<String>() {
         @Override
@@ -125,40 +121,6 @@ public class YdActiListFragment extends BaseFragment {
             ToastUtil.toast("服务器解析错误，请重试。");
         }
     };
-
-    //TODO:TEST END
-
-    /*private final BaseJsonHttpResponseHandler mHandler = new BaseJsonHttpResponseHandler() {
-        @Override
-        public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, Object response) {
-            if(response != null) {
-                dataList = (ArrayList<MotionActivities>)response;
-                adapter.notifyDataSetChanged();
-            }
-            mPullToRefreshView.setRefreshing(false);
-        }
-
-        @Override
-        public void onFailure(int statusCode, Header[] headers, Throwable throwable, String rawJsonData, Object errorResponse) {
-            mPullToRefreshView.setRefreshing(false);
-            switch (statusCode) {
-                case 200:
-                    ToastUtil.toast("服务器解析错误，请重试。");
-                    break;
-                default:
-                    ToastUtil.toast("网络错误，请重试。(" + statusCode + ")");
-                    break;
-            }
-        }
-
-        @Override
-        protected Object parseResponse(String rawJsonData, boolean isFailure) throws Throwable {
-            LogUtil.log(rawJsonData);
-            return JsonUtil.resolveMAList(rawJsonData);
-        }
-    };*/
-
-
 
      class RlistAdapter extends RecyclerView.Adapter<RlistHolder> {
 

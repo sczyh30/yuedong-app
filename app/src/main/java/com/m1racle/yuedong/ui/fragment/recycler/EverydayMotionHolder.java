@@ -45,7 +45,7 @@ public class EverydayMotionHolder extends RecyclerView.ViewHolder {
         return Integer.toString(i);
     }
 
-    private String getMotionType(int i) {
+    public String getMotionType(int i) {
         switch (i) {
             case 1:
                 return "走路";
@@ -58,7 +58,9 @@ public class EverydayMotionHolder extends RecyclerView.ViewHolder {
             case 5:
                 return "站立";
             case 6:
-                return "睡眠";
+                return "浅睡";
+            case 7:
+                return "深睡";
             default:
                 return "";
         }

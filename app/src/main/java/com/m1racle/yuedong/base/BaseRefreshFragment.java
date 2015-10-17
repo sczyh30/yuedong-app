@@ -13,6 +13,7 @@ import java.util.Map;
  * Base Refresh Fragment
  * for ListView/RecyclerView
  */
+@Deprecated
 public abstract class BaseRefreshFragment extends BaseFragment {
 
     public static final int REFRESH_DELAY = 2000;
@@ -33,12 +34,7 @@ public abstract class BaseRefreshFragment extends BaseFragment {
                 R.color.eggplant,
                 R.color.sienna};
 
-        int[] strings = {
-                R.string.lt1,
-                R.string.lt2,
-                R.string.lt3,
 
-        };
 
         /*for (int i = 0; i < icons.length; i++) {
             map = new HashMap<>();

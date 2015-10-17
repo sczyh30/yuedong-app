@@ -41,7 +41,7 @@
                         android:visibility="gone"
                         android:layout_marginTop="@dimen/space_10"
                         android:id="@+id/my_warning_layout">
-                        <include layout="@layout/view_warning_layout" />
+                        <include layout="@layout/view_no_data_layout" />
                     </LinearLayout>
 
                     <LinearLayout

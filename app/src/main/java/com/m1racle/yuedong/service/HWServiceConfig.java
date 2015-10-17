@@ -20,6 +20,7 @@ public class HWServiceConfig {
     public static final int GET_DEVICE_ALL_MOTION_INFO = 8;
     public static final int GET_DEVICE_MOTION_GOAL = 9;
     public static final int GET_DEVICE_ALARM = 10;
+    public static final int GET_DEVICE_SLEEP = 11;
 
     public static final int SET_DEVICE_USER_INFO = 36;
     public static final int SET_DEVICE_MOTION_GOAL = 39;

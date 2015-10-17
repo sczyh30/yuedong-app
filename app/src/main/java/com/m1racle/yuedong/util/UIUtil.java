@@ -108,9 +108,21 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.SETTING_NOTIFICATION);
     }
 
+    public static void showDeviceAlarmSet(Context context, int max) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("index", max);
+            showActivity(context, UtilActivityPage.DEVICE_ALARM_SET, bundle);
+
+    }
+
     public static void showDeviceAlarmSet(Context context, DataAlarm data) {
         if (data != null) {
             Bundle bundle = new Bundle();
+            bundle.putBoolean("enable", data.isAlarm_enable());
+            bundle.putInt("time", data.getAlarm_time());
+            bundle.putInt("cycle", data.getAlarm_cycle());
+            bundle.putString("name", data.getAlarm_name());
+            bundle.putInt("index", data.getAlarm_index());
             showActivity(context, UtilActivityPage.DEVICE_ALARM_SET, bundle);
         } else {
             showActivity(context, UtilActivityPage.DEVICE_ALARM_SET);

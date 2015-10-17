@@ -22,6 +22,7 @@ import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.base.Constants;
 import com.m1racle.yuedong.cache.CacheManager;
+import com.m1racle.yuedong.cache.SaveCacheTask;
 import com.m1racle.yuedong.entity.Notice;
 import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.net.SamsaraAPI;
@@ -321,24 +322,6 @@ public class MySocialInfoFragment extends BaseFragment {
                 mInfo = info;
                 updateUI();
             }
-        }
-    }
-
-    private class SaveCacheTask extends AsyncTask<Void, Void, Void> {
-        private final WeakReference<Context> mContext;
-        private final Serializable object;
-        private final String key;
-
-        private SaveCacheTask(Context context, Serializable object, String key) {
-            mContext = new WeakReference<>(context);
-            this.object = object;
-            this.key = key;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            CacheManager.saveObject(mContext.get(), object, key);
-            return null;
         }
     }
 

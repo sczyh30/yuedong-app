@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
 import com.huawei.huaweiwearable.callback.IResultReportCallback;
+import com.huawei.huaweiwearable.data.DataHealthData;
 import com.huawei.huaweiwearable.data.DataTodayTotalMotion;
 import com.huawei.huaweiwearable.data.DataTotalMotion;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
@@ -114,7 +115,6 @@ public class EverydayMotionFragment extends BaseFragment {
 
     @Override
     public void onClick(View v) {
-
     }
 
     private void ensureView() {
