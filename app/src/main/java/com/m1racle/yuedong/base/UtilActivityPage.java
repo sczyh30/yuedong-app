@@ -14,7 +14,7 @@ public enum UtilActivityPage {
     SETTING (1, R.string.actionbar_title_setting, SettingsFragment.class),
     ABOUT_YD (2, R.string.actionbar_title_about, AboutYDFragment.class),
     MY_INFORMATION (3, R.string.actionbar_title_my_information,
-            MyInformationFragment.class),
+            MySocialInfoFragment.class),
     SETTING_NOTIFICATION (4, R.string.actionbar_title_setting_notification,
             SettingsNotificationFragment.class),
     SOCIAL_DETAIL(5,R.string.actionbar_title_my_information_detail, MySocialDetailFragment.class),

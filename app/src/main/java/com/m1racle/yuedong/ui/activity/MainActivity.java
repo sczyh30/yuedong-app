@@ -21,7 +21,6 @@ import com.m1racle.yuedong.ui.fragment.DeviceBasicInfoFragment;
 import com.m1racle.yuedong.ui.fragment.MotionBasicInfoFragment;
 import com.m1racle.yuedong.ui.fragment.MySocialInfoFragment;
 import com.m1racle.yuedong.ui.fragment.YdActiListFragment;
-import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.UIUtil;
 
 import java.util.ArrayList;
@@ -30,7 +29,7 @@ import java.util.List;
 import butterknife.Bind;
 
 public class MainActivity extends BaseActivity
-        implements MainFragmentInteractionListener {
+        implements MainActivityListener {
     @Bind(R.id.pager_tab)
     PagerTabStrip tabStrip;
 

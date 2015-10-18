@@ -2,7 +2,7 @@ package com.m1racle.yuedong.util;
 
 /**
  * WebView Util Class
- * @author OSC
+ * @author sczyh30
  */
 public class WebViewUtil {
 

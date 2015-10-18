@@ -12,7 +12,7 @@ import java.util.TimeZone;
 import java.util.regex.Pattern;
 
 /**
- * 悦动App
+ * Yuedong App
  * String Util Class
  */
 public class StringUtils {
@@ -73,7 +73,7 @@ public class StringUtils {
         if (time == null) {
             return "Unknown";
         }
-        String ftime = "";
+        String ftime;
         Calendar cal = Calendar.getInstance();
 
         // 判断是否是同一天

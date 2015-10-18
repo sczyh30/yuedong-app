@@ -56,8 +56,8 @@ public class BaseApplication extends Application {
 
     public void initBDLocation() {
         mLocationClient = new LocationClient(getApplicationContext());
-        myListener = new AppLocationListener();
-        mLocationClient.registerLocationListener(myListener);
+        //myListener = new AppLocationListener();
+        //mLocationClient.registerLocationListener(myListener);
     }
 
     public void initHWManager() {

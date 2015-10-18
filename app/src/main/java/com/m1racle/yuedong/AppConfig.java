@@ -20,7 +20,7 @@ public class AppConfig {
 
     public final static String CONF_COOKIE = "cookie";
 
-    public final static String CONF_APP_UNIQUE_ID = "APP_UNIQUEID";
+    public final static String CONF_APP_UNIQUE_ID = "APP_UNIQUE_ID";
 
     public static final String KEY_LOAD_IMAGE = "KEY_LOAD_IMAGE";
     public static final String KEY_NOTIFICATION_ACCEPT = "KEY_NOTIFICATION_ACCEPT";
@@ -96,7 +96,6 @@ public class AppConfig {
         FileOutputStream fos = null;
         try {
 
-            // 把config建在(自定义)app_config的目录下
             File dirConf = mContext.getDir(APP_CONFIG, Context.MODE_PRIVATE);
             File conf = new File(dirConf, APP_CONFIG);
             fos = new FileOutputStream(conf);

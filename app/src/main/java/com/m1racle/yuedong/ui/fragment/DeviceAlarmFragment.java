@@ -107,7 +107,10 @@ public class DeviceAlarmFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.public_menu_send:
-                UIUtil.showDeviceAlarmSet(getActivity(), mList.size());
+                if(error_code != 0)
+                    ToastUtil.toast("手环未连接，请连接手环");
+                else
+                    UIUtil.showDeviceAlarmSet(getActivity(), mList.size());
                 break;
         }
         return true;

@@ -210,7 +210,7 @@ public class MotionGoalFragment extends BaseFragment {
                 @Override
                 public void onFailure(int err_code, String err_msg) {
                     error_code = err_code;
-                    readCacheData(getCacheKey());
+                    //readCacheData(getCacheKey());
                     ensureView();
                     ToastUtil.toast("获取运动目标时出现了点问题，请稍后重试");
                 }
@@ -218,7 +218,7 @@ public class MotionGoalFragment extends BaseFragment {
         }
     }
 
-    private class CacheTask extends AsyncTask<String, Void, ArrayList<DataHealthGoal>> {
+    /**private class CacheTask extends AsyncTask<String, Void, ArrayList<DataHealthGoal>> {
         private final WeakReference<Context> mContext;
 
         private CacheTask(Context context) {
@@ -255,7 +255,7 @@ public class MotionGoalFragment extends BaseFragment {
             mCacheTask.cancel(true);
             mCacheTask = null;
         }
-    }
+    }*/
 
     private String getCacheKey() {
         return "m_motion_goal";

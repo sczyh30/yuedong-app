@@ -207,10 +207,12 @@ public class YdActiListFragment extends BaseFragment {
             String img_id = mData.getImgId();
             String title = mData.getTitle();
             String summary = mData.getSummary();
-            if(img_id != null) {
-                BitmapRequestClient.send(mIvPic, img_id, 80, 80);
-            } else {
-                BitmapRequestClient.send(mIvPic, "image_no");
+            if(DeviceUtil.hasInternet()) {
+                if(img_id != null) {
+                    BitmapRequestClient.send(mIvPic, img_id, 80, 80);
+                } else {
+                    BitmapRequestClient.send(mIvPic, "image_no");
+                }
             }
             setTextOptional(title, mTvTitle);
             setTextOptional(summary, mTvSummary);

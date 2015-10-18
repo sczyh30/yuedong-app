@@ -20,17 +20,14 @@ import java.io.Serializable;
  */
 public class CacheManager {
 
-    // wifi缓存时间为5分钟
+    // WiFi Cache time 5 min
     private static long WIFI_CACHE_EXPIRE_TIME = 5 * 60 * 1000;
-    // 其他网络环境为1小时
+    // Other environment 1 hour
     private static long COMMON_CACHE_EXPIRE_TIME = 60 * 60 * 1000;
 
     /**
-     * 保存对象
-     *
-     * @param ser
-     * @param file
-     * @throws IOException
+     * save the object
+     * this must be serializable
      */
     public static boolean saveObject(Context context, Serializable ser,
                                      String file) {
@@ -58,11 +55,7 @@ public class CacheManager {
     }
 
     /**
-     * 读取对象
-     *
-     * @param file
-     * @return
-     * @throws IOException
+     * read the object from the cache file
      */
     public static Serializable readObject(Context context, String file) {
         if (!isExistDataCache(context, file))
@@ -76,7 +69,7 @@ public class CacheManager {
         } catch (FileNotFoundException e) {
         } catch (Exception e) {
             e.printStackTrace();
-            // 反序列化失败 - 删除缓存文件
+            // fail then remove
             if (e instanceof InvalidClassException) {
                 File data = context.getFileStreamPath(file);
                 data.delete();

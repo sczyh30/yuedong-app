@@ -9,7 +9,6 @@ import java.security.NoSuchAlgorithmException;
  * Yuedong App Common Library
  * SHA crypt class
  * @author sczyh30
- * @since 0.0.28
  */
 public class SHAUtil {
     public static String SHA1(String decript) {

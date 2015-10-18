@@ -21,10 +21,12 @@ import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.service.HWServiceConfig;
 import com.m1racle.yuedong.ui.fragment.recycler.DeviceAlarmHolder;
+import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -39,6 +41,7 @@ public class DeviceAlarmSetFragment extends BaseFragment {
     private int error_code = 0;
     private int cb_status = 0;
     private int index = 0;
+    private ArrayList<DataAlarm> mList = new ArrayList<>();
     private DataAlarm mAlarm;
 
     @Bind(R.id.alarm_timePicker)
@@ -138,9 +141,9 @@ public class DeviceAlarmSetFragment extends BaseFragment {
         showWaitDialog(R.string.sync_data).show();
         if(HWManager != null && mAlarm != null) {
             summaryData();
-            ArrayList<DataAlarm> list = new ArrayList<>();
-            list.add(mAlarm);
-            HWManager.setAlarmList(HWServiceConfig.HUAWEI_TALKBAND_B2, list, new IResultReportCallback() {
+            mList.remove(mAlarm.getAlarm_index() - 1);
+            mList.add(mAlarm.getAlarm_index() - 1, mAlarm);
+            HWManager.setAlarmList(HWServiceConfig.HUAWEI_TALKBAND_B2, mList, new IResultReportCallback() {
                 @Override
                 public void onSuccess(Object object) {
                     cb_status = 6666;
@@ -207,7 +210,7 @@ public class DeviceAlarmSetFragment extends BaseFragment {
         }, 1000);
     }
 
-    /*private static class MyHandler extends Handler {
+    private static class MyHandler extends Handler {
         private final WeakReference<DeviceAlarmSetFragment> mFragment;
 
         public MyHandler(DeviceAlarmSetFragment fragment) {
@@ -219,7 +222,8 @@ public class DeviceAlarmSetFragment extends BaseFragment {
             super.handleMessage(msg);
             Object object = msg.obj;
             switch (msg.what) {
-                case HWServiceConfig.SET_DEVICE_ALARM:
+                case HWServiceConfig.GET_DEVICE_ALARM:
+                    mFragment.get().mList = (ArrayList<DataAlarm>)object;
                     break;
                 default:
                     break;
@@ -227,5 +231,24 @@ public class DeviceAlarmSetFragment extends BaseFragment {
         }
     }
 
-    private MyHandler mHandler = new MyHandler(this);*/
+    private MyHandler mHandler = new MyHandler(this);
+
+    private void getAlarms() {
+        if(HWManager != null) {
+            HWManager.getAlarmList(HWServiceConfig.HUAWEI_TALKBAND_B2, new IResultReportCallback() {
+                @Override
+                public void onSuccess(Object object) {
+                    Message message = Message.obtain();
+                    message.what = HWServiceConfig.GET_DEVICE_ALARM;
+                    message.obj = object;
+                    mHandler.sendMessage(message);
+                }
+
+                @Override
+                public void onFailure(int err_code, String err_msg) {
+                    LogUtil.log("fucking error: " + err_msg);
+                }
+            });
+        }
+    }
 }

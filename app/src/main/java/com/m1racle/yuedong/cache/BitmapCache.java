@@ -9,9 +9,11 @@ import com.android.volley.toolbox.ImageLoader;
  * Yuedong app
  * Bitmap cache class (support Volley)
  * uses LRU Cache
+ * @author sczyh30
  */
 public class BitmapCache implements ImageLoader.ImageCache {
 
+    //max : 2048 kb
     private static final int MAX_SIZE = 1024 * 1024 * 2;
 
     private LruCache<String, Bitmap> mCache;

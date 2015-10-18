@@ -9,8 +9,9 @@ import com.huawei.huaweiwearable.data.DataTotalMotion;
 /**
  * Everyday Motion DAO Impl
  * @author sczyh30
- * 以后这里逻辑应该复用
+ * 用数据库太麻烦，因此废弃
  */
+@Deprecated
 public class EverydayMotionDao extends BaseDaoImpl {
 
     public DataTotalMotion getMotion(int type) {

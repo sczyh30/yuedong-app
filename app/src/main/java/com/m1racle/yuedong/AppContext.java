@@ -35,11 +35,13 @@ import static com.m1racle.yuedong.AppConfig.KEY_NOTIFICATION_SOUND;
 import static com.m1racle.yuedong.AppConfig.KEY_NOTIFICATION_VIBRATION;
 
 /**
- * 全局应用程序类：用于保存和调用全局应用配置及访问网络数据
+ * Yuedong App
+ * The global context class
+ * very significant
+ * @since 0.1
+ * @author sczyh30
  */
 public class AppContext extends BaseApplication {
-
-    public static final int PAGE_SIZE = 20; // 默认分页大小
 
     private static AppContext instance;
 
@@ -70,6 +72,7 @@ public class AppContext extends BaseApplication {
         ApiHttpClient.setHttpClient(client);
         ApiHttpClient.setCookie(ApiHttpClient.getCookie(this));
         initNewAPI();
+        isFirstStart();
         userDao = new LocalUserDaoImpl();
     }
 
@@ -143,12 +146,6 @@ public class AppContext extends BaseApplication {
             if(getNotificationSound() && getNotificationViberate()) {
                 Intent intent = new Intent(instance, NotificationPushService.class);
                 instance.startService(intent);
-            } else if(!getNotificationSound() && !getNotificationViberate()) {
-
-            } else if(getNotificationViberate() && !getNotificationSound()) {
-
-            } else {
-
             }
         }
     }

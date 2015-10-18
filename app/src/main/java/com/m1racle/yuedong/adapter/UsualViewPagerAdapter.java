@@ -42,7 +42,6 @@ public class UsualViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        //Log.v("Adapter Activity(s10)", "Adapter items get...");
         return fragmentList.get(position);
     }
 
