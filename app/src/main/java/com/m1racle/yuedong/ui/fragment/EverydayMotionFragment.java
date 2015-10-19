@@ -12,9 +12,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
 import com.huawei.huaweiwearable.callback.IResultReportCallback;
 import com.huawei.huaweiwearable.data.DataTodayTotalMotion;
 import com.huawei.huaweiwearable.data.DataTotalMotion;
@@ -22,7 +22,7 @@ import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.service.HWServiceConfig;
-import com.m1racle.yuedong.ui.fragment.recycler.EverydayMotionHolder;
+import com.m1racle.yuedong.ui.recycler.EverydayMotionHolder;
 import com.m1racle.yuedong.util.ToastUtil;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -49,6 +49,8 @@ public class EverydayMotionFragment extends BaseFragment {
     RecyclerView mRecyclerView;
     @Bind(R.id.tv_evm_total_carl)
     TextView mTvTC;
+    @Bind(R.id.my_warning_layout)
+    LinearLayout mWarningLayout;
 
     private EverydayMotionAdapter adapter = new EverydayMotionAdapter();
 
@@ -100,25 +102,31 @@ public class EverydayMotionFragment extends BaseFragment {
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
-
     }
 
     private void initHWManager() {
         HWManager = getHuaweiManager();
-        if(HWManager != null) {
-            HWManager.registerConnectStateCallback(stateCallBack);
-        }
     }
 
     @Override
     public void onClick(View v) {
+    }
 
+    private void ensureView() {
+        if (mList.size() == 0) {
+            mWarningLayout.setVisibility(View.VISIBLE);
+            mRecyclerView.setVisibility(View.GONE);
+        } else {
+            mWarningLayout.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void updateUI() {
         if(mToday != null)
             mTvTC.setText(String.format("%s 大卡", Integer.toString(mToday.getTotalCalorie())));
         adapter.notifyDataSetChanged();
+        ensureView();
     }
 
     private class EverydayMotionAdapter extends RecyclerView.Adapter<EverydayMotionHolder> {
@@ -126,7 +134,7 @@ public class EverydayMotionFragment extends BaseFragment {
         @Override
         public EverydayMotionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.everyday_motion_list, parent, false);
+                    .inflate(R.layout.list_everyday_motion, parent, false);
             return new EverydayMotionHolder(view);
         }
 
@@ -141,15 +149,6 @@ public class EverydayMotionFragment extends BaseFragment {
             return mList.size();
         }
     }
-
-    private IDeviceConnectStatusCallback stateCallBack = new IDeviceConnectStatusCallback() {
-        @Override
-        public void onConnectStatusChange(int deviceType, String macAddress, int status, int err_code) {
-            if(status > 2) {
-                ToastUtil.toast("获取数据时出了点问题");
-            }
-        }
-    };
 
     private class MyHandler extends Handler {
         private final WeakReference<EverydayMotionFragment> mFragment;
@@ -191,7 +190,8 @@ public class EverydayMotionFragment extends BaseFragment {
                 @Override
                 public void onFailure(int err_code, String err_msg) {
                     error_code = err_code;
-                    ToastUtil.toast("获取数据时出了点问题");
+                    ToastUtil.toast(R.string.no_device_data);
+                    ensureView();
                 }
             });
         }

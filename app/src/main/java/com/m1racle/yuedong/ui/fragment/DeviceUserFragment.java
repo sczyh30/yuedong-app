@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
@@ -18,6 +19,7 @@ import com.huawei.huaweiwearable.data.DataUserInfo;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.cache.XmlCacheManager;
 import com.m1racle.yuedong.service.HWServiceConfig;
 import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
@@ -42,6 +44,7 @@ public class DeviceUserFragment extends BaseFragment {
     private HuaweiWearableManager HWManager;
     private DataUserInfo mInfo;
     private int error_code = 0;
+    private boolean isInfoOK = false;
 
     @Bind(R.id.tv_du_age)
     TextView mTvAge;
@@ -59,6 +62,10 @@ public class DeviceUserFragment extends BaseFragment {
     TextView mTvHeight;
     @Bind(R.id.iv_du_gender)
     ImageView mIvGender;
+    @Bind(R.id.my_warning_layout)
+    LinearLayout mWarningLayout;
+    @Bind(R.id.my_info_layout)
+    LinearLayout mInfoLayout;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,14 +91,27 @@ public class DeviceUserFragment extends BaseFragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_change, menu);
+        inflater.inflate(R.menu.menu_refresh_change, menu);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(HWManager != null)
+            getDeviceUserInfo();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.public_menu_send:
-                UIUtil.showDeviceUserSet(getActivity());
+                if(error_code != 0)
+                    ToastUtil.toast(R.string.tip_device_no_conn_warning);
+                else
+                    UIUtil.showDeviceUserSet(getActivity());
+                break;
+            case R.id.refresh:
+                getDeviceUserInfo();
                 break;
         }
         return true;
@@ -105,9 +125,6 @@ public class DeviceUserFragment extends BaseFragment {
 
     private void initHWManager() {
         HWManager = getHuaweiManager();
-        if(HWManager != null) {
-            HWManager.registerConnectStateCallback(stateCallBack);
-        }
     }
 
     @Override
@@ -132,17 +149,6 @@ public class DeviceUserFragment extends BaseFragment {
         }
     }
 
-    private IDeviceConnectStatusCallback stateCallBack = new IDeviceConnectStatusCallback() {
-        @Override
-        public void onConnectStatusChange(int deviceType, String macAddress, int status, int err_code) {
-            Message message = Message.obtain();
-            message.what = HWServiceConfig.CONNECT_DEVICE;
-            message.obj = status;
-            message.arg1 = err_code;
-            mHandler.sendMessage(message);
-        }
-    };
-
     private static class MyHandler extends Handler {
         private final WeakReference<DeviceUserFragment> mFragment;
 
@@ -155,61 +161,74 @@ public class DeviceUserFragment extends BaseFragment {
             super.handleMessage(msg);
             Object object = msg.obj;
             switch (msg.what) {
-                /*case HWServiceConfig.CONNECT_DEVICE:
-                    int state = (Integer)object;
-                    switch (state) {
-                        default:
-                            break;
-                    }
-                    break;*/
                 case HWServiceConfig.GET_DEVICE_USER_INFO:
                     mFragment.get().mInfo = (DataUserInfo)object;
-                    updateUI();
+                    mFragment.get().isInfoOK = true;
+                    mFragment.get().updateUI();
                     break;
                 default:
                     break;
             }
         }
-
-        private void updateUI() {
-            LogUtil.log("GET => Log :" + mFragment.get().mInfo.toString());
-            mFragment.get().mTvAge.setText(getInfoStr(mFragment.get().mInfo.getAge()));
-            mFragment.get().mTvBirthday.setText(getInfoStr(mFragment.get().mInfo.getBirthday()));
-            mFragment.get().mTvGender.setText(mFragment.get().mInfo.getGender() == 1 ? "男" : "女");
-            mFragment.get().mTvHeight.setText(getInfoStr(mFragment.get().mInfo.getHeight()) + " cm");
-            mFragment.get().mTvWeight.setText(getInfoStr(mFragment.get().mInfo.getWeight()) + " kg");
-            mFragment.get().mTvWalk.setText(Integer.toString(mFragment.get().mInfo.getWalk_step_length()) + " cm");
-            mFragment.get().mTvRun.setText(Integer.toString(mFragment.get().mInfo.getRun_step_length()) + " cm");
-            mFragment.get().mIvGender.setImageResource(StringUtils.toInt(mFragment.get().mInfo.getGender()) == 1 ? R.mipmap.userinfo_icon_male
-                    : R.mipmap.userinfo_icon_female);
-        }
-
-        private String getInfoStr(int id) {
-            if(id == 0)
-                return "未知";
-            else
-                return Integer.toString(id);
-        }
     }
 
     private final MyHandler mHandler = new MyHandler(this);
 
+    private void ensureView() {
+        if (!isInfoOK) {
+            mWarningLayout.setVisibility(View.VISIBLE);
+            mInfoLayout.setVisibility(View.GONE);
+        } else {
+            mWarningLayout.setVisibility(View.GONE);
+            mInfoLayout.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void updateUI() {
+        LogUtil.log("GET => InfoLog :" + mInfo.toString());
+        ensureView();
+        if(isInfoOK) {
+            XmlCacheManager.saveDeviceUser(mInfo);
+            mTvAge.setText(getInfoStr(mInfo.getAge()));
+            mTvBirthday.setText(getInfoStr(mInfo.getBirthday()));
+            mTvGender.setText(mInfo.getGender() == 1 ? "男" : "女");
+            mTvHeight.setText(String.format("%s cm", getInfoStr(mInfo.getHeight())));
+            mTvWeight.setText(String.format("%s kg", getInfoStr(mInfo.getWeight())));
+            mTvWalk.setText(String.format("%s cm", Integer.toString(mInfo.getWalk_step_length())));
+            mTvRun.setText(String.format("%s cm", Integer.toString(mInfo.getRun_step_length())));
+            mIvGender.setImageResource(StringUtils.toInt(mInfo.getGender()) == 1 ?
+                    R.mipmap.userinfo_icon_male : R.mipmap.userinfo_icon_female);
+        }
+    }
+
+    private String getInfoStr(int id) {
+        if(id == 0)
+            return "未知";
+        else
+            return Integer.toString(id);
+    }
+
     private void getDeviceUserInfo() {
         if(HWManager != null) {
-            HWManager.getUserInfo(HWServiceConfig.HUAWEI_TALKBAND_B2, new IResultReportCallback() {
-                @Override
-                public void onSuccess(Object object) {
-                    Message message = Message.obtain();
-                    message.what = HWServiceConfig.GET_DEVICE_USER_INFO;
-                    message.obj = object;
-                    mHandler.sendMessage(message);
-                }
+                HWManager.getUserInfo(HWServiceConfig.HUAWEI_TALKBAND_B2, new IResultReportCallback() {
+                    @Override
+                    public void onSuccess(Object object) {
+                        Message message = Message.obtain();
+                        message.what = HWServiceConfig.GET_DEVICE_USER_INFO;
+                        message.obj = object;
+                        mHandler.sendMessage(message);
+                    }
 
-                @Override
-                public void onFailure(int err_code, String err_msg) {
-                    error_code = err_code;
-                }
-            });
+                    @Override
+                    public void onFailure(int err_code, String err_msg) {
+                        error_code = err_code;
+                        ToastUtil.toast(R.string.no_device_data);
+                        isInfoOK = true;
+                        mInfo = XmlCacheManager.readDeviceUser();
+                        updateUI();
+                        //ensureView();
+                    }
+                });
         }
     }
 }

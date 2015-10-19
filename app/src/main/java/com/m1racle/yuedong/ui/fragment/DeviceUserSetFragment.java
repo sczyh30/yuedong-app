@@ -137,7 +137,7 @@ public class DeviceUserSetFragment extends BaseFragment {
     private void sendInfo() {
         hideKeyboard();
         if(okForSubmit()) {
-            showWaitDialog(R.string.saving_data).show();
+            showWaitDialog(R.string.sync_data).show();
             setInfoByView();
             setUserInfo();
             onHandleCallback();
@@ -151,7 +151,7 @@ public class DeviceUserSetFragment extends BaseFragment {
         mInfo.setBirthday(getIntForData(mEtBirthday));
         mInfo.setGender(getString(mEtGender).equals("男") ? 1 : 2);
         mInfo.setHeight(getIntForData(mEtHeight));
-        mInfo.setHeight(getIntForData(mEtHeight));
+        mInfo.setWeight(getIntForData(mEtWeight));
         mInfo.setWalk_step_length(getIntForData(mEtWalkStep));
     }
 
@@ -191,10 +191,10 @@ public class DeviceUserSetFragment extends BaseFragment {
             @Override
             public void run() {
                 if(cb_status == 6666) {
-                    ToastUtil.toast("手环用户信息更改成功！");
+                    ToastUtil.toast("手环信息同步成功！");
                     getActivity().finish();
                 } else {
-                    ToastUtil.toast("更改手环信息状态异常" + "(" + cb_status + ")");
+                    ToastUtil.toast("手环信息同步异常" + "(" + cb_status + ")");
                 }
                 hideWaitDialog();
             }

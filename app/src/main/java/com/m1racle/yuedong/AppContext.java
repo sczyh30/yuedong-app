@@ -1,6 +1,5 @@
 package com.m1racle.yuedong;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -19,27 +18,30 @@ import com.m1racle.yuedong.cache.DataCleanManager;
 import com.m1racle.yuedong.dao.LocalUserDaoImpl;
 import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.net.ApiHttpClient;
+import com.m1racle.yuedong.net.YuedongAPI;
+import com.m1racle.yuedong.service.NotificationPushService;
 import com.m1racle.yuedong.util.StringUtils;
-import com.m1racle.yuedong.util.LogUtil;
-//import com.m1racle.yuedong.util.UIHelper;
-
 
 import org.kymjs.kjframe.KJBitmap;
 
 import java.util.Properties;
 import java.util.UUID;
 
-import static com.m1racle.yuedong.AppConfig.KEY_FRITST_START;
+import static com.m1racle.yuedong.AppConfig.KEY_FIRST_START;
 import static com.m1racle.yuedong.AppConfig.KEY_LOAD_IMAGE;
 import static com.m1racle.yuedong.AppConfig.KEY_NIGHT_MODE_SWITCH;
-import static com.m1racle.yuedong.AppConfig.KEY_TWEET_DRAFT;
+import static com.m1racle.yuedong.AppConfig.KEY_NOTIFICATION_ACCEPT;
+import static com.m1racle.yuedong.AppConfig.KEY_NOTIFICATION_SOUND;
+import static com.m1racle.yuedong.AppConfig.KEY_NOTIFICATION_VIBRATION;
 
 /**
- * 全局应用程序类：用于保存和调用全局应用配置及访问网络数据
+ * Yuedong App
+ * The global context class
+ * very significant
+ * @since 0.1
+ * @author sczyh30
  */
 public class AppContext extends BaseApplication {
-
-    public static final int PAGE_SIZE = 20; // 默认分页大小
 
     private static AppContext instance;
 
@@ -47,6 +49,8 @@ public class AppContext extends BaseApplication {
 
     private boolean login;
     LocalUserDaoImpl userDao = new LocalUserDaoImpl();
+
+    //private RequestQueue mQueue = Volley.newRequestQueue(this);
 
     @Override
     public void onCreate() {
@@ -67,9 +71,14 @@ public class AppContext extends BaseApplication {
         client.setCookieStore(mCookieStore);
         ApiHttpClient.setHttpClient(client);
         ApiHttpClient.setCookie(ApiHttpClient.getCookie(this));
+        initNewAPI();
+        isFirstStart();
         userDao = new LocalUserDaoImpl();
-        //if(isFristStart())
-        //    userDao.initDatabase();
+    }
+
+    private void initNewAPI() {
+        //ApiRequestClient.setQueue(mQueue);
+        YuedongAPI.setCookie(YuedongAPI.getCookie(this));
     }
 
     private void initLogin() {
@@ -95,17 +104,50 @@ public class AppContext extends BaseApplication {
     }
 
 
-    public static boolean isFristStart() {
-        return getPreferences().getBoolean(KEY_FRITST_START, true);
+    public static boolean isFirstStart() {
+        return getPreferences().getBoolean(KEY_FIRST_START, true);
     }
 
-    public static void setFristStart(boolean frist) {
-        set(KEY_FRITST_START, frist);
+    public static void setFirstStart(boolean first) {
+        set(KEY_FIRST_START, first);
     }
 
     //夜间模式
     public static boolean getNightModeSwitch() {
         return getPreferences().getBoolean(KEY_NIGHT_MODE_SWITCH, false);
+    }
+
+    public static void setNotificationAccept(boolean b) {
+        set(KEY_NOTIFICATION_ACCEPT, b);
+    }
+
+    public static boolean getNotificationAccept() {
+        return getPreferences().getBoolean(KEY_NOTIFICATION_ACCEPT, false);
+    }
+
+    public static void setNotificationSound(boolean b) {
+        set(KEY_NOTIFICATION_SOUND, b);
+    }
+
+    public static boolean getNotificationSound() {
+        return getPreferences().getBoolean(KEY_NOTIFICATION_VIBRATION, false);
+    }
+
+    public static void setNotificationViberate(boolean b) {
+        set(KEY_NOTIFICATION_SOUND, b);
+    }
+
+    public static boolean getNotificationViberate() {
+        return getPreferences().getBoolean(KEY_NOTIFICATION_VIBRATION, false);
+    }
+
+    public static void startNotification() {
+        if(getNotificationAccept()) {
+            if(getNotificationSound() && getNotificationViberate()) {
+                Intent intent = new Intent(instance, NotificationPushService.class);
+                instance.startService(intent);
+            }
+        }
     }
 
     // 设置夜间模式
@@ -179,10 +221,10 @@ public class AppContext extends BaseApplication {
     }
 
     public String getAppId() {
-        String uniqueID = getProperty(AppConfig.CONF_APP_UNIQUEID);
+        String uniqueID = getProperty(AppConfig.CONF_APP_UNIQUE_ID);
         if (StringUtils.isEmpty(uniqueID)) {
             uniqueID = UUID.randomUUID().toString();
-            setProperty(AppConfig.CONF_APP_UNIQUEID, uniqueID);
+            setProperty(AppConfig.CONF_APP_UNIQUE_ID, uniqueID);
         }
         return uniqueID;
     }

@@ -23,8 +23,7 @@ import java.lang.ref.WeakReference;
  * this is the daemon activity
  * of most fragments
  */
-public class UtilActivity extends BaseActivity
-        implements FuckingMutiListener {
+public class UtilActivity extends BaseActivity {
 
     public final static String BUNDLE_KEY_PAGE = "BUNDLE_KEY_PAGE";
     public final static String BUNDLE_KEY_ARGS = "BUNDLE_KEY_ARGS";

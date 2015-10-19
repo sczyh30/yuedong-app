@@ -1,20 +1,7 @@
 package com.m1racle.yuedong.base;
 
 import com.m1racle.yuedong.R;
-import com.m1racle.yuedong.ui.fragment.DeviceUserSetFragment;
-import com.m1racle.yuedong.ui.fragment.HealthAdviceFragment;
-import com.m1racle.yuedong.ui.fragment.SleepObserverFragment;
-import com.m1racle.yuedong.ui.fragment.AboutYDFragment;
-import com.m1racle.yuedong.ui.fragment.DeviceAlarmFragment;
-import com.m1racle.yuedong.ui.fragment.DeviceMotionDataFragment;
-import com.m1racle.yuedong.ui.fragment.DeviceUserFragment;
-import com.m1racle.yuedong.ui.fragment.EverydayMotionFragment;
-import com.m1racle.yuedong.ui.fragment.MotionGoalFragment;
-import com.m1racle.yuedong.ui.fragment.MyInformationFragment;
-import com.m1racle.yuedong.ui.fragment.MySocialDetailFragment;
-import com.m1racle.yuedong.ui.fragment.SettingsFragment;
-import com.m1racle.yuedong.ui.fragment.SettingsNotificationFragment;
-import com.m1racle.yuedong.ui.fragment.TemperatureViewFragment;
+import com.m1racle.yuedong.ui.fragment.*;
 
 /**
  * The enum class designed for UtilActivity
@@ -27,7 +14,7 @@ public enum UtilActivityPage {
     SETTING (1, R.string.actionbar_title_setting, SettingsFragment.class),
     ABOUT_YD (2, R.string.actionbar_title_about, AboutYDFragment.class),
     MY_INFORMATION (3, R.string.actionbar_title_my_information,
-            MyInformationFragment.class),
+            MySocialInfoFragment.class),
     SETTING_NOTIFICATION (4, R.string.actionbar_title_setting_notification,
             SettingsNotificationFragment.class),
     SOCIAL_DETAIL(5,R.string.actionbar_title_my_information_detail, MySocialDetailFragment.class),
@@ -39,7 +26,11 @@ public enum UtilActivityPage {
     DEVICE_MOTION_GOAL(11,R.string.actionbar_title_device_motion_goal, MotionGoalFragment.class),
     SLEEP_OBSERVER(12,R.string.actionbar_title_device_sleep_observer, SleepObserverFragment.class),
     DEVICE_USER_INFO_SET(13,R.string.set_device_user_info, DeviceUserSetFragment.class),
-    HEALTH_MOTION_ADVICE(14,R.string.actionbar_title_motion_advice, HealthAdviceFragment.class);;
+    HEALTH_MOTION_ADVICE(14,R.string.actionbar_title_motion_advice, HealthAdviceFragment.class),
+    DEVICE_ALARM_SET(15,R.string.actionbar_title_device_alarm_set, DeviceAlarmSetFragment.class),
+    DEVICE_MOTION_GOAL_SET(16,R.string.actionbar_title_device_motion_goal_set, MotionGoalSetFragment.class),
+    MOTION_ACTIVITIES_DETAIL(17,R.string.actionbar_title_motion_activities_detail, ActivitiesDetailFragment.class),
+    MY_SOCIAL_MESSAGE(18,R.string.actionbar_title_message, MessageFragment.class);
 
     private int title;
     private Class<?> clz;

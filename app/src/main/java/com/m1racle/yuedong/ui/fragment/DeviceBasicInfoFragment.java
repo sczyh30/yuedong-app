@@ -10,6 +10,7 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
@@ -19,7 +20,6 @@ import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.service.HWServiceConfig;
-import com.m1racle.yuedong.util.LogUtil;
 
 import java.lang.ref.WeakReference;
 
@@ -39,7 +39,6 @@ public class DeviceBasicInfoFragment extends BaseFragment {
 
     protected WeakReference<View> mRootView;
 
-    public static final String STATUS_CHANGE_ACTION = "com.m1racle.yuedong.action.DEVICE_STATUS_CHANGED";
     // bind the view components
     @Bind(R.id.b2_status_text)
     TextView mEtStatus;
@@ -47,11 +46,12 @@ public class DeviceBasicInfoFragment extends BaseFragment {
     TextView mEtStatusInst;
     @Bind(R.id.b2_battery_status_text)
     TextView mEtBatteryStatus;
-    //@Bind(R.id.b2_battery_status_layout)
-    //LinearLayout batteryLayout;
+    @Bind(R.id.b2_battery_status_layout)
+    LinearLayout mBatteryLayout;
 
     private HuaweiWearableManager HWManager = null;
     private OnFragmentInteractionListener mListener;
+    private boolean isInfoOK = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -178,56 +178,69 @@ public class DeviceBasicInfoFragment extends BaseFragment {
             Object object = msg.obj;
             switch (msg.what) {
                 case HWServiceConfig.GET_DEVICE_BATTERY:
+                    mFragment.get().ensureView();
                     if(object.equals("获取数据失败"))
                         mFragment.get().mEtBatteryStatus.setText(R.string.b2_not_get_data);
                     else
                         mFragment.get().mEtBatteryStatus.setText("" + object + "%");
                     break;
                 case HWServiceConfig.CONNECT_DEVICE:
-                    int state = (Integer)object;
-                    switch (state) {
-                        case 1:
-                            mFragment.get().mEtStatusInst.setText(R.string.b2_connecting);
-                            mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.darker_blue));
-                            setStatus(R.string.b2_status_1);
-                            break;
-                        case 2:
-                            mFragment.get().mEtStatusInst.setText(R.string.b2_connected_ok_st);
-                            mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.lightblue));
-                            setStatus(R.string.b2_status_2);
-                            break;
-                        default:
-                            mFragment.get().mEtStatusInst.setText(R.string.b2_not_connected_st);
-                            switch (msg.arg1) {
-                                case 100100:
-                                    setStatus(R.string.b2_status_err_100100);
-                                    break;
-                                case 100101:
-                                    setStatus(R.string.b2_status_err_100101);
-                                    break;
-                                case 100104:
-                                    setStatus(R.string.b2_status_err_100104);
-                                    break;
-                                case 100105:
-                                    setStatus(R.string.b2_status_err_100105);
-                                    break;
-                                default:
-                                    setStatus(R.string.b2_status_err_100106);
-                                    break;
-                            }
-                            mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.red));
-                            break;
-                    }
+                    updateUI(msg);
                     break;
                 default:
                     break;
             }
+            mFragment.get().ensureView();
         }
 
         private void setStatus(int resId) {
             mFragment.get().mEtStatus.setText(resId);
         }
 
+        private void updateUI(Message msg) {
+            int state = (Integer)msg.obj;
+            switch (state) {
+                case 1:
+                    mFragment.get().mEtStatusInst.setText(R.string.b2_connecting);
+                    mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.darker_blue));
+                    setStatus(R.string.b2_status_1);
+                    break;
+                case 2:
+                    mFragment.get().mEtStatusInst.setText(R.string.b2_connected_ok_st);
+                    mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.lightblue));
+                    setStatus(R.string.b2_status_2);
+                    break;
+                default:
+                    mFragment.get().mEtStatusInst.setText(R.string.b2_not_connected_st);
+                    switch (msg.arg1) {
+                        case 100100:
+                            setStatus(R.string.b2_status_err_100100);
+                            break;
+                        case 100101:
+                            setStatus(R.string.b2_status_err_100101);
+                            break;
+                        case 100104:
+                            setStatus(R.string.b2_status_err_100104);
+                            break;
+                        case 100105:
+                            setStatus(R.string.b2_status_err_100105);
+                            break;
+                        default:
+                            setStatus(R.string.b2_status_err_100106);
+                            break;
+                    }
+                    mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.red));
+                    break;
+            }
+        }
+
+    }
+
+    private void ensureView() {
+        if(isInfoOK)
+            mBatteryLayout.setVisibility(View.VISIBLE);
+        else
+            mBatteryLayout.setVisibility(View.GONE);
     }
 
     private final MyHandler mHandler = new MyHandler(this);
@@ -239,6 +252,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
             Message message = Message.obtain();
             message.what = HWServiceConfig.CONNECT_DEVICE;
             message.obj = status;
+            isInfoOK = status == 2;
             message.arg1 = err_code;
             mHandler.sendMessage(message);
             getBlueToothBattery();
@@ -252,7 +266,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
             connectState = HWManager.getConnectStatus(HWServiceConfig.HUAWEI_TALKBAND_B2);
         }
         Message message = Message.obtain();
-        message.what = HWServiceConfig.JAR_GET_DEVICE_CONNECT_STATUS;
+        message.what = HWServiceConfig.GET_DEVICE_CONNECT_STATUS;
         message.obj = connectState;
         message.arg1 = HWServiceConfig.HUAWEI_TALKBAND_B2;
         mHandler.sendMessage(message);

@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import com.huawei.huaweiwearable.data.DataAlarm;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.base.UtilActivityPage;
 import com.m1racle.yuedong.ui.DialogUtil;
 import com.m1racle.yuedong.ui.activity.LoginActivity;
+import com.m1racle.yuedong.ui.activity.SocialUtilActivity;
+import com.m1racle.yuedong.ui.activity.UserProfileActivity;
 import com.m1racle.yuedong.ui.activity.UtilActivity;
 
 /**
@@ -50,6 +53,7 @@ public class UIUtil {
         context.startActivity(intent);
     }
 
+
     public static void showActivity(Context context, UtilActivityPage page) {
         Intent intent = new Intent(context, UtilActivity.class);
         intent.putExtra(UtilActivity.BUNDLE_KEY_PAGE, page.getValue());
@@ -62,6 +66,16 @@ public class UIUtil {
         intent.putExtra(UtilActivity.BUNDLE_KEY_ARGS, args);
         intent.putExtra(UtilActivity.BUNDLE_KEY_PAGE, page.getValue());
         context.startActivity(intent);
+    }
+
+    public static void showActivitiesDetail(Context context, int maid) {
+        if(maid == 0) {
+            ToastUtil.toast("获取信息失败");
+            return;
+        }
+        Bundle bundle = new Bundle();
+        bundle.putInt("ma_id", maid);
+        showActivity(context, UtilActivityPage.MOTION_ACTIVITIES_DETAIL, bundle);
     }
 
     public static void sendAppCrashReport(final Context context) {
@@ -93,8 +107,33 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.DEVICE_USER_INFO_SET);
     }
 
+    public static void showMessages(Context context) {
+        showActivity(context, UtilActivityPage.MY_SOCIAL_MESSAGE);
+    }
+
     public static void showSettingNotification(Context context) {
         showActivity(context, UtilActivityPage.SETTING_NOTIFICATION);
+    }
+
+    public static void showDeviceAlarmSet(Context context, int max) {
+            Bundle bundle = new Bundle();
+            bundle.putInt("index", max);
+            showActivity(context, UtilActivityPage.DEVICE_ALARM_SET, bundle);
+
+    }
+
+    public static void showDeviceAlarmSet(Context context, DataAlarm data) {
+        if (data != null) {
+            Bundle bundle = new Bundle();
+            bundle.putBoolean("enable", data.isAlarm_enable());
+            bundle.putInt("time", data.getAlarm_time());
+            bundle.putInt("cycle", data.getAlarm_cycle());
+            bundle.putString("name", data.getAlarm_name());
+            bundle.putInt("index", data.getAlarm_index());
+            showActivity(context, UtilActivityPage.DEVICE_ALARM_SET, bundle);
+        } else {
+            showActivity(context, UtilActivityPage.DEVICE_ALARM_SET);
+        }
     }
 
     public static void showHealthAdvice(Context context) {
@@ -117,6 +156,11 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.DEVICE_MOTION_GOAL);
     }
 
+    //TODO:这里需要传入一些数据
+    public static void showMotionGoalSet(Context context) {
+        showActivity(context, UtilActivityPage.DEVICE_MOTION_GOAL_SET);
+    }
+
     public static void showSleepObserver(Context context) {
         showActivity(context, UtilActivityPage.SLEEP_OBSERVER);
     }
@@ -136,6 +180,19 @@ public class UIUtil {
     public static void showEverydayMotion(Context context) {
         showActivity(context, UtilActivityPage.DEVICE_EVERYDAY_MOTION);
     }
+
+    public static void showRelationActivity(Context context, int type) {
+        Intent intent = new Intent(context, SocialUtilActivity.class);
+        intent.putExtra("type", type);
+        context.startActivity(intent);
+    }
+
+    public static void showUserProfile(Context context, int uid) {
+        Intent intent = new Intent(context, UserProfileActivity.class);
+        intent.putExtra("uid", uid);
+        context.startActivity(intent);
+    }
+
 
     public static void clearAppCache(Activity activity) {
         final Handler handler = new Handler() {

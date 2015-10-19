@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
-        versionName "0.5.64-dev"
+        versionName "0.9.72-rc"
     }
     buildTypes {
         release {
@@ -29,17 +29,17 @@ dependencies {
     //testCompile group: 'junit', name: 'junit', version: '4.+'
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    //compile 'com.android.support:support-v4:22.2.0'
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.google.zxing:core:3.2.0'
     compile 'com.yqritc:recyclerview-flexibledivider:1.2.5'
     compile 'com.yalantis:phoenix:1.2.2'
-    compile 'com.squareup.retrofit:retrofit:2.0.0-beta1'
+    compile 'cz.msebera.android:httpclient:4.4.1.1'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'com.android.support:appcompat-v7:22.2.0'
     compile 'com.android.support:support-v13:22.2.0'
+    compile 'com.android.support:design:22.2.0'
     compile files('libs/KJFrameForAndroid_v2.223.jar')
     compile files('libs/locSDK_6.11.jar')
 }

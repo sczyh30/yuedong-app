@@ -28,6 +28,12 @@
         <item name="android:layout_height">1dip</item>
         <item name="android:background">?attr/lineColor</item>
     </style>
+
+    <style name="h_line_green">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">1dip</item>
+        <item name="android:background">@color/green</item>
+    </style>
     <!-- 纵向线条 -->
     <style name="v_line">
         <item name="android:layout_width">1dip</item>

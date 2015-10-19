@@ -58,6 +58,16 @@
 
         <View style="@style/h_line" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/my_warning_layout"
+            android:layout_marginTop="@dimen/space_20">
+            <include layout="@layout/view_no_data_layout" />
+        </LinearLayout>
+
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_evm"
             android:layout_width="match_parent"

@@ -22,8 +22,10 @@ import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.base.Constants;
 import com.m1racle.yuedong.cache.CacheManager;
+import com.m1racle.yuedong.cache.SaveCacheTask;
 import com.m1racle.yuedong.entity.Notice;
 import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.net.BitmapRequestClient;
 import com.m1racle.yuedong.net.SamsaraAPI;
 import com.m1racle.yuedong.ui.activity.MainActivity;
 import com.m1racle.yuedong.ui.dialog.MyQRCodeDialog;
@@ -205,6 +207,9 @@ public class MySocialInfoFragment extends BaseFragment {
         mTvMotionActivities.setText(String.valueOf(mInfo.getActivitiesNumber()));
         mTvFollowing.setText(String.valueOf(mInfo.getFollowers()));
         mTvFans.setText(String.valueOf(mInfo.getFans()));
+        if(mInfo.getPortrait() != null) {
+            BitmapRequestClient.send(mIvAvatar, "portrait/" + mInfo.getPortrait(), 60, 60);
+        }
     }
 
     private void readCacheData(String key) {
@@ -225,7 +230,7 @@ public class MySocialInfoFragment extends BaseFragment {
 
     @Override
     @OnClick({R.id.ly_motion_activities, R.id.iv_qr_code, R.id.ly_following, R.id.ly_follower, R.id.rl_message,
-            R.id.rl_health, R.id.rl_activities, R.id.rl_friend, R.id.rl_user_unlogin})
+            R.id.rl_health, R.id.rl_rank, R.id.rl_friend, R.id.rl_user_unlogin})
     public void onClick(View view) {
         if (isWaitingLogin) {
             ToastUtil.toast(R.string.unlogin);
@@ -237,6 +242,24 @@ public class MySocialInfoFragment extends BaseFragment {
             case R.id.rl_user_unlogin:
                 ToastUtil.toast(R.string.unlogin);
                 UIUtil.showLoginActivity(getActivity());
+                break;
+            case R.id.rl_friend:
+                UIUtil.showRelationActivity(getActivity(), 1);
+                break;
+            case R.id.rl_rank:
+                UIUtil.showRelationActivity(getActivity(), 15);
+                break;
+            case R.id.rl_message:
+                UIUtil.showMessages(getActivity());
+                break;
+            case R.id.ly_follower:
+                UIUtil.showRelationActivity(getActivity(), 2);
+                break;
+            case R.id.ly_following:
+                UIUtil.showRelationActivity(getActivity(), 3);
+                break;
+            case R.id.rl_health:
+                UIUtil.showHealthAdvice(getActivity());
                 break;
             case R.id.iv_avatar:
                 showMyDetail();
@@ -261,7 +284,6 @@ public class MySocialInfoFragment extends BaseFragment {
     private void showMyQrCode() {
         MyQRCodeDialog dialog = new MyQRCodeDialog(getActivity());
         dialog.show();
-        //LogUtil.toast("QR Code click");
     }
 
     private void setUserView() {
@@ -319,26 +341,12 @@ public class MySocialInfoFragment extends BaseFragment {
             super.onPostExecute(info);
             if (info != null) {
                 mInfo = info;
+                mErrorLayout.setErrorType(EmptyLayout.HIDE_LAYOUT);
+                updateUI();
+            } else {
+                mErrorLayout.setErrorType(EmptyLayout.NETWORK_ERROR);
                 updateUI();
             }
-        }
-    }
-
-    private class SaveCacheTask extends AsyncTask<Void, Void, Void> {
-        private final WeakReference<Context> mContext;
-        private final Serializable object;
-        private final String key;
-
-        private SaveCacheTask(Context context, Serializable object, String key) {
-            mContext = new WeakReference<>(context);
-            this.object = object;
-            this.key = key;
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            CacheManager.saveObject(mContext.get(), object, key);
-            return null;
         }
     }
 

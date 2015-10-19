@@ -10,7 +10,6 @@ import java.net.ConnectException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
-import org.apache.http.HttpException;
 import org.kymjs.kjframe.utils.FileUtils;
 import org.kymjs.kjframe.utils.SystemTool;
 
@@ -20,6 +19,10 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.os.Looper;
+
+import com.m1racle.yuedong.util.UIUtil;
+
+import cz.msebera.android.httpclient.HttpException;
 
 /**
  * 应用程序异常：用于捕获异常和提示错误信息
@@ -103,7 +106,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
         return new AppException(TYPE_JSON, 0, e);
     }
 
-    // 网络请求异常
+
     public static AppException network(Exception e) {
         if (e instanceof UnknownHostException || e instanceof ConnectException) {
             return new AppException(TYPE_NETWORK, 0, e);
@@ -121,9 +124,6 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
 
     /**
      * 获取APP异常崩溃处理对象
-     * 
-     * @param context
-     * @return
      */
     public static AppException getAppExceptionHandler(Context context) {
         return new AppException(context.getApplicationContext());
@@ -139,7 +139,6 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
     /**
      * 自定义异常处理:收集错误信息&发送错误报告
      * 
-     * @param ex
      * @return true:处理了该异常信息;否则返回false
      */
     private boolean handleException(final Throwable ex) {
@@ -150,6 +149,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
         try {
             success = saveToSDCard(ex);
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             if (!success) {
                 return false;
@@ -162,7 +162,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
                     public void run() {
                         Looper.prepare();
                         // 拿到未捕获的异常，
-                        //UIHelper.sendAppCrashReport(context);
+                        UIUtil.sendAppCrashReport(context);
                         Looper.loop();
                     }
                 }.start();
@@ -173,7 +173,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
 
     private boolean saveToSDCard(Throwable ex) throws Exception {
         boolean append = false;
-        File file = FileUtils.getSaveFile("OSChina", "OSCLog.log");
+        File file = FileUtils.getSaveFile("Yuedong", "yuedong_log.log");
         if (System.currentTimeMillis() - file.lastModified() > 5000) {
             append = true;
         }
@@ -217,11 +217,6 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
         // 手机型号
         pw.print("Model: ");
         pw.println(Build.MODEL);
-        pw.println();
-
-        // cpu架构
-        pw.print("CPU ABI: ");
-        pw.println(Build.CPU_ABI);
         pw.println();
     }
 }

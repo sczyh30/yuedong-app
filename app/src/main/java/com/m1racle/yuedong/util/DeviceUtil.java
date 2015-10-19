@@ -69,6 +69,10 @@ public class DeviceUtil {
     public DeviceUtil() {
     }
 
+    public static boolean isAndroid5() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
     public static float dpToPixel(float dp) {
         return dp * (getDisplayMetrics().densityDpi / 160F);
     }
@@ -157,18 +161,6 @@ public class DeviceUtil {
         return 0;
     }
 
-    /*public static String getUdid() {
-        String udid = BaseApplication.getPreferences().getString("udid", "");
-        if (udid.length() == 0) {
-            SharedPreferences.Editor editor = BaseApplication.getPreferences()
-                    .edit();
-            udid = String.format("%s", UUID.randomUUID());
-            editor.putString("udid", udid);
-            editor.commit();
-        }
-        return udid;
-    }*/
-
     public static boolean hasBigScreen() {
         boolean flag = true;
         if (_hasBigScreen == null) {
@@ -178,15 +170,15 @@ public class DeviceUtil {
                 flag1 = flag;
             else
                 flag1 = false;
-            Boolean boolean1 = Boolean.valueOf(flag1);
+            Boolean boolean1 = flag1;
             _hasBigScreen = boolean1;
-            if (!boolean1.booleanValue()) {
+            if (!boolean1) {
                 if (getDensity() <= 1.5F)
                     flag = false;
-                _hasBigScreen = Boolean.valueOf(flag);
+                _hasBigScreen = flag;
             }
         }
-        return _hasBigScreen.booleanValue();
+        return _hasBigScreen;
     }
 
     public static final boolean hasCamera() {
@@ -350,7 +342,6 @@ public class DeviceUtil {
 
     public static void gotoMarket(Context context, String pck) {
         if (!isHaveMarket(context)) {
-            //AppContext.showToast("你手机中没有安装应用市场！");
             Toast.makeText(context,"你手机中没有安装应用市场！",Toast.LENGTH_SHORT).show();
             return;
         }
@@ -586,8 +577,6 @@ public class DeviceUtil {
         ClipboardManager clip = (ClipboardManager) BaseApplication.getContext()
                 .getSystemService(Context.CLIPBOARD_SERVICE);
         clip.setText(string);
-        //AppContext.showToast(R.string.copy_success);
-
     }
 
     /**
@@ -610,10 +599,10 @@ public class DeviceUtil {
     }
 
     public static int getStatuBarHeight() {
-        Class<?> c = null;
-        Object obj = null;
-        Field field = null;
-        int x = 0, sbar = 38;
+        Class<?> c;
+        Object obj;
+        Field field;
+        int x, sbar = 38;
         try {
             c = Class.forName("com.android.internal.R$dimen");
             obj = c.newInstance();

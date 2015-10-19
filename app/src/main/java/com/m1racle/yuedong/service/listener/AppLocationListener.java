@@ -1,5 +1,6 @@
 package com.m1racle.yuedong.service.listener;
 
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,7 +16,7 @@ public class AppLocationListener implements BDLocationListener {
     @Override
     public void onReceiveLocation(BDLocation location) {
         //Receive Location
-        StringBuffer sb = new StringBuffer(256);
+        /*StringBuffer sb = new StringBuffer(256);
         sb.append("time : ");
         sb.append(location.getTime());
         sb.append("\nerror code : ");
@@ -73,6 +74,6 @@ public class AppLocationListener implements BDLocationListener {
             }
         }
         Log.i("AppLocationListener", sb.toString());
-        Toast.makeText(BaseApplication.getContext(), location.getLocationDescribe(), Toast.LENGTH_LONG).show();
+        Toast.makeText(BaseApplication.getContext(), location.getLocationDescribe(), Toast.LENGTH_LONG).show();*/
     }
 }

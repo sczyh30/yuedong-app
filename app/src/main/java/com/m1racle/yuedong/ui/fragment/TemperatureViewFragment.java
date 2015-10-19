@@ -149,12 +149,12 @@ public class TemperatureViewFragment extends BaseFragment {
      * @return the level
      */
     private String inspectTempData(int temp) {
-        if(temp >= 19 && temp <= 23)
+        if(temp >= 21 && temp <= 23)
             return "良好";
         else if (temp > 23 && temp <= 26) {
             return "舒适";
         }
-        else if (temp > 28 && temp <= 32) {
+        else if (temp > 26 && temp <= 32) {
             return "偏热";
         }
         else if (temp > 32) {

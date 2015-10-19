@@ -1,0 +1,137 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="?attr/windows_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.m1racle.yuedong.ui.fragment.ActivitiesDetailFragment">
+
+    <com.m1racle.yuedong.ui.widget.CustomerScrollView
+        android:id="@+id/sv_news_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fadingEdge="none"
+        android:scrollbars="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_event_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/space_10"
+                android:layout_marginTop="@dimen/space_20"
+                android:textColor="?attr/textColor"
+                tools:text="奔跑吧，骚年"
+                android:textSize="17sp" />
+
+            <View
+                style="@style/h_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_10" >
+
+                <TextView
+                    android:id="@+id/tv_event_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#999" />
+
+                <TextView
+                    android:id="@+id/tv_event_end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_event_start_time"
+                    android:textColor="#999" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/rl_event_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/layout_item_bg"
+                android:clickable="true"
+                android:orientation="horizontal"
+                android:padding="@dimen/space_10" >
+
+                <TextView
+                    android:id="@+id/tv_event_location"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="?android:textColorLink"
+                    tools:text="戴比路克星"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="bottom"
+                    android:background="@mipmap/detail_map_guide" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bt_event_apply"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginLeft="@dimen/space_10"
+                android:layout_marginRight="@dimen/space_10"
+                android:layout_marginTop="@dimen/space_5"
+                android:background="@drawable/btn_small_green_selector"
+                android:text="我要报名"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_event_tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_10"
+                android:text="你的报名已确认，我们将会通过邮箱或短信通知您具体信息！"
+                android:textColor="?attr/infoTextColor"
+                android:visibility="gone" />
+
+            <View
+                style="@style/h_line"
+                android:layout_marginTop="@dimen/space_10" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/space_10"
+                android:text="活动详情"
+                android:textColor="#999" />
+
+            <View
+                style="@style/h_line"
+                android:layout_marginLeft="@dimen/space_10"
+                android:layout_marginRight="@dimen/space_10" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_body"
+                android:textSize="16sp"
+                android:layout_marginTop="@dimen/space_10"
+                android:layout_marginRight="@dimen/space_10"
+                android:layout_marginLeft="@dimen/space_10"/>
+            <WebView
+                android:id="@+id/webview"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </com.m1racle.yuedong.ui.widget.CustomerScrollView>
+
+    <com.m1racle.yuedong.ui.empty.EmptyLayout
+        android:id="@+id/error_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+</LinearLayout>

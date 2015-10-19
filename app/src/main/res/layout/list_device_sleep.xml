@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="155dp"
+    android:background="?attr/layout_item_bg"
+    android:clickable="true">
+
+    <ImageView
+        android:id="@+id/image_motion_icon"
+        android:src="@mipmap/s_health_drawer_sleep"
+        android:layout_marginLeft="@dimen/space_15"
+        android:layout_marginRight="@dimen/space_80"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="@dimen/space_80"
+        android:layout_gravity="start|center_vertical"
+        android:layout_width="@dimen/space_80"
+        android:layout_height="@dimen/space_80" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_10">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="睡眠类型："
+                android:textSize="@dimen/text_size_16"/>
+            <TextView
+                android:id="@+id/tv_dsl_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/actionbar_blue"
+                android:layout_marginLeft="@dimen/space_10"
+                android:textSize="@dimen/text_size_16"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_10">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="时长："
+                android:textSize="@dimen/text_size_16"/>
+            <TextView
+                android:id="@+id/tv_dsl_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/actionbar_blue"
+                android:layout_marginLeft="@dimen/space_10"
+                android:textSize="@dimen/text_size_16"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_10">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="记录时间："
+                android:textSize="@dimen/text_size_16"/>
+            <TextView
+                android:id="@+id/tv_dsl_jlsj"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/actionbar_blue"
+                android:layout_marginLeft="@dimen/space_10"
+                android:textSize="@dimen/text_size_16"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

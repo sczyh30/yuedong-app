@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/space_110"
+    style="@style/option_item_list">
+
+    <ImageView
+        android:id="@+id/image_view_icon"
+        android:src="@mipmap/pic_load_wait"
+        android:layout_marginLeft="@dimen/space_6"
+        android:layout_marginRight="@dimen/space_80"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="@dimen/space_80"
+        android:layout_gravity="start|center_vertical"
+        android:layout_width="@dimen/space_80"
+        android:layout_height="@dimen/space_80" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="今天的天气适合打羽毛球"
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/space_100"
+            android:layout_marginLeft="@dimen/space_100"
+            android:layout_marginEnd="@dimen/space_20"
+            android:layout_marginRight="@dimen/space_20"
+            android:layout_marginTop="@dimen/space_18"
+            android:textSize="@dimen/text_size_16"
+            android:textColor="@color/black"
+            android:id="@+id/tv_ma_list_title" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="33sp"
+            android:text="这里应该显示内容。"
+            android:textSize="@dimen/text_size_13"
+            android:layout_marginTop="@dimen/space_6"
+            android:layout_marginStart="@dimen/space_100"
+            android:layout_marginLeft="@dimen/space_100"
+            android:layout_marginEnd="@dimen/space_20"
+            android:layout_marginRight="@dimen/space_20"
+            android:id="@+id/tv_ma_list_summary"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_5">
+            <TextView
+                android:id="@+id/tv_ma_ct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2015-09-12"
+                android:textColor="@color/actionbar_blue"
+                android:layout_marginLeft="@dimen/space_100"/>
+            <TextView
+                android:id="@+id/tv_ma_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="sczyh30"
+                android:layout_toRightOf="@+id/tv_ma_ct"
+                android:textColor="@color/green"
+                android:layout_marginLeft="@dimen/space_20"/>
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:id="@+id/iv_heart"
+                android:layout_toRightOf="@+id/tv_ma_author"
+                android:layout_marginLeft="@dimen/text_size_20"
+                android:layout_marginTop="@dimen/space_1"
+                android:background="@drawable/ic_heart_small_blue"/>
+            <TextView
+                android:id="@+id/tv_ma_bm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8"
+                android:layout_toRightOf="@+id/iv_heart"
+                android:textColor="@color/actionbar_blue"
+                android:layout_marginLeft="@dimen/space_3"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>
