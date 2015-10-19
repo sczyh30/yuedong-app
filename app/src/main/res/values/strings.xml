@@ -34,6 +34,7 @@
     <string name="advice_level_2">您的运动习惯较好，每天可以做一些适度的锻炼~</string>
     <string name="advice_level_3">您的运动量貌似有点少诶~没事的时候可以多运动运动，哪怕是出去散一下步也很好哦~</string>
     <string name="advice_level_f">您的运动有些过量，请稍微减少一下运动量。诚然，适量的运动对我们的健康非常有益，但是过量的运动也会危害健康。</string>
+    <string name="advice_info_p1">根据您目前的运动情况</string>
 
     <string name="choose_function_inst">运动与健康功能</string>
     <string name="b2_btn_fn_user_info">用户信息</string>
@@ -65,6 +66,7 @@
     <string name="tip_network_error">没有可用的网络</string>
     <string name="tip_temperature_sensor_error">您的设备没有可用的传感器</string>
     <string name="tip_device_no_conn_warning">未连接至手环，请检查连接</string>
+    <string name="no_device_data">获取数据失败，请稍后重试</string>
 
     <string name="unlogin">未登录，请先登录</string>
     <string name="unlogin_tip">您还未登录\r\n或网络延迟</string>
@@ -168,5 +170,6 @@
     <string name="detail_information">详细信息</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_social_util">我的悦动</string>
 
 </resources>

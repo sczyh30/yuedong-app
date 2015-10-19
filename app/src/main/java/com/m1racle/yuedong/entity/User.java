@@ -12,6 +12,7 @@ public class User extends Entity {
     private String username;
     private String password;
     private String portrait;
+    private String tips;
 
     private String temp_token;
     //private TempToken temp_token;
@@ -135,6 +136,14 @@ public class User extends Entity {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
     }
 
     @Override

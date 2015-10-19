@@ -243,6 +243,15 @@ public class MySocialInfoFragment extends BaseFragment {
                 ToastUtil.toast(R.string.unlogin);
                 UIUtil.showLoginActivity(getActivity());
                 break;
+            case R.id.rl_friend:
+                UIUtil.showRelationActivity(getActivity(), 1);
+                break;
+            case R.id.ly_follower:
+                UIUtil.showRelationActivity(getActivity(), 2);
+                break;
+            case R.id.ly_following:
+                UIUtil.showRelationActivity(getActivity(), 3);
+                break;
             case R.id.iv_avatar:
                 showMyDetail();
                 break;

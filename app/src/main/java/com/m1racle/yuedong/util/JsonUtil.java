@@ -71,4 +71,8 @@ public class JsonUtil {
     public static Update resolveUpdate(String jsonData) {
         return gson.fromJson(jsonData, Update.class);
     }
+
+    public static BaseFriend resolveBaseFriend(String jsonData) {
+        return gson.fromJson(jsonData, BaseFriend.class);
+    }
 }

@@ -21,14 +21,6 @@ import java.util.Map;
  * support Volley
  * @author sczyh30
  * @since 0.6
- * 注：由于主办方没有提供云服务器，因此测试只能在线下进行
- * 在进行重要操作（注册、登录）等等的时候，一定要合理对数据加密（这里默认设计为MD5加密）
- * 切记防止SQL注入及XSS攻击
- * 若服务器后端为Java，则要合理利用持久层框架（如Mybatis）以及合理的设计模式（AOP，IoC等等的）
- * 设置拦截器拦截恶意请求，并进行记录
- * 在进行并发操作时，应保证各线程之间数据的安全
- * 我们在这里设计了REST风格的接口，配合Spring MVC是极好的，Flask也不错
- * 返回数据应为加密的JSON数据
  */
 public class YuedongAPI {
 
@@ -42,6 +34,10 @@ public class YuedongAPI {
     public static final String URL_UPLOAD_LOG = "action/api/upload/log";
     public static final String URL_GET_ANDROID_UPDATE = "action/api/get/app_version_android.json";
     public static final String URL_GET_ACTIVITY_DETAIL = "action/api/get/act_detail";
+
+    public static final String URL_GET_FRIEND = "action/api/get/friend";
+    public static final String URL_GET_FANS = "action/api/get/fans";
+    public static final String URL_GET_FOLLOWING = "action/api/get/following";
 
     /**
      * Login API method (POST)
@@ -119,6 +115,35 @@ public class YuedongAPI {
         request.setDefaultHeaders(appCookie);
         ApiRequestClient.send(request);
         LogUtil.log("GET => " + url);
+    }
+
+    public static void getFriendList(final int uid, final int type, Response.Listener<String> listener,
+                                     Response.ErrorListener errorListener) {
+        String url = ApiRequestClient.getAbsoluteApiUrl(getRelationRequestURL(uid, type));
+        SamsaraStringRequest request = new SamsaraStringRequest(url, listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("uid", Integer.toString(uid));
+                return params;
+            }
+        };
+        request.setDefaultHeaders(appCookie);
+        ApiRequestClient.send(request);
+        LogUtil.log("GET => " + url);
+    }
+
+    public static String getRelationRequestURL(final int uid, final int type) {
+        switch (type) {
+            case 1:
+                return URL_GET_FRIEND + "/" + uid + ".json";
+            case 2:
+                return URL_GET_FANS + "/" + uid + ".json";
+            case 3:
+                return URL_GET_FOLLOWING + "/" + uid + ".json";
+            default:
+                return "";
+        }
     }
 
     public static void getUserDetail(final int uid, Response.Listener<String> listener,

@@ -5,82 +5,76 @@
     android:orientation="vertical"
     tools:context="com.m1racle.yuedong.ui.fragment.HealthAdviceFragment">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_15"
+        android:layout_marginBottom="@dimen/space_10"
+        android:text="@string/actionbar_title_motion_advice"
+        android:textSize="20sp"
+        android:layout_gravity="center" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_advice_level"
+        android:layout_gravity="center"
+        android:background="@mipmap/s_health_ani_icon_comfort_b07"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/space_10">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@id/text"
+            android:textSize="@dimen/text_size_20"
+            android:text="@string/advice_info_p1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_20"
+            android:visibility="gone"
+            android:id="@+id/tv_goal"
+            android:layout_toRightOf="@+id/text"
+            android:layout_toEndOf="@+id/text"
+            android:textColor="@color/actionbar_blue" />
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/space_40">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_20"
+            android:text="我们给您的建议是："/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/space_150"
+            android:layout_marginLeft="@dimen/space_30"
+            android:layout_marginRight="@dimen/space_30"
+            android:textSize="@dimen/text_size_16"
+            android:layout_marginTop="@dimen/space_15"
+            android:textColor="@color/green"
+            android:id="@+id/tv_motion_advice"
+            android:text="@string/advice_level_1"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/light_gray"
+        android:layout_gravity="bottom|center"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_10"
-            android:layout_marginBottom="@dimen/space_10"
-            android:text="@string/actionbar_title_motion_advice"
-            android:textSize="20sp"
-            android:layout_gravity="center" />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/iv_advice_level"
-            android:layout_gravity="center"
-            android:background="@mipmap/s_health_ani_icon_comfort_b07"/>
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/space_5">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@id/text"
-                android:textSize="@dimen/text_size_20"
-                android:text="根据您目前的运动目标："/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_20"
-                android:id="@+id/tv_goal"
-                android:layout_toRightOf="@+id/text"
-                android:textColor="@color/actionbar_blue"
-                android:text="10000"/>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/space_40">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_20"
-                android:text="我们给您的建议是："/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/space_150"
-                android:layout_marginLeft="@dimen/space_30"
-                android:layout_marginRight="@dimen/space_30"
-                android:textSize="@dimen/text_size_16"
-                android:layout_marginTop="@dimen/space_15"
-                android:textColor="@color/green"
-                android:id="@+id/tv_motion_advice"
-                android:text="@string/advice_level_1"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/space_80"
-            android:background="@color/light_gray"
-            android:layout_gravity="bottom|center"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
-                android:text="@string/advice_bottom_info"/>
-        </LinearLayout>
-
-
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:text="@string/advice_bottom_info"/>
     </LinearLayout>
 
 

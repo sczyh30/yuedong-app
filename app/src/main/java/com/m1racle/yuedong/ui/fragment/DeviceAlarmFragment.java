@@ -19,9 +19,8 @@ import com.huawei.huaweiwearable.data.DataAlarm;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.cache.SaveCacheTask;
 import com.m1racle.yuedong.service.HWServiceConfig;
-import com.m1racle.yuedong.ui.fragment.recycler.DeviceAlarmHolder;
+import com.m1racle.yuedong.ui.recycler.DeviceAlarmHolder;
 import com.m1racle.yuedong.util.ToastUtil;
 import com.m1racle.yuedong.util.UIUtil;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
@@ -41,7 +40,7 @@ import butterknife.ButterKnife;
 public class DeviceAlarmFragment extends BaseFragment {
 
     private HuaweiWearableManager HWManager;
-    private int error_code = 0;
+    private int error_code = 1;
     private List<DataAlarm> mList = new ArrayList<>();
     private AlarmAdapter adapter = new AlarmAdapter();
 
@@ -70,6 +69,7 @@ public class DeviceAlarmFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getAlarms();
+
     }
 
     @Override
@@ -215,6 +215,7 @@ public class DeviceAlarmFragment extends BaseFragment {
     }
 
     private void getAlarms() {
+        updateUI();
         if(HWManager != null) {
             HWManager.getAlarmList(HWServiceConfig.HUAWEI_TALKBAND_B2, new IResultReportCallback() {
                 @Override
@@ -223,13 +224,14 @@ public class DeviceAlarmFragment extends BaseFragment {
                     message.what = HWServiceConfig.GET_DEVICE_ALARM;
                     message.obj = object;
                     mHandler.sendMessage(message);
+                    error_code = 0;
                 }
 
                 @Override
                 public void onFailure(int err_code, String err_msg) {
                     ToastUtil.toast("获取手环闹钟时出现错误");
                     updateUI();
-                    error_code = err_code;
+                    error_code = err_code + 1;
                 }
             });
         }

@@ -41,12 +41,10 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name" >
         </activity>
-
         <activity
             android:name=".ui.activity.LoginActivity"
             android:label="@string/login" >
         </activity>
-
         <activity
             android:name=".ui.activity.UtilActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -67,8 +65,10 @@
         <!-- Broadcast Receiver -->
         <receiver android:name=".service.receiver.NPSBroadcastReceiver" />
 
-
-
+        <activity
+            android:name=".ui.activity.SocialUtilActivity"
+            android:label="@string/title_activity_social_util" >
+        </activity>
     </application>
 
 </manifest>

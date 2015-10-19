@@ -1,4 +1,4 @@
-package com.m1racle.yuedong.ui.fragment.recycler;
+package com.m1racle.yuedong.ui.recycler;
 
 import android.view.View;
 import android.widget.ImageView;

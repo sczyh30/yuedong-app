@@ -19,6 +19,7 @@ import com.huawei.huaweiwearable.data.DataUserInfo;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.cache.XmlCacheManager;
 import com.m1racle.yuedong.service.HWServiceConfig;
 import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
@@ -187,6 +188,7 @@ public class DeviceUserFragment extends BaseFragment {
         LogUtil.log("GET => InfoLog :" + mInfo.toString());
         ensureView();
         if(isInfoOK) {
+            XmlCacheManager.saveDeviceUser(mInfo);
             mTvAge.setText(getInfoStr(mInfo.getAge()));
             mTvBirthday.setText(getInfoStr(mInfo.getBirthday()));
             mTvGender.setText(mInfo.getGender() == 1 ? "男" : "女");
@@ -220,9 +222,11 @@ public class DeviceUserFragment extends BaseFragment {
                     @Override
                     public void onFailure(int err_code, String err_msg) {
                         error_code = err_code;
-                        ToastUtil.toast("获取数据失败，请稍后重试");
-                        isInfoOK = false;
-                        ensureView();
+                        ToastUtil.toast(R.string.no_device_data);
+                        isInfoOK = true;
+                        mInfo = XmlCacheManager.readDeviceUser();
+                        updateUI();
+                        //ensureView();
                     }
                 });
         }

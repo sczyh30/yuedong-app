@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.cache.XmlCacheManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,6 +42,12 @@ public class HealthAdviceFragment extends BaseFragment {
     }
 
     @Override
+    public void initData() {
+        goal = XmlCacheManager.readGoal(1).getStep_goal();
+        updateUI();
+    }
+
+    @Override
     public void onClick(View v) {
 
     }
@@ -68,6 +75,7 @@ public class HealthAdviceFragment extends BaseFragment {
     }
 
     private void updateUI() {
-
+        mTvAdvice.setText(getAdviceByGoal());
+        mIvLevel.setImageResource(getLevelByGoal());
     }
 }

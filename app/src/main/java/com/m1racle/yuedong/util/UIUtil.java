@@ -14,6 +14,7 @@ import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.base.UtilActivityPage;
 import com.m1racle.yuedong.ui.DialogUtil;
 import com.m1racle.yuedong.ui.activity.LoginActivity;
+import com.m1racle.yuedong.ui.activity.SocialUtilActivity;
 import com.m1racle.yuedong.ui.activity.UtilActivity;
 
 /**
@@ -173,6 +174,14 @@ public class UIUtil {
     public static void showEverydayMotion(Context context) {
         showActivity(context, UtilActivityPage.DEVICE_EVERYDAY_MOTION);
     }
+
+    public static void showRelationActivity(Context context, int type) {
+        Intent intent = new Intent(context, SocialUtilActivity.class);
+        intent.putExtra("type", type);
+        context.startActivity(intent);
+    }
+
+
 
     public static void clearAppCache(Activity activity) {
         final Handler handler = new Handler() {

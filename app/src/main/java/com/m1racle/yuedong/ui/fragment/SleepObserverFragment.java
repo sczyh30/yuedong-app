@@ -19,7 +19,7 @@ import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.service.HWServiceConfig;
-import com.m1racle.yuedong.ui.fragment.recycler.SleepDataHolder;
+import com.m1racle.yuedong.ui.recycler.SleepDataHolder;
 import com.m1racle.yuedong.util.ToastUtil;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 

@@ -60,7 +60,7 @@ public class YdActiListFragment extends BaseFragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_yd_acti_list, container, false);
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter.setOnItemClickLitener(new OnItemClickListener() {
+        adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 UIUtil.showActivitiesDetail(getActivity(), position);
@@ -140,7 +140,7 @@ public class YdActiListFragment extends BaseFragment {
 
         private OnItemClickListener mOnItemClickListener;
 
-        public void setOnItemClickLitener(OnItemClickListener mOnItemClickListener)
+        public void setOnItemClickListener(OnItemClickListener mOnItemClickListener)
         {
             this.mOnItemClickListener = mOnItemClickListener;
         }

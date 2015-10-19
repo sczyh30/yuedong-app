@@ -21,8 +21,8 @@ public class ApiRequestClient {
     //public final static String HOST = "192.168.95.1";
     //private final static String API_URL = "http://192.168.95.1/sandbox/";
 
-    public final static String HOST = "www.sczyh30.com";
-    private final static String API_URL = "http://www.sczyh30.com/sandbox/";
+    public final static String HOST = "192.168.95.1";
+    public final static String API_URL = "http://192.168.95.1/sandbox/";
 
     //volley net object
     public static RequestQueue mQueue = Volley.newRequestQueue(AppContext.getContext());

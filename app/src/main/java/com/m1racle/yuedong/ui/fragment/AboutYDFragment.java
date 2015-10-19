@@ -71,6 +71,7 @@ public class AboutYDFragment extends BaseFragment {
                 break;
             case R.id.rl_feedback:
                 showFeedback();
+                UIUtil.showRelationActivity(getActivity(), 2);
                 break;
             case R.id.rl_grade:
                 DeviceUtil.openAppInMarket(getActivity());

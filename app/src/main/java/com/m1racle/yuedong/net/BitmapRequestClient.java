@@ -16,7 +16,7 @@ import com.m1racle.yuedong.util.LogUtil;
  */
 public class BitmapRequestClient {
 
-    private static final String PIC_SERVER_URL = "http://192.168.95.1/sandbox/res/img/";
+    private static final String PIC_SERVER_URL = ApiRequestClient.API_URL + "res/img/";
 
     public static ImageLoader imageLoader = new ImageLoader(
             ApiRequestClient.getQueue(), new BitmapCache());

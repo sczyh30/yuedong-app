@@ -1,7 +1,6 @@
 package com.m1racle.yuedong.ui.fragment;
 
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,26 +16,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
 import com.huawei.huaweiwearable.callback.IResultReportCallback;
 import com.huawei.huaweiwearable.data.DataHealthGoal;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
-import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.cache.CacheManager;
-import com.m1racle.yuedong.cache.SaveCacheTask;
-import com.m1racle.yuedong.entity.User;
+import com.m1racle.yuedong.cache.XmlCacheManager;
 import com.m1racle.yuedong.service.HWServiceConfig;
-import com.m1racle.yuedong.ui.fragment.recycler.MotionGoalHolder;
+import com.m1racle.yuedong.ui.recycler.MotionGoalHolder;
 import com.m1racle.yuedong.util.ToastUtil;
 import com.m1racle.yuedong.util.UIUtil;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
-import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -114,9 +107,6 @@ public class MotionGoalFragment extends BaseFragment {
 
     private void initHWManager() {
         HWManager = getHuaweiManager();
-        if(HWManager != null) {
-            HWManager.registerConnectStateCallback(stateCallBack);
-        }
     }
 
     @Override
@@ -144,17 +134,6 @@ public class MotionGoalFragment extends BaseFragment {
         }
     }
 
-    private IDeviceConnectStatusCallback stateCallBack = new IDeviceConnectStatusCallback() {
-        @Override
-        public void onConnectStatusChange(int deviceType, String macAddress, int status, int err_code) {
-            Message message = Message.obtain();
-            message.what = HWServiceConfig.CONNECT_DEVICE;
-            message.obj = status;
-            message.arg1 = err_code;
-            mHandler.sendMessage(message);
-        }
-    };
-
     private static class MyHandler extends Handler {
         private final WeakReference<MotionGoalFragment> mFragment;
 
@@ -169,9 +148,8 @@ public class MotionGoalFragment extends BaseFragment {
             switch (msg.what) {
                 case HWServiceConfig.GET_DEVICE_MOTION_GOAL:
                     mFragment.get().mList = (ArrayList<DataHealthGoal>)object;
-                    new SaveCacheTask(mFragment.get().getActivity(),
-                            mFragment.get().mList, mFragment.get().getCacheKey()).execute();
                     mFragment.get().updateUI();
+                    mFragment.get().saveCache();
                     break;
                 default:
                     break;
@@ -210,54 +188,17 @@ public class MotionGoalFragment extends BaseFragment {
                 @Override
                 public void onFailure(int err_code, String err_msg) {
                     error_code = err_code;
-                    //readCacheData(getCacheKey());
-                    ensureView();
+                    mList.add(XmlCacheManager.readGoal(1));
+                    updateUI();
                     ToastUtil.toast("获取运动目标时出现了点问题，请稍后重试");
                 }
             });
         }
     }
 
-    /**private class CacheTask extends AsyncTask<String, Void, ArrayList<DataHealthGoal>> {
-        private final WeakReference<Context> mContext;
-
-        private CacheTask(Context context) {
-            mContext = new WeakReference<>(context);
-        }
-
-        @Override
-        protected ArrayList<DataHealthGoal> doInBackground(String... params) {
-            Serializable object = CacheManager.readObject(mContext.get(), params[0]);
-            if (object == null) {
-                return null;
-            } else {
-                return (ArrayList<DataHealthGoal>) object;
-            }
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<DataHealthGoal> info) {
-            super.onPostExecute(info);
-            if (info != null) {
-                mList = info;
-                updateUI();
-            }
-        }
+    private void saveCache() {
+        for(DataHealthGoal g : mList)
+            XmlCacheManager.saveGoal(g.getMotion_type(), g);
     }
 
-    private void readCacheData(String key) {
-        cancelReadCacheTask();
-        mCacheTask = new CacheTask(getActivity()).execute(key);
-    }
-
-    private void cancelReadCacheTask() {
-        if (mCacheTask != null) {
-            mCacheTask.cancel(true);
-            mCacheTask = null;
-        }
-    }*/
-
-    private String getCacheKey() {
-        return "m_motion_goal";
-    }
 }

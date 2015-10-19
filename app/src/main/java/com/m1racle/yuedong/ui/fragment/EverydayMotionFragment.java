@@ -15,16 +15,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
 import com.huawei.huaweiwearable.callback.IResultReportCallback;
-import com.huawei.huaweiwearable.data.DataHealthData;
 import com.huawei.huaweiwearable.data.DataTodayTotalMotion;
 import com.huawei.huaweiwearable.data.DataTotalMotion;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.service.HWServiceConfig;
-import com.m1racle.yuedong.ui.fragment.recycler.EverydayMotionHolder;
+import com.m1racle.yuedong.ui.recycler.EverydayMotionHolder;
 import com.m1racle.yuedong.util.ToastUtil;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -108,9 +106,6 @@ public class EverydayMotionFragment extends BaseFragment {
 
     private void initHWManager() {
         HWManager = getHuaweiManager();
-        if(HWManager != null) {
-            HWManager.registerConnectStateCallback(stateCallBack);
-        }
     }
 
     @Override
@@ -155,15 +150,6 @@ public class EverydayMotionFragment extends BaseFragment {
         }
     }
 
-    private IDeviceConnectStatusCallback stateCallBack = new IDeviceConnectStatusCallback() {
-        @Override
-        public void onConnectStatusChange(int deviceType, String macAddress, int status, int err_code) {
-            if(status > 2) {
-                ToastUtil.toast("获取数据时出了点问题");
-            }
-        }
-    };
-
     private class MyHandler extends Handler {
         private final WeakReference<EverydayMotionFragment> mFragment;
 
@@ -204,7 +190,7 @@ public class EverydayMotionFragment extends BaseFragment {
                 @Override
                 public void onFailure(int err_code, String err_msg) {
                     error_code = err_code;
-                    ToastUtil.toast("获取数据时出了点问题");
+                    ToastUtil.toast(R.string.no_device_data);
                     ensureView();
                 }
             });

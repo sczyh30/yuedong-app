@@ -3,19 +3,20 @@ package com.m1racle.yuedong.entity;
 /**
  * Friend Entity
  */
-public class Friend extends Entity {
+public class BaseFriend extends Entity {
 
-    private int user_id;
+    private int uid;
     private String name;
     private String location;
+    private String tips;
     private int gender;
 
-    public int getUser_id() {
-        return user_id;
+    public int getUid() {
+        return uid;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public String getName() {
@@ -40,5 +41,13 @@ public class Friend extends Entity {
 
     public void setGender(int gender) {
         this.gender = gender;
+    }
+
+    public String getTips() {
+        return tips;
+    }
+
+    public void setTips(String tips) {
+        this.tips = tips;
     }
 }

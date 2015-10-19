@@ -106,7 +106,7 @@ public class LoginActivity extends BaseActivity {
 
     private boolean okForLogin() {
         if (!DeviceUtil.hasInternet()) {
-            ToastUtil.showToastShort(R.string.tip_no_internet);
+            ToastUtil.toast(R.string.tip_no_internet);
             return false;
         }
         if (etUserName.length() == 0) {

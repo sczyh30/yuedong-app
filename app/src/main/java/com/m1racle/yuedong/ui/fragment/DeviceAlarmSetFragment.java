@@ -20,13 +20,12 @@ import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.service.HWServiceConfig;
-import com.m1racle.yuedong.ui.fragment.recycler.DeviceAlarmHolder;
+import com.m1racle.yuedong.ui.recycler.DeviceAlarmHolder;
 import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -141,7 +140,9 @@ public class DeviceAlarmSetFragment extends BaseFragment {
         showWaitDialog(R.string.sync_data).show();
         if(HWManager != null && mAlarm != null) {
             summaryData();
-            mList.remove(mAlarm.getAlarm_index() - 1);
+            if(mList.size() >= mAlarm.getAlarm_index() - 1) {
+                mList.remove(mAlarm.getAlarm_index() - 1);
+            }
             mList.add(mAlarm.getAlarm_index() - 1, mAlarm);
             HWManager.setAlarmList(HWServiceConfig.HUAWEI_TALKBAND_B2, mList, new IResultReportCallback() {
                 @Override
@@ -163,7 +164,7 @@ public class DeviceAlarmSetFragment extends BaseFragment {
         mAlarm.setAlarm_enable(true);
         mAlarm.setAlarm_cycle(getCycleToSet());
         mAlarm.setAlarm_time(getTime());
-        mAlarm.setAlarm_index(index);
+        mAlarm.setAlarm_index(index + 1);
         mAlarm.setAvailable(true);
     }
 
