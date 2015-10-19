@@ -1,5 +1,6 @@
 package com.m1racle.yuedong.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +22,7 @@ import com.m1racle.yuedong.ui.recycler.BaseFriendHolder;
 import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.JsonUtil;
 import com.m1racle.yuedong.util.ToastUtil;
+import com.m1racle.yuedong.util.UIUtil;
 import com.yalantis.phoenix.PullToRefreshView;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -31,8 +33,6 @@ import butterknife.OnClick;
 
 public class SocialUtilActivity extends BaseActivity {
 
-    @Bind(R.id.pull_to_refresh_a)
-    PullToRefreshView mPullToRefreshView;
     @Bind(R.id.recycler_view)
     RecyclerView mRecyclerView;
     @Bind(R.id.error_layout)
@@ -40,6 +40,7 @@ public class SocialUtilActivity extends BaseActivity {
     @Bind(R.id.content_layout)
     FrameLayout contentLayout;
 
+    PullToRefreshView mPullToRefreshView;
     private int type;
     private ArrayList<User> mList = new ArrayList<>();
     private SocialAdapter adapter = new SocialAdapter();
@@ -66,6 +67,8 @@ public class SocialUtilActivity extends BaseActivity {
                 return "我的粉丝";
             case 3:
                 return "我的关注";
+            case 15:
+                return "今日运动排行榜";
             default:
                 return "我的悦动";
         }
@@ -75,7 +78,8 @@ public class SocialUtilActivity extends BaseActivity {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int uid) {
-                ToastUtil.toast(Integer.toString(uid));
+                //ToastUtil.toast(Integer.toString(uid));
+                UIUtil.showUserProfile(SocialUtilActivity.this, uid);
             }
 
             @Override
@@ -87,6 +91,7 @@ public class SocialUtilActivity extends BaseActivity {
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(this).build());
+        mPullToRefreshView = (PullToRefreshView)findViewById(R.id.pull_to_refresh_a);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -188,14 +193,16 @@ public class SocialUtilActivity extends BaseActivity {
         public void onResponse(String response) {
             mList = JsonUtil.resolveUsers(response);
             updateUI();
-            mPullToRefreshView.setRefreshing(false);
+            if(mPullToRefreshView != null)
+                mPullToRefreshView.setRefreshing(false);
         }
     };
 
     private Response.ErrorListener errorListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            mPullToRefreshView.setRefreshing(false);
+            if(mPullToRefreshView != null)
+                mPullToRefreshView.setRefreshing(false);
             ToastUtil.toast("服务器解析错误，请重试。");
         }
     };

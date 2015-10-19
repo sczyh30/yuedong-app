@@ -15,6 +15,7 @@ import com.m1racle.yuedong.base.UtilActivityPage;
 import com.m1racle.yuedong.ui.DialogUtil;
 import com.m1racle.yuedong.ui.activity.LoginActivity;
 import com.m1racle.yuedong.ui.activity.SocialUtilActivity;
+import com.m1racle.yuedong.ui.activity.UserProfileActivity;
 import com.m1racle.yuedong.ui.activity.UtilActivity;
 
 /**
@@ -51,6 +52,7 @@ public class UIUtil {
         Intent intent = new Intent(context, LoginActivity.class);
         context.startActivity(intent);
     }
+
 
     public static void showActivity(Context context, UtilActivityPage page) {
         Intent intent = new Intent(context, UtilActivity.class);
@@ -103,6 +105,10 @@ public class UIUtil {
 
     public static void showDeviceUserSet(Context context) {
         showActivity(context, UtilActivityPage.DEVICE_USER_INFO_SET);
+    }
+
+    public static void showMessages(Context context) {
+        showActivity(context, UtilActivityPage.MY_SOCIAL_MESSAGE);
     }
 
     public static void showSettingNotification(Context context) {
@@ -181,6 +187,11 @@ public class UIUtil {
         context.startActivity(intent);
     }
 
+    public static void showUserProfile(Context context, int uid) {
+        Intent intent = new Intent(context, UserProfileActivity.class);
+        intent.putExtra("uid", uid);
+        context.startActivity(intent);
+    }
 
 
     public static void clearAppCache(Activity activity) {

@@ -17,6 +17,23 @@
             <include layout="@layout/fragment_my_information_head" />
 
             <LinearLayout
+                android:id="@+id/rl_rank"
+                style="@style/option_item_rl" >
+
+                <ImageView
+                    style="@style/option_item_img"
+                    android:background="@mipmap/icon_my_blog"
+                    android:contentDescription="@null" />
+
+                <TextView
+                    style="@style/option_item_text"
+                    android:text="今日运动排行榜" />
+            </LinearLayout>
+
+            <View
+                style="@style/h_line" />
+
+            <LinearLayout
                 android:id="@+id/rl_message"
                 style="@style/option_item_rl" >
 
@@ -40,22 +57,7 @@
             <View
                 style="@style/h_line" />
 
-            <LinearLayout
-                android:id="@+id/rl_activities"
-                style="@style/option_item_rl" >
 
-                <ImageView
-                    style="@style/option_item_img"
-                    android:background="@mipmap/icon_my_blog"
-                    android:contentDescription="@null" />
-
-                <TextView
-                    style="@style/option_item_text"
-                    android:text="@string/activi" />
-            </LinearLayout>
-
-            <View
-                style="@style/h_line" />
 
             <LinearLayout
                 android:id="@+id/rl_friend"

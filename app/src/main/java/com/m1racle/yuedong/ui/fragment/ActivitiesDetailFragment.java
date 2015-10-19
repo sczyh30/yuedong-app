@@ -56,6 +56,8 @@ public class ActivitiesDetailFragment extends BaseFragment {
     View mLocation;
     @Bind(R.id.tv_event_tip)
     TextView mEventTip;
+    @Bind(R.id.tv_body)
+    TextView mTvBody;
     @Bind(R.id.error_layout)
     EmptyLayout mErrorLayout;
     @Bind(R.id.webview)
@@ -106,6 +108,7 @@ public class ActivitiesDetailFragment extends BaseFragment {
         mTvStartTime.setText(mData.getStartTime());
         mTvEndTime.setText(mData.getEndTime());
         mEtLocation.setText(mData.getLocation());
+        mTvBody.setText(mData.getBody());
     }
 
     @Override

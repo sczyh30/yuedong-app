@@ -230,7 +230,7 @@ public class MySocialInfoFragment extends BaseFragment {
 
     @Override
     @OnClick({R.id.ly_motion_activities, R.id.iv_qr_code, R.id.ly_following, R.id.ly_follower, R.id.rl_message,
-            R.id.rl_health, R.id.rl_activities, R.id.rl_friend, R.id.rl_user_unlogin})
+            R.id.rl_health, R.id.rl_rank, R.id.rl_friend, R.id.rl_user_unlogin})
     public void onClick(View view) {
         if (isWaitingLogin) {
             ToastUtil.toast(R.string.unlogin);
@@ -246,11 +246,20 @@ public class MySocialInfoFragment extends BaseFragment {
             case R.id.rl_friend:
                 UIUtil.showRelationActivity(getActivity(), 1);
                 break;
+            case R.id.rl_rank:
+                UIUtil.showRelationActivity(getActivity(), 15);
+                break;
+            case R.id.rl_message:
+                UIUtil.showMessages(getActivity());
+                break;
             case R.id.ly_follower:
                 UIUtil.showRelationActivity(getActivity(), 2);
                 break;
             case R.id.ly_following:
                 UIUtil.showRelationActivity(getActivity(), 3);
+                break;
+            case R.id.rl_health:
+                UIUtil.showHealthAdvice(getActivity());
                 break;
             case R.id.iv_avatar:
                 showMyDetail();

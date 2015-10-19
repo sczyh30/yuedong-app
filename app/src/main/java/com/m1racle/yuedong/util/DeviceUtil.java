@@ -69,6 +69,10 @@ public class DeviceUtil {
     public DeviceUtil() {
     }
 
+    public static boolean isAndroid5() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+    }
+
     public static float dpToPixel(float dp) {
         return dp * (getDisplayMetrics().densityDpi / 160F);
     }

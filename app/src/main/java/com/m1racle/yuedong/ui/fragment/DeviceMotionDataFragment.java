@@ -45,26 +45,12 @@ public class DeviceMotionDataFragment extends BaseFragment {
 
     private void initHWManager() {
         HWManager = getHuaweiManager();
-        if(HWManager != null) {
-            HWManager.registerConnectStateCallback(stateCallBack);
-        }
     }
 
     @Override
     public void onClick(View v) {
 
     }
-
-    private IDeviceConnectStatusCallback stateCallBack = new IDeviceConnectStatusCallback() {
-        @Override
-        public void onConnectStatusChange(int deviceType, String macAddress, int status, int err_code) {
-            Message message = Message.obtain();
-            message.what = HWServiceConfig.CONNECT_DEVICE;
-            message.obj = status;
-            message.arg1 = err_code;
-            mHandler.sendMessage(message);
-        }
-    };
 
     private class MyHandler extends Handler {
         private final WeakReference<DeviceMotionDataFragment> mFragment;

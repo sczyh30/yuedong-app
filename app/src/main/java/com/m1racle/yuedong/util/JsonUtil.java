@@ -26,6 +26,11 @@ public class JsonUtil {
         return gson.fromJson(jsonData, listType);
     }
 
+    public static ArrayList<BaseMessage> resolveMessages(String jsonData) {
+        Type listType = new TypeToken<ArrayList<BaseMessage>>(){}.getType();
+        return gson.fromJson(jsonData, listType);
+    }
+
     public static Object resolveSingle(String jsonData, Class<?> cls) {
         return gson.fromJson(jsonData, cls);
     }

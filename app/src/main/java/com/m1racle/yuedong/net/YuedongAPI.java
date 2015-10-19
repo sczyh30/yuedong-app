@@ -6,6 +6,7 @@ import com.android.volley.Response;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.entity.LoginResult;
 import com.m1racle.yuedong.entity.MotionActivitiesDetail;
+import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.net.request.SamsaraGsonRequest;
 import com.m1racle.yuedong.net.request.SamsaraStringRequest;
 import com.m1racle.yuedong.util.LogUtil;
@@ -30,6 +31,7 @@ public class YuedongAPI {
     public static final String URL_LOGIN = "action/api/login.json";
     public static final String URL_GET_LATEST_ACTIVITIES = "action/api/get/latest_ma.json";
     public static final String URL_GET_USER = "action/api/get/user.json";
+    public static final String URL_GET_MESSAGES = "action/api/get/message";
     public static final String URL_GET_USER_DETAIL= "action/api/get/user_detail.json";
     public static final String URL_UPLOAD_LOG = "action/api/upload/log";
     public static final String URL_GET_ANDROID_UPDATE = "action/api/get/app_version_android.json";
@@ -38,6 +40,8 @@ public class YuedongAPI {
     public static final String URL_GET_FRIEND = "action/api/get/friend";
     public static final String URL_GET_FANS = "action/api/get/fans";
     public static final String URL_GET_FOLLOWING = "action/api/get/following";
+
+    public static final String URL_GET_TODAY_RANK= "action/api/get/today_rank";
 
     /**
      * Login API method (POST)
@@ -117,6 +121,41 @@ public class YuedongAPI {
         LogUtil.log("GET => " + url);
     }
 
+    public static void getMessages(final int uid, Response.Listener<String> listener,
+                                   Response.ErrorListener errorListener) {
+        //String url = ApiRequestClient.getAbsoluteApiUrl(URL_GET_MESSAGES);
+        String url = ApiRequestClient.getAbsoluteApiUrl("action/api/get/message/" + uid + ".json");
+        SamsaraStringRequest request = new SamsaraStringRequest(url, listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("uid", Integer.toString(uid));
+                return params;
+            }
+        };
+        request.setDefaultHeaders(appCookie);
+        ApiRequestClient.send(request);
+        LogUtil.log("GET => " + url);
+    }
+
+    public static void getUser(final int uid, Response.Listener<User> listener,
+                                   Response.ErrorListener errorListener) {
+        //String url = ApiRequestClient.getAbsoluteApiUrl(URL_GET_USER);
+        String url = ApiRequestClient.getAbsoluteApiUrl("action/api/get/user/" + uid + ".json"); //ONLY FOR TEST
+        SamsaraGsonRequest<User> request = new SamsaraGsonRequest<User>(url, User.class,
+                listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("uid", Integer.toString(uid));
+                return params;
+            }
+        };
+        request.setDefaultHeaders(appCookie);
+        ApiRequestClient.send(request);
+        LogUtil.log("GET => " + url);
+    }
+
     public static void getFriendList(final int uid, final int type, Response.Listener<String> listener,
                                      Response.ErrorListener errorListener) {
         String url = ApiRequestClient.getAbsoluteApiUrl(getRelationRequestURL(uid, type));
@@ -141,6 +180,8 @@ public class YuedongAPI {
                 return URL_GET_FANS + "/" + uid + ".json";
             case 3:
                 return URL_GET_FOLLOWING + "/" + uid + ".json";
+            case 15:
+                return URL_GET_TODAY_RANK+ "/" + uid + ".json";
             default:
                 return "";
         }

@@ -113,6 +113,14 @@
                 android:layout_marginLeft="@dimen/space_10"
                 android:layout_marginRight="@dimen/space_10" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_body"
+                android:textSize="16sp"
+                android:layout_marginTop="@dimen/space_10"
+                android:layout_marginRight="@dimen/space_10"
+                android:layout_marginLeft="@dimen/space_10"/>
             <WebView
                 android:id="@+id/webview"
                 android:layout_width="fill_parent"

@@ -23,6 +23,9 @@ public class User extends Entity {
     private int score;
     private int activities_number;
 
+    private int rank;
+    private int step;
+
     private String location;
     private int gender;
 
@@ -144,6 +147,22 @@ public class User extends Entity {
 
     public void setTips(String tips) {
         this.tips = tips;
+    }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public int getStep() {
+        return step;
+    }
+
+    public void setStep(int step) {
+        this.step = step;
     }
 
     @Override

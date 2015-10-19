@@ -41,7 +41,7 @@ public class BaseFriendHolder extends RecyclerView.ViewHolder {
             if(data.getPortrait() != null)
                 BitmapRequestClient.send(mCircle, "portrait/" + data.getPortrait(), 50, 50);
             else
-                BitmapRequestClient.send(mCircle, "image_no");
+                BitmapRequestClient.send(mCircle, "widget_dface");
         }
     }
 }

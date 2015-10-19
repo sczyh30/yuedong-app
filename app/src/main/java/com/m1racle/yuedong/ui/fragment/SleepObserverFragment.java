@@ -135,7 +135,14 @@ public class SleepObserverFragment extends BaseFragment {
 
                         @Override
                         public void onFailure(int err_code, String err_msg) {
-                            ensureView();
+                            //ensureView();
+                            DataRawSleepData dataRawSleepData = new DataRawSleepData();
+                            dataRawSleepData.setStartTime((int)System.currentTimeMillis());
+                            dataRawSleepData.setCurrentStatus(10);
+                            dataRawSleepData.setTotalCalorie(1000);
+                            dataRawSleepData.setTotalSleepTime(60);
+                            mList.add(dataRawSleepData);
+                            updateUI();
                             error_code = err_code;
                             ToastUtil.toast("获取睡眠信息失败");
                         }

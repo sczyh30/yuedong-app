@@ -69,6 +69,11 @@
             android:name=".ui.activity.SocialUtilActivity"
             android:label="@string/title_activity_social_util" >
         </activity>
+        <activity
+            android:name=".ui.activity.UserProfileActivity"
+            android:label="@string/title_activity_user_profile"
+            android:theme="@style/NoActionBar">
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.m1racle.yuedong.ui.fragment.MessageFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tl_tab"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="?attr/colorAccent"
+            app:tabGravity="fill"
+            app:tabIndicatorColor="#5be5ad"
+            app:tabIndicatorHeight="4dp"
+            app:tabMode="fixed" />
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/content_layout"
+        android:layout_marginTop="48dp">
+        <com.yalantis.phoenix.PullToRefreshView
+            android:id="@+id/pull_to_refresh_b"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:fadingEdge="none"/>
+        </com.yalantis.phoenix.PullToRefreshView>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/btnCreate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/space_16"
+            android:layout_marginRight="@dimen/space_16"
+            android:src="@mipmap/action_refresh"
+            app:borderWidth="0dp"
+            app:elevation="6dp"
+            app:pressedTranslationZ="12dp" />
+    </FrameLayout>
+
+
+    <com.m1racle.yuedong.ui.empty.EmptyLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/error_layout"
+        android:visibility="gone">
+    </com.m1racle.yuedong.ui.empty.EmptyLayout>
+
+
+</FrameLayout>

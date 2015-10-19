@@ -50,4 +50,5 @@ public class BaseFriend extends Entity {
     public void setTips(String tips) {
         this.tips = tips;
     }
+
 }

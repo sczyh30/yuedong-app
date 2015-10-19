@@ -155,6 +155,7 @@
     <string name="actionbar_title_device_motion_goal_set">设定运动目标</string>
     <string name="actionbar_title_device_sleep_observer">睡眠监测</string>
     <string name="actionbar_title_motion_activities_detail">约动起来</string>
+    <string name="actionbar_title_message">我的信息</string>
 
     <string-array name="weeks">
         <item>周一</item>
@@ -171,5 +172,6 @@
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_social_util">我的悦动</string>
+    <string name="title_activity_user_profile">用户信息</string>
 
 </resources>
