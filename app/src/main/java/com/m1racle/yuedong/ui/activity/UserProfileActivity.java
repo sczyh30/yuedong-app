@@ -136,13 +136,21 @@ public class UserProfileActivity extends BaseActivity
             mTvFollowing.setText(Integer.toString(mUser.getFollowers()));
             mIvGender.setImageResource(StringUtils.toInt(mUser.getGender()) == 1 ?
                     R.mipmap.userinfo_icon_male : R.mipmap.userinfo_icon_female);
-            if(mUser.getPortrait() != null)
-                BitmapRequestClient.send(mAvatar, "portrait/" + mUser.getPortrait(), 100, 100);
-            else
-                BitmapRequestClient.send(mAvatar, "widget_dface");
+            getImages();
         }
         if(mList.size() > 0)
             adapter.notifyDataSetChanged();
+    }
+
+    private void getImages() {
+        if(mUser.getBackground() != null)
+            vUserProfileRoot.setBackgroundResource(R.mipmap.profile_bg3);
+        else
+            vUserProfileRoot.setBackgroundResource(R.mipmap.profile_bg2);
+        if(mUser.getPortrait() != null)
+            BitmapRequestClient.send(mAvatar, "portrait/" + mUser.getPortrait(), 100, 100);
+        else
+            mAvatar.setImageResource(R.mipmap.widget_dface);
     }
 
     private void getData() {

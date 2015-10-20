@@ -142,8 +142,11 @@ public class DeviceAlarmSetFragment extends BaseFragment {
             summaryData();
             if(mList.size() >= mAlarm.getAlarm_index() - 1) {
                 mList.remove(mAlarm.getAlarm_index() - 1);
+                mList.add(mAlarm.getAlarm_index() - 1, mAlarm);
+            } else {
+                mList.add(mAlarm);
             }
-            mList.add(mAlarm.getAlarm_index() - 1, mAlarm);
+
             HWManager.setAlarmList(HWServiceConfig.HUAWEI_TALKBAND_B2, mList, new IResultReportCallback() {
                 @Override
                 public void onSuccess(Object object) {

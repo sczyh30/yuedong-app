@@ -4,11 +4,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.entity.BaseMessage;
 import com.m1racle.yuedong.net.BitmapRequestClient;
 import com.m1racle.yuedong.ui.widget.CircleImageView;
 import com.m1racle.yuedong.util.DeviceUtil;
+import com.m1racle.yuedong.util.UIUtil;
 
 /**
  * Yuedong app
@@ -28,7 +30,7 @@ public class BaseMessageHolder extends RecyclerView.ViewHolder {
         mTvMessage = (TextView)itemView.findViewById(R.id.tv_message);
     }
 
-    public void bindData(BaseMessage data) {
+    public void bindData(final BaseMessage data) {
         mTvMessage.setText(data.getMessage());
         mTvTime.setText(data.getTime());
         mTvUsername.setText(data.getUsername());
@@ -36,7 +38,14 @@ public class BaseMessageHolder extends RecyclerView.ViewHolder {
             if(data.getPortrait() != null)
                 BitmapRequestClient.send(mCircle, "portrait/" + data.getPortrait(), 100, 100);
             else
-                BitmapRequestClient.send(mCircle, "widget_dface");
+                mCircle.setImageResource(R.mipmap.widget_dface);
         }
+        mCircle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(data.getUid() != 0)
+                    UIUtil.showUserProfile(AppContext.getContext(), data.getUid());
+            }
+        });
     }
 }

@@ -190,6 +190,7 @@ public class UIUtil {
     public static void showUserProfile(Context context, int uid) {
         Intent intent = new Intent(context, UserProfileActivity.class);
         intent.putExtra("uid", uid);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 

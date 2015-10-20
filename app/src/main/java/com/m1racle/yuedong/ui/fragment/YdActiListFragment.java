@@ -1,14 +1,19 @@
 package com.m1racle.yuedong.ui.fragment;
 
+import android.animation.ObjectAnimator;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +39,9 @@ import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Yuedong common motion activities(in life) Fragment
@@ -44,6 +51,11 @@ public class YdActiListFragment extends BaseFragment {
     private PullToRefreshView mPullToRefreshView;
     RecyclerView mRecyclerView;
     RlistAdapter adapter = new RlistAdapter();
+
+    ObjectAnimator refreshAnimator;
+
+    @Bind(R.id.btnCreate)
+    FloatingActionButton btnRefresh;
 
     protected ArrayList<MotionActivitiesPre> dataList = new ArrayList<>();
 
@@ -74,17 +86,18 @@ public class YdActiListFragment extends BaseFragment {
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
-
         mPullToRefreshView = (PullToRefreshView) rootView.findViewById(R.id.pull_to_refresh);
         mPullToRefreshView.setOnRefreshListener(new PullToRefreshView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if(!DeviceUtil.hasInternet()) {
+                if (!DeviceUtil.hasInternet()) {
                     mPullToRefreshView.setRefreshing(false);
                     readCacheData(getCacheKey());
+                } else {
+                    refreshAnimator.start();
+                    getData();
                 }
-                else
-                    YuedongAPI.getLatestMotionActivities(listener, errorListener);
+
             }
         });
         initData();
@@ -97,8 +110,13 @@ public class YdActiListFragment extends BaseFragment {
     @Override
     public void initView(View view) {
         super.initView(view);
+        initAnimator();
         if(DeviceUtil.getNetworkType() == 1)
-            YuedongAPI.getLatestMotionActivities(listener, errorListener);
+            getData();
+    }
+
+    private void getData() {
+        YuedongAPI.getLatestMotionActivities(listener, errorListener);
     }
 
     @Override
@@ -124,6 +142,7 @@ public class YdActiListFragment extends BaseFragment {
                 adapter.notifyDataSetChanged();
             }
             mPullToRefreshView.setRefreshing(false);
+            refreshAnimator.cancel();
         }
     };
 
@@ -133,6 +152,7 @@ public class YdActiListFragment extends BaseFragment {
             mPullToRefreshView.setRefreshing(false);
             error.printStackTrace();
             ToastUtil.toast("服务器解析错误，请重试。");
+            refreshAnimator.cancel();
         }
     };
 
@@ -275,8 +295,21 @@ public class YdActiListFragment extends BaseFragment {
         }
     }
 
-    @Override
-    public void onClick(View view) {
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
+    private void initAnimator() {
+        LinearInterpolator interpolator = new LinearInterpolator();
+        refreshAnimator = ObjectAnimator.ofFloat(btnRefresh,"rotation",
+                0f, 360f);
+        refreshAnimator.setInterpolator(interpolator);
+        refreshAnimator.setDuration(300);
+        refreshAnimator.setAutoCancel(false);
+    }
 
+
+    @Override
+    @OnClick(R.id.btnCreate)
+    public void onClick(View view) {
+        refreshAnimator.start();
+        getData();
     }
 }

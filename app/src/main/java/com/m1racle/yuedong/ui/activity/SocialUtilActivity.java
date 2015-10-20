@@ -1,13 +1,15 @@
 package com.m1racle.yuedong.ui.activity;
 
-import android.content.Intent;
+import android.animation.ObjectAnimator;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 
 import com.android.volley.Response;
@@ -39,6 +41,8 @@ public class SocialUtilActivity extends BaseActivity {
     EmptyLayout emptyLayout;
     @Bind(R.id.content_layout)
     FrameLayout contentLayout;
+    @Bind(R.id.btnCreate)
+    FloatingActionButton btnRefresh;
 
     PullToRefreshView mPullToRefreshView;
     private int type;
@@ -112,8 +116,7 @@ public class SocialUtilActivity extends BaseActivity {
             ToastUtil.toast(R.string.error_view_load_error_click_to_refresh);
         }
         else
-            //YuedongAPI.getFriendList(AppContext.getContext().getLoginUid(), type, listener, errorListener);
-            YuedongAPI.getFriendList(6666, type, listener, errorListener);
+            YuedongAPI.getFriendList(AppContext.getContext().getLoginUid(), type, listener, errorListener);
     }
 
     private void updateUI() {
@@ -132,6 +135,7 @@ public class SocialUtilActivity extends BaseActivity {
     @Override
     @OnClick(R.id.btnCreate)
     public void onClick(View v) {
+        doAnimator();
         getData();
     }
 
@@ -206,6 +210,16 @@ public class SocialUtilActivity extends BaseActivity {
             ToastUtil.toast("服务器解析错误，请重试。");
         }
     };
+
+    private void doAnimator() {
+        LinearInterpolator interpolator = new LinearInterpolator();
+        ObjectAnimator refreshAnimator = ObjectAnimator.ofFloat(btnRefresh, "rotation",
+                0f, 360f);
+        refreshAnimator.setInterpolator(interpolator);
+        refreshAnimator.setDuration(300);
+        refreshAnimator.setRepeatCount(3);
+        refreshAnimator.start();
+    }
 
 
 }
