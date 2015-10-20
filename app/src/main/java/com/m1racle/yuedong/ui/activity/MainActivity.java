@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity
     private static final int TAB_COUNT = 4;
     private UsualViewPagerAdapter adapter;
     private List<Fragment> fragmentList;
-    public static final int MENU_TEST = R.menu.menu_test;
+    public static final int MENU_TEST = R.menu.global;
     public static Notice mNotice;
 
     private IntentFilter netFilter;

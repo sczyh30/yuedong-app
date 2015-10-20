@@ -14,6 +14,7 @@ import com.m1racle.yuedong.util.UIUtil;
 
 /**
  * Yuedong app
+ * Bas eMessage ViewHolder
  */
 public class BaseMessageHolder extends RecyclerView.ViewHolder {
 

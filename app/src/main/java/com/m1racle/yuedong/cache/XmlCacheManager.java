@@ -9,7 +9,7 @@ import com.m1racle.yuedong.AppContext;
 
 /**
  * Yuedong app
- * Xml Cache Manager
+ * SharedPreferences Cache Manager
  * @author sczyh30
  */
 public class XmlCacheManager {

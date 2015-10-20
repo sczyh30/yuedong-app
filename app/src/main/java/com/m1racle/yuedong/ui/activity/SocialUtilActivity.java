@@ -21,6 +21,7 @@ import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.net.YuedongAPI;
 import com.m1racle.yuedong.ui.empty.EmptyLayout;
 import com.m1racle.yuedong.ui.recycler.BaseFriendHolder;
+import com.m1racle.yuedong.util.AnimatorUtil;
 import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.JsonUtil;
 import com.m1racle.yuedong.util.ToastUtil;
@@ -82,7 +83,6 @@ public class SocialUtilActivity extends BaseActivity {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int uid) {
-                //ToastUtil.toast(Integer.toString(uid));
                 UIUtil.showUserProfile(SocialUtilActivity.this, uid);
             }
 
@@ -135,7 +135,7 @@ public class SocialUtilActivity extends BaseActivity {
     @Override
     @OnClick(R.id.btnCreate)
     public void onClick(View v) {
-        doAnimator();
+        AnimatorUtil.doSimpleRefresh(btnRefresh);
         getData();
     }
 
@@ -211,15 +211,6 @@ public class SocialUtilActivity extends BaseActivity {
         }
     };
 
-    private void doAnimator() {
-        LinearInterpolator interpolator = new LinearInterpolator();
-        ObjectAnimator refreshAnimator = ObjectAnimator.ofFloat(btnRefresh, "rotation",
-                0f, 360f);
-        refreshAnimator.setInterpolator(interpolator);
-        refreshAnimator.setDuration(300);
-        refreshAnimator.setRepeatCount(3);
-        refreshAnimator.start();
-    }
 
 
 }
