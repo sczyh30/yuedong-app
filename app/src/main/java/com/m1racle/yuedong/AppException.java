@@ -25,8 +25,9 @@ import com.m1racle.yuedong.util.UIUtil;
 import cz.msebera.android.httpclient.HttpException;
 
 /**
- * 应用程序异常：用于捕获异常和提示错误信息
- * 
+ * Yuedong app
+ * App exception
+ * @author osc
  */
 @SuppressWarnings("serial")
 public class AppException extends Exception implements UncaughtExceptionHandler {
@@ -40,7 +41,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
     public final static byte TYPE_IO = 0x06;
     public final static byte TYPE_RUN = 0x07;
     public final static byte TYPE_JSON = 0x08;
-    public final static byte TYPE_FILENOTFOUND = 0x09;
+    public final static byte TYPE_FILE_NOT_FOUND = 0x09;
 
     private byte type;// 异常的类型
     // 异常的状态码，这里一般是网络请求的状态码
@@ -80,7 +81,7 @@ public class AppException extends Exception implements UncaughtExceptionHandler 
     }
 
     public static AppException file(Exception e) {
-        return new AppException(TYPE_FILENOTFOUND, 0, e);
+        return new AppException(TYPE_FILE_NOT_FOUND, 0, e);
     }
 
     // io异常

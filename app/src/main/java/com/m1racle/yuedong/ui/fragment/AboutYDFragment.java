@@ -24,10 +24,6 @@ import butterknife.ButterKnife;
  */
 public class AboutYDFragment extends BaseFragment {
 
-
-    @Bind(R.id.ab_version)
-    TextView mTvVersionStatus;
-
     @Bind(R.id.ab_version_name)
     TextView mTvVersionName;
 
@@ -59,7 +55,7 @@ public class AboutYDFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        mTvVersionName.setText("悦动 v " + DeviceUtil.getVersionName());
+        mTvVersionName.setText(String.format("悦动 v %s", DeviceUtil.getVersionName()));
     }
 
     @Override
@@ -71,7 +67,6 @@ public class AboutYDFragment extends BaseFragment {
                 break;
             case R.id.rl_feedback:
                 showFeedback();
-                UIUtil.showRelationActivity(getActivity(), 2);
                 break;
             case R.id.rl_grade:
                 DeviceUtil.openAppInMarket(getActivity());
@@ -81,7 +76,7 @@ public class AboutYDFragment extends BaseFragment {
                 break;
             case R.id.ab_gosite:
                 UIUtil.openSysBrowser(getActivity(),
-                        "http://www.sczyh30.com");
+                        "http://app.yuedong.com");
                 break;
             case R.id.tv_knowmore:
                 UIUtil.openSysBrowser(getActivity(),

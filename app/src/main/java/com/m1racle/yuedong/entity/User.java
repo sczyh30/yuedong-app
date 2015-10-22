@@ -13,6 +13,7 @@ public class User extends Entity {
     private String password;
     private String portrait;
     private String tips;
+    private String background;
 
     private String temp_token;
     //private TempToken temp_token;
@@ -163,6 +164,14 @@ public class User extends Entity {
 
     public void setStep(int step) {
         this.step = step;
+    }
+
+    public String getBackground() {
+        return background;
+    }
+
+    public void setBackground(String background) {
+        this.background = background;
     }
 
     @Override

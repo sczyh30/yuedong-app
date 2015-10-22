@@ -19,7 +19,7 @@ public class AppManager {
     private AppManager() {}
 
     /**
-     * 单一实例
+     * Singleton instance
      */
     public static AppManager getAppManager() {
         if (instance == null) {
@@ -29,24 +29,24 @@ public class AppManager {
     }
 
     /**
-     * 添加Activity到堆栈
+     * add Activity to the stack
      */
     public void addActivity(Activity activity) {
         if (activityStack == null) {
-            activityStack = new Stack<Activity>();
+            activityStack = new Stack<>();
         }
         activityStack.add(activity);
     }
 
     /**
-     * 获取当前Activity（堆栈中最后一个压入的）
+     * get current Activity(top)
      */
     public Activity currentActivity() {
         return activityStack.lastElement();
     }
 
     /**
-     * 结束当前Activity（堆栈中最后一个压入的）
+     * finish current Activity(top)
      */
     public void finishActivity() {
         Activity activity = activityStack.lastElement();
@@ -54,7 +54,7 @@ public class AppManager {
     }
 
     /**
-     * 结束指定的Activity
+     * finish the certain Activity
      */
     public void finishActivity(Activity activity) {
         if (activity != null && !activity.isFinishing()) {
@@ -65,7 +65,7 @@ public class AppManager {
     }
 
     /**
-     * 结束指定类名的Activity
+     * finish the certain Activity by Class Object
      */
     public void finishActivity(Class<?> cls) {
         for (Activity activity : activityStack) {
@@ -77,7 +77,7 @@ public class AppManager {
     }
 
     /**
-     * 结束所有Activity
+     * finish all Activities
      */
     public void finishAllActivity() {
         for (int i = 0, size = activityStack.size(); i < size; i++) {

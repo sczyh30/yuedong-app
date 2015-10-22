@@ -11,8 +11,8 @@ import java.io.FileOutputStream;
 import java.util.Properties;
 
 /**
- * 应用程序配置类：用于保存用户相关信息及设置
- * 
+ * Yuedong App
+ * App config class
  */
 public class AppConfig {
 

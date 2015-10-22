@@ -1,6 +1,7 @@
 package com.m1racle.yuedong.ui.activity;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +27,7 @@ import com.m1racle.yuedong.net.YuedongAPI;
 import com.m1racle.yuedong.ui.recycler.BaseMessageHolder;
 import com.m1racle.yuedong.ui.widget.CircleImageView;
 import com.m1racle.yuedong.ui.widget.RevealBackgroundView;
+import com.m1racle.yuedong.util.AnimatorUtil;
 import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.JsonUtil;
 import com.m1racle.yuedong.util.ToastUtil;
@@ -75,6 +77,8 @@ public class UserProfileActivity extends BaseActivity
     View vUserStats;
     @Bind(R.id.vUserProfileRoot)
     View vUserProfileRoot;
+    @Bind(R.id.btnCreate)
+    FloatingActionButton btnRefresh;
 
     private int uid;
     private User mUser;
@@ -97,6 +101,7 @@ public class UserProfileActivity extends BaseActivity
     @Override
     @OnClick(R.id.btnCreate)
     public void onClick(View v) {
+        AnimatorUtil.doSimpleRefresh(btnRefresh, 2);
         getData();
     }
 
@@ -136,13 +141,21 @@ public class UserProfileActivity extends BaseActivity
             mTvFollowing.setText(Integer.toString(mUser.getFollowers()));
             mIvGender.setImageResource(StringUtils.toInt(mUser.getGender()) == 1 ?
                     R.mipmap.userinfo_icon_male : R.mipmap.userinfo_icon_female);
-            if(mUser.getPortrait() != null)
-                BitmapRequestClient.send(mAvatar, "portrait/" + mUser.getPortrait(), 100, 100);
-            else
-                BitmapRequestClient.send(mAvatar, "widget_dface");
+            getImages();
         }
         if(mList.size() > 0)
             adapter.notifyDataSetChanged();
+    }
+
+    private void getImages() {
+        if(mUser.getBackground() != null)
+            vUserProfileRoot.setBackgroundResource(R.mipmap.profile_bg3);
+        else
+            vUserProfileRoot.setBackgroundResource(R.mipmap.profile_bg2);
+        if(mUser.getPortrait() != null)
+            BitmapRequestClient.send(mAvatar, "portrait/" + mUser.getPortrait(), 100, 100);
+        else
+            mAvatar.setImageResource(R.mipmap.widget_dface);
     }
 
     private void getData() {

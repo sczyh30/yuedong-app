@@ -239,6 +239,9 @@ public class MySocialInfoFragment extends BaseFragment {
         }
         int id = view.getId();
         switch (id) {
+            case R.id.ly_motion_activities:
+                ToastUtil.toast("参加过的活动");
+                break;
             case R.id.rl_user_unlogin:
                 ToastUtil.toast(R.string.unlogin);
                 UIUtil.showLoginActivity(getActivity());

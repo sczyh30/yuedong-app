@@ -24,13 +24,11 @@ import java.lang.ref.WeakReference;
 public abstract class BaseFragment extends Fragment implements
         android.view.View.OnClickListener {
 
-    protected WeakReference<View> mRootView;
-
     public static final int STATE_NONE = 0;
     public static final int STATE_REFRESH = 1;
     public static final int STATE_LOADMORE = 2;
     public static final int STATE_NOMORE = 3;
-    public static final int STATE_PRESSNONE = 4;// 正在下拉但还没有到刷新的状态
+    public static final int STATE_PRESSNONE = 4;
     public static int mState = STATE_NONE;
 
     protected LayoutInflater mInflater;

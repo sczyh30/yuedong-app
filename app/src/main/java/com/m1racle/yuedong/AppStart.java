@@ -12,6 +12,7 @@ import com.m1racle.yuedong.service.LogUploadService;
 import com.m1racle.yuedong.ui.activity.MainActivity;
 
 /**
+ * Yuedong App
  * The App's start activity
  * @author sczyh30
  */

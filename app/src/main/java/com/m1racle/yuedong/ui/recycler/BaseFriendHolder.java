@@ -5,11 +5,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.net.BitmapRequestClient;
 import com.m1racle.yuedong.ui.widget.CircleImageView;
 import com.m1racle.yuedong.util.DeviceUtil;
+import com.m1racle.yuedong.util.UIUtil;
 
 import org.kymjs.kjframe.utils.StringUtils;
 
@@ -32,7 +34,7 @@ public class BaseFriendHolder extends RecyclerView.ViewHolder {
         mIvGender = (ImageView)itemView.findViewById(R.id.iv_gender);
     }
 
-    public void bindData(User data) {
+    public void bindData(final User data) {
         mIvGender.setImageResource(StringUtils.toInt(data.getGender()) == 1 ?
                 R.mipmap.userinfo_icon_male : R.mipmap.userinfo_icon_female);
         mTvTips.setText(data.getTips());
@@ -41,7 +43,14 @@ public class BaseFriendHolder extends RecyclerView.ViewHolder {
             if(data.getPortrait() != null)
                 BitmapRequestClient.send(mCircle, "portrait/" + data.getPortrait(), 50, 50);
             else
-                BitmapRequestClient.send(mCircle, "widget_dface");
+                mCircle.setImageResource(R.mipmap.widget_dface);
         }
+        mCircle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(data.getId() != 0)
+                    UIUtil.showUserProfile(AppContext.getContext(), data.getId());
+            }
+        });
     }
 }
