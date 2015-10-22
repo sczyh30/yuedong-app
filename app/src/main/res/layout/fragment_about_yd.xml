@@ -148,12 +148,6 @@
             android:text="@string/copyright"
             android:textColor="?attr/infoTextColor" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/copyright_support"
-            android:textColor="?attr/infoTextColor" />
     </LinearLayout>
 
 </ScrollView>

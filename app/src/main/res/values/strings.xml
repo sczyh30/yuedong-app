@@ -88,11 +88,10 @@
     <string name="exit">退出</string>
     <string name="grade">去评分</string>
 
-    <string name="gosite">华为官网</string>
+    <string name="gosite">App官网</string>
     <string name="knowmore">了解更多</string>
     <string name="hwapp">华为智能设备客户端</string>
     <string name="copyright">Copyright © 悦动 2015.</string>
-    <string name="copyright_support">本应用由华为手环强力驱动</string>
 
     <string name="qr_code_tip">扫一扫上面的二维码，加我为好友</string>
     <string name="qr_code_tip2">(长按保存到本地)</string>
@@ -169,8 +168,6 @@
     </string-array>
 
     <string name="detail_information">详细信息</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_social_util">我的悦动</string>
     <string name="title_activity_user_profile">用户信息</string>
 
