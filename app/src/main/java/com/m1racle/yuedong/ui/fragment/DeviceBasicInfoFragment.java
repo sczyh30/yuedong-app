@@ -1,8 +1,6 @@
 package com.m1racle.yuedong.ui.fragment;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,12 +18,13 @@ import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.service.HWServiceConfig;
+import com.m1racle.yuedong.ui.widget.SlideButton;
+import com.m1racle.yuedong.util.LogUtil;
 
 import java.lang.ref.WeakReference;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 
 /**
@@ -37,8 +36,6 @@ import butterknife.OnClick;
  */
 public class DeviceBasicInfoFragment extends BaseFragment {
 
-    protected WeakReference<View> mRootView;
-
     // bind the view components
     @Bind(R.id.b2_status_text)
     TextView mEtStatus;
@@ -48,9 +45,10 @@ public class DeviceBasicInfoFragment extends BaseFragment {
     TextView mEtBatteryStatus;
     @Bind(R.id.b2_battery_status_layout)
     LinearLayout mBatteryLayout;
+    @Bind(R.id.btn_update_dvstatus)
+    SlideButton btnRefresh;
 
     private HuaweiWearableManager HWManager = null;
-    private OnFragmentInteractionListener mListener;
     private boolean isInfoOK = false;
 
     @Override
@@ -93,7 +91,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (mRootView == null || mRootView.get() == null) {
+        /*if (mRootView == null || mRootView.get() == null) {
             View view = inflater.inflate(R.layout.fragment_device_basic_info, container, false);
             mRootView = new WeakReference<>(view);
         } else {
@@ -101,8 +99,8 @@ public class DeviceBasicInfoFragment extends BaseFragment {
             if (parent != null) {
                 parent.removeView(mRootView.get());
             }
-        }
-        View view = mRootView.get();
+        }*/
+        View view = inflater.inflate(R.layout.fragment_device_basic_info, container, false);
         initData();
         ButterKnife.bind(this, view);
         initView(view);
@@ -112,65 +110,32 @@ public class DeviceBasicInfoFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-        super.initView(view);
-
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     */
-    public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Uri uri);
-}
-
-    @Override
-    @OnClick({R.id.btn_update_dvstatus})
-    public void onClick(View view) {
-        int id = view.getId();
-        switch (id) {
-            case R.id.btn_update_dvstatus:
-                if(HWManager != null) {
+        btnRefresh.setOnSendClickListener(new SlideButton.OnSendClickListener() {
+            @Override
+            public void onSendClickListener(View v) {
+                btnRefresh.setCurrentState(SlideButton.STATE_DONE);
+                if (HWManager != null) {
                     getConnectState();
                     getBlueToothBattery();
                 }
-                break;
-            default:
-                break;
-        }
+            }
+        });
+
     }
 
-    /**
-     * A custom Handler
-     * In case of causing memory leak
-     * I use the nested class instead
-     * the WeakReference could solve this issue
-     */
+    @Override
+    public void onClick(View view) {
+    }
+
     private static class MyHandler extends Handler {
         private final WeakReference<DeviceBasicInfoFragment> mFragment;
+        private final DeviceBasicInfoFragment fragment;
 
         public MyHandler(DeviceBasicInfoFragment fragment) {
             mFragment = new WeakReference<>(fragment);
+            this.fragment = mFragment.get();
         }
+
 
         @Override
         public void handleMessage(Message msg) {
@@ -178,11 +143,11 @@ public class DeviceBasicInfoFragment extends BaseFragment {
             Object object = msg.obj;
             switch (msg.what) {
                 case HWServiceConfig.GET_DEVICE_BATTERY:
-                    mFragment.get().ensureView();
+                    fragment.ensureView();
                     if(object.equals("获取数据失败"))
-                        mFragment.get().mEtBatteryStatus.setText(R.string.b2_not_get_data);
+                        fragment.mEtBatteryStatus.setText(R.string.b2_not_get_data);
                     else
-                        mFragment.get().mEtBatteryStatus.setText("" + object + "%");
+                        fragment.mEtBatteryStatus.setText(String.format("%s%%", object));
                     break;
                 case HWServiceConfig.CONNECT_DEVICE:
                     updateUI(msg);
@@ -194,24 +159,24 @@ public class DeviceBasicInfoFragment extends BaseFragment {
         }
 
         private void setStatus(int resId) {
-            mFragment.get().mEtStatus.setText(resId);
+            fragment.mEtStatus.setText(resId);
         }
 
         private void updateUI(Message msg) {
             int state = (Integer)msg.obj;
             switch (state) {
                 case 1:
-                    mFragment.get().mEtStatusInst.setText(R.string.b2_connecting);
-                    mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.darker_blue));
+                    fragment.mEtStatusInst.setText(R.string.b2_connecting);
+                    fragment.mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.darker_blue));
                     setStatus(R.string.b2_status_1);
                     break;
                 case 2:
-                    mFragment.get().mEtStatusInst.setText(R.string.b2_connected_ok_st);
-                    mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.lightblue));
+                    fragment.mEtStatusInst.setText(R.string.b2_connected_ok_st);
+                    fragment.mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.lightblue));
                     setStatus(R.string.b2_status_2);
                     break;
                 default:
-                    mFragment.get().mEtStatusInst.setText(R.string.b2_not_connected_st);
+                    fragment.mEtStatusInst.setText(R.string.b2_not_connected_st);
                     switch (msg.arg1) {
                         case 100100:
                             setStatus(R.string.b2_status_err_100100);
@@ -229,7 +194,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
                             setStatus(R.string.b2_status_err_100106);
                             break;
                     }
-                    mFragment.get().mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.red));
+                    fragment.mEtStatus.setTextColor(AppContext.getContext().getResources().getColor(R.color.red));
                     break;
             }
         }

@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
 import com.huawei.huaweiwearable.callback.IResultReportCallback;
 import com.huawei.huaweiwearable.data.DataUserInfo;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
@@ -119,11 +118,6 @@ public class DeviceUserFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        super.initData();
-        initHWManager();
-    }
-
-    private void initHWManager() {
         HWManager = getHuaweiManager();
     }
 
@@ -226,7 +220,6 @@ public class DeviceUserFragment extends BaseFragment {
                         isInfoOK = true;
                         mInfo = XmlCacheManager.readDeviceUser();
                         updateUI();
-                        //ensureView();
                     }
                 });
         }

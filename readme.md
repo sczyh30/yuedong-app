@@ -9,8 +9,13 @@
 - 版本0.9.76 RC2 build 322 UI及稳定性完善
 - 版本1.0 build 328 release
 
+##引用的额外的libs
+- BaiduMap API（在官网可下载）
+- Huawei Wearable API(暂不提供)
+
 ##下一任务
 **Refactor the architecture**
+
 将架构重构为MVVM架构，降低各模块之间的耦合度
 
-2015.10.22
+2015.10.24
