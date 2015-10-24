@@ -76,8 +76,8 @@ public class MySocialInfoFragment extends BaseFragment {
     View mUserContainer;
     @Bind(R.id.rl_user_unlogin)
     View mUserUnLogin;
-    @Bind(R.id.rootview)
-    LinearLayout rootView;
+    //@Bind(R.id.rootview)
+    //LinearLayout rootView;
 
     private User mInfo;
     private AsyncTask<String, Void, User> mCacheTask;
