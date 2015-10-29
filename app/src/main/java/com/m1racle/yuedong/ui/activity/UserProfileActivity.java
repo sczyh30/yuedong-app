@@ -30,6 +30,7 @@ import com.m1racle.yuedong.ui.widget.RevealBackgroundView;
 import com.m1racle.yuedong.util.AnimatorUtil;
 import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.JsonUtil;
+import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
@@ -46,6 +47,8 @@ public class UserProfileActivity extends BaseActivity
     public static final String ARG_REVEAL_START_LOCATION = "reveal_start_location";
     private static final Interpolator INTERPOLATOR = new DecelerateInterpolator();
     private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
+
+    private int ac_flag = 1;
 
     private ArrayList<BaseMessage> mList = new ArrayList<>();
     private MessageAdapter adapter = new MessageAdapter();
@@ -131,9 +134,28 @@ public class UserProfileActivity extends BaseActivity
         }
     };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ac_flag = 1;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ac_flag = 0;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ac_flag = 0;
+    }
+
     private void updateUI() {
         //此逻辑还有些问题，可能会NullPointer
-        if(mUser != null) {
+        //fixed in 1.12
+        if(mUser != null && ac_flag > 0) {
             mTvUsername.setText(mUser.getUsername());
             mTvTips.setText(mUser.getTips());
             mTvActNum.setText(Integer.toString(mUser.getActivitiesNumber()));

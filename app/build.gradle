@@ -9,7 +9,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 336
-        versionName "1.10"
+        versionName "1.12"
     }
     buildTypes {
         release {
