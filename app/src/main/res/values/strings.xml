@@ -72,6 +72,7 @@
     <string name="unlogin_tip">您还未登录\r\n或网络延迟</string>
     <string name="my_information_unlogin_tips">未登录</string>
 
+
     <string name="loading">加载中…</string>
     <string name="loading_no_more">已加载全部</string>
     <string name="saving_data">正在保存数据…</string>
@@ -90,7 +91,7 @@
 
     <string name="gosite">App官网</string>
     <string name="knowmore">了解更多</string>
-    <string name="hwapp">华为智能设备客户端</string>
+    <string name="app_author">作者：sczyh30</string>
     <string name="copyright">Copyright © 悦动 2015.</string>
 
     <string name="qr_code_tip">扫一扫上面的二维码，加我为好友</string>
@@ -121,7 +122,6 @@
     <string name="user_weight">体重</string>
     <string name="run_step_length">跑步步长</string>
     <string name="gender">性别</string>
-    
     <string name="today_total_calorie">今日消耗卡路里量</string>
 
     <string name="activi">活动</string>
@@ -129,9 +129,10 @@
     <string name="qrcode">二维码</string>
     <string name="message">消息</string>
     <string name="health">健康状况</string>
-    <string name="note">便签</string>
     <string name="bookmarks">收藏夹</string>
     <string name="user_score">积分</string>
+    <string name="refresh_b2_status">刷新手环状态</string>
+
 
     <string name="warning_title_0001_error">出错啦！</string>
     <string name="warning_body_0001_error">信息暂时无法获取，请稍候再试。</string>

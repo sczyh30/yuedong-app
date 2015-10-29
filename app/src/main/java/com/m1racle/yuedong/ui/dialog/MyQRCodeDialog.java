@@ -33,7 +33,7 @@ public class MyQRCodeDialog extends Dialog {
         super(context, flag, listener);
     }
 
-    //@SuppressLint("InflateParams")
+    @SuppressLint("InflateParams")
     private MyQRCodeDialog(Context context, int defStyle) {
         super(context, defStyle);
         View contentView = getLayoutInflater().inflate(

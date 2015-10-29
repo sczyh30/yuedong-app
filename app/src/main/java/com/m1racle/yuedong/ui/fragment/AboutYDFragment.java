@@ -48,7 +48,7 @@ public class AboutYDFragment extends BaseFragment {
         view.findViewById(R.id.rl_app_feature).setOnClickListener(this);
         view.findViewById(R.id.rl_feedback).setOnClickListener(this);
         view.findViewById(R.id.rl_grade).setOnClickListener(this);
-        view.findViewById(R.id.bt_hwclient).setOnClickListener(this);
+        view.findViewById(R.id.bt_app_author).setOnClickListener(this);
         view.findViewById(R.id.ab_gosite).setOnClickListener(this);
         view.findViewById(R.id.tv_knowmore).setOnClickListener(this);
     }
@@ -71,8 +71,9 @@ public class AboutYDFragment extends BaseFragment {
             case R.id.rl_grade:
                 DeviceUtil.openAppInMarket(getActivity());
                 break;
-            case R.id.bt_hwclient:
-                ToastUtil.toast("打开华为智能设备客户端");
+            case R.id.bt_app_author:
+                UIUtil.openSysBrowser(getActivity(),
+                        "http://www.sczyh30.com");
                 break;
             case R.id.ab_gosite:
                 UIUtil.openSysBrowser(getActivity(),

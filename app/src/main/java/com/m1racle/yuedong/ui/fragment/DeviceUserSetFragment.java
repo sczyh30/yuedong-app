@@ -66,7 +66,6 @@ public class DeviceUserSetFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.fragment_device_user_set, container, false);
         ButterKnife.bind(this, view);
         initData();
-        initView(view);
         return view;
     }
 
@@ -93,16 +92,6 @@ public class DeviceUserSetFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        super.initData();
-        initHWManager();
-    }
-
-    @Override
-    public void initView(View view) {
-        super.initView(view);
-    }
-
-    private void initHWManager() {
         HWManager = getHuaweiManager();
         if(HWManager != null) {
             HWManager.registerConnectStateCallback(stateCallBack);

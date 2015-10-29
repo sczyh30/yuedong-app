@@ -142,7 +142,6 @@ public class YdActiListFragment extends BaseFragment {
                 adapter.notifyDataSetChanged();
             }
             mPullToRefreshView.setRefreshing(false);
-            refreshAnimator.cancel();
         }
     };
 
@@ -152,7 +151,6 @@ public class YdActiListFragment extends BaseFragment {
             mPullToRefreshView.setRefreshing(false);
             error.printStackTrace();
             ToastUtil.toast("服务器解析错误，请重试。");
-            refreshAnimator.cancel();
         }
     };
 
@@ -302,7 +300,7 @@ public class YdActiListFragment extends BaseFragment {
                 0f, 360f);
         refreshAnimator.setInterpolator(interpolator);
         refreshAnimator.setDuration(300);
-        refreshAnimator.setAutoCancel(false);
+        refreshAnimator.setRepeatCount(2);
     }
 
 

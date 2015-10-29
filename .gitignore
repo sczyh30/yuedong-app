@@ -1,0 +1,23 @@
+.gradle
+gradle
+
+# Local configuration file (sdk path, etc)
+/local.properties
+
+# IDEA project files
+.idea/
+*.iml
+
+# Screen Capture
+.DS_Store
+ss
+
+# built application files
+*.apk
+*.ap_
+*.class
+*.dex
+
+# generated files and system logs
+/build
+/captures

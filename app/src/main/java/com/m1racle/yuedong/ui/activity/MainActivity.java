@@ -111,11 +111,6 @@ public class MainActivity extends BaseActivity
     public void onClick(View view) {}
 
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-    @Override
     protected void onResume() {
         super.onResume();
     }

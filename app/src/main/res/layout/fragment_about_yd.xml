@@ -102,12 +102,12 @@
             android:layout_marginTop="20dip" />
 
         <RelativeLayout
-            android:id="@+id/bt_hwclient"
+            android:id="@+id/bt_app_author"
             style="@style/option_item_rl">
 
             <TextView
                 style="@style/option_item_text_parent"
-                android:text="@string/hwapp"
+                android:text="@string/app_author"
                 android:textColor="?attr/textColor"
                 android:textSize="@dimen/text_size_16" />
         </RelativeLayout>
