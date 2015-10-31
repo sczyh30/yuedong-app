@@ -8,8 +8,8 @@ android {
         applicationId "com.m1racle.yuedong"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 343
-        versionName "1.14"
+        versionCode 348
+        versionName "1.15"
     }
     buildTypes {
         release {
