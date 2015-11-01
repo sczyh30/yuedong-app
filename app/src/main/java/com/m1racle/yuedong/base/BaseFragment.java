@@ -14,8 +14,6 @@ import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 
-import java.lang.ref.WeakReference;
-
 /**
  * Base Fragment
  * @author sczyh30
@@ -30,6 +28,9 @@ public abstract class BaseFragment extends Fragment implements
     public static final int STATE_NOMORE = 3;
     public static final int STATE_PRESSNONE = 4;
     public static int mState = STATE_NONE;
+
+    // the flag of whether the fragment is on the top
+    protected int top_flag = 0;
 
     protected LayoutInflater mInflater;
 
@@ -47,6 +48,24 @@ public abstract class BaseFragment extends Fragment implements
                              Bundle savedInstanceState) {
         this.mInflater = inflater;
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        top_flag = 1;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        top_flag = 0;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        top_flag = 0;
     }
 
     protected int getLayoutId() {

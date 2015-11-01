@@ -21,9 +21,16 @@ public class JsonUtil {
         return gson.fromJson(jsonData, listType);
     }
 
+    //TODO: 2015.11.2 an exception occurs when no Internet and execute before the activity destroyed
     public static ArrayList<User> resolveUsers(String jsonData) {
-        Type listType = new TypeToken<ArrayList<User>>(){}.getType();
-        return gson.fromJson(jsonData, listType);
+        try {
+            Type listType = new TypeToken<ArrayList<User>>(){}.getType();
+            return gson.fromJson(jsonData, listType);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtil.toast("状态异常，请重试。(WJ3002)");
+            return null;
+        }
     }
 
     public static ArrayList<BaseMessage> resolveMessages(String jsonData) {
@@ -40,7 +47,7 @@ public class JsonUtil {
             return gson.fromJson(jsonData, User.class);
         } catch (Exception e) {
             e.printStackTrace();
-            ToastUtil.toast("解析用户数据时出现错误");
+            ToastUtil.toast("状态异常，请重试。(WJ3001)");
             return null;
         }
     }
@@ -63,7 +70,7 @@ public class JsonUtil {
             return gson.fromJson(jsonData, listType);
         } catch (Exception e) {
             e.printStackTrace();
-            ToastUtil.toast("解析数据时出现错误");
+            ToastUtil.toast("状态异常，请重试。(WJ3002)");
             return null;
         }
 

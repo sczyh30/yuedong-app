@@ -14,14 +14,15 @@ import com.m1racle.yuedong.util.UIUtil;
 
 /**
  * Yuedong app
- * Bas eMessage ViewHolder
+ * Base Message ViewHolder
  */
 public class BaseMessageHolder extends RecyclerView.ViewHolder {
 
-    private CircleImageView mCircle;
-    private TextView mTvUsername;
-    private TextView mTvTime;
-    private TextView mTvMessage;
+    // refactor on 2015.11.2 => ViewHolder's feature
+    public CircleImageView mCircle;
+    public TextView mTvUsername;
+    public TextView mTvTime;
+    public TextView mTvMessage;
 
     private int UID;
 
@@ -50,8 +51,8 @@ public class BaseMessageHolder extends RecyclerView.ViewHolder {
         }
         mCircle.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if(data.getUid() != 0 && data.getUid() != UID)
+            public void onClick(View v) { //TODO: 此处逻辑应仔细思考，如何保证不会重复打开界面，并保证用户体验。 Create:sczyh30
+                if(data.getUid() != 0 && UID != 0 && data.getUid() != UID)
                     UIUtil.showUserProfile(AppContext.getContext(), data.getUid());
             }
         });

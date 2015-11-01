@@ -43,8 +43,6 @@ public class SocialUtilActivity extends BaseActivity {
     @Bind(R.id.btnCreate)
     FloatingActionButton btnRefresh;
 
-    private static int ac_flag = 1;
-
     PullToRefreshView mPullToRefreshView;
     private int type;
     private ArrayList<User> mList = new ArrayList<>();
@@ -107,19 +105,16 @@ public class SocialUtilActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        ac_flag = 0;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        ac_flag = 1;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ac_flag = 0;
     }
 
 
@@ -209,7 +204,7 @@ public class SocialUtilActivity extends BaseActivity {
     private Response.Listener<String> listener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            if(ac_flag > 0) {
+            if(top_flag > 0) {
                 mList = JsonUtil.resolveUsers(response);
                 updateUI();
                 if (mPullToRefreshView != null)
@@ -223,7 +218,7 @@ public class SocialUtilActivity extends BaseActivity {
         public void onErrorResponse(VolleyError error) {
             if(mPullToRefreshView != null)
                 mPullToRefreshView.setRefreshing(false);
-            ToastUtil.toast("服务器解析错误，请重试。");
+            ToastUtil.toast("网络连接异常，请重试。(WJ4001)");
         }
     };
 
