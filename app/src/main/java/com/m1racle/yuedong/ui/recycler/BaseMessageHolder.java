@@ -23,12 +23,19 @@ public class BaseMessageHolder extends RecyclerView.ViewHolder {
     private TextView mTvTime;
     private TextView mTvMessage;
 
+    private int UID;
+
     public BaseMessageHolder(View itemView) {
         super(itemView);
         mCircle = (CircleImageView)itemView.findViewById(R.id.iv_avatar);
         mTvUsername = (TextView)itemView.findViewById(R.id.tv_username);
         mTvTime = (TextView)itemView.findViewById(R.id.tv_time);
         mTvMessage = (TextView)itemView.findViewById(R.id.tv_message);
+    }
+
+    public BaseMessageHolder(View itemView, int this_uid) {
+        this(itemView);
+        this.UID = this_uid;
     }
 
     public void bindData(final BaseMessage data) {
@@ -44,7 +51,7 @@ public class BaseMessageHolder extends RecyclerView.ViewHolder {
         mCircle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(data.getUid() != 0)
+                if(data.getUid() != 0 && data.getUid() != UID)
                     UIUtil.showUserProfile(AppContext.getContext(), data.getUid());
             }
         });

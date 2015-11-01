@@ -195,7 +195,7 @@ public class UserProfileActivity extends BaseActivity
         public BaseMessageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_message, parent, false);
-            return new BaseMessageHolder(view);
+            return new BaseMessageHolder(view, uid);
         }
 
         @Override
