@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
-    buildToolsVersion "23.0.0 rc2"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "com.m1racle.yuedong"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 356
-        versionName "1.18"
+        versionCode 359
+        versionName "1.19"
     }
     buildTypes {
         release {

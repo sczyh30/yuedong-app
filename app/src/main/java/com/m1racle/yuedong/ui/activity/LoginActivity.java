@@ -95,10 +95,18 @@ public class LoginActivity extends BaseActivity implements IBasicLoginView {
             etUserName.setError("请输入邮箱/用户名");
             etUserName.requestFocus();
             return false;
+        } else if (etUserName.length() < 4) {
+            etUserName.setError("用户名长度过短");
+            etUserName.requestFocus();
+            return false;
         }
 
         if (etPassword.length() == 0) {
             etPassword.setError("请输入密码");
+            etPassword.requestFocus();
+            return false;
+        } else if (etPassword.length() <= 7) {
+            etPassword.setError("密码长度过短");
             etPassword.requestFocus();
             return false;
         }

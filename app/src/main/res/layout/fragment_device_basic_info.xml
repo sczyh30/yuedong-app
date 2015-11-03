@@ -107,16 +107,6 @@
                 android:padding="@dimen/space_15">
 
             </com.m1racle.yuedong.ui.widget.SlideButton>
-            <!--<Button
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:text="@string/refresh_b2_status"
-                android:background="@drawable/btn_green_selector"
-                android:textColor="@color/white"
-                android:id="@+id/btn_update_dvstatus"
-                android:layout_marginTop="@dimen/space_50"
-                android:padding="@dimen/space_15"/>-->
 
         </LinearLayout>
 

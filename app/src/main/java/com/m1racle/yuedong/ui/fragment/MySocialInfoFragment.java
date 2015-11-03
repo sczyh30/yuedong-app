@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -192,6 +191,10 @@ public class MySocialInfoFragment extends BaseFragment {
 
     public void sendRequestData() {
         int uid = AppContext.getContext().getLoginUid();
+        if (!DeviceUtil.hasInternet()) {
+            ToastUtil.toast(R.string.tip_no_internet);
+            return;
+        }
         SamsaraAPI.getUserInfo(uid, mHandler);
     }
 

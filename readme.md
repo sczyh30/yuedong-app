@@ -9,7 +9,7 @@
 - v0.9.76 RC2 build 322 UI及稳定性完善
 - v1.0 build 328 release
 - v1.1 build 336 开始重构架构，向MVP-MVVM架构演变
-- v1.18 build 356 fixed some bugs and performance optimized
+- v1.19 build 359 fixed some bugs and performance optimized
 
 ##引用的额外的libs
 - BaiduMap API（在官网可下载）
@@ -20,4 +20,4 @@
 
 将架构重构为MVVM架构，降低各模块之间的耦合度
 
-2015.11.2
+2015.11.3

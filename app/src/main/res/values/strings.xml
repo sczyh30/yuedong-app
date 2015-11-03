@@ -98,6 +98,7 @@
     <string name="qr_code_tip2">(长按保存到本地)</string>
 
     <string name="notice_accept">接收新通知</string>
+    <string name="health_notice_accept">开启智能运动提醒</string>
     <string name="notice_voice">声音</string>
     <string name="notice_vibration">震动</string>
     <string name="notice_app_exit">退出后不提醒</string>
