@@ -2,6 +2,7 @@ package com.m1racle.yuedong.util;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.entity.*;
 
 import java.lang.reflect.Type;
@@ -28,7 +29,7 @@ public class JsonUtil {
             return gson.fromJson(jsonData, listType);
         } catch (Exception e) {
             e.printStackTrace();
-            ToastUtil.toast("状态异常，请重试。(WJ3002)");
+            ToastUtil.toast(R.string.error_WJ3002);
             return null;
         }
     }
@@ -47,7 +48,7 @@ public class JsonUtil {
             return gson.fromJson(jsonData, User.class);
         } catch (Exception e) {
             e.printStackTrace();
-            ToastUtil.toast("状态异常，请重试。(WJ3001)");
+            ToastUtil.toast(R.string.error_WJ3001);
             return null;
         }
     }
@@ -70,7 +71,7 @@ public class JsonUtil {
             return gson.fromJson(jsonData, listType);
         } catch (Exception e) {
             e.printStackTrace();
-            ToastUtil.toast("状态异常，请重试。(WJ3002)");
+            ToastUtil.toast(R.string.error_WJ3002);
             return null;
         }
 

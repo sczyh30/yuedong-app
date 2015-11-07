@@ -35,12 +35,12 @@ public class NotificationPushService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        new Thread(new Runnable() {
+        /*new Thread(new Runnable() {
             @Override
             public void run() {
                 NotificationUtil.doNotify("朋友，今天悦动了吗？", "今天天气很好，出去运动一下吧~");
             }
-        }).start();
+        }).start();*/
         AlarmUtil.setAlarmByBC(this, NPSBroadcastReceiver.class, period);
         return super.onStartCommand(intent, flags, startId);
     }

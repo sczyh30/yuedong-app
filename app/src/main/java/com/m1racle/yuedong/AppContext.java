@@ -46,6 +46,7 @@ public class AppContext extends BaseApplication {
     private static AppContext instance;
 
     private int loginUid;
+    private String username;
 
     private boolean login;
     LocalUserDaoImpl userDao = new LocalUserDaoImpl();
@@ -90,9 +91,14 @@ public class AppContext extends BaseApplication {
         if (null != user && user.getId() > 0) {
             login = true;
             loginUid = user.getId();
+            username = user.getUsername();
         } else {
             this.cleanLoginInfo();
         }
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setProperties(Properties ps) {
@@ -170,6 +176,7 @@ public class AppContext extends BaseApplication {
 
     public void saveUserInfo(User user) {
         this.loginUid = user.getId();
+        this.username = user.getUsername();
         this.login = true;
         userDao.saveUserInfo(user);
     }

@@ -72,7 +72,9 @@
         <activity
             android:name=".ui.activity.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
-            android:theme="@style/NoActionBar">
+            android:theme="@style/NoActionBar" >
+        </activity>
+        <activity android:name=".ui.activity.BaomingActivity" >
         </activity>
     </application>
 
