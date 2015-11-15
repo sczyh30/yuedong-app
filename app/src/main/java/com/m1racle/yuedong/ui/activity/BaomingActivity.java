@@ -123,12 +123,12 @@ public class BaomingActivity extends BaseActivity {
             return false;
         }
 
-        if(mEtName.length() <= 1 && mEtName.length() >= 30) {
+        if(mEtName.length() <= 1 || mEtName.length() >= 30) {
             mEtName.setError("长度错误");
             mEtName.requestFocus();
             return false;
         }
-        if(mEtMobile.length() <= 6 && mEtMobile.length() >= 20) {
+        if(mEtMobile.length() <= 6 || mEtMobile.length() >= 20) {
             mEtMobile.setError("格式错误");
             mEtMobile.requestFocus();
             return false;
@@ -138,7 +138,6 @@ public class BaomingActivity extends BaseActivity {
             mEtAddress.requestFocus();
             return false;
         }
-
         return true;
     }
 }
