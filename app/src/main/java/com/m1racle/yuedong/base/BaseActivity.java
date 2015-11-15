@@ -33,6 +33,8 @@ public abstract class BaseActivity extends AppCompatActivity
     protected ActionBar mActionBar;
     private ProgressDialog dialog;
 
+    protected int top_flag = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +63,12 @@ public abstract class BaseActivity extends AppCompatActivity
         // initialize the activity
         init(savedInstanceState);
         isVisible = true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        top_flag = 1;
     }
 
     @Override
@@ -112,9 +120,16 @@ public abstract class BaseActivity extends AppCompatActivity
     protected void init(Bundle savedInstanceState) {}
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        top_flag = 0;
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);
+        top_flag = 0;
     }
 
     /**

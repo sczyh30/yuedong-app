@@ -1,6 +1,7 @@
 package com.m1racle.yuedong.entity;
 
 /**
+ * Yuedong App
  * The common entity abstract class
  */
 public abstract class Entity extends SerialEntity {

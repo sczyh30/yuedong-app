@@ -1,7 +1,8 @@
 package com.m1racle.yuedong.entity;
 
 /**
- * Base Entity (Serializable)
+ * Yuedong App
+ * Base Serializable Entity
  */
 public abstract class SerialEntity implements java.io.Serializable {
 

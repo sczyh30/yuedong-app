@@ -18,11 +18,11 @@ import butterknife.Bind;
 
 public class SettingsNotificationFragment extends BaseFragment {
 	
-	@Bind(R.id.tb_accept)
-	ToggleButton mTbAccept;
+	@Bind(R.id.tb_accept) ToggleButton mTbAccept;
 	@Bind(R.id.tb_voice) ToggleButton mTbVoice;
 	@Bind(R.id.tb_vibration) ToggleButton mTbVibration;
 	@Bind(R.id.tb_app_exit) ToggleButton mTbAppExit;
+	@Bind(R.id.tb_health_notice) ToggleButton mTbHealthNotice;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -41,11 +41,13 @@ public class SettingsNotificationFragment extends BaseFragment {
 		setToggleChanged(mTbVoice, AppConfig.KEY_NOTIFICATION_SOUND);
 		setToggleChanged(mTbVibration, AppConfig.KEY_NOTIFICATION_VIBRATION);
 		setToggleChanged(mTbAppExit, AppConfig.KEY_NOTIFICATION_DISABLE_WHEN_EXIT);
+        setToggleChanged(mTbHealthNotice, AppConfig.KEY_HEALTH_NOTICE_ACCEPT);
 		
 		view.findViewById(R.id.rl_accept).setOnClickListener(this);
 		view.findViewById(R.id.rl_voice).setOnClickListener(this);
 		view.findViewById(R.id.rl_vibration).setOnClickListener(this);
 		view.findViewById(R.id.rl_app_exit).setOnClickListener(this);
+        view.findViewById(R.id.rl_health_notice).setOnClickListener(this);
 	}
 
 	public void initData() {
@@ -53,6 +55,7 @@ public class SettingsNotificationFragment extends BaseFragment {
 		setToggle(AppContext.get(AppConfig.KEY_NOTIFICATION_SOUND, true), mTbVoice);
 		setToggle(AppContext.get(AppConfig.KEY_NOTIFICATION_VIBRATION, true), mTbVibration);
 		setToggle(AppContext.get(AppConfig.KEY_NOTIFICATION_DISABLE_WHEN_EXIT, true), mTbAppExit);
+        setToggle(AppContext.get(AppConfig.KEY_HEALTH_NOTICE_ACCEPT, true), mTbHealthNotice);
 	}
 	
 	private void setToggleChanged(ToggleButton tb, final String key) {
@@ -88,6 +91,9 @@ public class SettingsNotificationFragment extends BaseFragment {
 		case R.id.rl_app_exit:
 			mTbAppExit.toggle();
 			break;
+        case R.id.rl_health_notice:
+            mTbHealthNotice.toggle();
+            break;
 		}
 	}
 }

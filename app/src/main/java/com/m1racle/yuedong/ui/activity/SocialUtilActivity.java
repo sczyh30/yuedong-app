@@ -1,6 +1,5 @@
 package com.m1racle.yuedong.ui.activity;
 
-import android.animation.ObjectAnimator;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -9,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.LinearInterpolator;
 import android.widget.FrameLayout;
 
 import com.android.volley.Response;
@@ -105,15 +103,26 @@ public class SocialUtilActivity extends BaseActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
     }
+
 
     private void getData() {
         updateUI();
         if (!DeviceUtil.hasInternet()) {
             mPullToRefreshView.setRefreshing(false);
-            ToastUtil.toast(R.string.error_view_load_error_click_to_refresh);
+            ToastUtil.toast(R.string.error_view_network_error_click_to_refresh);
         }
         else
             YuedongAPI.getFriendList(AppContext.getContext().getLoginUid(), type, listener, errorListener);
@@ -195,10 +204,12 @@ public class SocialUtilActivity extends BaseActivity {
     private Response.Listener<String> listener = new Response.Listener<String>() {
         @Override
         public void onResponse(String response) {
-            mList = JsonUtil.resolveUsers(response);
-            updateUI();
-            if(mPullToRefreshView != null)
-                mPullToRefreshView.setRefreshing(false);
+            if(top_flag > 0) {
+                mList = JsonUtil.resolveUsers(response);
+                updateUI();
+                if (mPullToRefreshView != null)
+                    mPullToRefreshView.setRefreshing(false);
+            }
         }
     };
 
@@ -207,7 +218,7 @@ public class SocialUtilActivity extends BaseActivity {
         public void onErrorResponse(VolleyError error) {
             if(mPullToRefreshView != null)
                 mPullToRefreshView.setRefreshing(false);
-            ToastUtil.toast("服务器解析错误，请重试。");
+            ToastUtil.toast("网络连接异常，请重试。(WJ4001)");
         }
     };
 

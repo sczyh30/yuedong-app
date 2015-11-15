@@ -37,9 +37,17 @@
                 android:padding="@dimen/space_10" >
 
                 <TextView
+                    android:id="@+id/tv_event_my_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/actionbar_blue"
+                    android:text="报名中"/>
+                <TextView
                     android:id="@+id/tv_event_start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_event_my_status"
+                    android:layout_marginTop="@dimen/space_5"
                     android:textColor="#999" />
 
                 <TextView
@@ -85,6 +93,7 @@
                 android:layout_marginTop="@dimen/space_5"
                 android:background="@drawable/btn_small_green_selector"
                 android:text="我要报名"
+                android:enabled="false"
                 android:textColor="@color/white"
                 android:textSize="14sp" />
 
