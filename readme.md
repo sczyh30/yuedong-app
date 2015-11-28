@@ -12,7 +12,7 @@
 - v1.21 build 371 some bugs fixed
 
 ##引用的额外的libs
-- BaiduMap API（在官网可下载）
+- BaiduMap API（locSDK_6.11.jar及相关so包, 在官网可下载）
 - Huawei Wearable API(暂不提供)
 
 ##Present Tasks
