@@ -8,6 +8,7 @@ import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 
 /**
+ * Yuedong app
  * User Login Database(Local) Helper class
  * SQLite 3 support
  */

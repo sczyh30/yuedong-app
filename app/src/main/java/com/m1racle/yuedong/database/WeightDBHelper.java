@@ -5,9 +5,11 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
+ * Yuedong app
  * Weight Database Helper
  * SQLite 3 support
  * @author sczyh30
+ * @since v1.22
  */
 public class WeightDBHelper extends SQLiteOpenHelper{
 

@@ -10,14 +10,16 @@
 - v1.0 build 328 release
 - v1.1 build 336 开始重构架构，向MVP-MVVM架构演变
 - v1.21 build 371 some bugs fixed
+- v1.30 build 382 添加了一些新的功能以及细节的完善
 
 ##引用的额外的libs
 - BaiduMap API（locSDK_6.11.jar及相关so包, 在官网可下载）
 - Huawei Wearable API(暂不提供)
 
 ##Present Tasks
+
 **Refactor the architecture**
 
 将架构重构为MVVM架构，降低各模块之间的耦合度
 
-2015.11.15
+2015.12.4
