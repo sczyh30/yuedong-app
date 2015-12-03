@@ -14,10 +14,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class WeightDBHelper extends SQLiteOpenHelper{
 
     private static final String CREATE_SQL = "CREATE TABLE weight (" +
+            "wid int NOT NULL PRIMARY KEY AUTOINCREMENT," +
             "weight float NOT NULL," +
             "height float NOT NULL," +
             "index float NOT NULL," +
-            "w_time date NOT NULL" +
+            "w_time varchar(40) NOT NULL" +
             "tip varchar(255) NOT NULL" +
             ")";
 

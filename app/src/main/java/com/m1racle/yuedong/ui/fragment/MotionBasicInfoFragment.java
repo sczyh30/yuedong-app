@@ -1,5 +1,6 @@
 package com.m1racle.yuedong.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.ui.activity.WeightActivity;
 import com.m1racle.yuedong.util.ToastUtil;
 import com.m1racle.yuedong.util.UIUtil;
 
@@ -81,7 +83,9 @@ public class MotionBasicInfoFragment extends BaseFragment {
                 UIUtil.showTemperature(getActivity());
                 break;
             case R.id.fn_button_weight:
-                ToastUtil.toast("功能即将开放，敬请期待！");
+                Intent intent = new Intent(getActivity(), WeightActivity.class);
+                startActivity(intent);
+                //ToastUtil.toast("功能即将开放，敬请期待！");
                 break;
             default:
                 break;
