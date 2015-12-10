@@ -16,6 +16,18 @@ public class XmlCacheManager {
 
     private static Context mContext = AppContext.getContext();
 
+    public static void saveWeightGoal(float goal) {
+        SharedPreferences cache = mContext.getSharedPreferences("weight_goal", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = cache.edit();
+        editor.putFloat("goal", goal);
+        editor.apply();
+    }
+
+    public static float readWeightGoal() {
+        SharedPreferences cache = mContext.getSharedPreferences("weight_goal", Context.MODE_PRIVATE);
+        return cache.getFloat("goal", 0.0f);
+    }
+
     public static void saveGoal(int type, DataHealthGoal goal) {
         SharedPreferences cache = mContext.getSharedPreferences("motion_goal_t" + type, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = cache.edit();

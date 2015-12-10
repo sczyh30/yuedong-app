@@ -1,0 +1,127 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.m1racle.yuedong.ui.fragment.WeightMainFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_wg_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="@dimen/space_20"
+            android:textSize="@dimen/text_size_16"
+            android:text="2015年12月12日星期六 23:56"/>
+
+        <TextView
+            android:id="@+id/tv_wg_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="@dimen/space_40"
+            android:textSize="40sp"
+            android:textColor="@color/main_green"
+            android:text="66.6 公斤"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="@dimen/space_10">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_wg_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="@dimen/space_20"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_25"
+                    android:text="24.4"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="@dimen/space_5"
+                    android:textSize="@dimen/text_size_16"
+                    android:text="@string/bmi"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/space_30">
+                <TextView
+                    android:id="@+id/tv_wg_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="@dimen/space_20"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_25"
+                    android:text="187.0 厘米"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="@dimen/space_5"
+                    android:textSize="@dimen/text_size_16"
+                    android:text="@string/height"/>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_wg_goal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_40"
+            android:textSize="40sp"
+            android:textColor="@color/actionbar_blue"
+            android:text="60.2 公斤"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="@dimen/space_5"
+            android:textSize="@dimen/text_size_16"
+            android:text="目标"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/light_gray"
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/btn_weight_record"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/weight_insert_manual"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_15"
+            android:background="@drawable/btn_green_selector"
+            android:layout_marginRight="@dimen/space_15"/>
+        <Button
+            android:id="@+id/btn_weight_sg"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="@string/weight_set_goal"
+            android:textSize="@dimen/text_size_15"
+            android:textColor="@color/white"
+            style="?android:attr/buttonBarButtonStyle"
+            android:background="@drawable/btn_green_selector"/>
+    </LinearLayout>
+
+</RelativeLayout>

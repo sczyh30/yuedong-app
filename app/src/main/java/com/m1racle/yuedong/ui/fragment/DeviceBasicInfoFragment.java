@@ -110,6 +110,7 @@ public class DeviceBasicInfoFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
+        btnRefresh.setBeforeText("刷新手环状态");
         btnRefresh.setOnSendClickListener(new SlideButton.OnSendClickListener() {
             @Override
             public void onSendClickListener(View v) {

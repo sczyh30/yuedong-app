@@ -27,6 +27,7 @@ import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.net.BitmapRequestClient;
 import com.m1racle.yuedong.net.SamsaraAPI;
 import com.m1racle.yuedong.ui.activity.MainActivity;
+import com.m1racle.yuedong.ui.activity.MessageActivity;
 import com.m1racle.yuedong.ui.dialog.MyQRCodeDialog;
 import com.m1racle.yuedong.ui.empty.EmptyLayout;
 import com.m1racle.yuedong.ui.widget.AvatarView;
@@ -256,7 +257,8 @@ public class MySocialInfoFragment extends BaseFragment {
                 UIUtil.showRelationActivity(getActivity(), 15);
                 break;
             case R.id.rl_message:
-                UIUtil.showMessages(getActivity());
+                Intent intentMessage = new Intent(getActivity(), MessageActivity.class);
+                startActivity(intentMessage);
                 break;
             case R.id.ly_follower:
                 UIUtil.showRelationActivity(getActivity(), 2);

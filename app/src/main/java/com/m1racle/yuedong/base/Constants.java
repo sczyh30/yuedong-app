@@ -12,4 +12,7 @@ public class Constants {
     public static final String INTENT_ACTION_NOTICE = "com.m1racle.yuedong.action.APPWIDGET_UPDATE";
 
     public static final String INTENT_ACTION_LOGOUT = "com.m1racle.yuedong.action.LOGOUT";
+
+    public static final int MESSAGE_DONGTAI = 1;
+    public static final int MESSAGE_NOTICE = 2;
 }

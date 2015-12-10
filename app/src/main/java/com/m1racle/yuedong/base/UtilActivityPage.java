@@ -29,8 +29,7 @@ public enum UtilActivityPage {
     HEALTH_MOTION_ADVICE(14,R.string.actionbar_title_motion_advice, HealthAdviceFragment.class),
     DEVICE_ALARM_SET(15,R.string.actionbar_title_device_alarm_set, DeviceAlarmSetFragment.class),
     DEVICE_MOTION_GOAL_SET(16,R.string.actionbar_title_device_motion_goal_set, MotionGoalSetFragment.class),
-    MOTION_ACTIVITIES_DETAIL(17,R.string.actionbar_title_motion_activities_detail, ActivitiesDetailFragment.class),
-    MY_SOCIAL_MESSAGE(18,R.string.actionbar_title_message, MessageFragment.class);
+    MOTION_ACTIVITIES_DETAIL(17,R.string.actionbar_title_motion_activities_detail, ActivitiesDetailFragment.class);
 
     private int title;
     private Class<?> clz;

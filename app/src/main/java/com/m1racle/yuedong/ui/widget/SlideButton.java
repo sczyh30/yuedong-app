@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.ViewAnimator;
 
 import com.m1racle.yuedong.R;
@@ -40,6 +41,10 @@ public class SlideButton extends ViewAnimator implements View.OnClickListener {
 
     private void init() {
         LayoutInflater.from(getContext()).inflate(R.layout.view_refresh_status_d_button, this, true);
+    }
+
+    public void setBeforeText(String text) {
+        ((TextView)findViewById(R.id.tvSend)).setText(text);
     }
 
     @Override

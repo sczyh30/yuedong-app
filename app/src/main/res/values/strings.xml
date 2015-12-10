@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">悦动</string>
 
+    <string name="title_activity_social_util">我的悦动</string>
+    <string name="title_activity_user_profile">用户信息</string>
+    <string name="title_activity_science_info">说明</string>
+
     <string name="action_settings">设置</string>
 
     <string name="welcome_fg">欢迎使用悦动！</string>
@@ -16,7 +20,7 @@
     <string name="b2_status_5">已断开连接</string>
     <string name="b2_status_default">已断开连接</string>
     <string name="b2_unknown">未知</string>
-    
+
     <string name="b2_status_err_100100">没有安装华为健康App</string>
     <string name="b2_status_err_100101">设备不支持</string>
     <string name="b2_status_err_100104">手环服务异常</string>
@@ -144,6 +148,7 @@
     <string name="error_WJ3001">状态异常，请重试。(WJ3001)</string>
     <string name="error_WJ3002">状态异常，请重试。(WJ3002)</string>
     <string name="error_WP0014">提交请求失败，请重试。（WP0014）</string>
+    <string name="error_RDI006">同步数据时出现异常，请重试。（RDI006）</string>
 
     <string name="actionbar_title_setting">设置</string>
     <string name="actionbar_title_setting_notification">新消息提醒</string>
@@ -175,7 +180,28 @@
     </string-array>
 
     <string name="detail_information">详细信息</string>
-    <string name="title_activity_social_util">我的悦动</string>
-    <string name="title_activity_user_profile">用户信息</string>
+    <string name="bmi">体重指数</string>
+    <string name="bmi_about">关于 BMI</string>
+    <string name="bmi_intro_01">BMI指数（即身体质量指数，简称体质指数又称体重，英文为Body Mass Index，简称BMI），是用体重公斤数除以身高米数平方得出的数字，是目前国际上常用的衡量人体胖瘦程度以及是否健康的一个标准。主要用于统计用途，当我们需要比较及分析一个人的体重对于不同高度的人所带来的健康影响时，BMI值是一个中立而可靠的指标。</string>
+    <string name="bmi_equation">体质指数（BMI）= 体重（kg）÷ 身高²（m²）</string>
+    <string name="bmi_intro_02">成人的BMI数值参考：</string>
+    <string name="bmi_intro_table">重量不足：低于18.5\n正常范围：18.5–25.0\n超重：≥25.0\n肥胖：≥30.0</string>
+    <string name="bmi_intro_mz">由于存在误差，所以BMI只能作为评估个人体重和健康状况的多项标准之一。App提供的BMI值仅供参考，不得用于医疗诊断与医疗评估。详情请咨询医疗专业人士。</string>
+    <string name="height">身高</string>
+
+    <string name="weight_goal_intro">设置一个目标体重以便于您的锻炼以及体重的管理。目标将会表现于折线图中。</string>
+    <string name="weight_goal_not_set">未设定</string>
+    <string name="weight_insert_manual">手动记录</string>
+    <string name="weight_insert_record_ok">添加体重记录成功</string>
+    <string name="weight_sync_goal_ok">同步体重目标成功</string>
+    <string name="weight_set_goal">体重目标</string>
+    <string name="weight_save_goal">保存体重目标</string>
+
+    <string name="title_activity_weight_record">记录体重</string>
+    <string name="title_activity_weight_goal">体重目标</string>
+    <string name="title_activity_message">我的信息</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
