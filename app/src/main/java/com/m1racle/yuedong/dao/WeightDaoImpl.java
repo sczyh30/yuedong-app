@@ -46,6 +46,7 @@ public class WeightDaoImpl extends BaseDaoImpl implements BaseDao<Weight> {
         Weight weight = new Weight();
         final String SQL = "SELECT * FROM weight WHERE wid = " + wid;
         SQLiteDatabase db = getUserDB(false);
+        db.beginTransaction();
         try {
             Cursor cursor = db.rawQuery(SQL, null);
             if(cursor.moveToFirst()) {
@@ -76,6 +77,7 @@ public class WeightDaoImpl extends BaseDaoImpl implements BaseDao<Weight> {
         Weight weight = new Weight();
         final String SQL = "SELECT * FROM weight WHERE wid = (SELECT MAX(wid) FROM weight)";
         SQLiteDatabase db = getUserDB(false);
+        db.beginTransaction();
         try {
             Cursor cursor = db.rawQuery(SQL, null);
             if(cursor.moveToFirst()) {
@@ -105,6 +107,7 @@ public class WeightDaoImpl extends BaseDaoImpl implements BaseDao<Weight> {
         List<Weight> list = new ArrayList<>();
         final String SQL = "SELECT * FROM weight";
         SQLiteDatabase db = getUserDB(false);
+        db.beginTransaction();
         try {
             Cursor cursor = db.rawQuery(SQL, null);
             if(cursor.moveToFirst()) {

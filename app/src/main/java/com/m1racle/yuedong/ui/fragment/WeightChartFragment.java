@@ -18,8 +18,11 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.dao.WeightDaoImpl;
+import com.m1racle.yuedong.entity.Weight;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,6 +35,8 @@ import butterknife.ButterKnife;
  * @since v1.30
  */
 public class WeightChartFragment extends BaseFragment {
+
+    WeightDaoImpl weightDao = new WeightDaoImpl(); //TODO:考虑做成单例？
 
     @Bind(R.id.chart_weight)
     LineChart mChart;
@@ -118,60 +123,57 @@ public class WeightChartFragment extends BaseFragment {
         mChart.setDrawGridBackground(false);
 
         mChart.setDescription("");
-        mChart.setNoDataTextDescription("没有可用的数据");
+        mChart.setNoDataTextDescription("没有记录过数据");
         mChart.setTouchEnabled(true);
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(true);
         mChart.setPinchZoom(true);
-        setData(10, 100);
+        setData(weightDao.getAll());
     }
 
-    private void setData(int count, float range) {
+    private void setData(List<Weight> list) {
 
         int color = Color.rgb(147, 196, 125);
-
-        ArrayList<String> xVals = new ArrayList<String>();
-        for (int i = 0; i < count; i++) {
-            xVals.add((i) + "");
+        int count = list.size();
+        if(count <= 0) {
+            return;
         }
-
-        ArrayList<Entry> yVals = new ArrayList<Entry>();
-
+        // set x bar
+        ArrayList<String> xVals = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-
-            float mult = (range + 1);
-            float val = (float) (Math.random() * mult) + 3;// + (float)
-            // ((mult *
-            // 0.1) / 10);
-            yVals.add(new Entry(val, i));
+            xVals.add(list.get(i).getwTime());
+        }
+        // set y bar
+        ArrayList<Entry> yVals = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            yVals.add(new Entry(list.get(i).getWeight(), i));
         }
 
         // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(yVals, "体重");
+        LineDataSet weightSet = new LineDataSet(yVals, "体重");
         // set1.setFillAlpha(110);
         // set1.setFillColor(Color.RED);
 
         // set the line to be drawn like this "- - - - - -"
-        set1.enableDashedLine(10f, 5f, 0f);
-        set1.enableDashedHighlightLine(10f, 5f, 0f);
-        set1.setColor(color);
-        set1.setCircleColor(color);
-        set1.setLineWidth(1f);
-        set1.setCircleSize(3f);
-        set1.setDrawCircleHole(false);
-        set1.setValueTextSize(9f);
-        set1.setFillAlpha(65);
-        set1.setFillColor(color);
+        weightSet.enableDashedLine(10f, 5f, 0f);
+        weightSet.enableDashedHighlightLine(10f, 5f, 0f);
+        weightSet.setColor(color);
+        weightSet.setCircleColor(color);
+        weightSet.setLineWidth(1f);
+        weightSet.setCircleSize(3f);
+        weightSet.setDrawCircleHole(false);
+        weightSet.setValueTextSize(9f);
+        weightSet.setFillAlpha(65);
+        weightSet.setFillColor(color);
 //        set1.setDrawFilled(true);
         // set1.setShader(new LinearGradient(0, 0, 0, mChart.getHeight(),
         // Color.BLACK, Color.WHITE, Shader.TileMode.MIRROR));
 
         ArrayList<LineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(set1); // add the datasets
+        dataSets.add(weightSet); // add the datasets
 
         // create a data object with the datasets
         LineData data = new LineData(xVals, dataSets);
-
         // set data
         mChart.setData(data);
     }

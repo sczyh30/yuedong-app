@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.dao.WeightDaoImpl;
 
 import butterknife.ButterKnife;
 
@@ -20,6 +21,8 @@ import butterknife.ButterKnife;
  * @since v1.30
  */
 public class WeightMainFragment extends BaseFragment {
+
+    WeightDaoImpl weightDao = new WeightDaoImpl();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
