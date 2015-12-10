@@ -28,7 +28,7 @@ abstract class BaseDaoImpl {
             case "user":
                 helper = new UserDBHelper(AppContext.getContext(), "UserLogin.db", null, 2);
                 break;
-            case "weight":
+            case "weight_table":
                 helper = new WeightDBHelper(AppContext.getContext(), "Weight.db", null, 2);
                 break;
             default:
@@ -42,6 +42,10 @@ abstract class BaseDaoImpl {
 
     protected SQLiteDatabase getUserDB(boolean type) {
         return getDatabase("user", type);
+    }
+
+    protected SQLiteDatabase getWeightDB(boolean type) {
+        return getDatabase("weight_table", type);
     }
 
     @Deprecated

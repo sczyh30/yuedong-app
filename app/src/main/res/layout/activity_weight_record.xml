@@ -84,7 +84,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/space_30">
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_marginLeft="@dimen/space_10"
@@ -97,9 +98,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/imageView"
-                android:ems="7"
-                android:hint="输入注释（可选）"
-                android:inputType="numberDecimal" />
+                android:ems="40"
+                android:hint="输入注释（可选）" />
         </RelativeLayout>
 
     </LinearLayout>

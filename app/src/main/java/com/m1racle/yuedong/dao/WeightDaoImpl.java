@@ -19,10 +19,11 @@ public class WeightDaoImpl extends BaseDaoImpl implements BaseDao<Weight> {
 
     @Override
     public boolean save(Weight weight) {
-        SQLiteDatabase db = getUserDB(true);
+        SQLiteDatabase db = getWeightDB(true);
+        db.beginTransaction();
         try {
             ContentValues values = getValues(weight);
-            db.insert("weight", null, values);
+            db.insert("weight_table", null, values);
             db.setTransactionSuccessful();
             return true;
         } catch (Exception e) {
@@ -44,14 +45,14 @@ public class WeightDaoImpl extends BaseDaoImpl implements BaseDao<Weight> {
     @Override
     public Weight get(int wid) {
         Weight weight = new Weight();
-        final String SQL = "SELECT * FROM weight WHERE wid = " + wid;
-        SQLiteDatabase db = getUserDB(false);
+        final String SQL = "SELECT * FROM weight_table WHERE wid = " + wid;
+        SQLiteDatabase db = getWeightDB(false);
         db.beginTransaction();
         try {
             Cursor cursor = db.rawQuery(SQL, null);
             if(cursor.moveToFirst()) {
                 weight.setWid(cursor.getInt(cursor.getColumnIndex("wid")));
-                weight.setIndex(cursor.getFloat(cursor.getColumnIndex("index")));
+                weight.setIndex(cursor.getFloat(cursor.getColumnIndex("bmi")));
                 weight.setHeight(cursor.getFloat(cursor.getColumnIndex("height")));
                 weight.setWeight(cursor.getFloat(cursor.getColumnIndex("weight")));
                 weight.setTip(cursor.getString(cursor.getColumnIndex("tip")));
@@ -75,14 +76,14 @@ public class WeightDaoImpl extends BaseDaoImpl implements BaseDao<Weight> {
      */
     public Weight getLatest() {
         Weight weight = new Weight();
-        final String SQL = "SELECT * FROM weight WHERE wid = (SELECT MAX(wid) FROM weight)";
-        SQLiteDatabase db = getUserDB(false);
+        final String SQL = "SELECT * FROM weight_table WHERE wid = (SELECT MAX(wid) FROM weight_table)";
+        SQLiteDatabase db = getWeightDB(false);
         db.beginTransaction();
         try {
             Cursor cursor = db.rawQuery(SQL, null);
             if(cursor.moveToFirst()) {
                 weight.setWid(cursor.getInt(cursor.getColumnIndex("wid")));
-                weight.setIndex(cursor.getFloat(cursor.getColumnIndex("index")));
+                weight.setIndex(cursor.getFloat(cursor.getColumnIndex("bmi")));
                 weight.setHeight(cursor.getFloat(cursor.getColumnIndex("height")));
                 weight.setWeight(cursor.getFloat(cursor.getColumnIndex("weight")));
                 weight.setTip(cursor.getString(cursor.getColumnIndex("tip")));
@@ -105,8 +106,8 @@ public class WeightDaoImpl extends BaseDaoImpl implements BaseDao<Weight> {
      */
     public List<Weight> getAll() {
         List<Weight> list = new ArrayList<>();
-        final String SQL = "SELECT * FROM weight";
-        SQLiteDatabase db = getUserDB(false);
+        final String SQL = "SELECT * FROM weight_table";
+        SQLiteDatabase db = getWeightDB(false);
         db.beginTransaction();
         try {
             Cursor cursor = db.rawQuery(SQL, null);
@@ -114,7 +115,7 @@ public class WeightDaoImpl extends BaseDaoImpl implements BaseDao<Weight> {
                 do {
                     Weight weight = new Weight();
                     weight.setWid(cursor.getInt(cursor.getColumnIndex("wid")));
-                    weight.setIndex(cursor.getFloat(cursor.getColumnIndex("index")));
+                    weight.setIndex(cursor.getFloat(cursor.getColumnIndex("bmi")));
                     weight.setHeight(cursor.getFloat(cursor.getColumnIndex("height")));
                     weight.setWeight(cursor.getFloat(cursor.getColumnIndex("weight")));
                     weight.setTip(cursor.getString(cursor.getColumnIndex("tip")));
@@ -140,10 +141,9 @@ public class WeightDaoImpl extends BaseDaoImpl implements BaseDao<Weight> {
 
     private ContentValues getValues(Weight weight) {
         ContentValues values = new ContentValues();
-        values.put("wid", weight.getWid());
         values.put("weight", weight.getWeight());
         values.put("height", weight.getHeight());
-        values.put("index", weight.getIndex());
+        values.put("bmi", weight.getIndex());
         values.put("w_time", weight.getwTime());
         values.put("tip", weight.getTip());
         return values;

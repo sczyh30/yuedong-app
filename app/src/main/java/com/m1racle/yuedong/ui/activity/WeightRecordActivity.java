@@ -11,6 +11,7 @@ import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseActivity;
 import com.m1racle.yuedong.dao.WeightDaoImpl;
 import com.m1racle.yuedong.entity.Weight;
+import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 
 import butterknife.Bind;
@@ -66,6 +67,7 @@ public class WeightRecordActivity extends BaseActivity {
         float w = Float.parseFloat(mEtWeight.getText().toString());
         weight.setHeight(h);
         weight.setWeight(w);
+        LogUtil.log("BMI -> " + getBMI(h, w));
         weight.setIndex(getBMI(h, w));
         weight.setTip(mEtTip.getText().toString());
         //TODO:加入星期几的表述
@@ -75,13 +77,13 @@ public class WeightRecordActivity extends BaseActivity {
     }
 
     /**
-     *
+     * Get the BMI index
      * @param h height, cm
      * @param w weight, kg
      * @return the bmi index
      */
     private float getBMI(float h, float w) {
-        return w / (h / 100)*(h / 100);
+        return w / ((h / 100)*(h / 100));
     }
 
     @Override

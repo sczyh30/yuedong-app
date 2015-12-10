@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.m1racle.yuedong.util.LogUtil;
+
 /**
  * Yuedong app
  * Weight Database Helper
@@ -13,13 +15,13 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class WeightDBHelper extends SQLiteOpenHelper{
 
-    private static final String CREATE_SQL = "CREATE TABLE weight (" +
-            "wid int NOT NULL PRIMARY KEY AUTOINCREMENT," +
+    private static final String CREATE_SQL = "CREATE TABLE weight_table (" +
+            "wid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
             "weight float NOT NULL," +
             "height float NOT NULL," +
-            "index float NOT NULL," +
-            "w_time varchar(40) NOT NULL" +
-            "tip varchar(255) NOT NULL" +
+            "bmi float NOT NULL," +
+            "w_time varchar(40) NOT NULL," +
+            "tip varchar(60)" +
             ")";
 
     private Context context;
@@ -31,18 +33,22 @@ public class WeightDBHelper extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.beginTransaction();
+        /*db.beginTransaction();
         try {
             db.execSQL(CREATE_SQL);
             db.setTransactionSuccessful();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        db.endTransaction();
+        db.endTransaction();*/
+        db.execSQL(CREATE_SQL);
+        LogUtil.log("WeightDB onCreate : CREATE TABLE");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE weight_table");
+        onCreate(db);
         // no need
     }
 
