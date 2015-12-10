@@ -1,6 +1,7 @@
 package com.m1racle.yuedong.ui.activity;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -74,17 +75,18 @@ public class WeightActivity extends BaseActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_info_only, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_open_info) {
+            Intent intent = new Intent(this, ScienceInfoActivity.class);
+            intent.putExtra("type", "weight");
+            startActivity(intent);
         }
-
         return super.onOptionsItemSelected(item);
     }
 

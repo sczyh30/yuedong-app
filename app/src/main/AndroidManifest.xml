@@ -68,13 +68,18 @@
             android:label="@string/title_activity_user_profile"
             android:theme="@style/NoActionBar" />
         <activity android:name=".ui.activity.BaomingActivity" />
-        <activity android:name=".ui.activity.WeightActivity"
+        <activity
+            android:name=".ui.activity.WeightActivity"
             android:label="@string/btn_fn_weight" />
 
         <service
             android:name=".service.UpdateWeatherService"
             android:enabled="true"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.activity.ScienceInfoActivity"
+            android:label="@string/title_activity_science_info"></activity>
     </application>
 
 </manifest>
