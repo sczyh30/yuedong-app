@@ -88,6 +88,7 @@
         android:gravity="center"
         android:layout_alignParentBottom="true">
         <Button
+            android:id="@+id/btn_weight_record"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
@@ -97,6 +98,7 @@
             android:background="@drawable/btn_green_selector"
             android:layout_marginRight="@dimen/space_15"/>
         <Button
+            android:id="@+id/btn_weight_sg"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:text="@string/weight_set_goal"

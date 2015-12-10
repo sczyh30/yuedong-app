@@ -1,6 +1,7 @@
 package com.m1racle.yuedong.ui.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,8 +11,11 @@ import android.view.ViewGroup;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.dao.WeightDaoImpl;
+import com.m1racle.yuedong.ui.activity.WeightGoalActivity;
+import com.m1racle.yuedong.ui.activity.WeightRecordActivity;
 
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Yuedong app
@@ -46,8 +50,20 @@ public class WeightMainFragment extends BaseFragment {
     }
 
     @Override
+    @OnClick({R.id.btn_weight_record, R.id.btn_weight_sg})
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.btn_weight_record:
+                Intent i1 = new Intent(getActivity(), WeightRecordActivity.class);
+                startActivity(i1);
+                break;
+            case R.id.btn_weight_sg:
+                Intent i2 = new Intent(getActivity(), WeightGoalActivity.class);
+                startActivity(i2);
+                break;
+            default:
+                break;
+        }
     }
 
 }

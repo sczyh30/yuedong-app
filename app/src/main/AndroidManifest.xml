@@ -79,7 +79,13 @@
 
         <activity
             android:name=".ui.activity.ScienceInfoActivity"
-            android:label="@string/title_activity_science_info"></activity>
+            android:label="@string/title_activity_science_info" />
+        <activity
+            android:name=".ui.activity.WeightRecordActivity"
+            android:label="@string/title_activity_weight_record" />
+        <activity
+            android:name=".ui.activity.WeightGoalActivity"
+            android:label="@string/title_activity_weight_goal"></activity>
     </application>
 
 </manifest>

@@ -148,6 +148,7 @@
     <string name="error_WJ3001">状态异常，请重试。(WJ3001)</string>
     <string name="error_WJ3002">状态异常，请重试。(WJ3002)</string>
     <string name="error_WP0014">提交请求失败，请重试。（WP0014）</string>
+    <string name="error_RDI006">同步数据时出现异常，请重试。（RDI006）</string>
 
     <string name="actionbar_title_setting">设置</string>
     <string name="actionbar_title_setting_notification">新消息提醒</string>
@@ -189,6 +190,8 @@
     <string name="height">身高</string>
 
     <string name="weight_insert_manual">手动记录</string>
-    <string name="weight_set_goal">设定目标</string>
+    <string name="weight_set_goal">体重目标</string>
+    <string name="title_activity_weight_record">记录体重</string>
+    <string name="title_activity_weight_goal">体重目标</string>
 
 </resources>
