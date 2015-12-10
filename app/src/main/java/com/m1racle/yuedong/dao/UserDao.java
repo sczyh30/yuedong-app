@@ -3,7 +3,7 @@ package com.m1racle.yuedong.dao;
 import com.m1racle.yuedong.entity.User;
 
 /**
- * User Dao
+ * User Dao Interface
  * @author sczyh30
  */
 public interface UserDao {

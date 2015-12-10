@@ -2,6 +2,7 @@ package com.m1racle.yuedong.ui.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.android.volley.Response;
@@ -22,6 +24,7 @@ import com.m1racle.yuedong.cache.CacheManager;
 import com.m1racle.yuedong.cache.SaveCacheTask;
 import com.m1racle.yuedong.entity.MotionActivitiesDetail;
 import com.m1racle.yuedong.net.YuedongAPI;
+import com.m1racle.yuedong.ui.activity.BaomingActivity;
 import com.m1racle.yuedong.ui.empty.EmptyLayout;
 import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.ToastUtil;
@@ -62,6 +65,8 @@ public class ActivitiesDetailFragment extends BaseFragment {
     EmptyLayout mErrorLayout;
     @Bind(R.id.webview)
     WebView mWebView;
+    @Bind(R.id.bt_event_apply)
+    Button btnApply;
 
     private AsyncTask<String, Void, MotionActivitiesDetail> mCacheTask;
 
@@ -114,6 +119,10 @@ public class ActivitiesDetailFragment extends BaseFragment {
     @Override
     @OnClick({R.id.bt_event_apply, R.id.rl_event_location})
     public void onClick(View v) {
+        if(!DeviceUtil.hasInternet()) {
+            ToastUtil.toast(R.string.error_view_network_error_click_to_refresh);
+            return;
+        }
         int id = v.getId();
         switch (id) {
             case R.id.rl_event_location:
@@ -124,13 +133,22 @@ public class ActivitiesDetailFragment extends BaseFragment {
                     UIUtil.showLoginActivity(getActivity());
                     return;
                 }
+                if(maid <= 0) {
+                    ToastUtil.toast(R.string.fucking_unknown_error);
+                    return;
+                }
                 showApply();
                 break;
         }
     }
 
     private void showApply() {
-
+        if(mData == null)
+            return;
+        Intent intent = new Intent(getActivity(), BaomingActivity.class);
+        intent.putExtra("MAID", maid);
+        intent.putExtra("MANAME", mData.getName());
+        getActivity().startActivity(intent);
     }
 
     private Response.Listener<MotionActivitiesDetail> listener = new Response.Listener<MotionActivitiesDetail>() {
@@ -140,6 +158,7 @@ public class ActivitiesDetailFragment extends BaseFragment {
             if(response != null)
                 mData = response;
             saveCache(mData);
+            btnApply.setEnabled(true);
             updateUI();
         }
     };

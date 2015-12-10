@@ -144,6 +144,7 @@ public class SettingsFragment extends BaseFragment {
         getActivity().finish();
     }
 
+    // only an activity can add a window!
     private void checkUpdate() {
         new UpdateManager(getActivity(), true).checkUpdate();
     }

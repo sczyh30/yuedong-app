@@ -17,7 +17,7 @@ import java.io.FileNotFoundException;
 import cz.msebera.android.httpclient.Header;
 
 /**
- * Log Generate Service
+ * Log Generate And Upload Service
  */
 public class LogUploadService extends Service {
 

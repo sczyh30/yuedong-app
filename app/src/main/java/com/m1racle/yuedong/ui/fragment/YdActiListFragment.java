@@ -44,7 +44,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
+ * Yuedong app
  * Yuedong common motion activities(in life) Fragment
+ * @author sczyh30
  */
 public class YdActiListFragment extends BaseFragment {
 

@@ -1,4 +1,4 @@
-package com.m1racle.yuedong.adapter;
+package com.m1racle.yuedong.ui.fragment.adapter;
 
 import android.app.Fragment;
 import android.app.FragmentManager;

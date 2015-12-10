@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.m1racle.yuedong" >
+    package="com.m1racle.yuedong">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -20,7 +20,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:screenOrientation="portrait"
-        android:theme="@style/AppBaseTheme_Light" >
+        android:theme="@style/AppBaseTheme_Light">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="49cd964eca9d2f38547034ed2781ce21" />
@@ -29,7 +29,7 @@
             android:name=".AppStart"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppStartLoad" >
+            android:theme="@style/Theme.AppStartLoad">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,12 +39,10 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name" >
-        </activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".ui.activity.LoginActivity"
-            android:label="@string/login" >
-        </activity>
+            android:label="@string/login" />
         <activity
             android:name=".ui.activity.UtilActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -53,27 +51,30 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote" >
-        </service>
-        <service android:name=".service.BDLocationService" >
-        </service>
+            android:process=":remote" />
+        <service android:name=".service.BDLocationService" />
         <!-- Service -->
         <service
             android:name=".service.NotificationPushService"
-            android:label="NPS" >
-        </service>
+            android:label="NPS" />
         <!-- Broadcast Receiver -->
         <receiver android:name=".service.receiver.NPSBroadcastReceiver" />
 
         <activity
             android:name=".ui.activity.SocialUtilActivity"
-            android:label="@string/title_activity_social_util" >
-        </activity>
+            android:label="@string/title_activity_social_util" />
         <activity
             android:name=".ui.activity.UserProfileActivity"
             android:label="@string/title_activity_user_profile"
-            android:theme="@style/NoActionBar">
-        </activity>
+            android:theme="@style/NoActionBar" />
+        <activity android:name=".ui.activity.BaomingActivity" />
+        <activity android:name=".ui.activity.WeightActivity"
+            android:label="@string/btn_fn_weight" />
+
+        <service
+            android:name=".service.UpdateWeatherService"
+            android:enabled="true"
+            android:exported="false"></service>
     </application>
 
 </manifest>

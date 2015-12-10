@@ -46,6 +46,7 @@ public class AppContext extends BaseApplication {
     private static AppContext instance;
 
     private int loginUid;
+    private String username;
 
     private boolean login;
     LocalUserDaoImpl userDao = new LocalUserDaoImpl();
@@ -71,9 +72,13 @@ public class AppContext extends BaseApplication {
         client.setCookieStore(mCookieStore);
         ApiHttpClient.setHttpClient(client);
         ApiHttpClient.setCookie(ApiHttpClient.getCookie(this));
+        // init volley compoments
         initNewAPI();
+        // init the local data
         isFirstStart();
         userDao = new LocalUserDaoImpl();
+        // load the settings
+        startNotification();
     }
 
     private void initNewAPI() {
@@ -86,9 +91,14 @@ public class AppContext extends BaseApplication {
         if (null != user && user.getId() > 0) {
             login = true;
             loginUid = user.getId();
+            username = user.getUsername();
         } else {
             this.cleanLoginInfo();
         }
+    }
+
+    public String getUsername() {
+        return username;
     }
 
     public void setProperties(Properties ps) {
@@ -117,36 +127,10 @@ public class AppContext extends BaseApplication {
         return getPreferences().getBoolean(KEY_NIGHT_MODE_SWITCH, false);
     }
 
-    public static void setNotificationAccept(boolean b) {
-        set(KEY_NOTIFICATION_ACCEPT, b);
-    }
-
-    public static boolean getNotificationAccept() {
-        return getPreferences().getBoolean(KEY_NOTIFICATION_ACCEPT, false);
-    }
-
-    public static void setNotificationSound(boolean b) {
-        set(KEY_NOTIFICATION_SOUND, b);
-    }
-
-    public static boolean getNotificationSound() {
-        return getPreferences().getBoolean(KEY_NOTIFICATION_VIBRATION, false);
-    }
-
-    public static void setNotificationViberate(boolean b) {
-        set(KEY_NOTIFICATION_SOUND, b);
-    }
-
-    public static boolean getNotificationViberate() {
-        return getPreferences().getBoolean(KEY_NOTIFICATION_VIBRATION, false);
-    }
-
     public static void startNotification() {
-        if(getNotificationAccept()) {
-            if(getNotificationSound() && getNotificationViberate()) {
-                Intent intent = new Intent(instance, NotificationPushService.class);
-                instance.startService(intent);
-            }
+        if(get(AppConfig.KEY_NOTIFICATION_ACCEPT, true)) {
+            Intent intent = new Intent(instance, NotificationPushService.class);
+            instance.startService(intent);
         }
     }
 
@@ -192,6 +176,7 @@ public class AppContext extends BaseApplication {
 
     public void saveUserInfo(User user) {
         this.loginUid = user.getId();
+        this.username = user.getUsername();
         this.login = true;
         userDao.saveUserInfo(user);
     }

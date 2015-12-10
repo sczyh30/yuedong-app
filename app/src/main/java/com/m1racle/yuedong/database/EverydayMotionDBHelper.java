@@ -12,7 +12,7 @@ import com.m1racle.yuedong.util.LogUtil;
  */
 public class EverydayMotionDBHelper extends SQLiteOpenHelper {
 
-    public static final String CREATE_SQL = "CREATE TABLE emd (" +
+    private static final String CREATE_SQL = "CREATE TABLE emd (" +
             "motion_type integer NOT NULL," +
             "step integer NOT NULL," +
             "calorie integer NOT NULL," +

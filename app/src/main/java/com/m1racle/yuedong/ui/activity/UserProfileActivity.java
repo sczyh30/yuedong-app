@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseActivity;
 import com.m1racle.yuedong.entity.BaseMessage;
@@ -30,7 +31,9 @@ import com.m1racle.yuedong.ui.widget.RevealBackgroundView;
 import com.m1racle.yuedong.util.AnimatorUtil;
 import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.JsonUtil;
+import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
+import com.m1racle.yuedong.util.UIUtil;
 import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.kymjs.kjframe.utils.StringUtils;
@@ -131,9 +134,25 @@ public class UserProfileActivity extends BaseActivity
         }
     };
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
     private void updateUI() {
         //此逻辑还有些问题，可能会NullPointer
-        if(mUser != null) {
+        //fixed in 1.12
+        if(mUser != null && top_flag > 0) {
             mTvUsername.setText(mUser.getUsername());
             mTvTips.setText(mUser.getTips());
             mTvActNum.setText(Integer.toString(mUser.getActivitiesNumber()));
@@ -173,14 +192,33 @@ public class UserProfileActivity extends BaseActivity
         public BaseMessageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_message, parent, false);
-            return new BaseMessageHolder(view);
+            return new BaseMessageHolder(view, uid);
         }
 
         @Override
         public void onBindViewHolder(final BaseMessageHolder holder, int position) {
             final BaseMessage data = mList.get(position);
-            final int uid = data.getUid();
-            holder.bindData(data);
+            final int data_uid = data.getUid();
+            // bind the data to the view
+            holder.mTvMessage.setText(data.getMessage());
+            holder.mTvTime.setText(data.getTime());
+            holder.mTvUsername.setText(data.getUsername());
+            if(DeviceUtil.hasInternet()) {
+                if(data.getPortrait() != null)
+                    BitmapRequestClient.send(holder.mCircle, "portrait/" + data.getPortrait(), 90, 90);
+                else
+                    holder.mCircle.setImageResource(R.mipmap.widget_dface);
+            }
+            holder.mCircle.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (data_uid != 0) {
+                        UIUtil.showUserProfile(AppContext.getContext(), data.getUid());
+                        if (data_uid == uid)
+                            finish();
+                    }
+                }
+            });
         }
 
         @Override

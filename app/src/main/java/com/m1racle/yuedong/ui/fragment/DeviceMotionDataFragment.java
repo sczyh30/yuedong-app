@@ -24,9 +24,6 @@ import butterknife.ButterKnife;
  */
 public class DeviceMotionDataFragment extends BaseFragment {
 
-    private HuaweiWearableManager HWManager;
-    private int error_code = 0;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -39,35 +36,11 @@ public class DeviceMotionDataFragment extends BaseFragment {
 
     @Override
     public void initData() {
-        super.initData();
-        initHWManager();
     }
 
-    private void initHWManager() {
-        HWManager = getHuaweiManager();
-    }
 
     @Override
     public void onClick(View v) {
 
     }
-
-    private class MyHandler extends Handler {
-        private final WeakReference<DeviceMotionDataFragment> mFragment;
-
-        public MyHandler(DeviceMotionDataFragment fragment) {
-            mFragment = new WeakReference<>(fragment);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            Object object = msg.obj;
-            switch (msg.what) {
-
-            }
-        }
-    }
-
-    private MyHandler mHandler = new MyHandler(this);
 }

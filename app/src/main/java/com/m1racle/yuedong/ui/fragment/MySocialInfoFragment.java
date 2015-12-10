@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
@@ -76,8 +75,8 @@ public class MySocialInfoFragment extends BaseFragment {
     View mUserContainer;
     @Bind(R.id.rl_user_unlogin)
     View mUserUnLogin;
-    @Bind(R.id.rootview)
-    LinearLayout rootView;
+    //@Bind(R.id.rootview)
+    //LinearLayout rootView;
 
     private User mInfo;
     private AsyncTask<String, Void, User> mCacheTask;
@@ -192,6 +191,10 @@ public class MySocialInfoFragment extends BaseFragment {
 
     public void sendRequestData() {
         int uid = AppContext.getContext().getLoginUid();
+        if (!DeviceUtil.hasInternet()) {
+            ToastUtil.toast(R.string.tip_no_internet);
+            return;
+        }
         SamsaraAPI.getUserInfo(uid, mHandler);
     }
 

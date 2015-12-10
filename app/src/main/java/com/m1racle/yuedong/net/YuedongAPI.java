@@ -4,6 +4,7 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.m1racle.yuedong.AppContext;
+import com.m1racle.yuedong.entity.EventApply;
 import com.m1racle.yuedong.entity.LoginResult;
 import com.m1racle.yuedong.entity.MotionActivitiesDetail;
 import com.m1racle.yuedong.entity.User;
@@ -32,7 +33,7 @@ public class YuedongAPI {
     public static final String URL_GET_LATEST_ACTIVITIES = "action/api/get/latest_ma.json";
     public static final String URL_GET_USER = "action/api/get/user.json";
     public static final String URL_GET_MESSAGES = "action/api/get/message";
-    public static final String URL_GET_USER_DETAIL= "action/api/get/user_detail.json";
+    public static final String URL_GET_USER_DETAIL = "action/api/get/user_detail.json";
     public static final String URL_UPLOAD_LOG = "action/api/upload/log";
     public static final String URL_GET_ANDROID_UPDATE = "action/api/get/app_version_android.json";
     public static final String URL_GET_ACTIVITY_DETAIL = "action/api/get/act_detail";
@@ -41,7 +42,12 @@ public class YuedongAPI {
     public static final String URL_GET_FANS = "action/api/get/fans";
     public static final String URL_GET_FOLLOWING = "action/api/get/following";
 
-    public static final String URL_GET_TODAY_RANK= "action/api/get/today_rank";
+    public static final String URL_GET_TODAY_RANK = "action/api/get/today_rank";
+
+    public static final String URL_POST_EVENT_APPLY = "action/api/put/event/apply";
+
+
+    //TODO: 最后所有逻辑提交时必须经过AOP过滤模块过滤恶意字符及无效字符！
 
     /**
      * Login API method (POST)
@@ -225,6 +231,32 @@ public class YuedongAPI {
         ApiRequestClient.send(request);
         LogUtil.log("POST => " + login_url);
     }
+
+    public static void postEventApply(final EventApply data, Response.Listener<String> listener,
+                                       Response.ErrorListener errorListener) {
+        if(data == null && data.getUid() <= 0 && data.getMaid() <= 0)
+            return;
+        String url = ApiRequestClient.getAbsoluteApiUrl(URL_POST_EVENT_APPLY);
+        SamsaraStringRequest request = new SamsaraStringRequest(Request.Method.POST, url,
+                listener, errorListener) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("uid", String.valueOf(data.getUid()));
+                params.put("maid", String.valueOf(data.getMaid()));
+                params.put("name", data.getName());
+                params.put("mobile", data.getMobile());
+                params.put("address", data.getAddress());
+                params.put("gender", String.valueOf(data.getGender()));
+                return params;
+            }
+        };
+        request.setDefaultHeaders(appCookie);
+        ApiRequestClient.send(request);
+        LogUtil.log("POST => " + url);
+    }
+
+
 
     // common functions
 

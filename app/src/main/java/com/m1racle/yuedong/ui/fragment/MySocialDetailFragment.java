@@ -17,6 +17,7 @@ import com.m1racle.yuedong.entity.UserDetail;
 import com.m1racle.yuedong.net.BitmapRequestClient;
 import com.m1racle.yuedong.net.SamsaraAPI;
 import com.m1racle.yuedong.ui.empty.EmptyLayout;
+import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.JsonUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 
@@ -85,6 +86,10 @@ public class MySocialDetailFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        if (!DeviceUtil.hasInternet()) {
+            ToastUtil.toast(R.string.tip_no_internet);
+            return;
+        }
         sendRequestData();
     }
 

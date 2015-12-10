@@ -7,6 +7,7 @@ public class MotionActivitiesDetail extends Entity {
 
     private int ma_id;
     private String title;
+    private String name;
     private String body;
     private String img_id;
     private String author;
@@ -30,6 +31,14 @@ public class MotionActivitiesDetail extends Entity {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getBody() {

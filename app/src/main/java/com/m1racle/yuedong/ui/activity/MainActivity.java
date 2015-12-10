@@ -3,7 +3,6 @@ package com.m1racle.yuedong.ui.activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
@@ -12,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.m1racle.yuedong.R;
-import com.m1racle.yuedong.adapter.UsualViewPagerAdapter;
+import com.m1racle.yuedong.ui.fragment.adapter.UsualViewPagerAdapter;
 import com.m1racle.yuedong.base.BaseActivity;
 import com.m1racle.yuedong.entity.Notice;
 import com.m1racle.yuedong.service.HWService;
