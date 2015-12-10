@@ -5,8 +5,9 @@
     tools:context="com.m1racle.yuedong.ui.fragment.WeightChartFragment">
 
     <com.github.mikephil.charting.charts.LineChart
+        android:layout_marginTop="@dimen/space_10"
         android:id="@+id/chart_weight"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

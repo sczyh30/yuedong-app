@@ -11,6 +11,7 @@ import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.crypt.MD5Util;
 
 /**
+ * Yuedong app
  * Local User Dao Service Impl
  * @author sczyh30
  */
@@ -71,7 +72,7 @@ public class LocalUserDaoImpl extends BaseDaoImpl implements UserDao {
     @Override
     public User getUserInfo() {
         User user = new User();
-        String sql = "SELECT * FROM user";
+        final String sql = "SELECT * FROM user";
         SQLiteDatabase db = getUserDB(false);
         db.beginTransaction();
         try {

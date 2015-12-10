@@ -14,7 +14,7 @@
         android:background="@color/main_green"
         app:tabIndicatorColor="@color/white"
         app:tabSelectedTextColor="@color/white"
-        app:tabTextColor="#d9d9d9"/>
+        app:tabTextColor="#d9ead3"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/weight_vp"
