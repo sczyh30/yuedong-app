@@ -20,6 +20,7 @@ import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.dao.WeightDaoImpl;
 import com.m1racle.yuedong.entity.Weight;
+import com.m1racle.yuedong.ui.widget.SlideButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +41,8 @@ public class WeightChartFragment extends BaseFragment {
 
     @Bind(R.id.chart_weight)
     LineChart mChart;
+    @Bind(R.id.btn_update_wg_status)
+    SlideButton btnRefresh;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +63,14 @@ public class WeightChartFragment extends BaseFragment {
     @Override
     public void initView(View view) {
         initChart();
+        btnRefresh.setBeforeText("刷新数据");
+        btnRefresh.setOnSendClickListener(new SlideButton.OnSendClickListener() {
+            @Override
+            public void onSendClickListener(View v) {
+                setData(weightDao.getAll());
+                btnRefresh.setCurrentState(SlideButton.STATE_DONE);
+            }
+        });
     }
 
     @Override
@@ -76,7 +87,8 @@ public class WeightChartFragment extends BaseFragment {
 
             @Override
             public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
-
+                if(lastPerformedGesture != ChartTouchListener.ChartGesture.SINGLE_TAP)
+                    mChart.highlightValues(null);
             }
 
             @Override

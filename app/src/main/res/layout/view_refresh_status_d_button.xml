@@ -6,10 +6,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="@string/refresh_b2_status"
         android:textColor="#ffffff"
         android:textSize="12sp" />
-
+    <!--:text="@string/refresh_b2_status"-->
     <TextView
         android:id="@+id/tvDone"
         android:layout_width="match_parent"

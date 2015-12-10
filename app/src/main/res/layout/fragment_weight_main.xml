@@ -16,7 +16,7 @@
             android:layout_gravity="center_horizontal"
             android:paddingTop="@dimen/space_20"
             android:textSize="@dimen/text_size_16"
-            android:text="2015年12月12日星期六 24:56"/>
+            android:text="2015年12月12日星期六 23:56"/>
 
         <TextView
             android:id="@+id/tv_wg_weight"

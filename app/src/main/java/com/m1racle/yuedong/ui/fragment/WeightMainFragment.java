@@ -7,13 +7,16 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.dao.WeightDaoImpl;
+import com.m1racle.yuedong.entity.Weight;
 import com.m1racle.yuedong.ui.activity.WeightGoalActivity;
 import com.m1racle.yuedong.ui.activity.WeightRecordActivity;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -28,6 +31,17 @@ public class WeightMainFragment extends BaseFragment {
 
     WeightDaoImpl weightDao = new WeightDaoImpl();
 
+    private Weight present;
+
+    @Bind(R.id.tv_wg_weight)
+    TextView mTvWeight;
+    @Bind(R.id.tv_wg_height)
+    TextView mTvHeight;
+    @Bind(R.id.tv_wg_index)
+    TextView mTvBMI;
+    @Bind(R.id.tv_wg_time)
+    TextView mTvTime;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,12 +55,18 @@ public class WeightMainFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        present = weightDao.getLatest();
 
     }
 
     @Override
     public void initView(View view) {
-        super.initView(view);
+        if(present != null) {
+            mTvWeight.setText(String.format("%s 公斤", String.valueOf(present.getWeight())));
+            mTvHeight.setText(String.format("%s 厘米", String.valueOf(present.getHeight())));
+            mTvTime.setText(present.getwTime());
+            mTvBMI.setText(String.valueOf(present.getIndex()));
+        }
     }
 
     @Override
