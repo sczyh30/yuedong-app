@@ -26,7 +26,7 @@
             android:paddingTop="@dimen/space_40"
             android:textSize="40sp"
             android:textColor="@color/main_green"
-            android:text="60.2 公斤"/>
+            android:text="66.6 公斤"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -46,7 +46,7 @@
                     android:paddingTop="@dimen/space_20"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_25"
-                    android:text="32.4"/>
+                    android:text="24.4"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,6 +78,22 @@
                     android:text="@string/height"/>
             </LinearLayout>
         </LinearLayout>
+        <TextView
+            android:id="@+id/tv_wg_goal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/space_40"
+            android:textSize="40sp"
+            android:textColor="@color/actionbar_blue"
+            android:text="60.2 公斤"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingTop="@dimen/space_5"
+            android:textSize="@dimen/text_size_16"
+            android:text="目标"/>
     </LinearLayout>
 
 

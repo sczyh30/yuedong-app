@@ -2,13 +2,14 @@ package com.m1racle.yuedong.ui.fragment;
 
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,22 +34,11 @@ import butterknife.ButterKnife;
 
 /**
  * Yuedong App
- * Message fragment
- * Refactored in v1.36
- * @author sczyh30
- * @version 2
- * @since v1.36
+ * Message Fragment
+ * @deprecated has been refactored
  */
-public class MessageFragment extends BaseFragment {
-
-    int type = 1;
-
-    public MessageFragment() {}
-
-    public MessageFragment(int type) {
-        super();
-        this.type = type;
-    }
+@Deprecated
+public class MessageTempFragment extends BaseFragment {
 
     private int uid = AppContext.getContext().getLoginUid();
     private ArrayList<BaseMessage> mList = new ArrayList<>();
@@ -60,22 +50,18 @@ public class MessageFragment extends BaseFragment {
     @Bind(R.id.error_layout)
     EmptyLayout emptyLayout;
     @Bind(R.id.content_layout)
-    LinearLayout contentLayout;
-
+    FrameLayout contentLayout;
+    @Bind(R.id.tl_tab)
+    TabLayout tlUserProfileTabs;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_message, container, false);
+        View view = inflater.inflate(R.layout.fragment_message_temp, container, false);
         ButterKnife.bind(this, view);
         initData();
         initView(view);
         return view;
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -91,6 +77,8 @@ public class MessageFragment extends BaseFragment {
                 getData();
             }
         });
+        tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setText("动态"));
+        tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setText("信息"));
         getData();
     }
 
@@ -114,6 +102,11 @@ public class MessageFragment extends BaseFragment {
             emptyLayout.setErrorType(EmptyLayout.NODATA);
             emptyLayout.setVisibility(View.VISIBLE);
         }
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 
@@ -158,9 +151,4 @@ public class MessageFragment extends BaseFragment {
             ToastUtil.toast(R.string.no_device_data);
         }
     };
-
-    @Override
-    public void onClick(View v) {
-
-    }
 }

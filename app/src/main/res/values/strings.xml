@@ -189,9 +189,19 @@
     <string name="bmi_intro_mz">由于存在误差，所以BMI只能作为评估个人体重和健康状况的多项标准之一。App提供的BMI值仅供参考，不得用于医疗诊断与医疗评估。详情请咨询医疗专业人士。</string>
     <string name="height">身高</string>
 
+    <string name="weight_goal_intro">设置一个目标体重以便于您的锻炼以及体重的管理。目标将会表现于折线图中。</string>
+    <string name="weight_goal_not_set">未设定</string>
     <string name="weight_insert_manual">手动记录</string>
+    <string name="weight_insert_record_ok">添加体重记录成功</string>
+    <string name="weight_sync_goal_ok">同步体重目标成功</string>
     <string name="weight_set_goal">体重目标</string>
+    <string name="weight_save_goal">保存体重目标</string>
+
     <string name="title_activity_weight_record">记录体重</string>
     <string name="title_activity_weight_goal">体重目标</string>
+    <string name="title_activity_message">我的信息</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

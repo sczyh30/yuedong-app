@@ -107,10 +107,6 @@ public class UIUtil {
         showActivity(context, UtilActivityPage.DEVICE_USER_INFO_SET);
     }
 
-    public static void showMessages(Context context) {
-        showActivity(context, UtilActivityPage.MY_SOCIAL_MESSAGE);
-    }
-
     public static void showSettingNotification(Context context) {
         showActivity(context, UtilActivityPage.SETTING_NOTIFICATION);
     }

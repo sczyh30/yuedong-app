@@ -1,15 +1,11 @@
 package com.m1racle.yuedong.ui.activity;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.view.LayoutInflater;
+import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
@@ -18,30 +14,31 @@ import android.widget.TextView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
+import com.m1racle.yuedong.adapter.BasicFragmentPagerAdapter;
 import com.m1racle.yuedong.base.BaseActivity;
 import com.m1racle.yuedong.entity.BaseMessage;
 import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.net.BitmapRequestClient;
 import com.m1racle.yuedong.net.YuedongAPI;
-import com.m1racle.yuedong.ui.recycler.BaseMessageHolder;
+import com.m1racle.yuedong.ui.fragment.MessageFragment;
 import com.m1racle.yuedong.ui.widget.CircleImageView;
 import com.m1racle.yuedong.ui.widget.RevealBackgroundView;
 import com.m1racle.yuedong.util.AnimatorUtil;
 import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.JsonUtil;
-import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
-import com.m1racle.yuedong.util.UIUtil;
-import com.yqritc.recyclerviewflexibledivider.HorizontalDividerItemDecoration;
 
 import org.kymjs.kjframe.utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+
+import static com.m1racle.yuedong.base.Constants.MESSAGE_DONGTAI;
+import static com.m1racle.yuedong.base.Constants.MESSAGE_NOTICE;
 
 public class UserProfileActivity extends BaseActivity
         implements RevealBackgroundView.OnStateChangeListener {
@@ -50,8 +47,7 @@ public class UserProfileActivity extends BaseActivity
     private static final Interpolator INTERPOLATOR = new DecelerateInterpolator();
     private static final int USER_OPTIONS_ANIMATION_DELAY = 300;
 
-    private ArrayList<BaseMessage> mList = new ArrayList<>();
-    private MessageAdapter adapter = new MessageAdapter();
+    private BasicFragmentPagerAdapter adapter;
 
     @Bind(R.id.tv_username)
     TextView mTvUsername;
@@ -67,13 +63,14 @@ public class UserProfileActivity extends BaseActivity
     TextView mTvFollowing;
     @Bind(R.id.iv_gender)
     ImageView mIvGender;
-    @Bind(R.id.rv_profile)
-    RecyclerView mRecyclerView;
+
+    @Bind(R.id.vp_profile)
+    ViewPager vpProfile;
 
     @Bind(R.id.vRevealBackground)
     RevealBackgroundView vRevealBackground;
-    @Bind(R.id.tlUserProfileTabs)
-    TabLayout tlUserProfileTabs;
+    @Bind(R.id.profile_message_tab)
+    TabLayout messageTab;
     @Bind(R.id.vUserDetails)
     View vUserDetails;
     @Bind(R.id.vUserStats)
@@ -97,7 +94,7 @@ public class UserProfileActivity extends BaseActivity
         uid = getIntent().getIntExtra("uid", 0);
         getData();
         setupTabs();
-        setupUserProfileGrid();
+        //setupUserProfileGrid();
         //setupRevealBackground(savedInstanceState);
     }
 
@@ -115,15 +112,6 @@ public class UserProfileActivity extends BaseActivity
                 mUser = response;
                 updateUI();
             }
-        }
-    };
-
-    private Response.Listener<String> listener0 = new Response.Listener<String>() {
-        @Override
-        public void onResponse(String response) {
-            mList = JsonUtil.resolveMessages(response);
-            if(mList.size() > 0)
-                updateUI();
         }
     };
 
@@ -162,8 +150,6 @@ public class UserProfileActivity extends BaseActivity
                     R.mipmap.userinfo_icon_male : R.mipmap.userinfo_icon_female);
             getImages();
         }
-        if(mList.size() > 0)
-            adapter.notifyDataSetChanged();
     }
 
     private void getImages() {
@@ -182,63 +168,32 @@ public class UserProfileActivity extends BaseActivity
             ToastUtil.toast(R.string.error_view_network_error_click_to_refresh);
         } else {
             YuedongAPI.getUser(uid, listener, errorListener);
-            YuedongAPI.getMessages(uid, listener0, errorListener);
         }
     }
-
-    private class MessageAdapter extends RecyclerView.Adapter<BaseMessageHolder> {
-
-        @Override
-        public BaseMessageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.list_message, parent, false);
-            return new BaseMessageHolder(view, uid);
-        }
-
-        @Override
-        public void onBindViewHolder(final BaseMessageHolder holder, int position) {
-            final BaseMessage data = mList.get(position);
-            final int data_uid = data.getUid();
-            // bind the data to the view
-            holder.mTvMessage.setText(data.getMessage());
-            holder.mTvTime.setText(data.getTime());
-            holder.mTvUsername.setText(data.getUsername());
-            if(DeviceUtil.hasInternet()) {
-                if(data.getPortrait() != null)
-                    BitmapRequestClient.send(holder.mCircle, "portrait/" + data.getPortrait(), 90, 90);
-                else
-                    holder.mCircle.setImageResource(R.mipmap.widget_dface);
-            }
-            holder.mCircle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (data_uid != 0) {
-                        UIUtil.showUserProfile(AppContext.getContext(), data.getUid());
-                        if (data_uid == uid)
-                            finish();
-                    }
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return mList.size();
-        }
-    }
-
-
 
     private void setupTabs() {
-        tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setText("动态"));
-        tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setText("交流"));
-        //tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_place_white));
-        //tlUserProfileTabs.addTab(tlUserProfileTabs.newTab().setIcon(R.drawable.ic_label_white));
+        // init fragment list
+        List<Fragment> fragmentList = new ArrayList<>();
+        fragmentList.add(new MessageFragment(MESSAGE_DONGTAI));
+        fragmentList.add(new MessageFragment(MESSAGE_NOTICE));
+        // init title list
+        List<String> titleList = new ArrayList<>();
+        titleList.add("动态");
+        titleList.add("交流");
+        // init the adapter
+        adapter = new BasicFragmentPagerAdapter(getFragmentManager(), fragmentList, titleList);
+        vpProfile.setAdapter(adapter);
+        vpProfile.setCurrentItem(0);
+        // init the tab
+        messageTab.setTabMode(TabLayout.MODE_FIXED);
+        messageTab.setupWithViewPager(vpProfile);
+        //messageTab.addTab(messageTab.newTab().setText("交流"));
+        //messageTab.addTab(messageTab.newTab().setIcon(R.drawable.ic_place_white));
     }
 
-    private void setupUserProfileGrid() {
+    /*private void setupUserProfileGrid() {
         final StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
-        //mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -246,10 +201,10 @@ public class UserProfileActivity extends BaseActivity
         mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                //userPhotosAdapter.setLockedAnimations(true);
+                userPhotosAdapter.setLockedAnimations(true);
             }
         });
-    }
+    }*/
 
     private void setupRevealBackground(Bundle savedInstanceState) {
         vRevealBackground.setOnStateChangeListener(this);
@@ -272,23 +227,23 @@ public class UserProfileActivity extends BaseActivity
     @Override
     public void onStateChange(int state) {
         if (RevealBackgroundView.STATE_FINISHED == state) {
-            mRecyclerView.setVisibility(View.VISIBLE);
-            tlUserProfileTabs.setVisibility(View.VISIBLE);
+            //mRecyclerView.setVisibility(View.VISIBLE);
+            messageTab.setVisibility(View.VISIBLE);
             vUserProfileRoot.setVisibility(View.VISIBLE);
             //userPhotosAdapter = new UserProfileAdapter(this);
             //mRecyclerView.setAdapter(userPhotosAdapter);
             animateUserProfileOptions();
             animateUserProfileHeader();
         } else {
-            tlUserProfileTabs.setVisibility(View.INVISIBLE);
-            mRecyclerView.setVisibility(View.INVISIBLE);
+            messageTab.setVisibility(View.INVISIBLE);
+            //mRecyclerView.setVisibility(View.INVISIBLE);
             vUserProfileRoot.setVisibility(View.INVISIBLE);
         }
     }
 
     private void animateUserProfileOptions() {
-        tlUserProfileTabs.setTranslationY(-tlUserProfileTabs.getHeight());
-        tlUserProfileTabs.animate().translationY(0).setDuration(300).setStartDelay(USER_OPTIONS_ANIMATION_DELAY).setInterpolator(INTERPOLATOR);
+        messageTab.setTranslationY(-messageTab.getHeight());
+        messageTab.animate().translationY(0).setDuration(300).setStartDelay(USER_OPTIONS_ANIMATION_DELAY).setInterpolator(INTERPOLATOR);
     }
 
     private void animateUserProfileHeader() {

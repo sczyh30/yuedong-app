@@ -1,8 +1,13 @@
 package com.m1racle.yuedong.ui.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -37,7 +42,9 @@ import butterknife.ButterKnife;
  */
 public class WeightChartFragment extends BaseFragment {
 
-    WeightDaoImpl weightDao = new WeightDaoImpl(); //TODO:考虑做成单例？
+    //TODO:代码多量重复，下一版本需进行进一步抽象实现代码复用(2015-12-10)
+
+    WeightDaoImpl weightDao = new WeightDaoImpl();
 
     @Bind(R.id.chart_weight)
     LineChart mChart;
@@ -57,7 +64,24 @@ public class WeightChartFragment extends BaseFragment {
 
     @Override
     public void initData() {
-
+        // init the broadcast receiver
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter goalIntentFilter = new IntentFilter("com.m1racle.yuedong.action.ON_WEIGHT_GOAL_CHANGE");
+        IntentFilter dataIntentFilter = new IntentFilter("com.m1racle.yuedong.action.ON_WEIGHT_PRESENT_CHANGE");
+        BroadcastReceiver goalReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                //refreshGoal();
+            }
+        };
+        BroadcastReceiver dataReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                refreshData();
+            }
+        };
+        broadcastManager.registerReceiver(goalReceiver, goalIntentFilter);
+        broadcastManager.registerReceiver(dataReceiver, dataIntentFilter);
     }
 
     @Override
@@ -67,7 +91,7 @@ public class WeightChartFragment extends BaseFragment {
         btnRefresh.setOnSendClickListener(new SlideButton.OnSendClickListener() {
             @Override
             public void onSendClickListener(View v) {
-                setData(weightDao.getAll());
+                refreshData();
                 btnRefresh.setCurrentState(SlideButton.STATE_DONE);
             }
         });
@@ -76,6 +100,10 @@ public class WeightChartFragment extends BaseFragment {
     @Override
     public void onClick(View v) {
 
+    }
+
+    private void refreshData() {
+        setData(weightDao.getAll());
     }
 
     private void initChart() {
@@ -140,12 +168,12 @@ public class WeightChartFragment extends BaseFragment {
         mChart.setDragEnabled(true);
         mChart.setScaleEnabled(true);
         mChart.setPinchZoom(true);
-        setData(weightDao.getAll());
+        refreshData();
     }
 
     private void setData(List<Weight> list) {
 
-        int color = Color.rgb(147, 196, 125);
+
         int count = list.size();
         if(count <= 0) {
             return;
@@ -155,38 +183,45 @@ public class WeightChartFragment extends BaseFragment {
         for (int i = 0; i < count; i++) {
             xVals.add(list.get(i).getwTime());
         }
-        // set y bar
+        // set y bar (weight)
         ArrayList<Entry> yVals = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             yVals.add(new Entry(list.get(i).getWeight(), i));
         }
 
+        /*ArrayList<Entry> BMIVals = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            yVals.add(new Entry(list.get(i).getIndex(), i));
+        }
+        LineDataSet BMISet = new LineDataSet(BMIVals, "BMI");
+        setDataSetStyle(BMISet);
+        dataSets.add(BMISet);*/
+
         // create a dataset and give it a type
         LineDataSet weightSet = new LineDataSet(yVals, "体重");
-        // set1.setFillAlpha(110);
-        // set1.setFillColor(Color.RED);
-
-        // set the line to be drawn like this "- - - - - -"
-        weightSet.enableDashedLine(10f, 5f, 0f);
-        weightSet.enableDashedHighlightLine(10f, 5f, 0f);
-        weightSet.setColor(color);
-        weightSet.setCircleColor(color);
-        weightSet.setLineWidth(1f);
-        weightSet.setCircleSize(3f);
-        weightSet.setDrawCircleHole(false);
-        weightSet.setValueTextSize(9f);
-        weightSet.setFillAlpha(65);
-        weightSet.setFillColor(color);
-//        set1.setDrawFilled(true);
-        // set1.setShader(new LinearGradient(0, 0, 0, mChart.getHeight(),
-        // Color.BLACK, Color.WHITE, Shader.TileMode.MIRROR));
-
+        // set style
+        setDataSetStyle(weightSet);
+        // add the datasets
         ArrayList<LineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(weightSet); // add the datasets
-
+        dataSets.add(weightSet);
         // create a data object with the datasets
         LineData data = new LineData(xVals, dataSets);
         // set data
         mChart.setData(data);
+    }
+
+    private void setDataSetStyle(LineDataSet dataSet) {
+        int color = Color.rgb(147, 196, 125);
+
+        dataSet.enableDashedLine(10f, 5f, 0f);
+        dataSet.enableDashedHighlightLine(10f, 5f, 0f);
+        dataSet.setColor(color);
+        dataSet.setCircleColor(color);
+        dataSet.setLineWidth(1f);
+        dataSet.setCircleSize(3f);
+        dataSet.setDrawCircleHole(false);
+        dataSet.setValueTextSize(9f);
+        dataSet.setFillAlpha(65);
+        dataSet.setFillColor(color);
     }
 }

@@ -85,7 +85,10 @@
             android:label="@string/title_activity_weight_record" />
         <activity
             android:name=".ui.activity.WeightGoalActivity"
-            android:label="@string/title_activity_weight_goal"></activity>
+            android:label="@string/title_activity_weight_goal" />
+        <activity
+            android:name=".ui.activity.MessageActivity"
+            android:label="@string/title_activity_message"></activity>
     </application>
 
 </manifest>

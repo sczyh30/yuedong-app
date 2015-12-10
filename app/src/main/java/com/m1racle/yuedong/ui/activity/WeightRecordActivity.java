@@ -1,6 +1,8 @@
 package com.m1racle.yuedong.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -98,7 +100,9 @@ public class WeightRecordActivity extends BaseActivity {
         if (id == R.id.public_menu_send) {
             if(validate()) {
                 if(saveData()) {
-                    ToastUtil.toast("添加体重记录成功");
+                    ToastUtil.toast(R.string.weight_insert_record_ok);
+                    Intent intent = new Intent("com.m1racle.yuedong.action.ON_WEIGHT_PRESENT_CHANGE");
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
                     finish();
                 } else
                     ToastUtil.toast(R.string.error_RDI006);

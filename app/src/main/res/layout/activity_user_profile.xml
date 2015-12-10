@@ -18,11 +18,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_profile"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -207,7 +208,7 @@
                 android:layout_height="48dp">
 
                 <android.support.design.widget.TabLayout
-                    android:id="@+id/tlUserProfileTabs"
+                    android:id="@+id/profile_message_tab"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:background="?attr/colorAccent"
