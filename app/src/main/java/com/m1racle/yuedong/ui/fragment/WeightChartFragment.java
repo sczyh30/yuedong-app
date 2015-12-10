@@ -147,7 +147,7 @@ public class WeightChartFragment extends BaseFragment {
         }
 
         // create a dataset and give it a type
-        LineDataSet set1 = new LineDataSet(yVals, "范大神的战斗力");
+        LineDataSet set1 = new LineDataSet(yVals, "体重");
         // set1.setFillAlpha(110);
         // set1.setFillColor(Color.RED);
 
