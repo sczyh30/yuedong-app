@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.m1racle.yuedong.R;
+import com.m1racle.yuedong.adapter.ViewPageInfo;
 import com.m1racle.yuedong.ui.widget.PagerSlidingTabStrip;
 
 import java.util.ArrayList;

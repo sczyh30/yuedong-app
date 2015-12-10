@@ -8,8 +8,8 @@ android {
         applicationId "com.m1racle.yuedong"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 382
-        versionName "1.30"
+        versionCode 396
+        versionName "1.32"
     }
     buildTypes {
         release {
@@ -27,7 +27,8 @@ android {
 dependencies {
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:recyclerview-v7:22.2.0'
+
+    compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.google.zxing:core:3.2.0'
     compile 'com.yqritc:recyclerview-flexibledivider:1.2.5'
@@ -36,7 +37,10 @@ dependencies {
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.jakewharton:butterknife:7.0.1'
     compile 'org.kymjs.kjframe:kjframe:2.4.4'
-    compile 'com.android.support:appcompat-v7:22.2.0'
-    compile 'com.android.support:support-v13:22.2.0'
-    compile 'com.android.support:design:22.2.0'
+    compile 'com.android.support:appcompat-v7:22.2.1'
+    compile 'com.android.support:support-v13:22.2.1'
+    compile 'com.android.support:design:22.2.1'
+    compile 'com.sefford:circular-progress-drawable:1.31@aar'
+    compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
+    compile 'com.android.support:support-v4:22.2.1'
 }

@@ -178,4 +178,7 @@
     <string name="title_activity_social_util">我的悦动</string>
     <string name="title_activity_user_profile">用户信息</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
