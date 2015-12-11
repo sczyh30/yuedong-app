@@ -42,8 +42,56 @@ public class EverydayMotionDao extends BaseDaoImpl implements BaseDao<StepDayDat
     }
 
     @Override
-    public StepDayData get(int id) {
-        return null;
+    public StepDayData get(int eid) {
+        StepDayData data = new StepDayData();
+        final String SQL = "SELECT * FROM em_table WHERE eid = " + eid;
+        SQLiteDatabase db = getEverydayMotionDB(false);
+        db.beginTransaction();
+        try {
+            Cursor cursor = db.rawQuery(SQL, null);
+            if(cursor.moveToFirst()) {
+                data.setCalorie(cursor.getInt(cursor.getColumnIndex("calorie")));
+                data.setDistance(cursor.getInt(cursor.getColumnIndex("distance")));
+                data.setEdate(cursor.getString(cursor.getColumnIndex("edate")));
+                data.setEtime(cursor.getInt(cursor.getColumnIndex("etime")));
+                data.setStep(cursor.getInt(cursor.getColumnIndex("step")));
+                data.setEid(cursor.getInt(cursor.getColumnIndex("eid")));
+            }
+            cursor.close();
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+        return data;
+    }
+
+    public StepDayData getLatest() {
+        StepDayData data = new StepDayData();
+        final String SQL = "SELECT * FROM em_table WHERE eid = (SELECT MAX(eid) FROM em_table)";
+        SQLiteDatabase db = getEverydayMotionDB(false);
+        db.beginTransaction();
+        try {
+            Cursor cursor = db.rawQuery(SQL, null);
+            if(cursor.moveToFirst()) {
+                data.setCalorie(cursor.getInt(cursor.getColumnIndex("calorie")));
+                data.setDistance(cursor.getInt(cursor.getColumnIndex("distance")));
+                data.setEdate(cursor.getString(cursor.getColumnIndex("edate")));
+                data.setEtime(cursor.getInt(cursor.getColumnIndex("etime")));
+                data.setStep(cursor.getInt(cursor.getColumnIndex("step")));
+                data.setEid(cursor.getInt(cursor.getColumnIndex("eid")));
+            }
+            cursor.close();
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+        return data;
     }
 
     @Override
@@ -51,8 +99,37 @@ public class EverydayMotionDao extends BaseDaoImpl implements BaseDao<StepDayDat
         return false;
     }
 
+    public boolean updateByDate(StepDayData stepDayData, String date) {
+        return false;
+    }
+
     public List<StepDayData> getAll() {
         List<StepDayData> list = new ArrayList<>();
+        final String SQL = "SELECT * FROM em_table";
+        SQLiteDatabase db = getWeightDB(false);
+        db.beginTransaction();
+        try {
+            Cursor cursor = db.rawQuery(SQL, null);
+            if(cursor.moveToFirst()) {
+                do {
+                    StepDayData data = new StepDayData();
+                    data.setCalorie(cursor.getInt(cursor.getColumnIndex("calorie")));
+                    data.setDistance(cursor.getInt(cursor.getColumnIndex("distance")));
+                    data.setEdate(cursor.getString(cursor.getColumnIndex("edate")));
+                    data.setEtime(cursor.getInt(cursor.getColumnIndex("etime")));
+                    data.setStep(cursor.getInt(cursor.getColumnIndex("step")));
+                    data.setEid(cursor.getInt(cursor.getColumnIndex("eid")));
+                    list.add(data);
+                } while(cursor.moveToNext());
+            }
+            cursor.close();
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
         return list;
     }
 
