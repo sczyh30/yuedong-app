@@ -9,6 +9,8 @@ import com.m1racle.yuedong.util.LogUtil;
 /**
  * Yuedong app
  * Everyday Motion Database Helper
+ * @author sczyh30
+ * @since v1.40 (refactored)
  */
 public class EverydayMotionDBHelper extends SQLiteOpenHelper {
 

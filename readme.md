@@ -21,11 +21,11 @@
 - BaiduMap API（locSDK_6.11.jar及相关so包, 在官网可下载）
 - Huawei Wearable API
 
-##Present Tasks
+##Pending Tasks
 
 **Refactor the architecture**
 
-- 将架构重构为MVVM架构，降低各模块之间的耦合度（2015.11）
+- 架构重构，更简洁的代码
 - 继续美化UI，做成Material Design风格
 
 2015.12.11

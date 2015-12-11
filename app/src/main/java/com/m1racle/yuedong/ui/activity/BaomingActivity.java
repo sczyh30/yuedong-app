@@ -40,7 +40,7 @@ public class BaomingActivity extends BaseActivity {
     }
 
     private void initView() {
-        mTvEventName.setText(getIntent().getStringExtra("MANAME"));
+        //mTvEventName.setText(getIntent().getStringExtra("MANAME"));
         mTvUid.setText(AppContext.getContext().getUsername());
         maid = getIntent().getIntExtra("MAID", 0);
     }

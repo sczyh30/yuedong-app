@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.m1racle.yuedong">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -15,6 +16,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
 
     <application
+        tools:replace="android:icon"
         android:name=".AppContext"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -44,9 +46,13 @@
             android:name=".ui.activity.LoginActivity"
             android:label="@string/login" />
         <activity
+            android:name=".TestActivity"
+            android:label="测试用" />
+        <activity
             android:name=".ui.activity.UtilActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
+
         <!-- BaiduMap Service -->
         <service
             android:name="com.baidu.location.f"
@@ -91,12 +97,11 @@
             android:label="@string/title_activity_message" />
         <activity
             android:name=".ui.activity.MotionGoalActivity"
-            android:label="@string/title_activity_motion_goal"
-            android:theme="@style/AppBaseTheme_MD_BG" />
+            android:label="@string/title_activity_motion_goal" />
         <activity android:name=".base.CommonTabActivity" />
         <activity
             android:name=".ui.activity.MotionDataActivity"
-            android:label="@string/title_activity_motion_data"></activity>
+            android:label="@string/title_activity_motion_data"/>
     </application>
 
 </manifest>

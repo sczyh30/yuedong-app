@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.glomadrian.dashedcircularprogress.DashedCircularProgress;
 import com.huawei.huaweiwearable.callback.IDeviceConnectStatusCallback;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
@@ -15,14 +16,19 @@ import com.m1racle.yuedong.service.HWServiceConfig;
 
 import java.lang.ref.WeakReference;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-
 
 /**
  * Yuedong App
  * Device Motion Data View Fragment
+ * @author sczyh30
+ * @since v1.39
  */
 public class DeviceMotionDataFragment extends BaseFragment {
+
+    @Bind(R.id.cp_goal_circle)
+    DashedCircularProgress progressGoal;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,6 +42,8 @@ public class DeviceMotionDataFragment extends BaseFragment {
 
     @Override
     public void initData() {
+        progressGoal.setMax(10000);
+        progressGoal.setValue(8866);
     }
 
 

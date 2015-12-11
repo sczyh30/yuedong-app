@@ -27,7 +27,6 @@
         <item name="quickoption_icon_note_selector">@drawable/day_quickoption_icon_note_selector</item>
     </style>
 
-    <!-- 夜间模式 -->
     <style name="AppBaseTheme_MD_BG" parent="@style/Theme.AppCompat">
         <item name="colorPrimary">#66cccc</item>
         <item name="colorPrimaryDark">#33cccc</item>
@@ -45,6 +44,7 @@
         <item name="windows_bg">@color/day_windows_bg</item>
     </style>
 
+    <!-- 夜间模式 -->
     <style name="AppBaseTheme_Night" parent="@style/Theme.AppCompat">
         <item name="colorPrimary">@color/night_colorPrimary</item>
         <item name="colorPrimaryDark">@color/night_colorPrimaryDark</item>

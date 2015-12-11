@@ -54,6 +54,16 @@ public class EverydayMotionFragment extends BaseFragment {
 
     private EverydayMotionAdapter adapter = new EverydayMotionAdapter();
 
+    private List<DataTotalMotion> getTestData() {
+        List<DataTotalMotion> list = new ArrayList<>();
+        list.add(new DataTotalMotion(1, 266, 2773, 2841, 126));
+        list.add(new DataTotalMotion(2, 217, 2120, 416, 42));
+        list.add(new DataTotalMotion(3, 306, 2763, 277, 47));
+        list.add(new DataTotalMotion(4, 55, 241, 45, 11));
+        list.add(new DataTotalMotion(5, 266, 561, 27168, 87));
+        return list;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,6 +112,13 @@ public class EverydayMotionFragment extends BaseFragment {
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
+        // ONLY FOR TEST
+        if(mList.size() == 0) {
+            mToday = new DataTodayTotalMotion();
+            mList = getTestData();
+            mToday.setTotalCalorie(7189);
+        }
+
     }
 
     private void initHWManager() {

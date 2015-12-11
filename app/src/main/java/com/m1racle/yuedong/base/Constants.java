@@ -6,6 +6,8 @@ package com.m1racle.yuedong.base;
  */
 public class Constants {
 
+    public static final int APP_DEV_STATUS = 0; // 0 DEBUG, 1 RELEASE, 2 EB
+
     // intent
     public static final String INTENT_ACTION_USER_CHANGE = "com.m1racle.yuedong.action.USER_CHANGE";
 

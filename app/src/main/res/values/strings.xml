@@ -43,7 +43,7 @@
     <string name="choose_function_inst">运动与健康功能</string>
     <string name="b2_btn_fn_user_info">用户信息</string>
     <string name="b2_btn_fn_motion_everyday">每日运动</string>
-    <string name="b2_btn_fn_motion_data">运动数据</string>
+    <string name="b2_btn_fn_motion_data">计步统计</string>
     <string name="b2_btn_fn_motion_goal">运动目标</string>
     <string name="b2_btn_fn_sleep">睡眠监测</string>
     <string name="b2_btn_alarm">手环闹钟</string>
@@ -201,7 +201,7 @@
     <string name="title_activity_weight_goal">体重目标</string>
     <string name="title_activity_message">我的信息</string>
     <string name="title_activity_motion_goal">运动目标</string>
-    <string name="title_activity_motion_data">运动数据</string>
+    <string name="title_activity_motion_data">计步统计</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -27,9 +27,12 @@ android {
 dependencies {
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile(name:'DashedCircularProgress-1.0', ext:'aar')
 
-    //compile 'com.github.glomadrian:DashedCircularProgress:1.0@aar'
+    //provided 'DashedCircularProgress-1.0.aar'
     //compile 'com.sefford:circular-progress-drawable:1.31@aar'
+    //compile 'com.github.glomadrian:DashedCircularProgress:1.0@aar'
+
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.google.zxing:core:3.2.0'

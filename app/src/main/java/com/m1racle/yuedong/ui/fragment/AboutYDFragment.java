@@ -35,7 +35,6 @@ public class AboutYDFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        LogUtil.log("About Fragment => OnCreateView");
         View view = inflater.inflate(R.layout.fragment_about_yd, container, false);
         ButterKnife.bind(this, view);
         initView(view);
