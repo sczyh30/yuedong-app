@@ -88,7 +88,15 @@
             android:label="@string/title_activity_weight_goal" />
         <activity
             android:name=".ui.activity.MessageActivity"
-            android:label="@string/title_activity_message"></activity>
+            android:label="@string/title_activity_message" />
+        <activity
+            android:name=".ui.activity.MotionGoalActivity"
+            android:label="@string/title_activity_motion_goal"
+            android:theme="@style/AppBaseTheme_MD_BG" />
+        <activity android:name=".base.CommonTabActivity" />
+        <activity
+            android:name=".ui.activity.MotionDataActivity"
+            android:label="@string/title_activity_motion_data"></activity>
     </application>
 
 </manifest>

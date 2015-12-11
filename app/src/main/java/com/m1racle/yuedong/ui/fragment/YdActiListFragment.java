@@ -82,7 +82,6 @@ public class YdActiListFragment extends BaseFragment {
 
             @Override
             public void onItemLongClick(View view, int position) {
-                LogUtil.log("onItemLongClick => to detail");
             }
         });
         mRecyclerView.setAdapter(adapter);

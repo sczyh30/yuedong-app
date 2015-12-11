@@ -17,6 +17,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/space_20"
         android:textSize="17sp"
-        android:text="设置运动目标（逻辑懒得写了，先空着吧）"/>
+        android:text="设置运动目标"/>
 
 </LinearLayout>

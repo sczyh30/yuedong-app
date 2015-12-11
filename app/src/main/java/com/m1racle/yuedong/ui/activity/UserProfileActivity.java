@@ -17,7 +17,6 @@ import com.android.volley.VolleyError;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.adapter.BasicFragmentPagerAdapter;
 import com.m1racle.yuedong.base.BaseActivity;
-import com.m1racle.yuedong.entity.BaseMessage;
 import com.m1racle.yuedong.entity.User;
 import com.m1racle.yuedong.net.BitmapRequestClient;
 import com.m1racle.yuedong.net.YuedongAPI;
@@ -40,6 +39,12 @@ import butterknife.OnClick;
 import static com.m1racle.yuedong.base.Constants.MESSAGE_DONGTAI;
 import static com.m1racle.yuedong.base.Constants.MESSAGE_NOTICE;
 
+/**
+ * Yuedong app
+ * User profile activity
+ * @author sczyh30
+ * @since v1.0
+ */
 public class UserProfileActivity extends BaseActivity
         implements RevealBackgroundView.OnStateChangeListener {
 

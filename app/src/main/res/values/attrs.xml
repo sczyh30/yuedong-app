@@ -10,5 +10,12 @@
         <attr name="allowWidthFull" format="boolean"/>
         <attr name="disableViewPager" format="boolean"/>
     </declare-styleable>
-    
+
+    <declare-styleable name="CircleProgressBar">
+        <attr name="radius" format="dimension"/>
+        <attr name="strokeWidth" format="dimension"/>
+        <attr name="circleColor" format="color"/>
+        <attr name="ringColor" format="color"/>
+    </declare-styleable>
+
 </resources>

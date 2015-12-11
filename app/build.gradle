@@ -8,8 +8,8 @@ android {
         applicationId "com.m1racle.yuedong"
         minSdkVersion 15
         targetSdkVersion 22
-        versionCode 426
-        versionName "1.37"
+        versionCode 437
+        versionName "1.38"
     }
     buildTypes {
         release {
@@ -28,6 +28,8 @@ dependencies {
 
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
+    //compile 'com.github.glomadrian:DashedCircularProgress:1.0@aar'
+    //compile 'com.sefford:circular-progress-drawable:1.31@aar'
     compile 'com.android.support:recyclerview-v7:22.2.1'
     compile 'com.mcxiaoke.volley:library:1.0.19'
     compile 'com.google.zxing:core:3.2.0'
@@ -40,7 +42,6 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.android.support:support-v13:22.2.1'
     compile 'com.android.support:design:22.2.1'
-    compile 'com.sefford:circular-progress-drawable:1.31@aar'
     compile 'com.github.PhilJay:MPAndroidChart:v2.1.6'
     compile 'com.android.support:support-v4:22.2.1'
 }

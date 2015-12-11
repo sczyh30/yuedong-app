@@ -6,12 +6,13 @@ import android.widget.TextView;
 
 import com.huawei.huaweiwearable.data.DataHealthGoal;
 import com.m1racle.yuedong.R;
+import com.m1racle.yuedong.ui.fragment.MotionGoalDetailFragment;
 
 /**
  * Yuedong app
  * RecyclerView Holder for MotionGoalFragment
  * extends MotionHolder
- * @see com.m1racle.yuedong.ui.fragment.MotionGoalFragment
+ * @see MotionGoalDetailFragment
  * @see MotionHolder
  */
 public class MotionGoalHolder extends MotionHolder {

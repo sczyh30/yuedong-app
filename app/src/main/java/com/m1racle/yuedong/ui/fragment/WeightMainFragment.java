@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.base.Constants;
 import com.m1racle.yuedong.cache.XmlCacheManager;
 import com.m1racle.yuedong.dao.WeightDaoImpl;
 import com.m1racle.yuedong.entity.Weight;
@@ -65,8 +66,8 @@ public class WeightMainFragment extends BaseFragment {
         //present = weightDao.getLatest();
         // init the broadcast receiver
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
-        IntentFilter goalIntentFilter = new IntentFilter("com.m1racle.yuedong.action.ON_WEIGHT_GOAL_CHANGE");
-        IntentFilter dataIntentFilter = new IntentFilter("com.m1racle.yuedong.action.ON_WEIGHT_PRESENT_CHANGE");
+        IntentFilter goalIntentFilter = new IntentFilter(Constants.INTENT_ON_WEIGHT_GOAL_CHANGE);
+        IntentFilter dataIntentFilter = new IntentFilter(Constants.INTENT_ON_WEIGHT_PRESENT_CHANGE);
         BroadcastReceiver goalReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {

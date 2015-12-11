@@ -23,6 +23,7 @@ import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.base.Constants;
 import com.m1racle.yuedong.dao.WeightDaoImpl;
 import com.m1racle.yuedong.entity.Weight;
 import com.m1racle.yuedong.ui.widget.SlideButton;
@@ -66,22 +67,26 @@ public class WeightChartFragment extends BaseFragment {
     public void initData() {
         // init the broadcast receiver
         LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
-        IntentFilter goalIntentFilter = new IntentFilter("com.m1racle.yuedong.action.ON_WEIGHT_GOAL_CHANGE");
-        IntentFilter dataIntentFilter = new IntentFilter("com.m1racle.yuedong.action.ON_WEIGHT_PRESENT_CHANGE");
-        BroadcastReceiver goalReceiver = new BroadcastReceiver() {
+        IntentFilter goalIntentFilter = new IntentFilter(Constants.INTENT_ON_WEIGHT_GOAL_CHANGE);
+        IntentFilter dataIntentFilter = new IntentFilter(Constants.INTENT_ON_WEIGHT_PRESENT_CHANGE);
+        BroadcastReceiver receiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                //refreshGoal();
+                String action = intent.getAction();
+                switch (action) {
+                    case Constants.INTENT_ON_WEIGHT_GOAL_CHANGE:
+                        //refreshGoal();
+                        break;
+                    case Constants.INTENT_ON_WEIGHT_PRESENT_CHANGE:
+                        refreshData();
+                        break;
+                    default:
+                        break;
+                }
             }
         };
-        BroadcastReceiver dataReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                refreshData();
-            }
-        };
-        broadcastManager.registerReceiver(goalReceiver, goalIntentFilter);
-        broadcastManager.registerReceiver(dataReceiver, dataIntentFilter);
+        broadcastManager.registerReceiver(receiver, goalIntentFilter);
+        broadcastManager.registerReceiver(receiver, dataIntentFilter);
     }
 
     @Override

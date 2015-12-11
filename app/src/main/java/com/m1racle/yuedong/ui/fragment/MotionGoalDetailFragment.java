@@ -36,9 +36,9 @@ import butterknife.ButterKnife;
 
 /**
  * Yuedong App
- * Motion Goal Fragment
+ * Motion Goal Detail Fragment
  */
-public class MotionGoalFragment extends BaseFragment {
+public class MotionGoalDetailFragment extends BaseFragment {
 
     private HuaweiWearableManager HWManager;
     private ArrayList<DataHealthGoal> mList = new ArrayList<>();
@@ -60,7 +60,7 @@ public class MotionGoalFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_motion_goal, container, false);
+        View view = inflater.inflate(R.layout.fragment_motion_goal_detail, container, false);
         ButterKnife.bind(this, view);
         initData();
         initView(view);
@@ -135,9 +135,9 @@ public class MotionGoalFragment extends BaseFragment {
     }
 
     private static class MyHandler extends Handler {
-        private final WeakReference<MotionGoalFragment> mFragment;
+        private final WeakReference<MotionGoalDetailFragment> mFragment;
 
-        public MyHandler(MotionGoalFragment fragment) {
+        public MyHandler(MotionGoalDetailFragment fragment) {
             mFragment = new WeakReference<>(fragment);
         }
 

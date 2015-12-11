@@ -23,7 +23,7 @@ public enum UtilActivityPage {
     DEVICE_EVERYDAY_MOTION(8,R.string.actionbar_title_device_everyday_motion, EverydayMotionFragment.class),
     DEVICE_ALARM(9,R.string.actionbar_title_device_alarm, DeviceAlarmFragment.class),
     DEVICE_MOTION_DATA(10,R.string.actionbar_title_device_motion_data, DeviceMotionDataFragment.class),
-    DEVICE_MOTION_GOAL(11,R.string.actionbar_title_device_motion_goal, MotionGoalFragment.class),
+    DEVICE_MOTION_GOAL(11,R.string.actionbar_title_device_motion_goal, MotionGoalDetailFragment.class),
     SLEEP_OBSERVER(12,R.string.actionbar_title_device_sleep_observer, SleepObserverFragment.class),
     DEVICE_USER_INFO_SET(13,R.string.set_device_user_info, DeviceUserSetFragment.class),
     HEALTH_MOTION_ADVICE(14,R.string.actionbar_title_motion_advice, HealthAdviceFragment.class),

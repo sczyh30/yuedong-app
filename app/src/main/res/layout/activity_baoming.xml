@@ -46,6 +46,7 @@
                 android:id="@+id/tv_apply_event_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="运动活动"
                 android:layout_marginLeft="@dimen/space_10"
                 android:textColor="@color/green"
                 android:textSize="@dimen/text_size_16"/>
@@ -91,6 +92,8 @@
             android:text="* 手机（有效的联系方式）："/>
         <android.support.v7.widget.AppCompatEditText
             android:id="@+id/et_apply_mobile"
+            android:ems="20"
+            android:inputType="phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="请输入手机号"/>

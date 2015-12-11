@@ -41,7 +41,9 @@ import butterknife.ButterKnife;
  */
 public class MessageFragment extends BaseFragment {
 
-    int type = 1;
+    private int type = 1;
+
+    private static int refresh_flag = 0;
 
     public MessageFragment() {}
 
@@ -89,6 +91,7 @@ public class MessageFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 getData();
+                refresh_flag = 1;
             }
         });
         getData();
@@ -97,7 +100,11 @@ public class MessageFragment extends BaseFragment {
     private void getData() {
         updateUI();
         if (!DeviceUtil.hasInternet()) {
-            mPullToRefreshView.setRefreshing(false);
+            if(refresh_flag == 1) {
+                mPullToRefreshView.setRefreshing(false);
+                refresh_flag = 0;
+            }
+
             ToastUtil.toast(R.string.error_view_network_error_click_to_refresh);
         }
         else
@@ -145,16 +152,20 @@ public class MessageFragment extends BaseFragment {
             mList = JsonUtil.resolveMessages(response);
             if(mList.size() > 0)
                 updateUI();
-            if(mPullToRefreshView != null)
+            if(mPullToRefreshView != null && refresh_flag == 1) {
                 mPullToRefreshView.setRefreshing(false);
+                refresh_flag = 0;
+            }
         }
     };
 
     private Response.ErrorListener errorListener = new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            if(mPullToRefreshView != null)
+            if(mPullToRefreshView != null && refresh_flag == 1) {
                 mPullToRefreshView.setRefreshing(false);
+                refresh_flag = 0;
+            }
             ToastUtil.toast(R.string.no_device_data);
         }
     };
