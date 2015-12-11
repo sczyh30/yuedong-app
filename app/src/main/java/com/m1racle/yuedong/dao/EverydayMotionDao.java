@@ -106,7 +106,7 @@ public class EverydayMotionDao extends BaseDaoImpl implements BaseDao<StepDayDat
     public List<StepDayData> getAll() {
         List<StepDayData> list = new ArrayList<>();
         final String SQL = "SELECT * FROM em_table";
-        SQLiteDatabase db = getWeightDB(false);
+        SQLiteDatabase db = getEverydayMotionDB(false);
         db.beginTransaction();
         try {
             Cursor cursor = db.rawQuery(SQL, null);

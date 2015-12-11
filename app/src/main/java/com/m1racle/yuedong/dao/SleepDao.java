@@ -21,7 +21,7 @@ public class SleepDao extends BaseDaoImpl implements BaseDao<SleepData> {
 
     @Override
     public boolean save(SleepData data) {
-        SQLiteDatabase db = getEverydayMotionDB(true);
+        SQLiteDatabase db = getSleepDB(true);
         db.beginTransaction();
         try {
             ContentValues values = getValues(data);
@@ -50,7 +50,7 @@ public class SleepDao extends BaseDaoImpl implements BaseDao<SleepData> {
     public SleepData getLatest() {
         SleepData sleepData = new SleepData();
         final String SQL = "SELECT * FROM sleep_table WHERE aid = (SELECT MAX(sid) FROM sleep_table)";
-        SQLiteDatabase db = getEverydayMotionDB(false);
+        SQLiteDatabase db = getSleepDB(false);
         db.beginTransaction();
         try {
             Cursor cursor = db.rawQuery(SQL, null);
@@ -74,7 +74,7 @@ public class SleepDao extends BaseDaoImpl implements BaseDao<SleepData> {
     public List<SleepData> getAllData() {
         List<SleepData> list = new ArrayList<>();
         final String SQL = "SELECT * FROM sleep_table";
-        SQLiteDatabase db = getWeightDB(false);
+        SQLiteDatabase db = getSleepDB(false);
         db.beginTransaction();
         try {
             Cursor cursor = db.rawQuery(SQL, null);
@@ -101,7 +101,7 @@ public class SleepDao extends BaseDaoImpl implements BaseDao<SleepData> {
 
     @Override
     public boolean update(SleepData sleepData, int id) {
-        SQLiteDatabase db = getUserDB(true);
+        SQLiteDatabase db = getSleepDB(true);
         db.beginTransaction();
         try {
             ContentValues values = getValues(sleepData);
@@ -118,7 +118,7 @@ public class SleepDao extends BaseDaoImpl implements BaseDao<SleepData> {
     }
 
     public boolean updateByDate(SleepData sleepData, String date) {
-        SQLiteDatabase db = getUserDB(true);
+        SQLiteDatabase db = getSleepDB(true);
         db.beginTransaction();
         try {
             ContentValues values = getValues(sleepData);
