@@ -4,12 +4,21 @@
     android:layout_height="match_parent"
     tools:context="com.m1racle.yuedong.ui.fragment.AchievementFragment">
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view_ach"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:fadingEdge="none"/>
+
     <TextView
+        android:id="@+id/tv_ach_error"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_16"
         android:textColor="@color/main_green"
-        android:text="敬请期待！"/>
+        android:text="暂时还木有获得成就哦~继续努力！"/>
 
 </FrameLayout>

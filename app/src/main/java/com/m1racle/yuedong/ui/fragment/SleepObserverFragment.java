@@ -137,10 +137,9 @@ public class SleepObserverFragment extends BaseFragment {
                         public void onFailure(int err_code, String err_msg) {
                             //ensureView();
                             DataRawSleepData dataRawSleepData = new DataRawSleepData();
-                            dataRawSleepData.setStartTime((int)System.currentTimeMillis());
                             dataRawSleepData.setCurrentStatus(10);
                             dataRawSleepData.setTotalCalorie(1000);
-                            dataRawSleepData.setTotalSleepTime(60);
+                            dataRawSleepData.setTotalSleepTime(360);
                             mList.add(dataRawSleepData);
                             updateUI();
                             error_code = err_code;

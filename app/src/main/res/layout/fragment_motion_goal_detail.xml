@@ -1,6 +1,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context=".ui.fragment.MotionGoalDetailFragment">
+    android:layout_height="match_parent"
+    tools:context=".ui.fragment.MotionGoalDetailFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_5"
                 android:layout_marginBottom="@dimen/space_10"
-                android:text="@string/actionbar_title_device_motion_goal"
+                android:text="我的运动目标（来自手环）"
                 android:textSize="20sp"
                 android:layout_gravity="center" />
         </LinearLayout>

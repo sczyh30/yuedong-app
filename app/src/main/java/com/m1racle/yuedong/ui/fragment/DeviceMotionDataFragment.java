@@ -94,7 +94,7 @@ public class DeviceMotionDataFragment extends BaseFragment {
         int goal = (int) XmlCacheManager.readMutiGoal(Constants.GOAL_STEP);
         if(goal == 0) {
             mTvGoal.setText(String.valueOf(goal));
-            progressGoal.setMax(10000);
+            progressGoal.setMax(10000); // default 10000
         }
         else {
             mTvGoal.setText("10000");

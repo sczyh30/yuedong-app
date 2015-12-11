@@ -1,8 +1,94 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.m1racle.yuedong.ui.fragment.MotionGoalOverviewFragment">
 
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_10"
+        android:background="@mipmap/s_health_ani_goal"/>
 
-</FrameLayout>
+    <View
+        android:layout_marginTop="@dimen/space_20"
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="1px"
+        android:background="@color/actionbar_blue" />
+    <TextView
+        android:id="@+id/tv_mg_step"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_20"
+        android:textSize="40sp"
+        android:textColor="#f1c232"
+        android:text="10000 步"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="@dimen/space_5"
+        android:textSize="@dimen/text_size_16"
+        android:text="步数目标"/>
+    <View
+        android:layout_marginTop="@dimen/space_20"
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="1px"
+        android:background="@color/actionbar_blue" />
+    <TextView
+        android:id="@+id/tv_mg_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_20"
+        android:textSize="40sp"
+        android:textColor="#e06666"
+        android:text="1.50 千米"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="@dimen/space_5"
+        android:textSize="@dimen/text_size_16"
+        android:text="距离目标"/>
+    <View
+        android:layout_marginTop="@dimen/space_20"
+        android:layout_gravity="center"
+        android:layout_width="150dp"
+        android:layout_height="1px"
+        android:background="@color/actionbar_blue" />
+    <TextView
+        android:id="@+id/tv_mg_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/space_20"
+        android:textSize="40sp"
+        android:textColor="#6aa84f"
+        android:text="90 分钟"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="@dimen/space_5"
+        android:textSize="@dimen/text_size_16"
+        android:text="运动时间目标"/>
+
+    <Button
+        android:id="@+id/btn_change_goal"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_marginTop="@dimen/space_20"
+        android:layout_gravity="center"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="更改运动目标"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_15"
+        android:background="@drawable/btn_green_selector"/>
+
+</LinearLayout>

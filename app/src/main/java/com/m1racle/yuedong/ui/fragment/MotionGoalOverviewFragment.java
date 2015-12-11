@@ -10,13 +10,17 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.base.Constants;
+import com.m1racle.yuedong.cache.XmlCacheManager;
+import com.m1racle.yuedong.util.UIUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Yuedong app
@@ -25,6 +29,13 @@ import butterknife.ButterKnife;
  * @since v1.40
  */
 public class MotionGoalOverviewFragment extends BaseFragment {
+
+    @Bind(R.id.tv_mg_step)
+    TextView mTvStep;
+    @Bind(R.id.tv_mg_distance)
+    TextView mTvDistance;
+    @Bind(R.id.tv_mg_time)
+    TextView mTvTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,20 +57,33 @@ public class MotionGoalOverviewFragment extends BaseFragment {
                 refreshUI();
             }
         };
-        //broadcastManager.registerReceiver(receiver, goalIntentFilter);
+        broadcastManager.registerReceiver(receiver, goalIntentFilter);
     }
 
     @Override
     public void initView(View view) {
-
+        refreshUI();
     }
 
     private void refreshUI() {
-
+        float a = XmlCacheManager.readMutiGoal(Constants.GOAL_STEP);
+        float b = XmlCacheManager.readMutiGoal(Constants.GOAL_DISTANCE);
+        float c = XmlCacheManager.readMutiGoal(Constants.GOAL_TIME);
+        if(a >= 0)
+            mTvStep.setText(String.format("%s 步", String.valueOf(a)));
+        if(b >= 0)
+            mTvDistance.setText(String.format("%s公里", String.valueOf(b)));
+        if(c >= 0)
+            mTvTime.setText(String.format("%s 分钟", String.valueOf(c)));
     }
 
     @Override
+    @OnClick({R.id.btn_change_goal})
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.btn_change_goal:
+                UIUtil.showMotionGoalSet(getActivity());
+                break;
+        }
     }
 }
