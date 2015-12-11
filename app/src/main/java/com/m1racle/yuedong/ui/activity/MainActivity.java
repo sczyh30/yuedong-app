@@ -17,7 +17,7 @@ import com.m1racle.yuedong.entity.Notice;
 import com.m1racle.yuedong.service.HWService;
 import com.m1racle.yuedong.service.receiver.NetworkChangeReceiver;
 import com.m1racle.yuedong.ui.fragment.DeviceBasicInfoFragment;
-import com.m1racle.yuedong.ui.fragment.MotionBasicInfoFragment;
+import com.m1racle.yuedong.ui.fragment.MainSelectFragment;
 import com.m1racle.yuedong.ui.fragment.MySocialInfoFragment;
 import com.m1racle.yuedong.ui.fragment.YdActiListFragment;
 import com.m1racle.yuedong.util.UIUtil;
@@ -68,7 +68,7 @@ public class MainActivity extends BaseActivity
         tabStrip.setBackgroundColor(getResources().getColor(R.color.main_green));
         fragmentList = new ArrayList<>();
         fragmentList.add(new DeviceBasicInfoFragment());
-        fragmentList.add(new MotionBasicInfoFragment());
+        fragmentList.add(new MainSelectFragment());
         fragmentList.add(new YdActiListFragment());
         fragmentList.add(new MySocialInfoFragment());
         adapter = new UsualViewPagerAdapter(getFragmentManager(), fragmentList);
@@ -78,7 +78,7 @@ public class MainActivity extends BaseActivity
                 fragmentList = null;
                 List<Fragment> list = new ArrayList<>();
                 list.add(new DeviceBasicInfoFragment());
-                list.add(new MotionBasicInfoFragment());
+                list.add(new MainSelectFragment());
                 list.add(new YdActiListFragment());
                 list.add(new MySocialInfoFragment());
                 adapter.setPagerItems(list);

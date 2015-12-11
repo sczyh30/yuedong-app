@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.ui.activity.MotionDataActivity;
 import com.m1racle.yuedong.ui.activity.MotionGoalActivity;
 import com.m1racle.yuedong.ui.activity.WeightActivity;
-import com.m1racle.yuedong.util.ToastUtil;
 import com.m1racle.yuedong.util.UIUtil;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
 
 /**
  * Yuedong App
@@ -23,9 +22,9 @@ import butterknife.OnClick;
  * @author sczyh30
  * @since 0.2.28
  */
-public class MotionBasicInfoFragment extends BaseFragment {
+public class MainSelectFragment extends BaseFragment {
 
-    public MotionBasicInfoFragment() {
+    public MainSelectFragment() {
     }
 
     @Override
@@ -36,7 +35,7 @@ public class MotionBasicInfoFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_motion_basic_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_main_function_select, container, false);
         ButterKnife.bind(this, view);
         initView(view);
         initData();
@@ -66,7 +65,9 @@ public class MotionBasicInfoFragment extends BaseFragment {
                 UIUtil.showEverydayMotion(getActivity());
                 break;
             case R.id.fn_button_mt_data:
-                UIUtil.showDeviceMotionData(getActivity());
+                //UIUtil.showDeviceMotionData(getActivity());
+                Intent imd = new Intent(getActivity(), MotionDataActivity.class);
+                startActivity(imd);
                 break;
             case R.id.fn_button_mt_goal:
                 //UIUtil.showMotionGoal(getActivity());

@@ -4,10 +4,12 @@
     android:layout_height="match_parent"
     tools:context="com.m1racle.yuedong.ui.fragment.AchievementFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_16"
+        android:textColor="@color/main_green"
+        android:text="敬请期待！"/>
 
 </FrameLayout>

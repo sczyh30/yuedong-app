@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.ui.widget.CircleProgressBar;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -20,9 +19,6 @@ import butterknife.ButterKnife;
  * @since v1.40
  */
 public class MotionGoalOverviewFragment extends BaseFragment {
-
-    @Bind(R.id.cpb_task)
-    CircleProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,7 +32,7 @@ public class MotionGoalOverviewFragment extends BaseFragment {
 
     @Override
     public void initView(View view) {
-        progressBar.setProgress(80);
+
     }
 
     @Override

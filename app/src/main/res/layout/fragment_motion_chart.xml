@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.m1racle.yuedong.ui.fragment.MotionChartFragment">
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:layout_marginTop="@dimen/space_10"
+        android:layout_marginLeft="@dimen/space_10"
+        android:layout_marginRight="@dimen/space_10"
+        android:id="@+id/chart_motion_data"
+        android:layout_width="match_parent"
+        android:layout_height="350dp" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="运动数据趋势"/>
+
+    <com.m1racle.yuedong.ui.widget.SlideButton
+        android:layout_marginTop="@dimen/space_15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:elevation="4dp"
+        android:text="刷新数据"
+        android:background="@drawable/btn_green_selector"
+        android:id="@+id/btn_update_mdc_status"
+        android:padding="@dimen/space_15">
+
+    </com.m1racle.yuedong.ui.widget.SlideButton>
+
+</LinearLayout>
