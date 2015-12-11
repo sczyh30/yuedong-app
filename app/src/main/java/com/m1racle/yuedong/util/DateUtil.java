@@ -6,9 +6,14 @@ import java.util.TimeZone;
 
 /**
  * Yuedong App
- * TimeZone Transform Util
+ * Date and TimeZone Transform Util
  */
-public class TimeZoneUtil {
+public class DateUtil {
+
+	public static String getToday() {
+        SimpleDateFormat sFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return sFormat.format(new Date());
+    }
 
 	/**
 	 * 判断用户的设备时区是否为GMT+08

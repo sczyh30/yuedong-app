@@ -229,7 +229,7 @@ public class DeviceAlarmFragment extends BaseFragment {
 
                 @Override
                 public void onFailure(int err_code, String err_msg) {
-                    ToastUtil.toast("获取手环闹钟时出现错误");
+                    ToastUtil.toast(R.string.no_b2_now_local);
                     updateUI();
                     error_code = err_code + 1;
                 }

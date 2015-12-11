@@ -18,6 +18,7 @@ import com.huawei.huaweiwearable.data.DataUserInfo;
 import com.huawei.huaweiwearableApi.HuaweiWearableManager;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.cache.XmlCacheManager;
 import com.m1racle.yuedong.service.HWServiceConfig;
 import com.m1racle.yuedong.util.LogUtil;
 import com.m1racle.yuedong.util.ToastUtil;
@@ -156,7 +157,7 @@ public class DeviceUserSetFragment extends BaseFragment {
     private void setUserInfo() {
         if(error_code != 0) {
             ToastUtil.toast(R.string.tip_device_no_conn_warning);
-            return;
+            //return;
         }
         if(mInfo == null) {
             ToastUtil.toast("手环用户信息出现异常");
@@ -171,6 +172,7 @@ public class DeviceUserSetFragment extends BaseFragment {
             @Override
             public void onFailure(int err_code, String err_msg) {
                 cb_status = err_code;
+                XmlCacheManager.saveDeviceUser(mInfo);
             }
         });
     }
@@ -181,11 +183,11 @@ public class DeviceUserSetFragment extends BaseFragment {
             public void run() {
                 if(cb_status == 6666) {
                     ToastUtil.toast("手环信息同步成功！");
-                    getActivity().finish();
                 } else {
-                    ToastUtil.toast("手环信息同步异常" + "(" + cb_status + ")");
+                    ToastUtil.toast("手环信息同步异常" + "(" + cb_status + ")， 数据保存在本地");
                 }
                 hideWaitDialog();
+                getActivity().finish();
             }
         }, 1000);
     }

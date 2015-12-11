@@ -1,13 +1,19 @@
 package com.m1racle.yuedong.ui.fragment;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
+import com.m1racle.yuedong.base.Constants;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -31,7 +37,24 @@ public class MotionGoalOverviewFragment extends BaseFragment {
     }
 
     @Override
+    public void initData() {
+        LocalBroadcastManager broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        IntentFilter goalIntentFilter = new IntentFilter(Constants.INTENT_ACTION_ON_GOAL_CHANGE);
+        BroadcastReceiver receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                refreshUI();
+            }
+        };
+        //broadcastManager.registerReceiver(receiver, goalIntentFilter);
+    }
+
+    @Override
     public void initView(View view) {
+
+    }
+
+    private void refreshUI() {
 
     }
 

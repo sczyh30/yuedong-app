@@ -68,6 +68,32 @@ public class EverydayMotionDao extends BaseDaoImpl implements BaseDao<StepDayDat
         return data;
     }
 
+    public StepDayData getByDate(String date) {
+        StepDayData data = new StepDayData();
+        final String SQL = "SELECT * FROM em_table WHERE edate = " + date;
+        SQLiteDatabase db = getEverydayMotionDB(false);
+        db.beginTransaction();
+        try {
+            Cursor cursor = db.rawQuery(SQL, null);
+            if(cursor.moveToFirst()) {
+                data.setCalorie(cursor.getInt(cursor.getColumnIndex("calorie")));
+                data.setDistance(cursor.getInt(cursor.getColumnIndex("distance")));
+                data.setEdate(cursor.getString(cursor.getColumnIndex("edate")));
+                data.setEtime(cursor.getInt(cursor.getColumnIndex("etime")));
+                data.setStep(cursor.getInt(cursor.getColumnIndex("step")));
+                data.setEid(cursor.getInt(cursor.getColumnIndex("eid")));
+            }
+            cursor.close();
+            db.setTransactionSuccessful();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            db.endTransaction();
+            db.close();
+        }
+        return data;
+    }
+
     public StepDayData getLatest() {
         StepDayData data = new StepDayData();
         final String SQL = "SELECT * FROM em_table WHERE eid = (SELECT MAX(eid) FROM em_table)";

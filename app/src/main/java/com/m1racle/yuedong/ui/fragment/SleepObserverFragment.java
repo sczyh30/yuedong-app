@@ -144,7 +144,7 @@ public class SleepObserverFragment extends BaseFragment {
                             mList.add(dataRawSleepData);
                             updateUI();
                             error_code = err_code;
-                            ToastUtil.toast("获取睡眠信息失败");
+                            ToastUtil.toast(R.string.no_b2_now_local);
                         }
                     });
         }

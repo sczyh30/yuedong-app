@@ -10,6 +10,7 @@ import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.ui.activity.MotionDataActivity;
 import com.m1racle.yuedong.ui.activity.MotionGoalActivity;
+import com.m1racle.yuedong.ui.activity.SleepActivity;
 import com.m1racle.yuedong.ui.activity.WeightActivity;
 import com.m1racle.yuedong.util.UIUtil;
 
@@ -75,7 +76,9 @@ public class MainSelectFragment extends BaseFragment {
                 startActivity(isg);
                 break;
             case R.id.fn_button_sleep:
-                UIUtil.showSleepObserver(getActivity());
+                Intent isleep = new Intent(getActivity(), SleepActivity.class);
+                startActivity(isleep);
+                //UIUtil.showSleepObserver(getActivity());
                 break;
             case R.id.fn_button_alarm:
                 UIUtil.showDeviceAlarm(getActivity());

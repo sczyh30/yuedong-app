@@ -190,7 +190,7 @@ public class MotionGoalDetailFragment extends BaseFragment {
                     error_code = err_code;
                     mList.add(XmlCacheManager.readGoal(1));
                     updateUI();
-                    ToastUtil.toast("获取运动目标时出现了点问题，请稍后重试");
+                    ToastUtil.toast(R.string.no_b2_now_local);
                 }
             });
         }

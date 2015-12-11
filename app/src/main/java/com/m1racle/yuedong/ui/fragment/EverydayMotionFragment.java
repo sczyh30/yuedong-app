@@ -207,7 +207,7 @@ public class EverydayMotionFragment extends BaseFragment {
                 @Override
                 public void onFailure(int err_code, String err_msg) {
                     error_code = err_code;
-                    ToastUtil.toast(R.string.no_device_data);
+                    ToastUtil.toast("无法从手环中获取数据，使用离线数据");
                     ensureView();
                 }
             });

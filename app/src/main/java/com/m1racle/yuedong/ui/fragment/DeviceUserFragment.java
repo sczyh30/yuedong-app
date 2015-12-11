@@ -104,9 +104,9 @@ public class DeviceUserFragment extends BaseFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.public_menu_send:
-                if(error_code != 0)
+                /*if(error_code != 0)
                     ToastUtil.toast(R.string.tip_device_no_conn_warning);
-                else
+                else*/
                     UIUtil.showDeviceUserSet(getActivity());
                 break;
             case R.id.refresh:
@@ -129,10 +129,10 @@ public class DeviceUserFragment extends BaseFragment {
     @Override
     @OnClick({R.id.btn_start_set_du_info})
     public void onClick(View v) {
-        if(error_code != 0) {
+        /*if(error_code != 0) {
             ToastUtil.toast(R.string.tip_device_no_conn_warning);
             return;
-        }
+        }*/
         int id = v.getId();
         switch (id) {
             case R.id.btn_start_set_du_info:
@@ -216,7 +216,7 @@ public class DeviceUserFragment extends BaseFragment {
                     @Override
                     public void onFailure(int err_code, String err_msg) {
                         error_code = err_code;
-                        ToastUtil.toast(R.string.no_device_data);
+                        ToastUtil.toast(R.string.no_b2_now_local);
                         isInfoOK = true;
                         mInfo = XmlCacheManager.readDeviceUser();
                         updateUI();

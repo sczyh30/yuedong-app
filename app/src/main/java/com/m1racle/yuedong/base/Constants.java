@@ -11,6 +11,8 @@ public class Constants {
     // intent
     public static final String INTENT_ACTION_USER_CHANGE = "com.m1racle.yuedong.action.USER_CHANGE";
 
+    public static final String INTENT_ACTION_ON_GOAL_CHANGE = "com.m1racle.yuedong.action.ON_GOAL_CHANGE";
+
     public static final String INTENT_ACTION_COMMENT_CHANGED = "ncom.m1racle.yuedong.action.COMMENT_CHANGED";
 
     public static final String INTENT_ACTION_NOTICE = "com.m1racle.yuedong.action.APPWIDGET_UPDATE";
@@ -24,4 +26,9 @@ public class Constants {
     // message type
     public static final int MESSAGE_DONGTAI = 1;
     public static final int MESSAGE_NOTICE = 2;
+
+    // goal type
+    public static final String GOAL_STEP = "step_goal";
+    public static final String GOAL_DISTANCE = "distance_goal";
+    public static final String GOAL_TIME = "time_goal";
 }

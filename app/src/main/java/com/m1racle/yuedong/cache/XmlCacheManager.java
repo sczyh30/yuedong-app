@@ -28,6 +28,18 @@ public class XmlCacheManager {
         return cache.getFloat("goal", 0.0f);
     }
 
+    public static void saveMutiGoal(float goal, String type) {
+        SharedPreferences cache = mContext.getSharedPreferences(type, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = cache.edit();
+        editor.putFloat("goal", goal);
+        editor.apply();
+    }
+
+    public static float readMutiGoal(String type) {
+        SharedPreferences cache = mContext.getSharedPreferences(type, Context.MODE_PRIVATE);
+        return cache.getFloat("goal", 0.0f);
+    }
+
     public static void saveGoal(int type, DataHealthGoal goal) {
         SharedPreferences cache = mContext.getSharedPreferences("motion_goal_t" + type, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = cache.edit();

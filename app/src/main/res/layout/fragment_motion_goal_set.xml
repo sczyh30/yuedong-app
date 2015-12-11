@@ -5,18 +5,96 @@
     android:orientation="vertical"
     tools:context="com.m1racle.yuedong.ui.fragment.MotionGoalSetFragment">
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="140dp"
-        android:background="@mipmap/s_health_exercise_icon_bicycling"/>
-    <TextView
-        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/s_health_drawer_exercise_press" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/space_20"
+            android:layout_marginLeft="@dimen/space_10"
+            android:layout_marginRight="@dimen/space_10"
+            android:text="@string/set_goal_intro" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/space_20"
-        android:textSize="17sp"
-        android:text="设置运动目标"/>
+        android:background="#d9d9d9"
+        android:padding="@dimen/space_10"
+        android:paddingTop="@dimen/space_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设定计步步数目标（步）" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_goal_step"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_10"
+        android:ems="6"
+        android:hint="输入您的步数目标（步）"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#d9d9d9"
+        android:padding="@dimen/space_10"
+        android:paddingTop="@dimen/space_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设定运动时间目标（分钟）" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_goal_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_10"
+        android:ems="3"
+        android:hint="输入您的运动时间目标（分钟）"
+        android:inputType="number" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#d9d9d9"
+        android:padding="@dimen/space_10"
+        android:paddingTop="@dimen/space_20">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设定运动距离目标（千米）" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_goal_distance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/space_10"
+        android:layout_marginTop="@dimen/space_10"
+        android:ems="6"
+        android:hint="输入您的运动距离目标（千米）"
+        android:inputType="numberDecimal" />
+
+
+
 
 </LinearLayout>

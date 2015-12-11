@@ -16,8 +16,7 @@ import android.widget.TextView;
 
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
-import com.m1racle.yuedong.util.LogUtil;
-import com.m1racle.yuedong.util.TimeZoneUtil;
+import com.m1racle.yuedong.util.DateUtil;
 import com.m1racle.yuedong.util.ToastUtil;
 
 import java.lang.ref.WeakReference;
@@ -185,7 +184,7 @@ public class TemperatureViewFragment extends BaseFragment {
     private void getTempTimestamp() {
         Message message = Message.obtain();
         message.what = HANDLE_TIME;
-        message.obj = TimeZoneUtil.getCurrentTime();
+        message.obj = DateUtil.getCurrentTime();
         mHandler.sendMessage(message);
     }
 }
