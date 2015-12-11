@@ -5,96 +5,64 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.huawei.huaweiwearable.data.DataTotalMotion;
+import com.m1racle.yuedong.entity.StepDayData;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Everyday Motion DAO Impl
+ * Everyday Motion Dao Impl
  * @author sczyh30
- * 用数据库太麻烦，因此废弃
+ * @version 2-rf
+ * @since v1.40
  */
-@Deprecated
-public class EverydayMotionDao extends BaseDaoImpl {
+public class EverydayMotionDao extends BaseDaoImpl implements BaseDao<StepDayData>{
 
-    public DataTotalMotion getMotion(int type) {
-        DataTotalMotion data = new DataTotalMotion();
-        String sql = "SELECT * FROM emd WHERE motion_type = ? AND timestamp = (SELECT MAX(timestamp) FROM emd)";
-        SQLiteDatabase db = getEverydayMotionDB(false);
+    @Override
+    public boolean save(StepDayData data) {
+        SQLiteDatabase db = getEverydayMotionDB(true);
         db.beginTransaction();
         try {
-            Cursor cursor = db.rawQuery(sql,new String[]{Integer.toString(type)});
-            if(cursor.moveToFirst()) {
-                data.setMotion_type(type);
-                data.setCalorie(getInt(cursor, "calorie"));
-                data.setDistance(getInt(cursor, "distance"));
-                data.setSleep_time(getInt(cursor, "sleep_time"));
-                data.setStep(getInt(cursor, "step"));
-            }
-            cursor.close();
+            ContentValues values = getValues(data);
+            db.insert("em_table", null, values);
             db.setTransactionSuccessful();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             db.endTransaction();
             db.close();
         }
+        return false;
+    }
+
+    @Override
+    public boolean remove(int id) {
+        return false;
+    }
+
+    @Override
+    public StepDayData get(int id) {
         return null;
     }
 
-    private int getInt(Cursor cursor, String s) {
-        return cursor.getInt(cursor.getColumnIndex(s));
+    @Override
+    public boolean update(StepDayData stepDayData, int id) {
+        return false;
     }
 
-    public void updateInfo(final DataTotalMotion motion, int type) {
-        SQLiteDatabase db = getEverydayMotionDB(true);
-        db.beginTransaction();
-        try {
-            ContentValues values = getValues(motion);
-            final String sql = "UPDATE emd" +
-                    "SET";
-            db.setTransactionSuccessful();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            db.endTransaction();
-            db.close();
-        }
+    public List<StepDayData> getAll() {
+        List<StepDayData> list = new ArrayList<>();
+        return list;
     }
 
-    public void saveInfo(final DataTotalMotion motion, int type) {
-        SQLiteDatabase db = getEverydayMotionDB(true);
-        db.beginTransaction();
-        try {
-            ContentValues values = getValues(motion);
-            db.insert("emd", null, values);
-            db.setTransactionSuccessful();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            db.endTransaction();
-            db.close();
-        }
-    }
-
-    public void removeInfo(final int type) {
-        SQLiteDatabase db = getEverydayMotionDB(true);
-        db.beginTransaction();
-        try {
-            db.setTransactionSuccessful();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            db.endTransaction();
-            db.close();
-        }
-    }
-
-    private ContentValues getValues(DataTotalMotion data) {
+    private ContentValues getValues(StepDayData data) {
         ContentValues values = new ContentValues();
-        values.put("motion_type", data.getMotion_type());
         values.put("step", data.getStep());
         values.put("calorie", data.getCalorie());
         values.put("distance", data.getDistance());
-        values.put("sleep_time", data.getSleep_time());
-        values.put("timestamp", System.currentTimeMillis());
+        values.put("etime", data.getEtime());
+        values.put("edate", data.getEdate());
         return values;
     }
 }

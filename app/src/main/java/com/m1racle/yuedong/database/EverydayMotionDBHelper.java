@@ -14,13 +14,13 @@ import com.m1racle.yuedong.util.LogUtil;
  */
 public class EverydayMotionDBHelper extends SQLiteOpenHelper {
 
-    private static final String CREATE_SQL = "CREATE TABLE emd (" +
-            "motion_type integer NOT NULL," +
-            "step integer NOT NULL," +
-            "calorie integer NOT NULL," +
-            "distance integer NOT NULL," +
-            "sleep_time integer NOT NULL," +
-            "timestamp integer NOT NULL" +
+    private static final String CREATE_SQL = "CREATE TABLE em_table (" +
+            "eid INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+            "step INTEGER NOT NULL DEFAULT 0," +
+            "calorie INTEGER NOT NULL DEFAULT 0," +
+            "distance INTEGER NOT NULL DEFAULT 0," +
+            "etime INTEGER NOT NULL DEFAULT 0," +
+            "edate VARCHAR(20) NOT NULL" +
             ")";
 
     private Context context;

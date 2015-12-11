@@ -4,7 +4,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.m1racle.yuedong.AppContext;
+import com.m1racle.yuedong.database.DrinkDBHelper;
 import com.m1racle.yuedong.database.EverydayMotionDBHelper;
+import com.m1racle.yuedong.database.SleepDBHelper;
 import com.m1racle.yuedong.database.UserDBHelper;
 import com.m1racle.yuedong.database.WeightDBHelper;
 
@@ -31,6 +33,15 @@ abstract class BaseDaoImpl {
             case "weight_table":
                 helper = new WeightDBHelper(AppContext.getContext(), "Weight.db", null, 2);
                 break;
+            case "sleep":
+                helper = new SleepDBHelper(AppContext.getContext(), "motion_data.db", null, 2);
+                break;
+            case "drink_water":
+                helper = new DrinkDBHelper(AppContext.getContext(), "motion_data.db", null, 2);
+                break;
+            case "everyday_step":
+                helper = new EverydayMotionDBHelper(AppContext.getContext(), "motion_data.db", null, 2);
+                break;
             default:
                 throw new RuntimeException("No the certain database~");
         }
@@ -48,12 +59,15 @@ abstract class BaseDaoImpl {
         return getDatabase("weight_table", type);
     }
 
-    @Deprecated
+    protected SQLiteDatabase getDrinkDB(boolean type) {
+        return getDatabase("drink_water", type);
+    }
+
+    protected SQLiteDatabase getSleepDB(boolean type) {
+        return getDatabase("sleep", type);
+    }
+
     protected SQLiteDatabase getEverydayMotionDB(boolean type) {
-        EverydayMotionDBHelper helper = new EverydayMotionDBHelper(AppContext.getContext(), "EverydayMotion.db", null, 2);
-        if(type)
-            return helper.getWritableDatabase();
-        else
-            return helper.getReadableDatabase();
+        return getDatabase("everyday_step", type);
     }
 }

@@ -16,7 +16,8 @@ public class DrinkDBHelper extends SQLiteOpenHelper {
 
     private static final String CREATE_SQL = "CREATE TABLE drink (" +
             "did INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-            "cup integer NOT NULL DEAULT 0," +
+            "cup integer NOT NULL DEFAULT 0," +
+            "d_date VARCHAR(20) NOT NULL" +
             ")";
 
     private Context context;
