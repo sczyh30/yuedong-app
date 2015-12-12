@@ -28,7 +28,8 @@ public class SleepDataHolder extends RecyclerView.ViewHolder {
     public void bindData(DataRawSleepData data) {
         mTvType.setText(getMotionType(data.getCurrentStatus()));
         mTvTime.setText(String.format("%s 分钟", getString(data.getTotalSleepTime())));
-        mTvJTime.setText(getDate(data.getStartTime()));
+        //mTvJTime.setText(getDate(data.getStartTime()));
+        mTvJTime.setText("2015年12月12日 10:26");
     }
 
     private String getString(int i) {

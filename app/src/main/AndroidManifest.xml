@@ -45,9 +45,9 @@
         <activity
             android:name=".ui.activity.LoginActivity"
             android:label="@string/login" />
-        <activity
+        <!--<activity
             android:name=".TestActivity"
-            android:label="测试用" />
+            android:label="测试用" />-->
         <activity
             android:name=".ui.activity.UtilActivity"
             android:configChanges="keyboardHidden|orientation"
@@ -104,7 +104,7 @@
             android:label="@string/title_activity_motion_data" />
         <activity
             android:name=".ui.activity.SleepActivity"
-            android:label="@string/title_activity_sleep"></activity>
+            android:label="@string/title_activity_sleep"/>
     </application>
 
 </manifest>

@@ -35,9 +35,10 @@
     <string name="advice_bottom_info">本建议仅供参考，详细健康与运动建议请咨询医生。</string>
 
     <string name="advice_level_1">您的运动习惯非常好，请继续保持。</string>
-    <string name="advice_level_2">您的运动习惯较好，每天可以做一些适度的锻炼~</string>
-    <string name="advice_level_3">您的运动量貌似有点少诶~没事的时候可以多运动运动，哪怕是出去散一下步也很好哦~</string>
-    <string name="advice_level_f">您的运动有些过量，请稍微减少一下运动量。诚然，适量的运动对我们的健康非常有益，但是过量的运动也会危害健康。</string>
+    <string name="advice_level_2">您的运动习惯较好，每天可以做一些适度的锻炼~（建议：8000步）</string>
+    <string name="advice_level_3">您的运动量貌似有点少诶~没事的时候可以多运动运动，哪怕是出去散一下步也很好哦~（建议：6500步）</string>
+    <string name="advice_level_f">您的运动有些过量，请稍微减少一下运动量。诚然，适量的运动对我们的健康非常有益，但是过量的运动也会危害健康。（建议：8000步-12000步）</string>
+    <string name="advice_level_fjc">亲，一定要坚持不懈哟~要尽量完成定下的目标哦~</string>
     <string name="advice_info_p1">根据您目前的运动情况</string>
 
     <string name="choose_function_inst">运动与健康功能</string>

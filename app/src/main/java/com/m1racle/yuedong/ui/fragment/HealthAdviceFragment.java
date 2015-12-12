@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.cache.XmlCacheManager;
+import com.m1racle.yuedong.dao.EverydayMotionDao;
+import com.m1racle.yuedong.util.DateUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -53,12 +55,21 @@ public class HealthAdviceFragment extends BaseFragment {
     }
 
     private int getAdviceByGoal() {
-        if(goal >= 4000 && goal <= 16000)
+        float goal = XmlCacheManager.readMutiGoal("step_goal");
+        EverydayMotionDao dao = new EverydayMotionDao();
+        int present = dao.getByDate(DateUtil.getToday()).getStep();
+        float ratio = goal / present;
+        if(ratio == 0)
+            ratio = 0.6f;
+
+        if(goal >= 4000 && goal <= 16000 && ratio >= 0.5)
             return R.string.advice_level_1;
-        else if((goal > 16000 && goal <= 22000) || (goal >= 1800 && goal < 4000))
+        else if((goal > 16000 && goal <= 22000) || (goal >= 1800 && goal < 4000) && ratio >= 0.5)
             return R.string.advice_level_2;
-        else if(goal > 22000)
+        else if(goal > 22000 && ratio >= 0.5)
             return R.string.advice_level_f;
+        else if(goal > 22000 && ratio < 0.5)
+            return R.string.advice_level_fjc;
         else
             return R.string.advice_level_3;
     }
