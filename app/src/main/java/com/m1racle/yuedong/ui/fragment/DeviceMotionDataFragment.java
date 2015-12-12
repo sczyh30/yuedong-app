@@ -79,7 +79,7 @@ public class DeviceMotionDataFragment extends BaseFragment {
 
     private void updateDataUI() {
         EverydayMotionDao dao = new EverydayMotionDao();
-        StepDayData data = dao.getByDate(DateUtil.getToday());
+        StepDayData data = dao.getLatest();
         if(data != null) {
             mTvPresent.setText(String.valueOf(data.getStep()));
             mTvConsume.setText(String.valueOf(data.getCalorie()));

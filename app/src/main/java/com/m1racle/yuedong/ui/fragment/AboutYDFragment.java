@@ -1,5 +1,6 @@
 package com.m1racle.yuedong.ui.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.m1racle.yuedong.R;
+import com.m1racle.yuedong.TestActivity;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.util.DeviceUtil;
 import com.m1racle.yuedong.util.LogUtil;
@@ -79,8 +81,9 @@ public class AboutYDFragment extends BaseFragment {
                         "http://app.yuedong.com");
                 break;
             case R.id.tv_knowmore:
-                UIUtil.openSysBrowser(getActivity(),
-                        "http://www.sczyh30.com");
+                //UIUtil.openSysBrowser(getActivity(), "http://www.sczyh30.com");
+                Intent intent = new Intent(getActivity(), TestActivity.class);
+                startActivity(intent);
                 break;
             default:
                 break;

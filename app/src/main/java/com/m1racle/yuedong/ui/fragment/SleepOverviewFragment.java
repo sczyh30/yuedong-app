@@ -65,7 +65,8 @@ public class SleepOverviewFragment extends BaseFragment {
     }
 
     private void refreshData() {
-        setData(sleepDao.getAllData());
+        mList = sleepDao.getAllData();
+        setData(mList);
         mTvSleepQuality.setText(calcQuality());
     }
 
@@ -160,7 +161,7 @@ public class SleepOverviewFragment extends BaseFragment {
         dataSets.add(BMISet);*/
 
         // create a dataset and give it a type
-        LineDataSet weightSet = new LineDataSet(yVals, "睡眠时长（小时）");
+        LineDataSet weightSet = new LineDataSet(yVals, "睡眠时长（分钟）");
         // set style
         setDataSetStyle(weightSet);
         // add the datasets
@@ -173,7 +174,7 @@ public class SleepOverviewFragment extends BaseFragment {
     }
 
     private void setDataSetStyle(LineDataSet dataSet) {
-        int color = Color.rgb(148, 196, 5);
+        int color = Color.rgb(61, 134, 198);
 
         dataSet.enableDashedLine(10f, 5f, 0f);
         dataSet.enableDashedHighlightLine(10f, 5f, 0f);
@@ -202,9 +203,9 @@ public class SleepOverviewFragment extends BaseFragment {
                     }
                     int avg_d = total_d / count;
                     int avg_l = total_l / count;
-                    if(avg_d >= 360 && avg_l >= 90)
+                    if(avg_d >= 400 && avg_l <= 90)
                         return "很好";
-                    else if (avg_d >= 300 && avg_d < 360 && avg_l >= 90 && (avg_d >= 360 && avg_l < 90))
+                    else if (avg_d >= 300 && avg_d < 360 && avg_l <= 100 && (avg_d >= 360 && avg_l > 90))
                         return "良好";
                     else
                         return "一般";

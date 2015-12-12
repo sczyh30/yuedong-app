@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.huawei.huaweiwearable.data.DataTotalMotion;
 import com.m1racle.yuedong.entity.StepDayData;
+import com.m1racle.yuedong.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ public class EverydayMotionDao extends BaseDaoImpl implements BaseDao<StepDayDat
 
     @Override
     public boolean save(StepDayData data) {
+
+        LogUtil.log("EverydayMotionDao::save");
         SQLiteDatabase db = getEverydayMotionDB(true);
         db.beginTransaction();
         try {
@@ -43,6 +46,7 @@ public class EverydayMotionDao extends BaseDaoImpl implements BaseDao<StepDayDat
 
     @Override
     public StepDayData get(int eid) {
+
         StepDayData data = new StepDayData();
         final String SQL = "SELECT * FROM em_table WHERE eid = " + eid;
         SQLiteDatabase db = getEverydayMotionDB(false);
@@ -69,6 +73,7 @@ public class EverydayMotionDao extends BaseDaoImpl implements BaseDao<StepDayDat
     }
 
     public StepDayData getByDate(String date) {
+        LogUtil.log("EverydayMotionDao::getByDate");
         StepDayData data = new StepDayData();
         final String SQL = "SELECT * FROM em_table WHERE edate = " + date;
         SQLiteDatabase db = getEverydayMotionDB(false);
@@ -95,6 +100,7 @@ public class EverydayMotionDao extends BaseDaoImpl implements BaseDao<StepDayDat
     }
 
     public StepDayData getLatest() {
+        LogUtil.log("EverydayMotionDao::getLatest");
         StepDayData data = new StepDayData();
         final String SQL = "SELECT * FROM em_table WHERE eid = (SELECT MAX(eid) FROM em_table)";
         SQLiteDatabase db = getEverydayMotionDB(false);

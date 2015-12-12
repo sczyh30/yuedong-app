@@ -130,6 +130,12 @@
                 android:layout_marginTop="@dimen/space_10"
                 android:layout_marginRight="@dimen/space_10"
                 android:layout_marginLeft="@dimen/space_10"/>
+            <ImageView
+                android:layout_marginTop="@dimen/space_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@mipmap/star_man"/>
             <WebView
                 android:id="@+id/webview"
                 android:layout_width="fill_parent"

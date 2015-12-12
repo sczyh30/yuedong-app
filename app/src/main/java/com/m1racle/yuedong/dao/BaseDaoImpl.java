@@ -34,13 +34,13 @@ abstract class BaseDaoImpl {
                 helper = new WeightDBHelper(AppContext.getContext(), "Weight.db", null, 2);
                 break;
             case "sleep":
-                helper = new SleepDBHelper(AppContext.getContext(), "motion_data.db", null, 2);
+                helper = new SleepDBHelper(AppContext.getContext(), "sleep_data.db", null, 3);
                 break;
             case "drink_water":
-                helper = new DrinkDBHelper(AppContext.getContext(), "motion_data.db", null, 2);
+                helper = new DrinkDBHelper(AppContext.getContext(), "drink_data.db", null, 3);
                 break;
             case "everyday_step":
-                helper = new EverydayMotionDBHelper(AppContext.getContext(), "motion_data.db", null, 2);
+                helper = new EverydayMotionDBHelper(AppContext.getContext(), "em_step_data.db", null, 3);
                 break;
             default:
                 throw new RuntimeException("No the certain database~");
