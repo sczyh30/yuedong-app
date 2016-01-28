@@ -1,6 +1,6 @@
 #悦动App
 
-一款集运动、健康监控、社交于一体的运动类应用，支持运动手环。
+一款集运动、健康监控、社交于一体的运动类APP，支持运动手环。
 
 ##更新日志
 
@@ -15,18 +15,16 @@
 - v1.30 build 382 添加了一些新的功能以及细节的完善
 - v1.32 build 396 完善体重记录功能，美化了UI
 - v1.37 build 426 改善了架构，优化了app的性能
+- v1.39.2 build 454 some bugs fixed
 
 ##引用的额外的libs
 
-- BaiduMap API（locSDK_6.11.jar及相关so包, 在官网可下载）
+- BaiduMap API
 - Huawei Wearable API
 
 ##Pending Tasks
 
-**Refactor the architecture**
+已停止功能更新。
 
-- 架构重构，更简洁的代码
-- 继续美化UI，做成Material Design风格
-
-2015.12.11
+2016.1.28
 

@@ -12,8 +12,6 @@ import com.m1racle.yuedong.R;
 import com.m1racle.yuedong.TestActivity;
 import com.m1racle.yuedong.base.BaseFragment;
 import com.m1racle.yuedong.util.DeviceUtil;
-import com.m1racle.yuedong.util.LogUtil;
-import com.m1racle.yuedong.util.ToastUtil;
 import com.m1racle.yuedong.util.UIUtil;
 
 import butterknife.Bind;

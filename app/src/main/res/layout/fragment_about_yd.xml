@@ -107,7 +107,7 @@
 
             <TextView
                 style="@style/option_item_text_parent"
-                android:text="作者 ： 0x5f3759df 团队"
+                android:text="作者 ： sczyh30"
                 android:textColor="?attr/textColor"
                 android:textSize="@dimen/text_size_16" />
         </RelativeLayout>
@@ -155,13 +155,7 @@
             android:text="悦动悦健康~"
             android:textColor="?attr/infoTextColor" />
 
-        <TextView
-            android:layout_marginTop="@dimen/space_5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="运动与健康部分由华为B2手环强力驱动"
-            android:textColor="?attr/infoTextColor" />
+
 
     </LinearLayout>
 

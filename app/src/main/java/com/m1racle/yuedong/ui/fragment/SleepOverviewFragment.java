@@ -3,7 +3,6 @@ package com.m1racle.yuedong.ui.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,7 +29,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
+ * Yuedong App
+ * Sleep Overview Fragment
  */
 public class SleepOverviewFragment extends BaseFragment {
 
@@ -189,7 +189,8 @@ public class SleepOverviewFragment extends BaseFragment {
     }
 
     private String calcQuality() {
-        if(mList != null) {
+        // TODO: this algorithm is not correct.
+        if(mList != null && mList.size() > 0) {
             final int count = mList.size();
             final String status;
             //new Thread(new Runnable() {
