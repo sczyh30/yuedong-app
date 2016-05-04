@@ -1,8 +1,8 @@
-#悦动App
+# 悦动App
 
-一款集运动、健康监控、社交于一体的运动类APP，支持运动手环。
+一款集运动、健康监控、社交于一体的运动类APP，支持运动手环。(只完成了部分功能)
 
-##更新日志
+## 更新日志
 
 - v0.6.2 build 217 将网络通信框架变更为Volley
 - v0.6.24 build 226 支持Android API 23
@@ -17,12 +17,12 @@
 - v1.37 build 426 改善了架构，优化了app的性能
 - v1.39.2 build 454 some bugs fixed
 
-##引用的额外的libs
+## 引用的额外的libs
 
 - BaiduMap API
 - Huawei Wearable API
 
-##Pending Tasks
+## Pending Tasks
 
 已停止功能更新。
 
