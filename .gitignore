@@ -20,4 +20,5 @@ ss
 
 # generated files and system logs
 /build
+app/build
 /captures

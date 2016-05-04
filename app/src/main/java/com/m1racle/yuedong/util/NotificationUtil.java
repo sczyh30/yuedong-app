@@ -12,7 +12,6 @@ import android.support.v7.app.NotificationCompat;
 
 import com.m1racle.yuedong.AppContext;
 import com.m1racle.yuedong.R;
-import com.m1racle.yuedong.TestActivity;
 import com.m1racle.yuedong.service.NotificationPushService;
 import com.m1racle.yuedong.ui.activity.MainActivity;
 
@@ -60,7 +59,7 @@ public class NotificationUtil {
         LogUtil.log("Yuedong => (DEBUG MODE) Notification executed");
     }
 
-    public static void doTest(Context context) {
+    /** public static void doTest(Context context) {
         NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.cancel(1);
         Intent i = new Intent(context, TestActivity.class);
@@ -83,5 +82,5 @@ public class NotificationUtil {
         notification.ledOffMS = 1000;
         notification.flags = Notification.FLAG_SHOW_LIGHTS;
         LogUtil.log("Yuedong => (DEBUG MODE) NPS Service executed");
-    }
+    } */
 }
